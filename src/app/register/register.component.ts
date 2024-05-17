@@ -3,12 +3,11 @@ import { Router } from '@angular/router';
 import { UserService } from '../core/service/user.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule, ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -17,8 +16,8 @@ export class RegisterComponent implements OnInit {
   }
   signupForm ! : FormGroup
 ngOnInit(): void {
-    this.signupForm = this.formBuilder.group({
+    // this.signupForm = this.formBuilder.group({
 
-    })
+    // })
 }
 }
