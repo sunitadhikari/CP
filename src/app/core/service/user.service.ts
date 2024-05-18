@@ -12,8 +12,17 @@ export class UserService {
   apiUrl:string = environment.api_url
 
   private registerApi  = environment.api_url + "userSignup"
+  private getUserRegister = environment.api_url + "getUserSignup"
+  private postLogin = environment.api_url + "postLogin"
 
-  postSignup(data:any):Observable <any>{
+  postRegister(data:any):Observable <any>{
     return this.http.post(this.registerApi, data);
+  }
+
+  getRegister():Observable<any>{
+    return this.http.get(this.getUserRegister)
+  }
+  postUserLogin(data:any):Observable<any>{
+return this.http.post(this.postLogin, data)
   }
 }
