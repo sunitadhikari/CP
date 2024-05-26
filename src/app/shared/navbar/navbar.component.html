@@ -1,1 +1,134 @@
-<p>navbar works!</p>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between fa fa-align-justify p-4">
+  <div>
+    <a class="navbar-brand fw-bold fs-4" href="#">
+      <img src="assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      Aspatal
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarNav">
+
+    <ul class="navbar-nav d-flex gap-4 justify-content-between align-items-center">
+      <li class="d-flex gap-2 ">
+        <img
+          src="https://cdn.shopify.com/app-store/listing_images/25e709a725329a5f5a1c109ef259cce6/icon/COGJy4aT4_QCEAE=.png"
+          alt="" style="height: 30px; width: 30px;">
+        <div class="d-flex flex-column">
+          <span class="fw-bold ">Emergency</span>
+          <span class="text-danger fw-medium fs-7">+123 456 7890
+          </span>
+        </div>
+      </li>
+      <li class="d-flex gap-2 ">
+        <img src="https://cdn-icons-png.freepik.com/512/8568/8568132.png" alt="" style="height: 30px; width: 30px;">
+        <div class="d-flex flex-column">
+          <span class="fw-bold ">Location</span>
+          <span class="text-danger fw-medium fs-7">Dhungepatan Leknath, Pokhara
+          </span>
+        </div>
+      </li>
+      <li class="d-flex gap-2 ">
+        <img src="https://img.graysonclocks.com/cdn-cgi/image/w=1362,q=80,f=auto/original/257.jpg" alt="" style="height: 30px; width: 30px;">
+        <div class="d-flex flex-column">
+          <span class="fw-bold ">Emergancy Services</span>
+          <span class="text-danger fw-medium fs-7">24 Hours
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-success
+ ">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="#">
+        <img
+          src="data:image/jpeg;base64,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"
+          height="20" alt="MDB Logo" loading="lazy" />
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-light d-flex justify-content-center">
+        <li class="nav-item text-light">
+          <a class="nav-link text-light fs-6 fw-bold hover-text-dark" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light  fs-6 fw-bold" href="#">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light fs-6 fw-bold" href="#">Doctors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light fs-6 fw-bold" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light fs-6 fw-bold" href="#">Contact Us</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <!-- Icon -->
+      <a class="text-reset me-3" href="#">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+
+      <!-- Notifications -->
+      <div class="dropdown">
+        <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
+          id="navbarDropdownMenuLink" role="button" aria-expanded="false">
+          <i class="fas fa-bell"></i>
+          <span class="badge rounded-pill badge-notification bg-danger">1</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+          <li>
+            <a class="dropdown-item" href="#home">Home</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">About us</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Doctors</a>
+          </li>
+        </ul>
+      </div>
+      <!-- Avatar -->
+      <div class="dropdown">
+        <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+          id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25"
+            alt="Black and White Portrait of a Man" loading="lazy" />
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+          <li>
+            <a class="dropdown-item" href="#">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Settings</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->

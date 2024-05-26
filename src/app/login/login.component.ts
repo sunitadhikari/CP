@@ -22,7 +22,6 @@ ngOnInit(): void {
     email : ['', [Validators.required, Validators.email]],
     password : ['', Validators.required]
   })
-   
   }
   submit(){
     if(this.loginForm.valid){
