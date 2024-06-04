@@ -12,11 +12,11 @@ import { Router } from '@angular/router';
   styleUrl: './doctors.component.css'
 })
 export class DoctorsComponent {
-  constructor(private route:Router){}
+  constructor(private route: Router) { }
   @Input() doctor: any;
   doctors = [
     {
-      id:1,
+      id: 1,
       name: 'Dr. John Doe',
       specialty: 'Internal Medicine',
       email: 'john.doe@example.com',
@@ -24,7 +24,7 @@ export class DoctorsComponent {
       image: 'assets/doctor.jpg'
     },
     {
-      id:2,
+      id: 2,
       name: 'Dr. Jane Smith',
       specialty: 'Pediatrics',
       email: 'jane.smith@example.com',
@@ -32,7 +32,7 @@ export class DoctorsComponent {
       image: 'assets/doctor2.jpg'
     },
     {
-      id:3,
+      id: 3,
       name: 'Dr. William Brown',
       specialty: 'Cardiology',
       email: 'william.brown@example.com',
@@ -40,7 +40,7 @@ export class DoctorsComponent {
       image: 'assets/doctor.jpg'
     },
     {
-      id:4,
+      id: 4,
       name: 'Dr. John Doe',
       specialty: 'Internal Medicine',
       email: 'john.doe@example.com',
@@ -48,7 +48,7 @@ export class DoctorsComponent {
       image: 'assets/doctor1.jpg'
     },
     {
-      id:5,
+      id: 5,
       name: 'Dr. Jane Smith',
       specialty: 'Pediatrics',
       email: 'jane.smith@example.com',
@@ -56,7 +56,7 @@ export class DoctorsComponent {
       image: 'assets/doctor2.jpg'
     },
     {
-      id:6,
+      id: 6,
       name: 'Dr. William Brown',
       specialty: 'Cardiology',
       email: 'william.brown@example.com',
@@ -66,9 +66,9 @@ export class DoctorsComponent {
     // Add more doctor objects as needed
   ];
 
-  submit(profilId?:number){
-if(profilId){
-  this.route.navigate(['/doctorDetail', profilId])
-}
+  submit(id?: number) {
+    if (id) {
+      this.route.navigate(['/doctorDetail', id])
+    }
   }
 }
