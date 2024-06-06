@@ -3,6 +3,7 @@ import { NavbarComponent } from "../../shared/navbar/navbar.component";
 import { FooterComponent } from "../../shared/footer/footer.component";
 import { CommonModule, NgIf } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-appointment',
@@ -13,7 +14,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class AppointmentComponent implements OnInit{
 appointmentForm! : FormGroup 
-constructor(private fb: FormBuilder){}
+constructor(private fb: FormBuilder, private route:Router){}
 ngOnInit(): void {
     this.appointmentForm = this.fb.group({
       name:['', Validators.required],
@@ -27,6 +28,7 @@ ngOnInit(): void {
 submit(){
 if(this.appointmentForm.valid){
   console.log('Form Submitted', this.appointmentForm.value);
+  // this.route.navigate(['/payment'])
 }
 else{
   console.log('Form is not valid');

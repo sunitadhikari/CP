@@ -8,19 +8,20 @@ import { DashboardReportComponent } from "../dashboard-report/dashboard-report.c
 import { DashboardNotificationComponent } from "../dashboard-notification/dashboard-notification.component";
 import { DashboardAppointmentComponent } from "../dashboard-appointment/dashboard-appointment.component";
 import { DashboardDoctorComponent } from "../dashboard-doctor/dashboard-doctor.component";
+import { SettingComponent } from "../setting/setting.component";
 
 @Component({
-  selector: 'app-dashboard-navigation',
-  standalone: true,
-  templateUrl: './dashboard-navigation.component.html',
-  styleUrl: './dashboard-navigation.component.css',
-  imports: [CommonModule, DashboardOverviewComponent, ProfilComponent, DashboardFeedbackComponent, DashboardReportComponent, DashboardNotificationComponent, DashboardAppointmentComponent, DashboardDoctorComponent]
+    selector: 'app-dashboard-navigation',
+    standalone: true,
+    templateUrl: './dashboard-navigation.component.html',
+    styleUrl: './dashboard-navigation.component.css',
+    imports: [CommonModule, DashboardOverviewComponent, ProfilComponent, DashboardFeedbackComponent, DashboardReportComponent, DashboardNotificationComponent, DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent]
 })
 export class DashboardNavigationComponent {
   currentSection: string = 'overview';
 
   constructor(private router: Router) {
-    this.currentSection = 'profile'
+    this.currentSection = 'dashAppointment'
   }
   showSection(section: string): void {
     this.currentSection = section;

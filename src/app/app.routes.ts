@@ -13,6 +13,7 @@ import { DashboardAppointmentComponent } from './dashboard/dashboard-appointment
 import { DashboardReportComponent } from './dashboard/dashboard-report/dashboard-report.component';
 import { DashboardNotificationComponent } from './dashboard/dashboard-notification/dashboard-notification.component';
 import { DashboardFeedbackComponent } from './dashboard/dashboard-feedback/dashboard-feedback.component';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 export const routes: Routes = [
     {
@@ -70,6 +71,10 @@ export const routes: Routes = [
 {
     path:'dashFeedback',
     component:DashboardFeedbackComponent
+},
+{
+    path:'payment',
+    component:PaymentComponent
 }
 
 ];

@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
-<!-- 
-<div class="container my-5 bg-dark text-light rounded">
+
+<div class="container my-5  text-light rounded">
     <h2 class="text-center py-4">Book an Appointment</h2>
-    <form [formGroup]="appointmentForm" (ngSubmit)="submit()" class="py-4">
+    <form [formGroup]="appointmentForm"  class="py-4">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
         <input type="text" id="name" class="form-control" formControlName="name" placeholder="Enter your name">
@@ -51,10 +51,10 @@
           Selecting a doctor is required.
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Book Appointment</button>
+      <button type="submit" (click)="submit()" class="btn btn-primary">Book Appointment</button>
     </form>
   </div>
-   -->
+  
 
 <div class="container-fluid">
   <div class="row">

@@ -49,7 +49,7 @@
                     <li class=" active cursor">
                         <a (click)="showSection('dashAppointment')">
                             <i class="fa fa-th-large"></i>
-                            <span>Appoinment</span>
+                            <span>Arrange Appoinment</span>
                         </a>
                     </li>
                     <li class=" active cursor">
@@ -74,6 +74,12 @@
                         <a (click)="showSection('profile')">
                             <i class="fa fa-th-large"></i>
                             <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class=" active cursor">
+                        <a (click)="showSection('setting')">
+                            <i class="fa fa-th-large"></i>
+                            <span>Setting</span>
                         </a>
                     </li>
                     <li class=" active cursor">
@@ -122,6 +128,12 @@
                 </div>
                 <div *ngIf="currentSection=== 'profile'">
                     <app-profil></app-profil>
+                </div>
+                <div *ngIf="currentSection=== 'setting'">
+                    <app-setting></app-setting>
+                </div>
+                <div *ngIf="currentSection=== 'profile'">
+                    <app-setting></app-setting>
                 </div>
             </div>
         </div>
