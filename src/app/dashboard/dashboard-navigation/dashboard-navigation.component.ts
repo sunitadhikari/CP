@@ -10,23 +10,23 @@ import { DashboardAppointmentComponent } from "../dashboard-appointment/dashboar
 import { DashboardDoctorComponent } from "../dashboard-doctor/dashboard-doctor.component";
 
 @Component({
-    selector: 'app-dashboard-navigation',
-    standalone: true,
-    templateUrl: './dashboard-navigation.component.html',
-    styleUrl: './dashboard-navigation.component.css',
-    imports: [CommonModule, DashboardOverviewComponent, ProfilComponent, DashboardFeedbackComponent, DashboardReportComponent, DashboardNotificationComponent, DashboardAppointmentComponent, DashboardDoctorComponent]
+  selector: 'app-dashboard-navigation',
+  standalone: true,
+  templateUrl: './dashboard-navigation.component.html',
+  styleUrl: './dashboard-navigation.component.css',
+  imports: [CommonModule, DashboardOverviewComponent, ProfilComponent, DashboardFeedbackComponent, DashboardReportComponent, DashboardNotificationComponent, DashboardAppointmentComponent, DashboardDoctorComponent]
 })
 export class DashboardNavigationComponent {
-  currentSection : string = 'overview';
+  currentSection: string = 'overview';
 
-constructor(private router :Router){
-  this.currentSection = 'dashReport'
-}
-showSection(section: string):void{
-  this.currentSection = section;
-}
-logout(){
-  localStorage.clear()
-  this.router.navigate([''])
-}
+  constructor(private router: Router) {
+    this.currentSection = 'profile'
+  }
+  showSection(section: string): void {
+    this.currentSection = section;
+  }
+  logout() {
+    localStorage.clear()
+    this.router.navigate([''])
+  }
 }
