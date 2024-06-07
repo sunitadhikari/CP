@@ -9,13 +9,14 @@ import { DashboardNotificationComponent } from "../dashboard-notification/dashbo
 import { DashboardAppointmentComponent } from "../dashboard-appointment/dashboard-appointment.component";
 import { DashboardDoctorComponent } from "../dashboard-doctor/dashboard-doctor.component";
 import { SettingComponent } from "../setting/setting.component";
+import { PatientComponent } from "../../pages/patient/patient.component";
 
 @Component({
     selector: 'app-dashboard-navigation',
     standalone: true,
     templateUrl: './dashboard-navigation.component.html',
     styleUrl: './dashboard-navigation.component.css',
-    imports: [CommonModule, DashboardOverviewComponent, ProfilComponent, DashboardFeedbackComponent, DashboardReportComponent, DashboardNotificationComponent, DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent]
+    imports: [CommonModule, DashboardOverviewComponent, ProfilComponent, DashboardFeedbackComponent, DashboardReportComponent, DashboardNotificationComponent, DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent, PatientComponent]
 })
 export class DashboardNavigationComponent {
   currentSection: string = 'overview';

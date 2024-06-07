@@ -47,6 +47,12 @@
                         </a>
                     </li>
                     <li class=" active cursor">
+                        <a (click)="showSection('patient')">
+                            <i class="fa fa-th-large"></i>
+                            <span>Patient</span>
+                        </a>
+                    </li>
+                    <li class=" active cursor">
                         <a (click)="showSection('dashAppointment')">
                             <i class="fa fa-th-large"></i>
                             <span>Arrange Appoinment</span>
@@ -113,6 +119,9 @@
                 </div>
                 <div *ngIf="currentSection=== 'dashboardDoctor'">
                     <app-dashboard-doctor></app-dashboard-doctor>
+                </div>
+                <div *ngIf="currentSection === 'patient' ">
+                    <app-patient></app-patient>
                 </div>
                 <div *ngIf="currentSection === 'dashAppointment'">
                     <app-dashboard-appointment></app-dashboard-appointment>
