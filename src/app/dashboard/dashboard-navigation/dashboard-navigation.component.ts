@@ -9,20 +9,30 @@ import { DashboardNotificationComponent } from "../dashboard-notification/dashbo
 import { DashboardAppointmentComponent } from "../dashboard-appointment/dashboard-appointment.component";
 import { DashboardDoctorComponent } from "../dashboard-doctor/dashboard-doctor.component";
 import { SettingComponent } from "../setting/setting.component";
-import { PatientComponent } from "../../pages/patient/patient.component";
+import { PatientListComponent } from "../patient-list/patient-list.component";
+import { AddPatientComponent } from "../add-patient/add-patient.component";
+import { AddScheduleComponent } from "../add-schedule/add-schedule.component";
+import { ScheduleListComponent } from "../schedule-list/schedule-list.component";
 
 @Component({
     selector: 'app-dashboard-navigation',
     standalone: true,
     templateUrl: './dashboard-navigation.component.html',
     styleUrl: './dashboard-navigation.component.css',
-    imports: [CommonModule, DashboardOverviewComponent, ProfilComponent, DashboardFeedbackComponent, DashboardReportComponent, DashboardNotificationComponent, DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent, PatientComponent]
+    imports: [CommonModule, DashboardOverviewComponent, ProfilComponent, DashboardFeedbackComponent, DashboardReportComponent, DashboardNotificationComponent, DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent, PatientListComponent, AddPatientComponent, AddScheduleComponent, 
+      ScheduleListComponent]
 })
 export class DashboardNavigationComponent {
   currentSection: string = 'overview';
+  dowpdowns:{ [ Key: string]: boolean}={
+    patient:false,
+  }
 
   constructor(private router: Router) {
-    this.currentSection = 'dashAppointment'
+    this.currentSection = 'addSchedule'
+  }
+  toogleDropdown(section:string):void{
+    this.dowpdowns[section]=!this.dowpdowns[section];
   }
   showSection(section: string): void {
     this.currentSection = section;

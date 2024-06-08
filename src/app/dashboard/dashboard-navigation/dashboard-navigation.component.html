@@ -1,149 +1,207 @@
 <div id="page-container" class="page-sidebar-fixed page-header-fixed">
-        <!-- begin sidebar scrollbar -->
-        <div id="sidebar" class="sidebar" style="height: 100vh; overflow-y: auto;">
-            <div data-scrollbar="true" data-height="100%">
-                <!-- begin sidebar user -->
-                <ul class="nav">
-                    <li class="nav-profile">
-                        <a href="javascript:;" data-toggle="nav-profile">
-                            <div class="cover with-shadow"></div>
-                            <div class="image">
-                                <img src="../../../assets/hospitals.jpg" alt="" />
-                            </div>
-                            <div class="info">
-                                <b class="caret pull-right"></b>Aspatal
-                                <small>The Hospital Management</small>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <ul class="nav nav-profile">
-                            <li><a href="javascript:;"><i class="fa fa-cog"></i> Settings</a></li>
-                            <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Send Feedback</a></li>
-                            <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- end sidebar user -->
-                <!-- begin sidebar nav -->
-                <ul class="nav">
-                    <!-- <li class="nav-header">Navigation</li> -->
-                    <li class="active cursor">
-                        
-                            <i class="fa fa-th-large"></i>
-                            <span>Admin</span>
-                      
-                    </li>
-                    <li class="active cursor">
-                        <a (click)="showSection('overview')">
-                            <i class="fa fa-th-large"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class=" active cursor">
-                        <a (click)="showSection('dashboardDoctor')">
-                            <i class="fa fa-th-large"></i>
-                            <span>Doctor</span>
-                        </a>
-                    </li>
-                    <li class=" active cursor">
-                        <a (click)="showSection('patient')">
-                            <i class="fa fa-th-large"></i>
+    <div id="sidebar" class="sidebar" style="height: 100vh; overflow-y: auto;">
+        <div data-scrollbar="true" data-height="100%">
+            <ul class="nav">
+                <li class="nav-profile">
+                    <a href="javascript:;" data-toggle="nav-profile">
+                        <div class="cover with-shadow"></div>
+                        <div class="image">
+                            <img src="../../../assets/hospitals.jpg" alt="" />
+                        </div>
+                        <div class="info">
+                            <b class="caret pull-right"></b>Aspatal
+                            <small>The Hospital Management</small>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <ul class="nav nav-profile">
+                        <li><a href="javascript:;"><i class="fa fa-cog"></i> Settings</a></li>
+                        <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Send Feedback</a></li>
+                        <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav ">
+                <li class=" ">
+                    <i class="fa fa-th-large"></i>
+                    <span>Admin</span>
+                </li>
+                <li class=" py-2 ">
+                    <a (click)="showSection('overview')">
+                        <i class="fa fa-th-large"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('doctor')">
+                        <i class="fas fa-user-md"></i>
+                        <span>Doctor</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="toogleDropdown('patient')" class="d-flex fustify-content-between align-items-center">
+                        <div>
+                            <i class="fa fa-wheelchair"></i>
                             <span>Patient</span>
-                        </a>
-                    </li>
-                    <li class=" active cursor">
-                        <a (click)="showSection('dashAppointment')">
-                            <i class="fa fa-th-large"></i>
-                            <span>Arrange Appoinment</span>
-                        </a>
-                    </li>
-                    <li class=" active cursor">
-                        <a (click)="showSection('dashReport')">
-                            <i class="fa fa-th-large"></i>
-                            <span>Report</span>
-                        </a>
-                    </li>
-                    <li class=" active cursor">
-                        <a (click)="showSection('dashNotification')">
-                            <i class="fa fa-th-large"></i>
-                            <span>Notifications</span>
-                        </a>
-                    </li>
-                    <li class=" active cursor">
-                        <a (click)="showSection('dashFeedback')">
-                            <i class="fa fa-th-large"></i>
-                            <span>Feedback</span>
-                        </a>
-                    </li>
-                    <li class=" active cursor">
-                        <a (click)="showSection('profile')">
-                            <i class="fa fa-th-large"></i>
-                            <span>Profile</span>
-                        </a>
-                    </li>
-                    <li class=" active cursor">
-                        <a (click)="showSection('setting')">
-                            <i class="fa fa-th-large"></i>
-                            <span>Setting</span>
-                        </a>
-                    </li>
-                    <li class=" active cursor">
-                        <a (click)="logout()">
-                            <i class="fa fa-th-large"></i>
-                            <span>Logout</span>
-                        </a>
-                    </li>
-                    <!-- begin sidebar minify button -->
-                    <!-- <li><a href=" " class="sidebar-minify-btn" data-click="sidebar-minify"><i
-                        class="fa fa-angle-double-left"></i></a></li> -->
-                    <!-- end sidebar minify button -->
-                </ul>
+                        </div>
+                        <i class="fa" [ngClass]="dowpdowns['patient'] ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                    </a>
+                    <ul *ngIf="dowpdowns['patient']" class="list-group mt-2 bg-secondary">
+                        <li class="list-group-item bg-dark text-light">
+                          <a  (click)="showSection('addPatient')">
+                            <span>Add Patient</span>
+                          </a>
+                        </li>
+                        <li class="list-group-item  text-light bg-dark">
+                          <a  (click)="showSection('patientList')">
+                            <span>Patient List</span>
+                          </a>
+                        </li>
+                      </ul>
+                </li>
 
-                <!-- end sidebar nav -->
-            </div>
-
-            <!-- end sidebar scrollbar -->
-
-
-
-
+                <li class="  py-2">
+                    <a (click)="showSection('appoinment')">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Appoinment</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="toogleDropdown('schedule')" class="d-flex fustify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Schedule</span>
+                        </div>
+                        <i class="fa" [ngClass]="dowpdowns['schedule'] ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                    </a>
+                    <ul *ngIf="dowpdowns['schedule']" class="list-group mt-2 bg-secondary">
+                        <li class="list-group-item bg-dark text-light">
+                          <a  (click)="showSection('addSchedule')">
+                            <span>Add Schedule</span>
+                          </a>
+                        </li>
+                        <li class="list-group-item  text-light bg-dark">
+                          <a  (click)="showSection('scheduleList')">
+                            <span>Schedule List</span>
+                          </a>
+                        </li>
+                      </ul>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('activities')">
+                        <i class="fas fa-procedures"></i>
+                        <span> Hospital Activities</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('prescription')">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                        <span>Precription</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('noticeboard')">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Notice Board</span>
+                    </a>
+                </li>
+              
+                <li class="  py-2">
+                    <a (click)="showSection('bedManagement')">
+                        <i class="fas fa-bed"></i>
+                        <span>Bed Management</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('mail')">
+                        <i class="fas fa-envelope"></i>
+                        <span> Send Mail</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('report')">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Report</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('notification')">
+                        <i class="fa fa-th-large"></i>
+                        <span>Notifications</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('feedback')">
+                        <i class="fa fa-th-large"></i>
+                        <span>Feedback</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('profile')">
+                        <i class="fa fa-th-large"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('setting')">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="logout()">
+                        <i class="fa fa-th-large"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <div class="sidebar-bg"></div>
+    </div>
+    <div class="sidebar-bg"></div>
 
-        <div id="content" class="content">
+    <div id="content" class="content">
 
-            <div>
-                <div *ngIf="currentSection=== 'overview'">
-                    <app-dashboard-overview></app-dashboard-overview>
-                </div>
-                <div *ngIf="currentSection=== 'dashboardDoctor'">
-                    <app-dashboard-doctor></app-dashboard-doctor>
-                </div>
-                <div *ngIf="currentSection === 'patient' ">
-                    <app-patient></app-patient>
-                </div>
-                <div *ngIf="currentSection === 'dashAppointment'">
-                    <app-dashboard-appointment></app-dashboard-appointment>
-                </div>
-                <div *ngIf="currentSection === 'dashReport'">
-                    <app-dashboard-report></app-dashboard-report>
-                </div>
-                <div *ngIf="currentSection=== 'dashNotification'">
-                    <app-dashboard-notification></app-dashboard-notification>
-                </div>
-                <div *ngIf="currentSection=== 'dashFeedback'">
-                    <app-dashboard-feedback></app-dashboard-feedback>
-                </div>
-                <div *ngIf="currentSection=== 'profile'">
-                    <app-profil></app-profil>
-                </div>
-                <div *ngIf="currentSection=== 'setting'">
-                    <app-setting></app-setting>
-                </div>
-                <div *ngIf="currentSection=== 'profile'">
-                    <app-setting></app-setting>
-                </div>
+        <div>
+            <div *ngIf="currentSection=== 'overview'">
+                <app-dashboard-overview></app-dashboard-overview>
+            </div>
+            <div *ngIf="currentSection=== 'doctor'">
+                <app-dashboard-doctor></app-dashboard-doctor>
+            </div>
+            <div *ngIf="currentSection === 'addPatient' ">
+                <app-add-patient></app-add-patient>
+            </div>
+            <div *ngIf="currentSection === 'patientList' ">
+                <app-patient-list></app-patient-list>
+            </div>
+            <div *ngIf="currentSection === 'appointment'">
+                <app-dashboard-appointment></app-dashboard-appointment>
+            </div>
+            <div *ngIf="currentSection === 'addSchedule'">
+                <app-add-schedule></app-add-schedule>
+            </div>
+            <div *ngIf="currentSection === 'scheduleList'">
+                <app-schedule-list></app-schedule-list>
+            </div>
+            <div *ngIf="currentSection === 'report'">
+                <app-dashboard-report></app-dashboard-report>
+            </div>
+            <div *ngIf="currentSection=== 'notification'">
+                <app-dashboard-notification></app-dashboard-notification>
+            </div>
+            <div *ngIf="currentSection=== 'feedback'">
+                <app-dashboard-feedback></app-dashboard-feedback>
+            </div>
+            <div *ngIf="currentSection=== 'profile'">
+                <app-profil></app-profil>
+            </div>
+            <div *ngIf="currentSection=== 'setting'">
+                <app-setting></app-setting>
+            </div>
+            <div *ngIf="currentSection=== 'profile'">
+                <app-setting></app-setting>
             </div>
         </div>
+    </div>
 </div>

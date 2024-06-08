@@ -14,6 +14,7 @@ import { DashboardReportComponent } from './dashboard/dashboard-report/dashboard
 import { DashboardNotificationComponent } from './dashboard/dashboard-notification/dashboard-notification.component';
 import { DashboardFeedbackComponent } from './dashboard/dashboard-feedback/dashboard-feedback.component';
 import { PaymentComponent } from './pages/payment/payment.component';
+import { AddPatientComponent } from './dashboard/add-patient/add-patient.component';
 
 export const routes: Routes = [
     {
@@ -75,6 +76,9 @@ export const routes: Routes = [
 {
     path:'payment',
     component:PaymentComponent
+},
+{
+    path:'addPatient',
+    component:AddPatientComponent
 }
-
 ];
