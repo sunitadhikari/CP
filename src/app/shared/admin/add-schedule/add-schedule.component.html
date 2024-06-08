@@ -1,48 +1,36 @@
 <div class="row">
     <div class="col-xl-12">
         <div class="panel panel-inverse card" data-sortable-id="form-stuff-1">
-            <div class="panel-heading bg-secondary">
+            <div class="panel-heading ">
                 <h4 class=" fw-bold fs-3 ">Add Schedule</h4>
-                <div class="panel-heading-btn">
-                </div>
+                <!-- <div class="panel-heading-btn">
+                </div> -->
             </div>
             <div class="panel-body card-body">
-                <!-- <div class="alert alert-muted">
-                    Add patient
-                </div> -->
                 <form>
-
                     <div class="form-group row m-b-15">
-                        <label class="col-form-label col-md-3 fw-bold">First Name <span
-                                class="text-danger fw-bold">*</span></label>
+                        <label class="col-form-label col-md-3 fw-bold">Available Days</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control m-b-5" placeholder="First Name" />
+                            <select class="form-control" name="available" placeholder="Select Option">
+                                <option>Sunday</option>
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option>Friday</option>
+                                <option>Saturday</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
-                        <label class="col-form-label col-md-3 fw-bold">Last Name <span
+                        <label class="col-form-label col-md-3 fw-bold">Start and End Time <span
                                 class="text-danger fw-bold">*</span></label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control m-b-5" placeholder="First Name" />
-                        </div>
-
-                    </div>
-                    <div class="form-group row m-b-15">
-                        <label class="col-form-label col-md-3 fw-bold">Email Address<span
-                                class="text-danger fw-bold">*</span></label>
-                        <div class="col-md-9">
-                            <input type="email" class="form-control m-b-5" placeholder="Email Address" />
-                            <small class="f-s-12 text-grey-darker">We'll never share your email with anyone
-                                else.</small>
+                        <div class="col d-flex justify-content-between">
+                            <input type="time" class="form-control m-b-5 col-lg-4 " placeholder="Start Time" />
+                            <input type="time" class="form-control m-b-5 col-lg-4" placeholder="End Time" />
                         </div>
                     </div>
-                    <div class="form-group row m-b-15">
-                        <label class="col-form-label col-md-3 fw-bold">Password <span
-                                class="text-danger fw-bold">*</span></label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control m-b-5" placeholder="Password" />
-                        </div>
-                    </div>
+                    
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 fw-bold">Mobile No <span
                                 class="text-danger fw-bold">*</span></label>

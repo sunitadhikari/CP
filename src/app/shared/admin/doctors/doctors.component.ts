@@ -5,8 +5,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   selector: 'app-dashboard-doctor',
   standalone: true,
   imports: [ReactiveFormsModule,],
-  templateUrl: './dashboard-doctor.component.html',
-  styleUrl: './dashboard-doctor.component.css'
+  templateUrl: './doctors.component.html',
+  styleUrl: './doctors.component.css'
 })
 export class DashboardDoctorComponent implements OnInit {
   doctorAddForm!: FormGroup

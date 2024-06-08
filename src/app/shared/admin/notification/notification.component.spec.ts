@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardNotificationComponent } from './dashboard-notification.component';
+import { DashboardNotificationComponent } from './notification.component';
 
 describe('DashboardNotificationComponent', () => {
   let component: DashboardNotificationComponent;

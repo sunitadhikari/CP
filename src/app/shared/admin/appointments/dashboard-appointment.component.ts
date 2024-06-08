@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentComponent } from "../../pages/appointment/appointment.component";
+import { AppointmentComponent } from "../../../pages/appointment/appointment.component";
 import { CommonModule, NgIf } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from "../../shared/navbar/navbar.component";
+import { NavbarComponent } from "../navbar/navbar.component";
 import { FooterComponent } from "../../shared/footer/footer.component";
 import { CommonModule, NgIf } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';

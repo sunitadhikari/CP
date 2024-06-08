@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../core/service/user.service';
+import { UserService } from '../../core/service/user.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import * as alertify from 'alertifyjs';
