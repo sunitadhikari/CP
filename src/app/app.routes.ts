@@ -13,7 +13,7 @@ import { DashboardAppointmentComponent } from './shared/admin/appointments/dashb
 import { DashboardReportComponent } from './shared/admin/reports/dashboard-report.component';
 import { DashboardNotificationComponent } from './shared/admin/notification/notification.component';
 import { DashboardFeedbackComponent } from './shared/admin/feedback/feedback.component';
-import { PaymentComponent } from './pages/payment/payment.component';
+import { PaymentComponent } from './shared/admin/payment/payment.component';
 import { AddPatientComponent } from './shared/admin/add-patient/add-patient.component';
 
 export const routes: Routes = [

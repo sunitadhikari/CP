@@ -13,6 +13,10 @@ import { PatientListComponent } from "../patient-list/patient-list.component";
 import { AddPatientComponent } from "../add-patient/add-patient.component";
 import { AddScheduleComponent } from "../add-schedule/add-schedule.component";
 import { ScheduleListComponent } from "../schedule-list/schedule-list.component";
+import { UserManagementComponent } from "../user-management/user-management.component";
+import { PaymentComponent } from "../payment/payment.component";
+import { DoctorsComponent } from "../../../pages/doctors/doctors.component";
+import { DoctorComponent } from "../doctor/doctor.component";
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -23,7 +27,7 @@ import { ScheduleListComponent } from "../schedule-list/schedule-list.component"
         DashboardReportComponent, DashboardNotificationComponent,
         DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent,
         PatientListComponent, AddPatientComponent, AddScheduleComponent,
-        ScheduleListComponent, DashboardFeedbackComponent]
+        ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent, PaymentComponent, DoctorsComponent, DoctorComponent]
 })
 export class DashboardNavigationComponent {
   currentSection: string = 'overview';

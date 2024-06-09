@@ -186,7 +186,7 @@
                 </li>
                 <li class="nav-header">Admin</li>
                 <li class="  py-2">
-                    <a (click)="showSection('user-mansgement')">
+                    <a (click)="showSection('user-management')">
                         <i class="fas fa-cog"></i>
                         <span>User Management</span>
                     </a>
@@ -205,13 +205,13 @@
                 </li>
              
                 <li class="  py-2">
-                    <a (click)="showSection('payments')">
+                    <a (click)="showSection('payment')">
                         <i class="fas fa-cog"></i>
                         <span>payments</span>
                     </a>
                 </li>
                 <li class="  py-2">
-                    <a (click)="showSection('doctors')">
+                    <a (click)="showSection('doctor')">
                         <i class="fas fa-cog"></i>
                         <span>doctors</span>
                     </a>
@@ -268,6 +268,15 @@
             </div>
             <div *ngIf="currentSection=== 'profile'">
                 <app-setting></app-setting>
+            </div>
+            <div *ngIf="currentSection=== 'user-management'">
+                <app-user-management></app-user-management>
+            </div>
+            <div *ngIf="currentSection=== 'payment'">
+                <app-payment></app-payment>
+            </div>
+            <div *ngIf="currentSection=== 'doctors'">
+                <app-doctor></app-doctor>
             </div>
         </div>
     </div>
