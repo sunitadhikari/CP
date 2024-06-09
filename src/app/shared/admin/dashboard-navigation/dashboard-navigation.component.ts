@@ -20,6 +20,9 @@ import { DoctorComponent } from "../doctor/doctor.component";
 import { DashboardComponent } from "../dashboard/dashboard.component";
 import { DepartmentComponent } from "../department/department.component";
 import { PatientComponent } from "../patient/patient.component";
+import { AppointmentHistoryComponent } from "../appointment-history/appointment-history.component";
+import { SymptomsComponent } from "../symptoms/symptoms.component";
+import { ViewHistoryComponent } from "../view-history/view-history.component";
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -30,7 +33,7 @@ import { PatientComponent } from "../patient/patient.component";
         DashboardReportComponent, DashboardNotificationComponent,
         DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent,
         PatientListComponent, AddPatientComponent, AddScheduleComponent,
-        ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent, PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent, DepartmentComponent, PatientComponent]
+        ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent, PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent, DepartmentComponent, PatientComponent, AppointmentHistoryComponent, SymptomsComponent, ViewHistoryComponent]
 })
 export class DashboardNavigationComponent {
   currentSection: string = 'overview';

@@ -1,113 +1,123 @@
 <div class="container mt-5">
-    <div class="row w-100">
-        <div class="col-12 d-flex justify-content-between align-items-center">
-            <div class="col-lg-5">
-                <input type="text" class="form-control mb-2 " placeholder="Input">
+    <div class="">
+        <div class="row">
+            <!-- <div class="col-lg-12"> -->
+            <div class="col-lg-10">
+                <input type="text" class="form-control mb-2 col-lg-12 " placeholder="Search">
             </div>
-            <div class="d-flex justify-content-end align-items-center ">
-                <input type="search" class="form-control mb-2 mr-2" placeholder="Search">
-                <button class="btn btn-primary w-fit mx-auto">Add</button>
+            <div class="col-lg-2">
+
+                <div class="d-flex ">
+                    <button type="submit" class="mr-2 btn btn-primary" placeholder="Search">Search</button>
+                    <button class="btn btn-primary">+ Add</button>
+                </div>
+                <!-- </div> -->
+
             </div>
         </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Add Person</h3>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Add Person</h3>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Enter first name"
+                                required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Enter last name"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="email">Email Address *</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter password">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="phoneNo">Phone No</label>
+                            <input type="text" class="form-control" id="phoneNo" placeholder="Enter phone number">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="mobileNo">Mobile No *</label>
+                            <input type="text" class="form-control" id="mobileNo" placeholder="Enter mobile number"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="bloodGroup">Blood Group</label>
+                            <input type="text" class="form-control" id="bloodGroup" placeholder="Enter blood group">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sex">Sex *</label>
+                            <select id="sex" class="form-control" required>
+                                <option selected disabled>Select sex</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth *</label>
+                        <input type="date" class="form-control" id="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address *</label>
+                        <textarea class="form-control" id="address" rows="3" placeholder="Enter address"
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="active" value="active"
+                                checked>
+                            <label class="form-check-label" for="active">
+                                Active
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="inactive" value="inactive">
+                            <label class="form-check-label" for="inactive">
+                                Inactive
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Person</button>
+                </form>
+            </div>
         </div>
-        <div class="card-body">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="firstName">First Name *</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="lastName">Last Name *</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="email">Email Address *</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter password">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="phoneNo">Phone No</label>
-                        <input type="text" class="form-control" id="phoneNo" placeholder="Enter phone number">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="mobileNo">Mobile No *</label>
-                        <input type="text" class="form-control" id="mobileNo" placeholder="Enter mobile number" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="bloodGroup">Blood Group</label>
-                        <input type="text" class="form-control" id="bloodGroup" placeholder="Enter blood group">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="sex">Sex *</label>
-                        <select id="sex" class="form-control" required>
-                            <option selected disabled>Select sex</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="dob">Date of Birth *</label>
-                    <input type="date" class="form-control" id="dob" required>
-                </div>
-                <div class="form-group">
-                    <label for="address">Address *</label>
-                    <textarea class="form-control" id="address" rows="3" placeholder="Enter address" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Status</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="active" value="active" checked>
-                        <label class="form-check-label" for="active">
-                            Active
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="inactive" value="inactive">
-                        <label class="form-check-label" for="inactive">
-                            Inactive
-                        </label>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Add Person</button>
-            </form>
-        </div>
-    </div>
-    <div class="mt-5">
-        <h2>Person Details</h2>
-        <table class="table table-striped mt-4">
-            <thead>
-                <tr>
-                    <th>SN</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone No</th>
-                    <th>Mobile No</th>
-                    <th>Blood Group</th>
-                    <th>Sex</th>
-                    <th>Date of Birth</th>
-                    <th>Address</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="personTable">
-                <td>1</td>
+        <div class="mt-5">
+            <h2>Person Details</h2>
+            <table class="table table-striped mt-4">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone No</th>
+                        <th>Mobile No</th>
+                        <th>Blood Group</th>
+                        <th>Sex</th>
+                        <th>Date of Birth</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="personTable">
+                    <td>1</td>
                     <td>First Name</td>
                     <td>Last Name</td>
                     <td>Email</td>
@@ -118,8 +128,8 @@
                     <td>Date of Birtd</td>
                     <td>Address</td>
                     <td>Status</td>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-

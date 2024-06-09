@@ -198,19 +198,19 @@
                     </a>
                 </li>
                 <li class="  py-2">
-                    <a (click)="showSection('Report')">
+                    <a (click)="showSection('report')">
                         <i class="fas fa-cog"></i>
                         <span>Report</span>
                     </a>
                 </li>
                 <li class="  py-2">
-                    <a (click)="showSection('Symptoms')">
+                    <a (click)="showSection('symptoms')">
                         <i class="fas fa-cog"></i>
                         <span>Symptoms</span>
                     </a>
                 </li>
                 <li class="  py-2">
-                    <a (click)="showSection('View-History')">
+                    <a (click)="showSection('view-history')">
                         <i class="fas fa-cog"></i>
                         <span>View-History</span>
                     </a>
@@ -341,6 +341,15 @@
             </div>
             <div *ngIf="currentSection=== 'Patient'">
                 <app-patient></app-patient>
+            </div>
+            <div *ngIf="currentSection=== 'appointment-history'">
+                <app-appointment-history></app-appointment-history>
+            </div>
+            <div *ngIf="currentSection=== 'symptoms'">
+                <app-symptoms></app-symptoms>
+            </div>
+            <div *ngIf="currentSection=== 'view-history'">
+                <app-view-history></app-view-history>
             </div>
         </div>
     </div>
