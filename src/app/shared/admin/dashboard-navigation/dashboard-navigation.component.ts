@@ -17,6 +17,9 @@ import { UserManagementComponent } from "../user-management/user-management.comp
 import { PaymentComponent } from "../payment/payment.component";
 import { DoctorsComponent } from "../../../pages/doctors/doctors.component";
 import { DoctorComponent } from "../doctor/doctor.component";
+import { DashboardComponent } from "../dashboard/dashboard.component";
+import { DepartmentComponent } from "../department/department.component";
+import { PatientComponent } from "../patient/patient.component";
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -27,7 +30,7 @@ import { DoctorComponent } from "../doctor/doctor.component";
         DashboardReportComponent, DashboardNotificationComponent,
         DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent,
         PatientListComponent, AddPatientComponent, AddScheduleComponent,
-        ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent, PaymentComponent, DoctorsComponent, DoctorComponent]
+        ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent, PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent, DepartmentComponent, PatientComponent]
 })
 export class DashboardNavigationComponent {
   currentSection: string = 'overview';
@@ -36,7 +39,7 @@ export class DashboardNavigationComponent {
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'appointment'
+    this.currentSection = 'user-management'
   }
   toogleDropdown(section:string):void{
     this.dowpdowns[section]=!this.dowpdowns[section];

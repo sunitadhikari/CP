@@ -53,32 +53,32 @@ export const routes: Routes = [
         path:'overview',
         component:DashboardOverviewComponent
     },
-    {
-        path:'dashboardDoctor',
-        component:DashboardDoctorComponent
-    },
-    {
-        path:'dashAppoinment',
-        component:DashboardAppointmentComponent
-    },
-    {
-        path:'dashReport',
-        component:DashboardReportComponent
-    },
-    {
-        path:'dashNotification',
-        component:DashboardNotificationComponent
-    }, 
-{
-    path:'dashFeedback',
-    component:DashboardFeedbackComponent
-},
-{
-    path:'payment',
-    component:PaymentComponent
-},
-{
-    path:'addPatient',
-    component:AddPatientComponent
-}
+//     {
+//         path:'dashboardDoctor',
+//         component:DashboardDoctorComponent
+//     },
+//     {
+//         path:'dashAppoinment',
+//         component:DashboardAppointmentComponent
+//     },
+//     {
+//         path:'dashReport',
+//         component:DashboardReportComponent
+//     },
+//     {
+//         path:'dashNotification',
+//         component:DashboardNotificationComponent
+//     }, 
+// {
+//     path:'dashFeedback',
+//     component:DashboardFeedbackComponent
+// },
+// {
+//     path:'payment',
+//     component:PaymentComponent
+// },
+// {
+//     path:'addPatient',
+//     component:AddPatientComponent
+// }
 ];
