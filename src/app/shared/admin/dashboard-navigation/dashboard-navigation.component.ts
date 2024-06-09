@@ -23,6 +23,9 @@ import { PatientComponent } from "../patient/patient.component";
 import { AppointmentHistoryComponent } from "../appointment-history/appointment-history.component";
 import { SymptomsComponent } from "../symptoms/symptoms.component";
 import { ViewHistoryComponent } from "../view-history/view-history.component";
+import { SendMailComponent } from "../send-mail/send-mail.component";
+import { PrescriptionComponent } from "../prescription/prescription.component";
+import { ScheduleComponent } from "../schedule/schedule.component";
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -33,7 +36,7 @@ import { ViewHistoryComponent } from "../view-history/view-history.component";
         DashboardReportComponent, DashboardNotificationComponent,
         DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent,
         PatientListComponent, AddPatientComponent, AddScheduleComponent,
-        ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent, PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent, DepartmentComponent, PatientComponent, AppointmentHistoryComponent, SymptomsComponent, ViewHistoryComponent]
+        ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent, PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent, DepartmentComponent, PatientComponent, AppointmentHistoryComponent, SymptomsComponent, ViewHistoryComponent, SendMailComponent, PrescriptionComponent, ScheduleComponent]
 })
 export class DashboardNavigationComponent {
   currentSection: string = 'overview';
@@ -42,7 +45,7 @@ export class DashboardNavigationComponent {
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'user-management'
+    this.currentSection = 'add-schedule'
   }
   toogleDropdown(section:string):void{
     this.dowpdowns[section]=!this.dowpdowns[section];

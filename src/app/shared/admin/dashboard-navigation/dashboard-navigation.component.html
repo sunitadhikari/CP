@@ -160,6 +160,12 @@
                     </a>
                 </li>
                 <li class="  py-2">
+                    <a (click)="showSection('schedule')">
+                        <i class="fas fa-cog"></i>
+                        <span>Schedule</span>
+                    </a>
+                </li>
+                <li class="  py-2">
                     <a (click)="showSection('report')">
                         <i class="fas fa-cog"></i>
                         <span>Generate Report</span>
@@ -180,6 +186,12 @@
                 </li>
                 <li class="  py-2">
                     <a (click)="showSection('report')">
+                        <i class="fas fa-cog"></i>
+                        <span>Report</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('send-mail')">
                         <i class="fas fa-cog"></i>
                         <span>Report</span>
                     </a>
@@ -215,6 +227,12 @@
                         <span>View-History</span>
                     </a>
                 </li>
+                <li class="  py-2">
+                    <a (click)="showSection('prescription')">
+                        <i class="fas fa-cog"></i>
+                        <span>Prescription</span>
+                    </a>
+                </li>
                 <li class="nav-header">Admin</li>
                 <li class="  py-2">
                     <a (click)="showSection('dashboard')">
@@ -238,6 +256,12 @@
                     <a (click)="showSection('Patient')">
                         <i class="fas fa-cog"></i>
                         <span>Patient</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('add-schedule')">
+                        <i class="fas fa-cog"></i>
+                        <span> Schedule</span>
                     </a>
                 </li>
                 <li class="  py-2">
@@ -350,6 +374,18 @@
             </div>
             <div *ngIf="currentSection=== 'view-history'">
                 <app-view-history></app-view-history>
+            </div>
+            <div *ngIf="currentSection=== 'send-mail'">
+                <app-send-mail></app-send-mail>
+            </div>
+            <div *ngIf="currentSection=== 'prescription'">
+                <app-prescription></app-prescription>
+            </div>
+            <div *ngIf="currentSection=== 'add-schedule'">
+                <app-add-schedule></app-add-schedule>
+            </div>
+            <div *ngIf="currentSection=== 'schedule'">
+                <app-schedule></app-schedule>
             </div>
         </div>
     </div>
