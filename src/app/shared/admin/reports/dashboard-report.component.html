@@ -1,6 +1,5 @@
-
 <div class="container-fluid">
-    <div class="row">
+  <!-- <div class="row">
       <div class="card">
         <div class="card-body">
           <div class="col-12">
@@ -33,5 +32,220 @@
         </div>
       </div>
      
+    </div> -->
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Patient Report</h3>
+      </div>
+      <div class="card-body">
+        <form id="patientReportForm">
+          <div class="form-group">
+            <label for="patientName">Patient Name</label>
+            <input type="text" class="form-control" id="patientName" placeholder="Enter patient name" required>
+          </div>
+          <div class="form-group">
+            <label for="patientAge">Patient Age</label>
+            <input type="number" class="form-control" id="patientAge" placeholder="Enter patient age" required>
+          </div>
+          <div class="form-group">
+            <label for="patientGender">Patient Gender</label>
+            <select class="form-control" id="patientGender" required>
+              <option value="">Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="diagnosis">Diagnosis</label>
+            <textarea class="form-control" id="diagnosis" rows="3" placeholder="Enter diagnosis" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="treatment">Treatment Plan</label>
+            <textarea class="form-control" id="treatment" rows="3" placeholder="Enter treatment plan"
+              required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="doctorNotes">Doctor's Notes</label>
+            <textarea class="form-control" id="doctorNotes" rows="3" placeholder="Enter any additional notes"
+              required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Report</button>
+        </form>
+      </div>
     </div>
   </div>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Doctor's Discharge Report</h3>
+    </div>
+    <div class="card-body">
+      <form id="doctorDischargeReportForm">
+        <div class="form-group">
+          <label for="patientName">Patient Name</label>
+          <input type="text" class="form-control" id="patientName" placeholder="Enter patient name" required>
+        </div>
+        <div class="form-group">
+          <label for="patientAge">Patient Age</label>
+          <input type="number" class="form-control" id="patientAge" placeholder="Enter patient age" required>
+        </div>
+        <div class="form-group">
+          <label for="patientGender">Patient Gender</label>
+          <select class="form-control" id="patientGender" required>
+            <option value="">Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="diagnosis">Diagnosis</label>
+          <textarea class="form-control" id="diagnosis" rows="3" placeholder="Enter diagnosis" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="treatmentGiven">Treatment Given</label>
+          <textarea class="form-control" id="treatmentGiven" rows="3" placeholder="Enter treatment given"
+            required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="dischargeInstructions">Discharge Instructions</label>
+          <textarea class="form-control" id="dischargeInstructions" rows="3" placeholder="Enter discharge instructions"
+            required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="followUpPlan">Follow-up Plan</label>
+          <textarea class="form-control" id="followUpPlan" rows="3" placeholder="Enter follow-up plan"
+            required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Report</button>
+      </form>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Hospital Discharge Report</h3>
+    </div>
+    <div class="card-body">
+      <form id="hospitalDischargeReportForm">
+        <div class="form-group">
+          <label for="patientName">Patient Name</label>
+          <input type="text" class="form-control" id="patientName" placeholder="Enter patient name" required>
+        </div>
+        <div class="form-group">
+          <label for="patientAge">Patient Age</label>
+          <input type="number" class="form-control" id="patientAge" placeholder="Enter patient age" required>
+        </div>
+        <div class="form-group">
+          <label for="patientGender">Patient Gender</label>
+          <select class="form-control" id="patientGender" required>
+            <option value="">Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="admissionDate">Admission Date</label>
+          <input type="date" class="form-control" id="admissionDate" required>
+        </div>
+        <div class="form-group">
+          <label for="dischargeDate">Discharge Date</label>
+          <input type="date" class="form-control" id="dischargeDate" required>
+        </div>
+        <div class="form-group">
+          <label for="finalDiagnosis">Final Diagnosis</label>
+          <textarea class="form-control" id="finalDiagnosis" rows="3" placeholder="Enter final diagnosis"
+            required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="summaryOfTreatment">Summary of Treatment</label>
+          <textarea class="form-control" id="summaryOfTreatment" rows="3" placeholder="Enter summary of treatment"
+            required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="dischargeMedications">Discharge Medications</label>
+          <textarea class="form-control" id="dischargeMedications" rows="3" placeholder="Enter discharge medications"
+            required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="followUpInstructions">Follow-up Instructions</label>
+          <textarea class="form-control" id="followUpInstructions" rows="3" placeholder="Enter follow-up instructions"
+            required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Report</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="">Doctor's Discharge Reports</h2>
+
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Patient Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Diagnosis</th>
+            <th>Treatment Given</th>
+            <th>Discharge Instructions</th>
+            <th>Follow-up Plan</th>
+          </tr>
+        </thead>
+        <tbody id="doctorsReportTableBody">
+
+          <td>Patient Name</td>
+          <td>Age</td>
+          <td>Gender</td>
+          <td>Diagnosis</td>
+          <td>Treatment Given</td>
+          <td>Discharge Instructions</td>
+          <td>Follow-up Plan</td>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="">Hospital Discharge Reports</h2>
+
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Patient Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Admission Date</th>
+            <th>Discharge Date</th>
+            <th>Final Diagnosis</th>
+            <th>Summary of Treatment</th>
+            <th>Discharge Medications</th>
+            <th>Follow-up Instructions</th>
+          </tr>
+        </thead>
+        <tbody id="hospitalReportTableBody">
+          <td>Patient Name</td>
+          <td>Age</td>
+          <td>Gender</td>
+          <td>Admission Date</td>
+          <td>Discharge Date</td>
+          <td>Final Diagnosis</td>
+          <td>Summary of Treatment</td>
+          <td>Discharge Medications</td>
+          <td>Follow-up Instructions</td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
