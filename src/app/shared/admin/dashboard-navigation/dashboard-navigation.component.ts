@@ -28,27 +28,31 @@ import { PrescriptionComponent } from "../prescription/prescription.component";
 import { ScheduleComponent } from "../schedule/schedule.component";
 
 @Component({
-    selector: 'app-dashboard-navigation',
-    standalone: true,
-    templateUrl: './dashboard-navigation.component.html',
-    styleUrl: './dashboard-navigation.component.css',
-    imports: [CommonModule, DashboardOverviewComponent, ProfilComponent,
-        DashboardReportComponent, DashboardNotificationComponent,
-        DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent,
-        PatientListComponent, AddPatientComponent, AddScheduleComponent,
-        ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent, PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent, DepartmentComponent, PatientComponent, AppointmentHistoryComponent, SymptomsComponent, ViewHistoryComponent, SendMailComponent, PrescriptionComponent, ScheduleComponent]
+  selector: 'app-dashboard-navigation',
+  standalone: true,
+  templateUrl: './dashboard-navigation.component.html',
+  styleUrl: './dashboard-navigation.component.css',
+  imports: [CommonModule, DashboardOverviewComponent, ProfilComponent,
+    DashboardReportComponent, DashboardNotificationComponent,
+    DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent,
+    PatientListComponent, AddPatientComponent, AddScheduleComponent,
+    ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent,
+    PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
+    DepartmentComponent, PatientComponent, AppointmentHistoryComponent,
+    SymptomsComponent, ViewHistoryComponent, SendMailComponent,
+    PrescriptionComponent, ScheduleComponent]
 })
 export class DashboardNavigationComponent {
   currentSection: string = 'overview';
-  dowpdowns:{ [ Key: string]: boolean}={
-    patient:false,
+  dowpdowns: { [Key: string]: boolean } = {
+    patient: false,
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'add-schedule'
+    this.currentSection = 'patientList'
   }
-  toogleDropdown(section:string):void{
-    this.dowpdowns[section]=!this.dowpdowns[section];
+  toogleDropdown(section: string): void {
+    this.dowpdowns[section] = !this.dowpdowns[section];
   }
   showSection(section: string): void {
     this.currentSection = section;
