@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DoctorService } from '../../../core/service/admin/doctor.service';
+import * as alertify from 'alertifyjs';
+
 
 @Component({
   selector: 'app-doctor',
@@ -12,7 +15,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class DoctorComponent  implements OnInit {
   doctorForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private doctorService:DoctorService) { }
 
   ngOnInit(): void {
     this.doctorForm = this.formBuilder.group({
@@ -36,8 +39,18 @@ export class DoctorComponent  implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.doctorForm.invalid) {
-      return;
+    this.doctorService.getDoctor(this.doctorForm.value).subscribe((data)=>{
+      console.log(data);
+    })
+    if(this.doctorForm.valid){
+      this.doctorService.postDoctor(this.doctorForm.value).subscribe((data)=>{
+       console.log(data);
+      })
+      alertify.success('Doctor Added Successfully')
+      this.doctorForm.reset()
+    }
+    else{
+      alertify.error('Invalid Form')
     }
 
     

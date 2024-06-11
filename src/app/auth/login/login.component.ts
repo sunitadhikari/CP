@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../core/service/user.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import * as alertify from 'alertifyjs';
+import { UserService } from '../../core/service/user/user.service';
 
 
 @Component({
@@ -30,7 +30,7 @@ ngOnInit(): void {
           console.log(data);
           localStorage.setItem('userData', JSON.stringify(this.loginForm.value))
           alertify.success('Login Sucessfully')
-          this.router.navigate(['dashboard'])
+          this.router.navigate([''])
         }
         else{
           alertify.error('Username and password does not match')
