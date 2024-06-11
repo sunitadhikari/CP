@@ -15,6 +15,7 @@ import { DashboardNotificationComponent } from './shared/admin/notification/noti
 import { DashboardFeedbackComponent } from './shared/admin/feedback/feedback.component';
 import { PaymentComponent } from './shared/admin/payment/payment.component';
 import { AddPatientComponent } from './shared/admin/add-patient/add-patient.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
     {
@@ -35,7 +36,8 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardNavigationComponent
+        component: DashboardNavigationComponent,
+        canActivate:[authGuard]
     },
     {
         path:'doctor',
@@ -53,32 +55,5 @@ export const routes: Routes = [
         path:'overview',
         component:DashboardOverviewComponent
     },
-//     {
-//         path:'dashboardDoctor',
-//         component:DashboardDoctorComponent
-//     },
-//     {
-//         path:'dashAppoinment',
-//         component:DashboardAppointmentComponent
-//     },
-//     {
-//         path:'dashReport',
-//         component:DashboardReportComponent
-//     },
-//     {
-//         path:'dashNotification',
-//         component:DashboardNotificationComponent
-//     }, 
-// {
-//     path:'dashFeedback',
-//     component:DashboardFeedbackComponent
-// },
-// {
-//     path:'payment',
-//     component:PaymentComponent
-// },
-// {
-//     path:'addPatient',
-//     component:AddPatientComponent
-// }
+
 ];

@@ -30,7 +30,7 @@ ngOnInit(): void {
           console.log(data);
           localStorage.setItem('userData', JSON.stringify(this.loginForm.value))
           alertify.success('Login Sucessfully')
-          this.router.navigate(['/'])
+          this.router.navigate(['dashboard'])
         }
         else{
           alertify.error('Username and password does not match')

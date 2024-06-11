@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashboardOverviewComponent } from "../overview/dashboard-overview.component";
 import { ProfilComponent } from "../profil/profil.component";
@@ -43,14 +43,18 @@ import { BedManagementComponent } from '../bed-management/bed-management.compone
     BedManagementComponent,
     PrescriptionComponent, ScheduleComponent]
 })
-export class DashboardNavigationComponent {
-  currentSection: string = 'overview';
+export class DashboardNavigationComponent implements OnInit{
+  currentSection: string = 'dashboard';
+  userRole:string|null |undefined;
   dowpdowns: { [Key: string]: boolean } = {
     patient: false,
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'patientList'
+    this.currentSection = 'dashboard'
+  }
+  ngOnInit(): void {
+      this.userRole= localStorage.getItem('userRole')
   }
   toogleDropdown(section: string): void {
     this.dowpdowns[section] = !this.dowpdowns[section];
