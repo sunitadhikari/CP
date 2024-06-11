@@ -241,21 +241,34 @@
                     </a>
                 </li>
                 <li class="  py-2">
-                    <a (click)="showSection('department')">
-                        <i class="fas fa-cog"></i>
-                        <span>Department</span>
-                    </a>
-                </li>
-                <li class="  py-2">
                     <a (click)="showSection('doctor')">
                         <i class="fas fa-cog"></i>
                         <span>Doctor</span>
                     </a>
                 </li>
                 <li class="  py-2">
+                    <a (click)="showSection('department')">
+                        <i class="fas fa-cog"></i>
+                        <span>Department</span>
+                    </a>
+                </li>
+               
+                <li class="  py-2">
                     <a (click)="showSection('Patient')">
                         <i class="fas fa-cog"></i>
                         <span>Patient</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('bed-mgmt')">
+                        <i class="fas fa-cog"></i>
+                        <span>Bed Management</span>
+                    </a>
+                </li>
+                <li class="  py-2">
+                    <a (click)="showSection('Patient')">
+                        <i class="fas fa-cog"></i>
+                        <span>Lab</span>
                     </a>
                 </li>
                 <li class="  py-2">
@@ -387,6 +400,13 @@
             <div *ngIf="currentSection=== 'schedule'">
                 <app-schedule></app-schedule>
             </div>
+
+<!-- mine -->
+
+<div *ngIf="currentSection=== 'bed-mgmt'">
+    <app-bed-management></app-bed-management>
+</div>
+
         </div>
     </div>
 </div>
