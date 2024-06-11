@@ -18,7 +18,6 @@ import { PaymentComponent } from "../payment/payment.component";
 import { DoctorsComponent } from "../../../pages/doctors/doctors.component";
 import { DoctorComponent } from "../doctor/doctor.component";
 import { DashboardComponent } from "../dashboard/dashboard.component";
-import { DepartmentComponent } from "../department/department.component";
 import { PatientComponent } from "../patient/patient.component";
 import { AppointmentHistoryComponent } from "../appointment-history/appointment-history.component";
 import { SymptomsComponent } from "../symptoms/symptoms.component";
@@ -39,7 +38,7 @@ import { BedManagementComponent } from '../bed-management/bed-management.compone
     PatientListComponent, AddPatientComponent, AddScheduleComponent,
     ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent,
     PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
-    DepartmentComponent, PatientComponent, AppointmentHistoryComponent,
+     PatientComponent, AppointmentHistoryComponent,
     SymptomsComponent, ViewHistoryComponent, SendMailComponent,
     BedManagementComponent,
     PrescriptionComponent, ScheduleComponent]

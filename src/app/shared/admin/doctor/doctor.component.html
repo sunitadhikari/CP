@@ -1,18 +1,18 @@
 <div class="container-fluid">
-   
+
     <div class="">
         <div class="row">
             <!-- <div class="col-lg-12"> -->
-                <div class="col-lg-10">
-                    <input type="text" class="form-control mb-2 col-lg-12 " placeholder="Search">
-                </div>
-                <div class="col-lg-2">
+            <div class="col-lg-10">
+                <input type="text" class="form-control mb-2 col-lg-12 " placeholder="Search">
+            </div>
+            <div class="col-lg-2">
 
                 <div class="d-flex ">
                     <button type="submit" class="mr-2 btn btn-primary" placeholder="Search">Search</button>
                     <button class="btn btn-primary">+ Add</button>
                 </div>
-            <!-- </div> -->
+                <!-- </div> -->
 
             </div>
         </div>
@@ -21,45 +21,50 @@
                 <h3 class="card-title">Add Doctor</h3>
             </div>
             <div class="card-body">
-                <form>
+                <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="firstName">First Name *</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="Enter first name" required>
+                            <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                                placeholder="Enter first name" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="lastName">Last Name *</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Enter last name" required>
+                            <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                                placeholder="Enter last name" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="email">Email Address *</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                            <input type="email" class="form-control" id="email" formControlName="email"
+                                placeholder="Enter email" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="password">Password *</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                            <input type="password" class="form-control" id="password" formControlName="password"
+                                placeholder="Enter password" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="department">Department</label>
-                            <input type="text" class="form-control" id="department" placeholder="Enter department">
+                            <input type="text" class="form-control" id="department" formControlName="department"
+                                placeholder="Enter department">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="picture">Picture</label>
-                            <input type="file" class="form-control-file" id="picture">
+                            <input type="file" class="form-control-file" id="picture" formControlName="picture">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="dob">Date of Birth</label>
-                            <input type="date" class="form-control" id="dob">
+                            <input type="date" class="form-control" id="dob" formControlName="dob">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="sex">Sex *</label>
-                            <select id="sex" class="form-control" required>
+                            <select id="sex" class="form-control" formControlName="sex" required>
                                 <option selected disabled>Select sex</option>
                                 <option>Male</option>
                                 <option>Female</option>
@@ -69,48 +74,57 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="bloodGroup">Blood Group</label>
-                            <input type="text" class="form-control" id="bloodGroup" placeholder="Enter blood group">
+                            <input type="text" class="form-control" id="bloodGroup" formControlName="bloodGroup"
+                                placeholder="Enter blood group">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="designation">Designation *</label>
-                            <input type="text" class="form-control" id="designation" placeholder="Enter designation" required>
+                            <input type="text" class="form-control" id="designation" formControlName="designation"
+                                placeholder="Enter designation" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="address">Address *</label>
-                        <textarea class="form-control" id="address" rows="3" placeholder="Enter address" required></textarea>
+                        <textarea class="form-control" id="address" formControlName="address" rows="3"
+                            placeholder="Enter address" required></textarea>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="phoneNo">Phone No</label>
-                            <input type="text" class="form-control" id="phoneNo" placeholder="Enter phone number">
+                            <input type="text" class="form-control" id="phoneNo" formControlName="phoneNo"
+                                placeholder="Enter phone number">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="mobileNo">Mobile No *</label>
-                            <input type="text" class="form-control" id="mobileNo" placeholder="Enter mobile number" required>
+                            <input type="text" class="form-control" id="mobileNo" formControlName="mobileNo"
+                                placeholder="Enter mobile number" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="careerTitle">Career Title *</label>
-                            <input type="text" class="form-control" id="careerTitle" placeholder="Enter career title" required>
+                            <input type="text" class="form-control" id="careerTitle" formControlName="careerTitle"
+                                placeholder="Enter career title" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="biography">Short Biography</label>
-                            <textarea class="form-control" id="biography" rows="3" placeholder="Enter short biography"></textarea>
+                            <textarea class="form-control" id="biography" formControlName="biography" rows="3"
+                                placeholder="Enter short biography"></textarea>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Status</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" id="active" value="active" checked>
+                                <input class="form-check-input" type="radio" name="status" id="active"
+                                    formControlName="status" value="active" checked>
                                 <label class="form-check-label" for="active">
                                     Active
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" id="inactive" value="inactive">
+                                <input class="form-check-input" type="radio" name="status" id="inactive"
+                                    formControlName="status" value="inactive">
                                 <label class="form-check-label" for="inactive">
                                     Inactive
                                 </label>
@@ -120,39 +134,38 @@
                     <button type="submit" class="btn btn-primary">Add Doctor</button>
                 </form>
             </div>
-        </div>
-    </div>
-
-    <div class="container mt-5">
-        <h2>Doctor Details</h2>
-        <table class="table table-striped mt-4">
-            <thead>
-                <tr>
-                    <th>SN</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Department</th>
-                    <th>Date of Birth</th>
-                    <th>Sex</th>
-                    <th>Designation</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="doctorTable">
-                <!-- Doctor details will be inserted here -->
-                <td>1</td>
-                <td>First Name</td>
-                <td>Last Name</td>
-                <td>Email</td>
-                <td>Department</td>
-                <td>Date of Birtd</td>
-                <td>Sex</td>
-                <td>Designation</td>
-                <td>Status</td>
-            </tbody>
-        </table>
-    </div>
 
 
-</div>
+                <div class="container mt-5">
+                    <h2>Doctor Details</h2>
+                    <table class="table table-striped mt-4">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                                <th>Date of Birth</th>
+                                <th>Sex</th>
+                                <th>Designation</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="doctorTable">
+                            <!-- Doctor details will be inserted here -->
+                            <td>1</td>
+                            <td>First Name</td>
+                            <td>Last Name</td>
+                            <td>Email</td>
+                            <td>Department</td>
+                            <td>Date of Birtd</td>
+                            <td>Sex</td>
+                            <td>Designation</td>
+                            <td>Status</td>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
