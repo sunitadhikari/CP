@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashboardOverviewComponent } from "../overview/dashboard-overview.component";
 import { ProfilComponent } from "../profil/profil.component";
@@ -26,32 +26,37 @@ import { SendMailComponent } from "../send-mail/send-mail.component";
 import { PrescriptionComponent } from "../prescription/prescription.component";
 import { ScheduleComponent } from "../schedule/schedule.component";
 import { BedManagementComponent } from '../bed-management/bed-management.component';
+import { DepartmentComponentimplements } from "../department/department.component";
 import { RoomManagementComponent } from '../room-management/room-management.component';
 
 @Component({
-  selector: 'app-dashboard-navigation',
-  standalone: true,
-  templateUrl: './dashboard-navigation.component.html',
-  styleUrl: './dashboard-navigation.component.css',
-  imports: [CommonModule, DashboardOverviewComponent, ProfilComponent,
-    DashboardReportComponent, DashboardNotificationComponent,
-    DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent,
-    PatientListComponent, AddPatientComponent, AddScheduleComponent,
-    ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent,
-    PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
-     PatientComponent, AppointmentHistoryComponent,
-    SymptomsComponent, ViewHistoryComponent, SendMailComponent,
-    BedManagementComponent,RoomManagementComponent,
-    PrescriptionComponent, ScheduleComponent]
+    selector: 'app-dashboard-navigation',
+    standalone: true,
+    templateUrl: './dashboard-navigation.component.html',
+    styleUrl: './dashboard-navigation.component.css',
+    imports: [CommonModule, DashboardOverviewComponent, ProfilComponent,
+        DashboardReportComponent, DashboardNotificationComponent,
+        DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent,
+        PatientListComponent, AddPatientComponent, AddScheduleComponent,
+        ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent,
+        PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
+        PatientComponent, AppointmentHistoryComponent,
+        SymptomsComponent, ViewHistoryComponent, SendMailComponent,
+        BedManagementComponent,RoomManagementComponent,
+        PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements]
 })
-export class DashboardNavigationComponent {
-  currentSection: string = 'overview';
+export class DashboardNavigationComponent implements OnInit{
+  currentSection: string = 'dashboard';
+  userRole:string|null |undefined;
   dowpdowns: { [Key: string]: boolean } = {
     patient: false,
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'patientList'
+    this.currentSection = 'department'
+  }
+  ngOnInit(): void {
+      this.userRole= localStorage.getItem('userRole')
   }
   toogleDropdown(section: string): void {
     this.dowpdowns[section] = !this.dowpdowns[section];

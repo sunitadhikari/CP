@@ -1,18 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DoctorService } from '../../../core/service/admin/doctor.service';
+import * as alertify from 'alertifyjs';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-doctor',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.css'
 })
 export class DoctorComponent  implements OnInit {
   doctorForm!: FormGroup;
+  doctorList : any[] =[];
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private doctorService:DoctorService) {
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+   }
 
   ngOnInit(): void {
     this.doctorForm = this.formBuilder.group({
@@ -20,6 +26,7 @@ export class DoctorComponent  implements OnInit {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
       department: [''],
       picture: [''],
       dob: [''],
@@ -33,11 +40,29 @@ export class DoctorComponent  implements OnInit {
       biography: [''],
       status: ['active', Validators.required]
     });
+    this.getDoctorList();
+
   }
 
-  onSubmit(): void {
-    if (this.doctorForm.invalid) {
-      return;
+  getDoctorList(){
+    this.doctorService.getDoctor().subscribe((data)=>{
+      // console.log(data);
+      this.doctorList=data;
+      console.log(this.doctorList);
+
+    })
+  }
+  onSubmit() {
+   
+    if(this.doctorForm.valid){
+      this.doctorService.postDoctor(this.doctorForm.value).subscribe((data)=>{
+       console.log(data);
+      })
+      alertify.success('Doctor Added Successfully')
+      this.doctorForm.reset()
+    }
+    else{
+      alertify.error('Invalid Form')
     }
 
     

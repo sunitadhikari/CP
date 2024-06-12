@@ -35,15 +35,20 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="email">Email Address *</label>
                             <input type="email" class="form-control" id="email" formControlName="email"
                                 placeholder="Enter email" required>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="password">Password *</label>
                             <input type="password" class="form-control" id="password" formControlName="password"
                                 placeholder="Enter password" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="confirmPassword">confirmPassword *</label>
+                            <input type="confirmPassword" class="form-control" id="confirmPassword"
+                                formControlName="confirmPassword" placeholder="Enter confirmPassword" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -136,11 +141,12 @@
             </div>
 
 
-                <div class="container mt-5">
-                    <h2>Doctor Details</h2>
-                    <table class="table table-striped mt-4">
+            <div class="container mt-5">
+                <h2>Doctor Details</h2>
+                <div class="table-responsive">
+                    <table  class="table table-striped mt-4">
                         <thead>
-                            <tr>
+                            <tr >
                                 <th>SN</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
@@ -152,20 +158,25 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody id="doctorTable">
-                            <!-- Doctor details will be inserted here -->
-                            <td>1</td>
-                            <td>First Name</td>
-                            <td>Last Name</td>
-                            <td>Email</td>
-                            <td>Department</td>
-                            <td>Date of Birtd</td>
-                            <td>Sex</td>
-                            <td>Designation</td>
-                            <td>Status</td>
+                        <tbody id="doctorTable" >
+                            <tr *ngFor="let item of doctorList; let i =index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.firstName}}</td>
+                                <td>{{item.lastName}}</td>
+                                <td>{{item.email}}</td>
+                                <td>{{item.department}}</td>
+                                <td>{{item.dob}}</td>
+                                <td>{{item.sex}}</td>
+                                <td>{{item.designation}}</td>
+                                <td>{{item.status}}</td>
+                            </tr>
+                           
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
+
+
+        </div>
+    </div>
+</div>

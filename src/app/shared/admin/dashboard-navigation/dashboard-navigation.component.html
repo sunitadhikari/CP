@@ -193,7 +193,7 @@
                 <li class="  py-2">
                     <a (click)="showSection('send-mail')">
                         <i class="fas fa-cog"></i>
-                        <span>Report</span>
+                        <span>Send-mail</span>
                     </a>
                 </li>
                 <li class="nav-header">Patient</li>
@@ -241,7 +241,7 @@
                     </a>
                 </li>
                 <li class="  py-2">
-                    <a (click)="showSection('doctor')">
+                    <a (click)="showSection('add-doctor')">
                         <i class="fas fa-cog"></i>
                         <span>Doctor</span>
                     </a>
@@ -252,7 +252,7 @@
                         <span>Department</span>
                     </a>
                 </li>
-               
+
                 <li class="  py-2">
                     <a (click)="showSection('Patient')">
                         <i class="fas fa-cog"></i>
@@ -301,7 +301,7 @@
                         <span>Profile</span>
                     </a>
                 </li>
-             
+
                 <li class="  py-2">
                     <a (click)="showSection('payment')">
                         <i class="fas fa-cog"></i>
@@ -376,7 +376,7 @@
             <div *ngIf="currentSection=== 'payment'">
                 <app-payment></app-payment>
             </div>
-            <div *ngIf="currentSection=== 'doctor'">
+            <div *ngIf="currentSection=== 'add-doctor'">
                 <app-doctor></app-doctor>
             </div>
             <div *ngIf="currentSection=== 'dashboard'">
@@ -409,12 +409,12 @@
             <div *ngIf="currentSection=== 'schedule'">
                 <app-schedule></app-schedule>
             </div>
-
-<!-- mine -->
-
-<div *ngIf="currentSection=== 'bed-mgmt'">
-    <app-bed-management></app-bed-management>
-</div>
+            <div *ngIf="currentSection=== 'department'">
+                <app-department></app-department>
+            </div>
+            <div *ngIf="currentSection=== 'bed-mgmt'">
+                <app-bed-management></app-bed-management>
+            </div>
 
         </div>
     </div>
