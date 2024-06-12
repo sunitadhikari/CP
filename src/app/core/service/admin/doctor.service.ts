@@ -17,7 +17,7 @@ private getDoctorApi = environment.api_url + "getDoctor"
 postDoctor(data:any):Observable <any>{
   return this.http.post(this.addDoctorApi, data)
 }
-getDoctor(value: any):Observable <any>{
+getDoctor():Observable <any>{
   return this.http.get(this.getDoctorApi)
 }
 

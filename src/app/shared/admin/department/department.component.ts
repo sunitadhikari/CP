@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DepartmentService } from '../../../core/service/admin/department.service';
 import * as alertify from 'alertifyjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-department',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './department.component.html',
   styleUrl: './department.component.css'
 })
@@ -14,7 +15,7 @@ export class DepartmentComponentimplements {
   departmentForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private departmentService: DepartmentService) { }
-
+department : any[] =[]
   ngOnInit(): void {
     this.departmentForm = this.formBuilder.group({
       departmentName: ['', Validators.required],
@@ -23,7 +24,16 @@ export class DepartmentComponentimplements {
       description: [''],
       status: ['active', Validators.required]
     });
+    this.getDepartmentList()
   }
+
+  getDepartmentList(){
+    this.departmentService.getDepartment(this.departmentForm.value).subscribe((data) => {
+     this.department =data
+      console.log(this.department);
+      
+    })
+  } 
 
   onSubmit() {
     if (this.departmentForm.valid) {
@@ -32,10 +42,7 @@ export class DepartmentComponentimplements {
         alertify.success('Successfully added')
         this.departmentForm.reset()
       })
-      this.departmentService.getDepartment(this.departmentForm.value).subscribe((data) => {
-        console.log(data);
-        
-      })
+   
     }
     else {
       console.log('Department Add form doesnot work');
