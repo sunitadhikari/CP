@@ -26,6 +26,7 @@ import { SendMailComponent } from "../send-mail/send-mail.component";
 import { PrescriptionComponent } from "../prescription/prescription.component";
 import { ScheduleComponent } from "../schedule/schedule.component";
 import { BedManagementComponent } from '../bed-management/bed-management.component';
+import { RoomManagementComponent } from '../room-management/room-management.component';
 
 @Component({
   selector: 'app-dashboard-navigation',
@@ -40,7 +41,7 @@ import { BedManagementComponent } from '../bed-management/bed-management.compone
     PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
      PatientComponent, AppointmentHistoryComponent,
     SymptomsComponent, ViewHistoryComponent, SendMailComponent,
-    BedManagementComponent,
+    BedManagementComponent,RoomManagementComponent,
     PrescriptionComponent, ScheduleComponent]
 })
 export class DashboardNavigationComponent {

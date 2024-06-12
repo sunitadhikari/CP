@@ -266,6 +266,12 @@
                     </a>
                 </li>
                 <li class="  py-2">
+                    <a (click)="showSection('room')">
+                        <i class="fas fa-cog"></i>
+                        <span>Room</span>
+                    </a>
+                </li>
+                <li class="  py-2">
                     <a (click)="showSection('Patient')">
                         <i class="fas fa-cog"></i>
                         <span>Lab</span>
@@ -342,6 +348,9 @@
             </div>
             <div *ngIf="currentSection === 'scheduleList'">
                 <app-schedule-list></app-schedule-list>
+            </div>
+            <div *ngIf="currentSection === 'room'">
+                <app-room-management></app-room-management>
             </div>
             <div *ngIf="currentSection === 'report'">
                 <app-dashboard-report></app-dashboard-report>

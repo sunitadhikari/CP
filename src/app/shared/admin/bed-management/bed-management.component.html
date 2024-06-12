@@ -1,60 +1,64 @@
 <div class="container-fluid">
     <div class="container mt-5">
         <h2>Room Management</h2>
-        <form [formGroup]="roomForm" (ngSubmit)="onSubmit()" class="mb-4">
-          <div class="form-group">
-            <label for="name">Room Name *</label>
-            <input id="name" formControlName="name" class="form-control" required />
-          </div>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <input id="description" formControlName="description" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="bedCapacity">Bed Capacity *</label>
-            <input id="bedCapacity" formControlName="bedCapacity" type="number" class="form-control" required />
-          </div>
-          <div class="form-group">
-            <label for="charge">Charge *</label>
-            <input id="charge" formControlName="charge" type="number" class="form-control" required />
-          </div>
-          <div class="form-group">
-            <label>Status</label>
-            <select formControlName="status" class="form-control">
-              <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      
-        <h3>Room List</h3>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>SL</th>
-              <th>Room Name</th>
-              <th>Description</th>
-              <th>Bed Capacity</th>
-              <th>Charge</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let room of rooms; let i = index">
-              <td>{{ i + 1 }}</td>
-              <td>{{ room.name }}</td>
-              <td>{{ room.description }}</td>
-              <td>{{ room.bedCapacity }}</td>
-              <td>{{ room.charge | currency }}</td>
-              <td>{{ room.status }}</td>
-              <td>
-                <button class="btn btn-warning btn-sm" (click)="editRoom(room)">Edit</button>
-                <button class="btn btn-outline-danger btn-sm ml-4" (click)="deleteRoom(room.id)">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="container-fluid">
+            <div class="container mt-5">
+                <h2>Room Management</h2>
+                <form [formGroup]="bedForm" (ngSubmit)="onSubmit()" class="mb-4">
+                  <div class="form-group">
+                    <label for="name">Room Name *</label>
+                    <input id="name" formControlName="name" class="form-control" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <input id="description" formControlName="description" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <label for="bedCapacity">Bed Capacity *</label>
+                    <input id="bedCapacity" formControlName="bedCapacity" type="number" class="form-control" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="charge">Charge *</label>
+                    <input id="charge" formControlName="charge" type="number" class="form-control" required />
+                  </div>
+                  <div class="form-group">
+                    <label>Status</label>
+                    <select formControlName="status" class="form-control">
+                      <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              
+                <h3>Room List</h3>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>SL</th>
+                      <th>Room Name</th>
+                      <th>Description</th>
+                      <th>Bed Capacity</th>
+                      <th>Charge</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <tr *ngFor="let room of rooms; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ room.name }}</td>
+                      <td>{{ room.description }}</td>
+                      <td>{{ room.bedCapacity }}</td>
+                      <td>{{ room.charge | currency }}</td>
+                      <td>{{ room.status }}</td>
+                      <td>
+                        <button class="btn btn-warning btn-sm" (click)="editRoom(room)">Edit</button>
+                        <button class="btn btn-outline-danger btn-sm ml-4" (click)="deleteRoom(room.id)">Delete</button>
+                      </td>
+                    </tr> -->
+                  </tbody>
+                </table>
+              </div>
+        </div>
       </div>
-      
 </div>
