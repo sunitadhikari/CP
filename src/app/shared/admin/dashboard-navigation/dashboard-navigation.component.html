@@ -252,7 +252,7 @@
                         <span>Department</span>
                     </a>
                 </li>
-               
+
                 <li class="  py-2">
                     <a (click)="showSection('Patient')">
                         <i class="fas fa-cog"></i>
@@ -295,7 +295,7 @@
                         <span>Profile</span>
                     </a>
                 </li>
-             
+
                 <li class="  py-2">
                     <a (click)="showSection('payment')">
                         <i class="fas fa-cog"></i>
@@ -400,12 +400,12 @@
             <div *ngIf="currentSection=== 'schedule'">
                 <app-schedule></app-schedule>
             </div>
-
-<!-- mine -->
-
-<div *ngIf="currentSection=== 'bed-mgmt'">
-    <app-bed-management></app-bed-management>
-</div>
+            <div *ngIf="currentSection=== 'department'">
+                <app-department></app-department>
+            </div>
+            <div *ngIf="currentSection=== 'bed-mgmt'">
+                <app-bed-management></app-bed-management>
+            </div>
 
         </div>
     </div>

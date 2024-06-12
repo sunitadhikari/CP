@@ -26,22 +26,23 @@ import { SendMailComponent } from "../send-mail/send-mail.component";
 import { PrescriptionComponent } from "../prescription/prescription.component";
 import { ScheduleComponent } from "../schedule/schedule.component";
 import { BedManagementComponent } from '../bed-management/bed-management.component';
+import { DepartmentComponentimplements } from "../department/department.component";
 
 @Component({
-  selector: 'app-dashboard-navigation',
-  standalone: true,
-  templateUrl: './dashboard-navigation.component.html',
-  styleUrl: './dashboard-navigation.component.css',
-  imports: [CommonModule, DashboardOverviewComponent, ProfilComponent,
-    DashboardReportComponent, DashboardNotificationComponent,
-    DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent,
-    PatientListComponent, AddPatientComponent, AddScheduleComponent,
-    ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent,
-    PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
-     PatientComponent, AppointmentHistoryComponent,
-    SymptomsComponent, ViewHistoryComponent, SendMailComponent,
-    BedManagementComponent,
-    PrescriptionComponent, ScheduleComponent]
+    selector: 'app-dashboard-navigation',
+    standalone: true,
+    templateUrl: './dashboard-navigation.component.html',
+    styleUrl: './dashboard-navigation.component.css',
+    imports: [CommonModule, DashboardOverviewComponent, ProfilComponent,
+        DashboardReportComponent, DashboardNotificationComponent,
+        DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent,
+        PatientListComponent, AddPatientComponent, AddScheduleComponent,
+        ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent,
+        PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
+        PatientComponent, AppointmentHistoryComponent,
+        SymptomsComponent, ViewHistoryComponent, SendMailComponent,
+        BedManagementComponent,
+        PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements]
 })
 export class DashboardNavigationComponent implements OnInit{
   currentSection: string = 'dashboard';
@@ -51,7 +52,7 @@ export class DashboardNavigationComponent implements OnInit{
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'add-doctor'
+    this.currentSection = 'department'
   }
   ngOnInit(): void {
       this.userRole= localStorage.getItem('userRole')
