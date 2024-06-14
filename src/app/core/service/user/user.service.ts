@@ -8,21 +8,21 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  constructor(private http:HttpClient) { }
-  apiUrl:string = environment.api_url
+  constructor(private http: HttpClient) { }
+  apiUrl: string = environment.api_url
 
-  private registerApi  = environment.api_url + "userSignup"
+  private registerApi = environment.api_url + "userSignup"
   private getUserRegister = environment.api_url + "getUserSignup"
   private postLogin = environment.api_url + "postLogin"
 
-  postRegister(data:any):Observable <any>{
+  postRegister(data: any): Observable<any> {
     return this.http.post(this.registerApi, data);
   }
 
-  getRegister():Observable<any>{
+  getRegister(): Observable<any> {
     return this.http.get(this.getUserRegister)
   }
-  postUserLogin(data:any):Observable<any>{
-return this.http.post(this.postLogin, data)
+  postUserLogin(data: any): Observable<any> {
+    return this.http.post(this.postLogin, data)
   }
 }
