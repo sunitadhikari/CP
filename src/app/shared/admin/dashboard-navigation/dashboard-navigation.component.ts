@@ -28,6 +28,7 @@ import { ScheduleComponent } from "../schedule/schedule.component";
 import { BedManagementComponent } from '../bed-management/bed-management.component';
 import { DepartmentComponentimplements } from "../department/department.component";
 import { RoomManagementComponent } from '../room-management/room-management.component';
+import { LabComponent } from "../Lab/lab/lab.component";
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -42,8 +43,8 @@ import { RoomManagementComponent } from '../room-management/room-management.comp
         PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
         PatientComponent, AppointmentHistoryComponent,
         SymptomsComponent, ViewHistoryComponent, SendMailComponent,
-        BedManagementComponent,RoomManagementComponent,
-        PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements]
+        BedManagementComponent, RoomManagementComponent,
+        PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements, LabComponent]
 })
 export class DashboardNavigationComponent implements OnInit{
   currentSection: string = 'dashboard';
@@ -53,7 +54,7 @@ export class DashboardNavigationComponent implements OnInit{
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'bed-management'
+    this.currentSection = 'lab'
   }
   ngOnInit(): void {
       this.userRole= localStorage.getItem('userRole')

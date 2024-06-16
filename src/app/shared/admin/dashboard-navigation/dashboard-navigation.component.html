@@ -272,7 +272,7 @@
                     </a>
                 </li>
                 <li class="  py-2">
-                    <a (click)="showSection('patient')">
+                    <a (click)="showSection('lab')">
                         <i class="fas fa-cog"></i>
                         <span>Lab</span>
                     </a>
@@ -382,9 +382,9 @@
             <div *ngIf="currentSection=== 'dashboard'">
                 <app-dashboard></app-dashboard>
             </div>
-            <!-- <div *ngIf="currentSection=== 'department'">
-                <app-department></app-department>
-            </div> -->
+            <div *ngIf="currentSection=== 'lab'">
+                <app-lab></app-lab>
+            </div>
             <div *ngIf="currentSection=== 'patient'">
                 <app-patient></app-patient>
             </div>

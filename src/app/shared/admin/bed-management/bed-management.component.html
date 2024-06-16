@@ -53,7 +53,7 @@
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
               
-                <h3>Room List</h3>
+                <h3>Bed List</h3>
                 <table class="table table-bordered">
                   <thead>
                     <tr>
@@ -76,7 +76,7 @@
                       <td>{{ room.status }}</td>
                       <td>
                         <button class="btn btn-warning btn-sm" (click)="editBed()">Edit</button>
-                        <button class="btn btn-outline-danger btn-sm ml-4" (click)="deleteBed()">Delete</button>
+                        <button class="btn btn-outline-danger btn-sm ml-4" (click)="deleteBed(room._id)">Delete</button>
                       </td>
                     </tr>
                   </tbody>

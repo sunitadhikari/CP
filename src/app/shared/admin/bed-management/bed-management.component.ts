@@ -15,7 +15,7 @@ import * as alertify from 'alertifyjs';
 export class BedManagementComponent implements OnInit {
   bedForm!: FormGroup;
   statuses = ['Active', 'Inactive'];
-  bedList :any[]=[]
+  bedList: any[] = []
 
   constructor(private fb: FormBuilder, private bedService: BedService) { }
 
@@ -43,17 +43,23 @@ export class BedManagementComponent implements OnInit {
       alertify.error('Invalid form');
     }
   }
-  getBed(){
-    this.bedService.getBed().subscribe((data)=>{
+  getBed() {
+    this.bedService.getBed().subscribe((data) => {
       console.log('data');
-this.bedList =data
+      this.bedList = data
     })
   }
-  editBed(){
+  editBed() {
 
   }
 
-  deleteBed(){
-
+  deleteBed(id: number) {
+    this.bedService.deleteBed(id).subscribe(() => {
+      alertify.success('Successfully deleted');
+      this.getBed();
+    },
+      error => {
+        alertify.error('Failed to delete')
+      });
   }
 }
