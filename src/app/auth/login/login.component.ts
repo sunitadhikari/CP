@@ -23,22 +23,33 @@ ngOnInit(): void {
     password : ['', Validators.required]
   })
   }
+  // this.userService.postUserLogin(this.loginForm.value).subscribe((data)=>{
   submit(){
     if(this.loginForm.valid){
-      this.userService.postUserLogin(this.loginForm.value).subscribe((data)=>{
-        if(this.loginForm.value.email, this.loginForm.value.password){
-          console.log(data);
-          localStorage.setItem('userData', JSON.stringify(this.loginForm.value))
-          alertify.success('Login Sucessfully')
-          this.router.navigate([''])
+      this.userService.postUserLogin(this.loginForm.value).subscribe((res)=>{
+        debugger
+        if (res && res.message === 'Login Sucessfull'){
+          console.log(res);
+          console.log(this.loginForm.value)
+          console.log(this.loginForm)
+          localStorage.setItem('userData',JSON.stringify(this.loginForm.value));
+          localStorage.setItem('userRole',res.role)
+          // localStorage.setItem('userRole',JSON.stringify(res.role))
+          // localStorage.setItem('userToken',JSON.stringify(res.token))
+          localStorage.setItem('userToken',res.token)
+          debugger
+          this.router.navigate(['/dashboard'])
+          
+          alertify.success('Login  Sucessfull')
         }
         else{
-          alertify.error('Username and password does not match')
+          alertify.error('enter Valid username and password')
+
         }
       })
     }
     else{
-      alertify.error('Please enter valid data')
+      alertify.error('error')
     }
   }
 }

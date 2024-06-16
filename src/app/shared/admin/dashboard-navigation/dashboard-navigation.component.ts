@@ -29,6 +29,7 @@ import { BedManagementComponent } from '../bed-management/bed-management.compone
 import { DepartmentComponentimplements } from "../department/department.component";
 import { RoomManagementComponent } from '../room-management/room-management.component';
 import { LabComponent } from "../Lab/lab/lab.component";
+import { NoteComponent } from '../../../pages/note/note.component';
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -43,7 +44,7 @@ import { LabComponent } from "../Lab/lab/lab.component";
         PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
         PatientComponent, AppointmentHistoryComponent,
         SymptomsComponent, ViewHistoryComponent, SendMailComponent,
-        BedManagementComponent, RoomManagementComponent,
+        BedManagementComponent, RoomManagementComponent,NoteComponent,
         PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements, LabComponent]
 })
 export class DashboardNavigationComponent implements OnInit{
@@ -55,7 +56,7 @@ export class DashboardNavigationComponent implements OnInit{
 
   constructor(private router: Router) {
     this.currentSection = 'lab'
-  }
+}
   ngOnInit(): void {
       this.userRole= localStorage.getItem('userRole')
   }

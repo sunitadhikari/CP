@@ -1,0 +1,37 @@
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="col-lg-8 offset-lg-2">
+        <div class="card">
+            <div class="card-header">
+                Create Doctor Note
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label for="patient">Patient:</label>
+                        <input type="text" class="form-control" id="patient" placeholder="Enter patient name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" class="form-control" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content:</label>
+                        <textarea class="form-control" id="content" rows="5" placeholder="Enter doctor's note content" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col">
+        <h2>Doctor Notes</h2>
+       <app-shared-table [columns]="tableColumn" [data]="tableNotes" [actions]="actions"></app-shared-table>
+      </div>
+    </div>
+  </div>
+  
