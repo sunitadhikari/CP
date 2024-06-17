@@ -89,6 +89,12 @@
                         </a>
                     </li>
                     <li class="py-2">
+                        <a (click)="showSection('send-mail')">
+                            <i class="fas fa-cogs"></i>
+                            <span>Mail</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
                         <a (click)="showSection('profile')">
                             <i class="fas fa-user"></i>
                             <span>Profile</span>
@@ -100,12 +106,12 @@
                             <span>Report</span>
                         </a>
                     </li>
-                    <li class="py-2">
+                    <!-- <li class="py-2">
                         <a (click)="showSection('sendMail')">
                             <i class="fas fa-envelope"></i>
                             <span>Send Mail</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="py-2">
                         <a (click)="logout()">
                             <i class="fas fa-sign-out-alt"></i>
@@ -125,6 +131,12 @@
                         <a (click)="showSection('appointment')">
                             <i class="fas fa-calendar-check"></i>
                             <span>Appointment</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('send-mail')">
+                            <i class="fas fa-cogs"></i>
+                            <span>Mail</span>
                         </a>
                     </li>
                     <li class="py-2">
@@ -179,6 +191,12 @@
                         </a>
                     </li>
                     <li class="py-2">
+                        <a (click)="showSection('send-mail')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Email</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
                         <a (click)="showSection('addDoctor')">
                             <i class="fas fa-user-md"></i>
                             <span>Doctor</span>
@@ -197,7 +215,7 @@
                         </a>
                     </li>
                     <li class="py-2">
-                        <a (click)="showSection('bedManagement')">
+                        <a (click)="showSection('bed-management')">
                             <i class="fas fa-bed"></i>
                             <span>Bed Management</span>
                         </a>
@@ -221,7 +239,7 @@
                         </a>
                     </li>
                     <li class="py-2">
-                        <a (click)="showSection('userManagement')">
+                        <a (click)="showSection('user-management')">
                             <i class="fas fa-users-cog"></i>
                             <span>User Management</span>
                         </a>
@@ -244,12 +262,7 @@
                             <span>Payments</span>
                         </a>
                     </li>
-                    <li class="py-2">
-                        <a (click)="showSection('doctor')">
-                            <i class="fas fa-user-md"></i>
-                            <span>Doctors</span>
-                        </a>
-                    </li>
+                   
                     <li class="py-2">
                         <a (click)="logout()">
                             <i class="fas fa-sign-out-alt"></i>
@@ -269,7 +282,7 @@
             <div *ngIf="currentSection=== 'overview'">
                 <app-dashboard-overview></app-dashboard-overview>
             </div>
-            <div *ngIf="currentSection=== 'doctor'">
+            <div *ngIf="currentSection=== 'addDoctor'">
                 <app-dashboard-doctor></app-dashboard-doctor>
             </div>
             <div *ngIf="currentSection === 'addPatient' ">
@@ -326,7 +339,7 @@
             <div *ngIf="currentSection=== 'patient'">
                 <app-patient></app-patient>
             </div>
-            <div *ngIf="currentSection=== 'appointment-history'">
+            <div *ngIf="currentSection=== 'appointmentHistory'">
                 <app-appointment-history></app-appointment-history>
             </div>
             <div *ngIf="currentSection=== 'symptoms'">
@@ -353,6 +366,11 @@
             <div *ngIf="currentSection=== 'bed-management'">
                 <app-bed-management></app-bed-management>
             </div>
+            <div *ngIf="currentSection=== 'medicalHistory'">
+               <app-medical-history></app-medical-history>  
+
+            </div>
+            
             <div *ngIf="currentSection=== 'note'">
                 <app-note></app-note>
             </div>

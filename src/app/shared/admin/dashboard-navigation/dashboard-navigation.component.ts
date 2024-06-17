@@ -30,6 +30,7 @@ import { DepartmentComponentimplements } from "../department/department.componen
 import { RoomManagementComponent } from '../room-management/room-management.component';
 import { LabComponent } from "../Lab/lab/lab.component";
 import { NoteComponent } from '../../../pages/note/note.component';
+import { MedicalHistoryComponent } from "../../../pages/patient/medical-history/medical-history.component";
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -44,8 +45,8 @@ import { NoteComponent } from '../../../pages/note/note.component';
         PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
         PatientComponent, AppointmentHistoryComponent,
         SymptomsComponent, ViewHistoryComponent, SendMailComponent,
-        BedManagementComponent, RoomManagementComponent,NoteComponent,
-        PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements, LabComponent]
+        BedManagementComponent, RoomManagementComponent, NoteComponent,
+        PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements, LabComponent, MedicalHistoryComponent]
 })
 export class DashboardNavigationComponent implements OnInit{
   currentSection: string = 'dashboard';
