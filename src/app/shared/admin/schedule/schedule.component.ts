@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedTableComponent } from '../../sharedComponent/shared-table/shared-table.component';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ScheduleService } from '../../../core/service/admin/schedule.service';
 import * as alertify from 'alertifyjs';
@@ -8,7 +8,7 @@ import * as alertify from 'alertifyjs';
 @Component({
   selector: 'app-schedule',
   standalone: true,
-  imports: [SharedTableComponent, CommonModule, ReactiveFormsModule],
+  imports: [SharedTableComponent, CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.css'
 })
@@ -44,6 +44,7 @@ export class ScheduleComponent implements OnInit {
   }
   submit() {
     console.log('Checked');
+    debugger
     if (this.scheduleForm.valid) {
       this.scheduleService.postSchedule(this.scheduleForm.value).subscribe((data) => {
         console.log(data);
@@ -52,6 +53,7 @@ export class ScheduleComponent implements OnInit {
       this.scheduleForm.reset()
     }
     else {
+      debugger
       alertify.error('Invalid Form ')
     }
   }
