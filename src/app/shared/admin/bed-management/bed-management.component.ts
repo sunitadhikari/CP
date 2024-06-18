@@ -14,7 +14,7 @@ import * as alertify from 'alertifyjs';
 })
 export class BedManagementComponent implements OnInit {
   bedForm!: FormGroup;
-  statuses = ['Active', 'Inactive'];
+  status = ['Active', 'Inactive'];
   bedList: any[] = []
 
   constructor(private fb: FormBuilder, private bedService: BedService) { }

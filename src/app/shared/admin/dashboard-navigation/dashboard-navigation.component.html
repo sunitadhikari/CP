@@ -197,7 +197,7 @@
                         </a>
                     </li>
                     <li class="py-2">
-                        <a (click)="showSection('addDoctor')">
+                        <a (click)="showSection('doctor')">
                             <i class="fas fa-user-md"></i>
                             <span>Doctor</span>
                         </a>
@@ -233,7 +233,7 @@
                         </a>
                     </li>
                     <li class="py-2">
-                        <a (click)="showSection('addSchedule')">
+                        <a (click)="showSection('schedule')">
                             <i class="fas fa-calendar-alt"></i>
                             <span>Schedule</span>
                         </a>
@@ -282,8 +282,8 @@
             <div *ngIf="currentSection=== 'overview'">
                 <app-dashboard-overview></app-dashboard-overview>
             </div>
-            <div *ngIf="currentSection=== 'addDoctor'">
-                <app-dashboard-doctor></app-dashboard-doctor>
+            <div *ngIf="currentSection=== 'doctor'">
+                <app-doctor></app-doctor>
             </div>
             <div *ngIf="currentSection === 'addPatient' ">
                 <app-add-patient></app-add-patient>
@@ -293,12 +293,6 @@
             </div>
             <div *ngIf="currentSection === 'appointment'">
                 <app-dashboard-appointment></app-dashboard-appointment>
-            </div>
-            <div *ngIf="currentSection === 'addSchedule'">
-                <app-add-schedule></app-add-schedule>
-            </div>
-            <div *ngIf="currentSection === 'scheduleList'">
-                <app-schedule-list></app-schedule-list>
             </div>
             <div *ngIf="currentSection === 'room'">
                 <app-room-management></app-room-management>
@@ -354,9 +348,7 @@
             <div *ngIf="currentSection=== 'prescription'">
                 <app-prescription></app-prescription>
             </div>
-            <div *ngIf="currentSection=== 'add-schedule'">
-                <app-add-schedule></app-add-schedule>
-            </div>
+           
             <div *ngIf="currentSection=== 'schedule'">
                 <app-schedule></app-schedule>
             </div>

@@ -7,12 +7,9 @@ import { DashboardFeedbackComponent } from "../feedback/feedback.component";
 import { DashboardReportComponent } from "../reports/dashboard-report.component";
 import { DashboardNotificationComponent } from "../notification/notification.component";
 import { DashboardAppointmentComponent } from "../appointments/dashboard-appointment.component";
-import { DashboardDoctorComponent } from "../doctors/doctors.component";
 import { SettingComponent } from "../setting/setting.component";
 import { PatientListComponent } from "../patient-list/patient-list.component";
 import { AddPatientComponent } from "../add-patient/add-patient.component";
-import { AddScheduleComponent } from "../add-schedule/add-schedule.component";
-import { ScheduleListComponent } from "../schedule-list/schedule-list.component";
 import { UserManagementComponent } from "../user-management/user-management.component";
 import { PaymentComponent } from "../payment/payment.component";
 import { DoctorsComponent } from "../../../pages/doctors/doctors.component";
@@ -39,9 +36,8 @@ import { MedicalHistoryComponent } from "../../../pages/patient/medical-history/
     styleUrl: './dashboard-navigation.component.css',
     imports: [CommonModule, DashboardOverviewComponent, ProfilComponent,
         DashboardReportComponent, DashboardNotificationComponent,
-        DashboardAppointmentComponent, DashboardDoctorComponent, SettingComponent,
-        PatientListComponent, AddPatientComponent, AddScheduleComponent,
-        ScheduleListComponent, DashboardFeedbackComponent, UserManagementComponent,
+        DashboardAppointmentComponent, SettingComponent,
+        PatientListComponent, AddPatientComponent, DashboardFeedbackComponent, UserManagementComponent,
         PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
         PatientComponent, AppointmentHistoryComponent,
         SymptomsComponent, ViewHistoryComponent, SendMailComponent,
@@ -56,7 +52,7 @@ export class DashboardNavigationComponent implements OnInit{
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'lab'
+    this.currentSection = 'schedule'
 }
   ngOnInit(): void {
       this.userRole= localStorage.getItem('userRole')

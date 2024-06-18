@@ -8,7 +8,6 @@ import { AppointmentComponent } from './pages/appointment/appointment.component'
 import { DoctorDetailComponent } from './pages/doctor-detail/doctor-detail.component';
 import { DashboardNavigationComponent } from './shared/admin/dashboard-navigation/dashboard-navigation.component';
 import { DashboardOverviewComponent } from './shared/admin/overview/dashboard-overview.component';
-import { DashboardDoctorComponent } from './shared/admin/doctors/doctors.component';
 import { DashboardAppointmentComponent } from './shared/admin/appointments/dashboard-appointment.component';
 import { DashboardReportComponent } from './shared/admin/reports/dashboard-report.component';
 import { DashboardNotificationComponent } from './shared/admin/notification/notification.component';
