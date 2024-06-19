@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentComponent } from "../../../pages/appointment/appointment.component";
 import { CommonModule, NgIf } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 @Component({
-    selector: 'app-dashboard-appointment',
+    selector: 'app-appointment',
     standalone: true,
-    templateUrl: './dashboard-appointment.component.html',
-    styleUrl: './dashboard-appointment.component.css',
-    imports: [AppointmentComponent,  CommonModule, NgIf, ReactiveFormsModule]
+    templateUrl: './appointment.component.html',
+    styleUrl: './appointment.component.css',
+    imports: [  CommonModule, NgIf, ReactiveFormsModule]
 })
-export class DashboardAppointmentComponent implements OnInit{
+export class AppointmentComponent implements OnInit{
     appointmentForm! : FormGroup 
     constructor(private fb: FormBuilder){}
     ngOnInit(): void {
         this.appointmentForm = this.fb.group({
-          name:['', Validators.required],
+          username:['', Validators.required],
           email:['', [Validators.required, Validators.email]],
-          phone:['',[Validators.required, Validators.pattern(/^(9[4-8][0-9]|01[0-9])\d{7}$/)]],
+          specialist:['', Validators.required],
+          phone:[ 0 ,[Validators.required, Validators.pattern(/^(9[4-8][0-9]|01[0-9])\d{7}$/)]],
           date:['', Validators.required],
+          problem:['', Validators.required],
           time:['', Validators.required],
-          doctor:['', Validators.required]
         })
     }
     submit(){

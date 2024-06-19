@@ -16,21 +16,28 @@ export class ScheduleComponent implements OnInit {
   scheduleForm!: FormGroup
   constructor(private fb: FormBuilder, private scheduleService: ScheduleService) { }
   appointments = [
-    { id: 1, patient: 'John Doe', Doctor: 'Dr. Smith', date: '2024-06-18', Time: '10:00 AM', Status: 'Scheduled' },
-    { ID: 2, patient: 'Jane Smith', Doctor: 'Dr. Johnson', date: '2024-06-19', Time: '11:00 AM', Status: 'Confirmed' }
   ];
   tableColumns = [
-    { field: 'id', header: 'ID' },
-    { field: 'patient', header: 'Patient' },
-    { field: 'Doctor', header: 'Doctor' },
-    { field: 'date', header: 'Date' },
-    { field: 'Time', header: 'Time' },
-    { field: 'Status', header: 'Status' },
+    { field: '_id', header: 'SN' },
+    { field: 'availableDays', header: 'availableDays' },
+    { field: 'startTime', header: 'Start Time' },
+    { field: 'endTime', header: 'Day' },
+    { field: 'endTime', header: 'End Time' },
+    { field: 'status', header: 'Status' },
   ];
   actions = [
     { label: 'Edit', action: this.editItem },
     { label: 'Delete', action: this.deleteItem }
   ];
+  getSchedule(){
+    debugger
+    this.scheduleService.getSchedule().subscribe((data)=>{
+      console.log('Api data is' , data);
+      this.appointments= data
+      debugger
+    })
+ 
+  }
 
   ngOnInit(): void {
     this.scheduleForm = this.fb.group({
@@ -41,6 +48,7 @@ export class ScheduleComponent implements OnInit {
       mobileNumber: ['', Validators.required],
       sex: ['', Validators.required]
     })
+    this.getSchedule()
   }
   submit() {
     console.log('Checked');

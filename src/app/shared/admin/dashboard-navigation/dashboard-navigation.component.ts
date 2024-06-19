@@ -6,7 +6,6 @@ import { ProfilComponent } from "../profil/profil.component";
 import { DashboardFeedbackComponent } from "../feedback/feedback.component";
 import { DashboardReportComponent } from "../reports/dashboard-report.component";
 import { DashboardNotificationComponent } from "../notification/notification.component";
-import { DashboardAppointmentComponent } from "../appointments/dashboard-appointment.component";
 import { SettingComponent } from "../setting/setting.component";
 import { PatientListComponent } from "../patient-list/patient-list.component";
 import { AddPatientComponent } from "../add-patient/add-patient.component";
@@ -28,6 +27,7 @@ import { RoomManagementComponent } from '../room-management/room-management.comp
 import { LabComponent } from "../Lab/lab/lab.component";
 import { NoteComponent } from '../../../pages/note/note.component';
 import { MedicalHistoryComponent } from "../../../pages/patient/medical-history/medical-history.component";
+import { AppointmentComponent } from '../appointments/appointment.component';
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -35,14 +35,14 @@ import { MedicalHistoryComponent } from "../../../pages/patient/medical-history/
     templateUrl: './dashboard-navigation.component.html',
     styleUrl: './dashboard-navigation.component.css',
     imports: [CommonModule, DashboardOverviewComponent, ProfilComponent,
-        DashboardReportComponent, DashboardNotificationComponent,
-        DashboardAppointmentComponent, SettingComponent,
+        DashboardReportComponent, DashboardNotificationComponent, SettingComponent,
         PatientListComponent, AddPatientComponent, DashboardFeedbackComponent, UserManagementComponent,
         PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
         PatientComponent, AppointmentHistoryComponent,
         SymptomsComponent, ViewHistoryComponent, SendMailComponent,
         BedManagementComponent, RoomManagementComponent, NoteComponent,
-        PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements, LabComponent, MedicalHistoryComponent]
+        PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements,
+         LabComponent, MedicalHistoryComponent, AppointmentComponent]
 })
 export class DashboardNavigationComponent implements OnInit{
   currentSection: string = 'dashboard';
@@ -52,7 +52,7 @@ export class DashboardNavigationComponent implements OnInit{
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'schedule'
+    this.currentSection = 'appointment'
 }
   ngOnInit(): void {
       this.userRole= localStorage.getItem('userRole')
