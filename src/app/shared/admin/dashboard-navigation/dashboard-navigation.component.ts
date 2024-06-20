@@ -40,9 +40,9 @@ import { AppointmentComponent } from '../appointments/appointment.component';
         PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
         PatientComponent, AppointmentHistoryComponent,
         SymptomsComponent, ViewHistoryComponent, SendMailComponent,
-        BedManagementComponent, RoomManagementComponent, NoteComponent,
+        BedManagementComponent, RoomManagementComponent, NoteComponent, AppointmentComponent,
         PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements,
-         LabComponent, MedicalHistoryComponent, AppointmentComponent]
+        LabComponent, MedicalHistoryComponent, AppointmentComponent]
 })
 export class DashboardNavigationComponent implements OnInit{
   currentSection: string = 'dashboard';
