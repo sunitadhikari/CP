@@ -50,5 +50,7 @@ getAppointment(){
   })
 }
 edit(){}
-delete(){}
+delete(){
+  console.log('Data deleted');
+}
 }

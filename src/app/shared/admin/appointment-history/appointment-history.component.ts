@@ -20,7 +20,7 @@ appointmentTable : any[] =[]
   //     return '';
   //   }
   //   const words = value.split(' ');
-  //   if (words.length <= limit) {
+  //    if (words.length <= limit) {
   //     return value;
   //   }
   //   return words.slice(0, limit).join(' ') + '...';
