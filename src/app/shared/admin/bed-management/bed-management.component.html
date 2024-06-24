@@ -44,7 +44,7 @@
                   <div class="form-group">
                     <label>Status</label>
                     <select formControlName="status" class="form-control">
-                      <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+                      <option *ngFor="let status of status" [value]="status">{{ status }}</option>
                     </select>
                     <div *ngIf="bedForm.get('status')?.invalid && bedForm.get('status')?.touched" class="text-danger">
                      Select one

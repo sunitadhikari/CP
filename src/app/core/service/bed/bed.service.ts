@@ -13,7 +13,7 @@ export class BedService {
 
   private postBedApiUrl = environment.api_url + "postBed"
   private getBedApiUrl = environment.api_url + "getBed"
-  private deleteApiUrl = environment.api_url + "delBed/"
+  private deleteApiUrl = environment.api_url + "delBed"
 
   postBed(data: any): Observable<any> {
     return this.http.post(this.postBedApiUrl, data)

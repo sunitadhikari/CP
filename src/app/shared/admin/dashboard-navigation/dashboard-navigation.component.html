@@ -3,10 +3,10 @@
         <div data-scrollbar="true" data-height="100%">
             <ul class="nav">
                 <li class="nav-profile">
-                    <a href="javascript:;" data-toggle="nav-profile">
+                    <a href=" " data-toggle="nav-profile">
                         <div class="cover with-shadow"></div>
                         <div class="image">
-                            <img src="../../../assets/hospitals.jpg" alt="" />
+                            <img src="../../../assets/hospitals.jpg"  alt="" />
                         </div>
                         <div class="info">
                             <b class="caret pull-right"></b>Aspatal
@@ -89,6 +89,12 @@
                         </a>
                     </li>
                     <li class="py-2">
+                        <a (click)="showSection('send-mail')">
+                            <i class="fas fa-cogs"></i>
+                            <span>Mail</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
                         <a (click)="showSection('profile')">
                             <i class="fas fa-user"></i>
                             <span>Profile</span>
@@ -100,12 +106,12 @@
                             <span>Report</span>
                         </a>
                     </li>
-                    <li class="py-2">
+                    <!-- <li class="py-2">
                         <a (click)="showSection('sendMail')">
                             <i class="fas fa-envelope"></i>
                             <span>Send Mail</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="py-2">
                         <a (click)="logout()">
                             <i class="fas fa-sign-out-alt"></i>
@@ -125,6 +131,12 @@
                         <a (click)="showSection('appointment')">
                             <i class="fas fa-calendar-check"></i>
                             <span>Appointment</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('send-mail')">
+                            <i class="fas fa-cogs"></i>
+                            <span>Mail</span>
                         </a>
                     </li>
                     <li class="py-2">
@@ -179,7 +191,13 @@
                         </a>
                     </li>
                     <li class="py-2">
-                        <a (click)="showSection('addDoctor')">
+                        <a (click)="showSection('send-mail')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Email</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('doctor')">
                             <i class="fas fa-user-md"></i>
                             <span>Doctor</span>
                         </a>
@@ -197,7 +215,7 @@
                         </a>
                     </li>
                     <li class="py-2">
-                        <a (click)="showSection('bedManagement')">
+                        <a (click)="showSection('bed-management')">
                             <i class="fas fa-bed"></i>
                             <span>Bed Management</span>
                         </a>
@@ -215,13 +233,13 @@
                         </a>
                     </li>
                     <li class="py-2">
-                        <a (click)="showSection('addSchedule')">
+                        <a (click)="showSection('schedule')">
                             <i class="fas fa-calendar-alt"></i>
                             <span>Schedule</span>
                         </a>
                     </li>
                     <li class="py-2">
-                        <a (click)="showSection('userManagement')">
+                        <a (click)="showSection('user-management')">
                             <i class="fas fa-users-cog"></i>
                             <span>User Management</span>
                         </a>
@@ -244,12 +262,7 @@
                             <span>Payments</span>
                         </a>
                     </li>
-                    <li class="py-2">
-                        <a (click)="showSection('doctor')">
-                            <i class="fas fa-user-md"></i>
-                            <span>Doctors</span>
-                        </a>
-                    </li>
+                   
                     <li class="py-2">
                         <a (click)="logout()">
                             <i class="fas fa-sign-out-alt"></i>
@@ -270,7 +283,7 @@
                 <app-dashboard-overview></app-dashboard-overview>
             </div>
             <div *ngIf="currentSection=== 'doctor'">
-                <app-dashboard-doctor></app-dashboard-doctor>
+                <app-doctor></app-doctor>
             </div>
             <div *ngIf="currentSection === 'addPatient' ">
                 <app-add-patient></app-add-patient>
@@ -279,13 +292,7 @@
                 <app-patient-list></app-patient-list>
             </div>
             <div *ngIf="currentSection === 'appointment'">
-                <app-dashboard-appointment></app-dashboard-appointment>
-            </div>
-            <div *ngIf="currentSection === 'addSchedule'">
-                <app-add-schedule></app-add-schedule>
-            </div>
-            <div *ngIf="currentSection === 'scheduleList'">
-                <app-schedule-list></app-schedule-list>
+                <app-appointment></app-appointment>
             </div>
             <div *ngIf="currentSection === 'room'">
                 <app-room-management></app-room-management>
@@ -341,9 +348,7 @@
             <div *ngIf="currentSection=== 'prescription'">
                 <app-prescription></app-prescription>
             </div>
-            <div *ngIf="currentSection=== 'add-schedule'">
-                <app-add-schedule></app-add-schedule>
-            </div>
+           
             <div *ngIf="currentSection=== 'schedule'">
                 <app-schedule></app-schedule>
             </div>
@@ -353,6 +358,11 @@
             <div *ngIf="currentSection=== 'bed-management'">
                 <app-bed-management></app-bed-management>
             </div>
+            <div *ngIf="currentSection=== 'medicalHistory'">
+               <app-medical-history></app-medical-history>  
+
+            </div>
+            
             <div *ngIf="currentSection=== 'note'">
                 <app-note></app-note>
             </div>

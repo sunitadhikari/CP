@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DashboardAppointmentComponent } from '../admin/appointments/dashboard-appointment.component';
+import { DashboardAppointmentComponent } from '../admin/appointments/appointment.component';
 
 
 describe('DashboardAppointmentComponent', () => {
