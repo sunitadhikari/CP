@@ -7,14 +7,14 @@ import { pipe } from 'rxjs';
 @Component({
   selector: 'app-appointment-history',
   standalone: true,
-  imports: [CommonModule, ],
+  imports: [CommonModule,],
   templateUrl: './appointment-history.component.html',
   styleUrl: './appointment-history.component.css'
 })
 
 export class AppointmentHistoryComponent implements OnInit {
-appointmentTable : any[] =[]
-  constructor(private appointmentService :AppointmentService) { }
+  appointmentTable: any[] = []
+  constructor(private appointmentService: AppointmentService) { }
   // transform(value: string, limit:number=10): string {
   //   if(!value){
   //     return '';
@@ -25,16 +25,17 @@ appointmentTable : any[] =[]
   //   }
   //   return words.slice(0, limit).join(' ') + '...';
   // }
-  
+
   ngOnInit(): void {
-this.appointment()
+    this.appointment()
   }
-  appointment(){
-    this.appointmentService.getAppointment().subscribe((data)=>{
+  appointment() {
+    debugger
+    this.appointmentService.getAppointment().subscribe((data) => {
       console.log('Data fetched');
       this.appointmentTable = data
+      debugger
     })
   }
-  edit(){}
-  delete(){}
+ 
 }

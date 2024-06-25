@@ -8,20 +8,30 @@
           <option value="doctor1">Dr. John Doe</option>
           <option value="doctor2">Dr. Jane Smith</option>
         </select>
+        <div *ngIf="symptomsForm.get('doctor')?.invalid && symptomsForm.get('doctor')?.touched"
+                class="text-danger">
+                Doctor is required.
+              </div>
       </div>
   
       <div class="form-group">
         <label for="symptoms">Symptoms</label>
         <textarea id="symptoms" class="form-control" formControlName="symptoms" rows="4"></textarea>
-    
+        <div *ngIf="symptomsForm.get('symptoms')?.invalid && symptomsForm.get('symptoms')?.touched"
+        class="text-danger">
+        Symptoms is required.
+      </div>
       </div>
   
       <div class="form-group">
         <label for="issue">Issue</label>
         <textarea id="issue" class="form-control" formControlName="issue" rows="4"></textarea>
-       
+        <div *ngIf="symptomsForm.get('issue')?.invalid && symptomsForm.get('issue')?.touched"
+        class="text-danger">
+        Issue is required.
       </div>
-  
+      </div>
+
       <button type="submit" class="btn btn-primary" [disabled]="symptomsForm.invalid">Submit</button>
     </form>
   </div>
