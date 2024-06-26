@@ -13,12 +13,16 @@ export class SymptomsService {
   api_Url: String = environment.api_url
 
   private postSymptomsApiUrl = this.api_Url + 'postSymptoms'
-  private getSymptomsApiUrl = this.api_Url + 'getSymptoms'
+  private getSymptomsApiUrl = this.api_Url + 'getSymptomsbyDoctor'
+  private getSymptomsPatientApiUrl = this.api_Url + 'getSymptomsbyEmail'
 
   postSymptoms(data: any): Observable<any> {
     return this.http.post(this.postSymptomsApiUrl, data)
   }
-  getSymptoms(): Observable<any> {
+  getSymptomsDoctor(): Observable<any> {
     return this.http.get(this.getSymptomsApiUrl)
+  }
+  getSymptomsPatient(): Observable<any> {
+    return this.http.get(this.getSymptomsPatientApiUrl)
   }
 }

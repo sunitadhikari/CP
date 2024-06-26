@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { DoctorService } from '../../../core/service/admin/doctor.service';
 import * as alertify from 'alertifyjs';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../../core/service/user/user.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { CommonModule } from '@angular/common';
 export class DoctorComponent  implements OnInit {
   doctorForm!: FormGroup;
   doctorList : any[] =[];
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private doctorService:DoctorService) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private doctorService:DoctorService, private userService : UserService) {
 
    }
 
@@ -32,7 +33,7 @@ export class DoctorComponent  implements OnInit {
       dob: [''],
       sex: ['', Validators.required],
       bloodGroup: [''],
-      designation: ['', Validators.required],
+      specialist: ['', Validators.required],
       address: ['', Validators.required],
       phoneNo: [''],
       mobileNo: ['', Validators.required],
@@ -55,11 +56,12 @@ export class DoctorComponent  implements OnInit {
   onSubmit() {
    
     if(this.doctorForm.valid){
-      this.doctorService.postDoctor(this.doctorForm.value).subscribe((data)=>{
+      this.userService.postRegister(this.doctorForm.value).subscribe((data)=>{
        console.log(data);
+       alertify.success('Doctor Added Successfully')
+       this.doctorForm.reset()
       })
-      alertify.success('Doctor Added Successfully')
-      this.doctorForm.reset()
+
     }
     else{
       alertify.error('Invalid Form')

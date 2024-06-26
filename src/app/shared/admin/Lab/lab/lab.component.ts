@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LabTechService } from '../../../../core/service/lab-tech/lab-tech.service';
 import * as alertify from 'alertifyjs';
+import { UserService } from '../../../../core/service/user/user.service';
 
 @Component({
   selector: 'app-lab',
@@ -14,7 +15,7 @@ import * as alertify from 'alertifyjs';
 export class LabComponent implements OnInit {
   labForm!: FormGroup
   labList: any[] = []
-  constructor(private fb: FormBuilder, private labService: LabTechService) { }
+  constructor(private fb: FormBuilder, private labService: LabTechService, private userService:UserService) { }
 
   ngOnInit(): void {
     this.labForm = this.fb.group({
@@ -42,11 +43,11 @@ export class LabComponent implements OnInit {
   submit() {
     // console.log(this.labForm.value);
     if (this.labForm.valid) {
-      this.labService.postLab(this.labForm.value).subscribe((data) => {
+      this.userService.postRegister(this.labForm.value).subscribe((data) => {
         console.log(data);
+        alertify.success('Form Valid')
+        this.labForm.reset()
       })
-      alertify.success('Form Valid')
-      this.labForm.reset()
     }
     else {
       alertify.error('Form is not valid.')

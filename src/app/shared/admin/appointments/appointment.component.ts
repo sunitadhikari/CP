@@ -27,7 +27,8 @@ export class AppointmentComponent implements OnInit {
       problem: ['', Validators.required],
       time: ['', Validators.required],
     })
-    this.getAppointment()
+    // this.getAppointment();
+    this.getAppointmentByEmail();
   }
   submit() {
     console.log('form filled');
@@ -44,10 +45,17 @@ export class AppointmentComponent implements OnInit {
     alertify.error('Invalid form')
     }
   }
-getAppointment(){
+// getAppointment(){
+//   this.appointmentService.getAppointment().subscribe((data)=>{
+//     console.log('Table filled succesfully');
+//   this.appointmentTable= data;
+//   })
+// }
+getAppointmentByEmail(){
+  debugger
   this.appointmentService.getAppointmentByEmail().subscribe((data)=>{
     console.log('Table filled succesfully');
-  this.appointmentTable= data;
+    this.appointmentTable= data.userAppointments
   })
 }
 edit(){}

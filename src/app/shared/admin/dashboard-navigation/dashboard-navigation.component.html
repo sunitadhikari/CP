@@ -68,6 +68,12 @@
                         </a>
                     </li>
                     <li class="py-2">
+                        <a (click)="showSection('prescriptionByDoctor')">
+                            <i class="fas fa-file-medical"></i>
+                            <span>Prescription</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
                         <a (click)="showSection('setting')">
                             <i class="fas fa-cogs"></i>
                             <span>Setting</span>
@@ -360,11 +366,12 @@
             </div>
             <div *ngIf="currentSection=== 'medicalHistory'">
                <app-medical-history></app-medical-history>  
-
             </div>
-            
             <div *ngIf="currentSection=== 'note'">
                 <app-note></app-note>
+            </div>
+            <div *ngIf="currentSection=== 'prescriptionByDoctor'">
+                <app-doctor-prescription></app-doctor-prescription>
             </div>
 
         </div>

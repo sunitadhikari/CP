@@ -13,6 +13,7 @@ export class AppointmentService {
 
  private postAppointmentApiUrl = this.apiUrl   + 'postAppointment'
  private getAppointmentApiUrl = this.apiUrl + 'getAppointment'
+ private getAppointmentHistoryApiUrl = this.apiUrl + 'getAppointmentHistory'
  private getAppointmentEmailApiUrl = this.apiUrl + 'appointmentsByEmail'
 
 
@@ -24,6 +25,9 @@ return this.http.get(this.getAppointmentApiUrl)
 }
 getAppointmentByEmail():Observable<any>{
 return this.http.get(this.getAppointmentEmailApiUrl)
+}
+getAppointmentHistory():Observable<any>{
+return this.http.get(this.getAppointmentHistoryApiUrl)
 }
  
 }

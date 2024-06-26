@@ -28,6 +28,7 @@ import { LabComponent } from "../Lab/lab/lab.component";
 import { NoteComponent } from '../../../pages/note/note.component';
 import { MedicalHistoryComponent } from "../../../pages/patient/medical-history/medical-history.component";
 import { AppointmentComponent } from '../appointments/appointment.component';
+import { DoctorPrescriptionComponent } from "../../../pages/doctor-prescription/doctor-prescription.component";
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -42,7 +43,7 @@ import { AppointmentComponent } from '../appointments/appointment.component';
         SymptomsComponent, ViewHistoryComponent, SendMailComponent,
         BedManagementComponent, RoomManagementComponent, NoteComponent, AppointmentComponent,
         PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements,
-        LabComponent, MedicalHistoryComponent, AppointmentComponent]
+        LabComponent, MedicalHistoryComponent, AppointmentComponent, DoctorPrescriptionComponent]
 })
 export class DashboardNavigationComponent implements OnInit{
   currentSection: string = 'dashboard';
@@ -52,7 +53,7 @@ export class DashboardNavigationComponent implements OnInit{
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'lab'
+    this.currentSection = 'symptoms'
 }
   ngOnInit(): void {
       this.userRole= localStorage.getItem('userRole')
