@@ -45,7 +45,7 @@ export class AppointmentComponent implements OnInit {
     }
   }
 getAppointment(){
-  this.appointmentService.getAppointment().subscribe((data)=>{
+  this.appointmentService.getAppointmentByEmail().subscribe((data)=>{
     console.log('Table filled succesfully');
   this.appointmentTable= data;
   })
