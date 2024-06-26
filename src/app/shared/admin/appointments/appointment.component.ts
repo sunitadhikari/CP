@@ -19,7 +19,8 @@ export class AppointmentComponent implements OnInit {
   ngOnInit(): void {
     this.appointmentForm = this.fb.group({
       username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      doctorname: ['', Validators.required],
+      email: [''],
       specialist: ['', Validators.required],
       phone: [ , [Validators.required, Validators.pattern(/^(9[4-8][0-9]|01[0-9])\d{7}$/)]],
       date: ['', Validators.required],
