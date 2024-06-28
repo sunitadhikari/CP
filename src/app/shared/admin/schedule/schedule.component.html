@@ -1,5 +1,5 @@
 <div class="container-fluid mt-5">
-    <div class="row">
+    <div class="row" *ngIf="userRole === 'admin'">
         <div class="card-head ">
             <h4 class=" fw-bold fs-3 mb-3 ">Add Schedule</h4>
         </div>
@@ -105,8 +105,163 @@
             <div class="row mt-4">
                 <div class="col">
                     <h2>Doctor</h2>
-                    <app-shared-table [columns]="tableColumns" [data]="appointments"
-                        [actions]="actions"></app-shared-table>
+                    <div class="container-fulid">
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-inverse" data-sortable-id="table-basic-4">
+                                            <div class="panel-body">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Id</th>
+                                                                <th nowrap>Doctor Name</th>
+                                                                <th nowrap>Availabe Days</th>
+                                                                <th nowrap>Start Time</th>
+                                                                <th nowrap>End Time</th>
+                                                                <th nowrap>Sex</th>
+                                                                <th nowrap>Mobile Number</th>
+                                                                <th nowrap>Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let item of scheduleTable; let i = index">
+                                                                <td>{{i+1}}</td>
+                                                                <td>{{item.doctorName}}</td>
+                                                                <td>{{item.availableDays}}</td>
+                                                                <td>{{item.startTime}}</td>
+                                                                <td>{{item.endTime}}</td>
+                                                                <td>{{item.sex}}</td>
+                                                                <td>{{item.mobileNumber}}</td>
+                                                                <td>
+                                                                    <div class="d-flex flex-wrap button-group">
+                                                                        <button class="btn btn-warning btn-sm"
+                                                                            (click)="edit()">Edit</button>
+                                                                        <button
+                                                                            class="btn btn-outline-danger btn-sm ml-4"
+                                                                            (click)="delete()">Delete</button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row mt-4">
+        <div *ngIf="userRole === 'doctor'" class="col">
+            <h2>Doctor</h2>
+            <div class="container-fulid">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-lg-12">
+                                <div class="panel panel-inverse" data-sortable-id="table-basic-4">
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th nowrap>Availabe Days</th>
+                                                        <th nowrap>Start Time</th>
+                                                        <th nowrap>End Time</th>
+                                                        <th nowrap>Sex</th>
+                                                        <th nowrap>Mobile Number</th>
+                                                        <th nowrap>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of scheduleTable; let i = index">
+                                                        <td>{{i+1}}</td>
+                                                        <td>{{item.availableDays}}</td>
+                                                        <td>{{item.startTime}}</td>
+                                                        <td>{{item.endTime}}</td>
+                                                        <td>{{item.sex}}</td>
+                                                        <td>{{item.mobileNumber}}</td>
+                                                        <td>
+                                                            <div class="d-flex flex-wrap button-group">
+                                                                <button class="btn btn-warning btn-sm"
+                                                                    (click)="edit()">Edit</button>
+                                                                <button class="btn btn-outline-danger btn-sm ml-4"
+                                                                    (click)="delete()">Delete</button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div *ngIf="userRole === 'patient'" class="col">
+                <h2>Doctor</h2>
+                <div class="container-fulid">
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-inverse" data-sortable-id="table-basic-4">
+                                        <div class="panel-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Doctor Name</th>
+                                                            <th nowrap>Availabe Days</th>
+                                                            <th nowrap>Start Time</th>
+                                                            <th nowrap>End Time</th>
+                                                            <th nowrap>Sex</th>
+                                                            <th nowrap>Mobile Number</th>
+                                                            <th nowrap>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of schedulePatientTable; let i = index">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{item.availableDays}}</td>
+                                                            <td>{{item.startTime}}</td>
+                                                            <td>{{item.endTime}}</td>
+                                                            <td>{{item.sex}}</td>
+                                                            <td>{{item.mobileNumber}}</td>
+                                                            <td>
+                                                                <div class="d-flex flex-wrap button-group">
+                                                                    <button class="btn btn-warning btn-sm"
+                                                                        (click)="edit()">Edit</button>
+                                                                    <button class="btn btn-outline-danger btn-sm ml-4"
+                                                                        (click)="delete()">Delete</button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

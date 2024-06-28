@@ -52,7 +52,7 @@ export class SymptomsComponent implements OnInit {
   getSymptomsDoctor(){
     this.symptomsService.getSymptomsDoctor().subscribe((data)=>{
       console.log(data);
-      this.doctorTable = data
+      this.doctorTable = data.data
     })
   }
   edit() { }

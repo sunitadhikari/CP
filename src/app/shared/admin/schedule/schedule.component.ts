@@ -14,32 +14,36 @@ import * as alertify from 'alertifyjs';
 })
 export class ScheduleComponent implements OnInit {
   scheduleForm!: FormGroup
+  scheduleTable: any[] = [];
+  scheduleDoctorTable: any[] = [];
+  schedulePatientTable: any[]=[]
+  userRole: string | null | undefined;
   constructor(private fb: FormBuilder, private scheduleService: ScheduleService) { }
-  appointments = [
-  ];
-  tableColumns = [
-    { field: '_id', header: 'SN' },
-    { field: 'availableDays', header: 'availableDays' },
-    { field: 'startTime', header: 'Start Time' },
-    { field: 'endTime', header: 'Day' },
-    { field: 'endTime', header: 'End Time' },
-    { field: 'status', header: 'Status' },
-  ];
-  actions = [
-    { label: 'Edit', action: this.editItem },
-    { label: 'Delete', action: this.deleteItem }
-  ];
-  getSchedule(){
-    debugger
-    this.scheduleService.getSchedule().subscribe((data)=>{
-      console.log('Api data is' , data);
-      this.appointments= data
-      debugger
+
+  getSchedule() {
+    this.scheduleService.getSchedule().subscribe((data) => {
+      console.log('Api data is', data);
+      this.scheduleTable = data
     })
- 
   }
 
+  getScheduleByDoctor() {
+    this.scheduleService.getScheduleByDoctor().subscribe((data => {
+      console.log('api data is ', data);
+      this.scheduleDoctorTable = data.data
+
+    }))
+  }
+  getScheduleByPatients() {
+    this.scheduleService.getScheduleByPatient().subscribe((data => {
+      console.log('api data is ', data);
+      this.schedulePatientTable = data.data
+
+    }))
+  }
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('userRole')
+
     this.scheduleForm = this.fb.group({
       doctorName: ['', Validators.required],
       availableDays: ['', Validators.required],
@@ -48,11 +52,11 @@ export class ScheduleComponent implements OnInit {
       mobileNumber: ['', Validators.required],
       sex: ['', Validators.required]
     })
-    this.getSchedule()
+    this.getSchedule();
+    this.getScheduleByDoctor();
+    this.getScheduleByPatients()
   }
   submit() {
-    console.log('Checked');
-    debugger
     if (this.scheduleForm.valid) {
       this.scheduleService.postSchedule(this.scheduleForm.value).subscribe((data) => {
         console.log(data);
@@ -65,11 +69,11 @@ export class ScheduleComponent implements OnInit {
       alertify.error('Invalid Form ')
     }
   }
-  editItem(row: any) {
-    console.log('Editks item:', row);
+  edit() {
+    console.log('Editks item:');
   }
 
-  deleteItem(row: any) {
-    console.log('Delete item:', row);
+  delete() {
+    console.log('Delete item:');
   }
 }

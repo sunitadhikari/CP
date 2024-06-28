@@ -7,16 +7,29 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ScheduleService {
+  getSymptomsDoctor() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private http:HttpClient) { }
   api_url : String = environment.api_url
-  private postScheduleUrl = environment.api_url + 'postSchedule'
-  private getScheduleUrl = environment.api_url +'getSchedule'
+  apiUrl:String = environment.api_url;
+
+  private postScheduleApiUrl = this.apiUrl + 'postSchedule'
+  private getScheduleApiUrl = this.apiUrl + 'getSchedule'
+  private getschedulebyPatientApiUrl = this.apiUrl + 'getschedulebyPatient'
+  private getschedulebyDoctorApiUrl = this.apiUrl + 'getschedulebyDoctor'
 
   postSchedule(data:any):Observable<any>{
-   return this.http.post(this.postScheduleUrl, data)
+    return this.http.post(this.postScheduleApiUrl, data)
   }
   getSchedule():Observable<any>{
-    return this.http.get(this.getScheduleUrl)
+    return this.http.get(this.getScheduleApiUrl)
+  }
+  getScheduleByPatient():Observable<any>{
+    return this.http.get(this.getschedulebyPatientApiUrl)
+  }
+  getScheduleByDoctor():Observable<any>{
+    return this.http.get(this.getschedulebyDoctorApiUrl)
   }
 }
