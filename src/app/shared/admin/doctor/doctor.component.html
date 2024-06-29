@@ -54,8 +54,12 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="department">Department</label>
-                            <input type="text" class="form-control" id="department" formControlName="department"
-                                placeholder="Enter department">
+                            <!-- <input type="text" class="form-control" id="department" formControlName="department"
+                                placeholder="Enter department"> -->
+                                <select class="form-control m-b-5" formControlName="department" required>
+                                    <option value="">--Please choose an option--</option>
+                                    <option *ngFor="let department of departmentList" [value]="department.departmentName">{{ department.departmentName }}</option>
+                                  </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="picture">Picture</label>

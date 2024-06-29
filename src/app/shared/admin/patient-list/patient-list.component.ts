@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AppointmentService } from '../../../core/service/appointment/appointment.service';
 
 @Component({
   selector: 'app-patient-list',
@@ -9,7 +10,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './patient-list.component.css'
 })
 export class PatientListComponent implements OnInit{
-constructor(private fb:FormBuilder){}
+constructor(private fb:FormBuilder,private appointmentList:AppointmentService){
+  this.appointmentList.getAppointmentsByDoctorEmail().subscribe((res)=>{
+    console.log(res);
+  })
+
+}
   patientAdd! : FormGroup
   ngOnInit(): void {
       this.patientAdd=this.fb.group({

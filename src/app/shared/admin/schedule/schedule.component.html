@@ -11,8 +11,12 @@
                             <label class="col-form-label col-md-3 fw-bold">Doctor's Name <span
                                     class="text-danger fw-bold">*</span></label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control m-b-5" formControlName="doctorName"
-                                    placeholder="Doctor Name" required />
+                                <select class="form-control m-b-5" formControlName="doctorName" required>
+                                    <option value="">--Please choose an option--</option>
+
+                                    <option *ngFor="let doctor of doctorName" [value]="doctor.email">{{ doctor.firstName }}</option>
+                                  </select>
+                                
                             </div>
                         </div>
                         <div class="form-group row m-b-15">
@@ -173,17 +177,17 @@
                                             <table class="table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Id</th>
-                                                        <th nowrap>Availabe Days</th>
-                                                        <th nowrap>Start Time</th>
-                                                        <th nowrap>End Time</th>
-                                                        <th nowrap>Sex</th>
-                                                        <th nowrap>Mobile Number</th>
-                                                        <th nowrap>Actions</th>
+                                                        <th>SN</th>
+                                                        <th >Availabe Days</th>
+                                                        <th >Start Time</th>
+                                                        <th >End Time</th>
+                                                        <th >Sex</th>
+                                                        <th >Mobile Number</th>
+                                                        <th >Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr *ngFor="let item of scheduleTable; let i = index">
+                                                    <tr *ngFor="let item of scheduleDoctorTable; let i = index">
                                                         <td>{{i+1}}</td>
                                                         <td>{{item.availableDays}}</td>
                                                         <td>{{item.startTime}}</td>

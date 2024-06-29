@@ -28,19 +28,36 @@ department : any[] =[]
   }
 
   getDepartmentList(){
-    this.departmentService.getDepartment(this.departmentForm.value).subscribe((data) => {
+    this.departmentService.getDepartment().subscribe((data) => {
      this.department =data
       console.log(this.department);
       
     })
   } 
+  deleteDepartment(id: string) {
+    this.departmentService.deleteDepartment(id).subscribe(
+      (response) => {
+        debugger
+        alertify.success('Successfully Deleted')
+        this.getDepartmentList()
 
+        console.log('Department deleted:', response);
+      },
+      error => {
+        console.error('Error deleting department:', error);
+        this.getDepartmentList()
+
+      }
+    );
+  }
   onSubmit() {
     if (this.departmentForm.valid) {
       this.departmentService.postDepartment(this.departmentForm.value).subscribe((res) => {
         console.log(res);
         alertify.success('Successfully added')
         this.departmentForm.reset()
+        this.getDepartmentList()
+
       })
    
     }

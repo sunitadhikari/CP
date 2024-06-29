@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonModule } from '@angular/common';
 import { ScheduleService } from '../../../core/service/admin/schedule.service';
 import * as alertify from 'alertifyjs';
+import { DoctorService } from '../../../core/service/admin/doctor.service';
 
 @Component({
   selector: 'app-schedule',
@@ -15,15 +16,23 @@ import * as alertify from 'alertifyjs';
 export class ScheduleComponent implements OnInit {
   scheduleForm!: FormGroup
   scheduleTable: any[] = [];
+  doctorName: any[] = [];
   scheduleDoctorTable: any[] = [];
   schedulePatientTable: any[]=[]
   userRole: string | null | undefined;
-  constructor(private fb: FormBuilder, private scheduleService: ScheduleService) { }
+  constructor(private fb: FormBuilder, private scheduleService: ScheduleService,private doctorService:DoctorService) {
+    this.getDoctorList()
+   }
 
   getSchedule() {
     this.scheduleService.getSchedule().subscribe((data) => {
       console.log('Api data is', data);
       this.scheduleTable = data
+    })
+  }
+  getDoctorList(){
+    this.doctorService.getDoctor().subscribe((res)=>{
+      this.doctorName=res
     })
   }
 

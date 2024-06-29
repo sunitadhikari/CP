@@ -5,6 +5,7 @@ import { DoctorService } from '../../../core/service/admin/doctor.service';
 import * as alertify from 'alertifyjs';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../core/service/user/user.service';
+import { DepartmentService } from '../../../core/service/admin/department.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { UserService } from '../../../core/service/user/user.service';
 export class DoctorComponent  implements OnInit {
   doctorForm!: FormGroup;
   doctorList : any[] =[];
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private doctorService:DoctorService, private userService : UserService) {
+  departmentList : any[] =[];
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private doctorService:DoctorService,private departmentService:DepartmentService, private userService : UserService) {
 
    }
 
@@ -42,9 +44,16 @@ export class DoctorComponent  implements OnInit {
       status: ['active', Validators.required]
     });
     this.getDoctorList();
+    this.getDepartmentListData()
 
   }
-
+getDepartmentListData(){
+  this.departmentService.getDepartment().subscribe((data)=>{
+    console.log(data);
+    this.departmentList=data
+    debugger
+  })
+}
   getDoctorList(){
     this.doctorService.getDoctor().subscribe((data)=>{
       // console.log(data);

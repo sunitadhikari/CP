@@ -3,6 +3,8 @@ import { CommonModule, NgIf } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AppointmentService } from '../../../core/service/appointment/appointment.service';
 import * as alertify from 'alertifyjs';
+import { DepartmentService } from '../../../core/service/admin/department.service';
+import { DoctorService } from '../../../core/service/admin/doctor.service';
 
 
 @Component({
@@ -15,17 +17,48 @@ import * as alertify from 'alertifyjs';
 export class AppointmentComponent implements OnInit {
   appointmentForm!: FormGroup
   appointmentTable : any[]=[]
-  constructor(private fb: FormBuilder, private appointmentService: AppointmentService) { }
+  departmentNameList : any[]=[]
+  getAppointmentByEmailList : any[]=[]
+  doctorName : any[]=[]
+  tomorrow: string;
+  userRole:string|null |undefined;
+
+
+
+  constructor(private fb: FormBuilder, private appointmentService: AppointmentService,private departmentService:DepartmentService,private doctorService:DoctorService ) {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.tomorrow = tomorrow.toISOString().split('T')[0]; 
+    this.departmentService.getDepartment().subscribe((res)=>{
+      console.log(res);
+      this.departmentNameList=res
+    })
+    this.doctorService.getDoctor().subscribe((res)=>{
+      console.log(res);
+      this.doctorName=res
+    })
+
+      this.appointmentService.getAppointmentsByDoctorEmail().subscribe((res)=>{
+        console.log(res);
+        this.getAppointmentByEmailList=res.userAppointments
+      })
+    
+    }
+
+
   ngOnInit(): void {
+    this.userRole= localStorage.getItem('userRole')
+
     this.appointmentForm = this.fb.group({
-      username: ['', Validators.required],
-      doctorname: ['', Validators.required],
+      username: [''],
       email: [''],
-      specialist: ['', Validators.required],
-      phone: [ , [Validators.required, Validators.pattern(/^(9[4-8][0-9]|01[0-9])\d{7}$/)]],
+      departmentName: ['', Validators.required],
+      doctorname: ['', Validators.required],
       date: ['', Validators.required],
-      problem: ['', Validators.required],
       time: ['', Validators.required],
+      phone: [ , [Validators.required, Validators.pattern(/^(9[4-8][0-9]|01[0-9])\d{7}$/)]],
+      problem: ['', Validators.required],
     })
     // this.getAppointment();
     this.getAppointmentByEmail();
@@ -37,11 +70,12 @@ export class AppointmentComponent implements OnInit {
         console.log(data);
         console.log(this.appointmentForm.value);
         
+        alertify.success('Form filled successfully');
+        this.appointmentForm.reset()
       })
-      alertify.success('Form filled successfully');
-      this.appointmentForm.reset()
     }
     else {
+      debugger
     alertify.error('Invalid form')
     }
   }
@@ -52,7 +86,6 @@ export class AppointmentComponent implements OnInit {
 //   })
 // }
 getAppointmentByEmail(){
-  debugger
   this.appointmentService.getAppointmentByEmail().subscribe((data)=>{
     console.log('Table filled succesfully');
     this.appointmentTable= data.userAppointments
@@ -63,3 +96,4 @@ delete(){
   console.log('Data deleted');
 }
 }
+// departmentName

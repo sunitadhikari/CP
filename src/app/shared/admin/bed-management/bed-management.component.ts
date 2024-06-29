@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BedService } from '../../../core/service/bed/bed.service';
 import * as alertify from 'alertifyjs';
+import { RoomManagementService } from '../../../core/service/room-management/room-management.service';
 
 
 @Component({
@@ -16,8 +17,9 @@ export class BedManagementComponent implements OnInit {
   bedForm!: FormGroup;
   status = ['Active', 'Inactive'];
   bedList: any[] = []
+  roomName:any[]=[]
 
-  constructor(private fb: FormBuilder, private bedService: BedService) { }
+  constructor(private fb: FormBuilder, private bedService: BedService,private roomService: RoomManagementService, ) { }
 
   ngOnInit() {
     this.bedForm = this.fb.group({
@@ -28,7 +30,13 @@ export class BedManagementComponent implements OnInit {
       charge: ['', Validators.required],
       status: ['Active', Validators.required]
     });
+    this.roomService.getRoom().subscribe((res)=>{
+      console.log(res);
+      this.roomName=res
+      debugger
+    })
     this.getBed()
+    
   }
 
   onSubmit() {

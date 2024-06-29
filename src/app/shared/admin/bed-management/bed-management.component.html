@@ -6,7 +6,11 @@
                 <form [formGroup]="bedForm" (ngSubmit)="onSubmit()" class="mb-4">
                   <div class="form-group">
                     <label for="name">Room Name *</label>
-                    <input id="name" formControlName="name" class="form-control" required />
+                    <select id="name" formControlName="name" class="form-control" required>
+                      <option value="">--Please choose an option--</option>
+                      <option *ngFor="let room of roomName" [value]="room.name">{{ room.name }}</option>
+                    </select>
+                    <!-- <input id="name" formControlName="name" class="form-control" required /> -->
                     <div *ngIf="bedForm.get('name')?.invalid && bedForm.get('name')?.touched" class="text-danger">
                       Enter valid room name
                      </div>
