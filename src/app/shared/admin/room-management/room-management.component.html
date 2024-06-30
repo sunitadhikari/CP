@@ -8,7 +8,7 @@
           </div>
           <div class="form-group">
             <label for="description">Description</label>
-            <input id="description" formControlName="description" class="form-control" required/>
+            <input id="description" formControlName="description" class="form-control" />
           </div>
           <div class="form-group">
             <label for="bedCapacity">Bed Capacity *</label>
@@ -20,13 +20,12 @@
           </div>
           <div class="form-group">
             <label>Status</label>
-            <select formControlName="status" class="form-control">
+            <select formControlName="status" class="form-control" required>
               <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
             </select>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-      
         <h3>Room List</h3>
         <table class="table table-bordered">
           <thead>

@@ -24,25 +24,18 @@ interface Room {
 export class RoomManagementComponent implements OnInit {
   roomForm!: FormGroup;
   rooms: Room[] = [];
-  statuses = ['Active', 'Inactive'];
+  statuses = ['Available', 'Occupied', 'Maintenance'];
   editingRoomId: number | null = null;
   constructor(private formBuilder: FormBuilder, private roomService: RoomManagementService) { }
- 
+
   ngOnInit(): void {
     this.roomForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: [''],
       bedCapacity: [1, [Validators.required, Validators.min(1)]],
-      charge: [ , [Validators.required, Validators.min(0)]],
-      status: ['Active', Validators.required]
+      charge: [, [Validators.required, Validators.min(0)]],
+      status: ['Available', Validators.required]
     });
-
-    // this.rooms = [
-    //   { id: 1, name: '0', description: '', bedCapacity: 1, charge: 1.00, status: 'Active' },
-    //   { id: 2, name: '1001', description: 'ICU', bedCapacity: 20, charge: 16000.00, status: 'Active' },
-    //   { id: 3, name: '101', description: 'General Ward', bedCapacity: 2147483647, charge: 40.00, status: 'Active' },
-
-    // ];
     this.getRoom()
   }
 
@@ -54,43 +47,20 @@ export class RoomManagementComponent implements OnInit {
       })
       alertify.success('Successfully Added')
       this.roomForm.reset()
+      this.getRoom()
+
     }
     else {
       alertify.error('Failed to Add')
+      this.getRoom()
+
     }
-
-  
- 
-    //   if (this.roomForm.invalid) {
-    //     return;
-    //   }
-
-    //   const roomData = this.roomForm.value;
-    //   if (this.editingRoomId !== null) {
-    //     const index = this.rooms.findIndex(room => room.id === this.editingRoomId);
-    //     this.rooms[index] = { ...roomData, id: this.editingRoomId };
-    //     this.editingRoomId = null;
-    //   } else {
-    //     const newRoom: Room = { ...roomData, id: this.rooms.length + 1 };
-    //     this.rooms.push(newRoom);
-    //   }
-
-    //   this.roomForm.reset({ status: 'Active' });
-    // }
-
-    // editRoom(room: Room): void {
-    //   this.roomForm.patchValue(room);
-    //   this.editingRoomId = room.id;
-    // }
-
-    // deleteRoom(roomId: number): void {
-    //   this.rooms = this.rooms.filter(room => room.id !== roomId);
   }
- 
-  getRoom(){
-    this.roomService.getRoom().subscribe((data)=>{
-      this.rooms =data;
- console.log(this.rooms);
+
+  getRoom() {
+    this.roomService.getRoom().subscribe((data) => {
+      this.rooms = data;
+      console.log(this.rooms);
     })
   }
 }

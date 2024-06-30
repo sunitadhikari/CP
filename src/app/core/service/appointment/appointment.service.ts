@@ -13,9 +13,9 @@ export class AppointmentService {
 
  private postAppointmentApiUrl = this.apiUrl   + 'postAppointment'
  private getAppointmentApiUrl = this.apiUrl + 'getAppointment'
- private getAppointmentHistoryApiUrl = this.apiUrl + 'getAppointmentHistory'
+ private getAppointmentHistoryApiUrl = this.apiUrl + 'docAppointmentsEmail'
  private getAppointmentEmailApiUrl = this.apiUrl + 'appointmentsByEmail'
- private getAppointmentsByDoctorEmailApiUrl = this.apiUrl + 'getAppointmentsByDoctorEmail'
+//  private getAppointmentsByDoctorEmailApiUrl = this.apiUrl + 'getAppointmentsByDoctorEmail'
 
 
  postAppointment(data :any):Observable<any>{

@@ -11,8 +11,8 @@ export class DoctorService {
   constructor(private http:HttpClient) { }
 apiUrl : string = environment.api_url
 
-private addDoctorApi = environment.api_url+ "addDoctor"
-private getDoctorApi = environment.api_url + "getDoctor"
+private addDoctorApi = environment.api_url+ "userSignup"
+private getDoctorApi = environment.api_url + "getDoctors"
 
 postDoctor(data:any):Observable <any>{
   return this.http.post(this.addDoctorApi, data)

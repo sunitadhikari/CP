@@ -41,7 +41,8 @@ export class DoctorComponent  implements OnInit {
       mobileNo: ['', Validators.required],
       careerTitle: ['', Validators.required],
       biography: [''],
-      status: ['active', Validators.required]
+      status: ['active', Validators.required],
+      role:['doctor']
     });
     this.getDoctorList();
     this.getDepartmentListData()
@@ -51,13 +52,12 @@ getDepartmentListData(){
   this.departmentService.getDepartment().subscribe((data)=>{
     console.log(data);
     this.departmentList=data
-    debugger
   })
 }
   getDoctorList(){
     this.doctorService.getDoctor().subscribe((data)=>{
       // console.log(data);
-      this.doctorList=data;
+      this.doctorList=data.doctors;
       console.log(this.doctorList);
 
     })

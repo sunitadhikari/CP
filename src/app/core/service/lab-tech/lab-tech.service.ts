@@ -10,8 +10,8 @@ export class LabTechService {
   constructor(private http: HttpClient){}
   api_url : String  = environment.api_url
   
-  private postLabApiUrl = environment.api_url + "postLab"
-  private getLabApiUrl = environment.api_url + "getLab"
+  private postLabApiUrl = environment.api_url + "userSignup"
+  private getLabApiUrl = environment.api_url + "getLabtecs"
   
   postLab(data:any): Observable<any>{
    return this.http.post(this.postLabApiUrl, data)

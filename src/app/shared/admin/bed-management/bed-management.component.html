@@ -3,58 +3,57 @@
         <h2>Bed Management</h2>
         <div class="container-fluid">
             <div class="container mt-5">
-                <form [formGroup]="bedForm" (ngSubmit)="onSubmit()" class="mb-4">
-                  <div class="form-group">
-                    <label for="name">Room Name *</label>
-                    <select id="name" formControlName="name" class="form-control" required>
-                      <option value="">--Please choose an option--</option>
-                      <option *ngFor="let room of roomName" [value]="room.name">{{ room.name }}</option>
-                    </select>
-                    <!-- <input id="name" formControlName="name" class="form-control" required /> -->
-                    <div *ngIf="bedForm.get('name')?.invalid && bedForm.get('name')?.touched" class="text-danger">
-                      Enter valid room name
-                     </div>
+              <form [formGroup]="bedForm" (ngSubmit)="onSubmit()" class="mb-4">
+                <div class="form-group">
+                  <label for="name">Room Name *</label>
+                  <select id="name" formControlName="name" class="form-control" required>
+                    <option value="">--Please choose an option--</option>
+                    <option *ngFor="let room of roomName" [value]="room.name">{{ room.name }}</option>
+                  </select>
+                  <div *ngIf="bedForm.get('name')?.invalid && bedForm.get('name')?.touched" class="text-danger">
+                    Enter valid room name
                   </div>
-                  <div class="form-group">
-                    <label for="name">Bed Number *</label>
-                    <input id="name" formControlName="bedNumber" class="form-control" required />
-                    <div *ngIf="bedForm.get('bedNumber')?.invalid && bedForm.get('bedNumber')?.touched" class="text-danger">
-                      Enter bed number
-                     </div>
+                </div>
+              
+                <div class="form-group">
+                  <label for="bedNumber">Bed Number *</label>
+                  <input id="bedNumber" formControlName="bedNumber" class="form-control" type="number" [max]="maxBedNumber" required />
+                  <div *ngIf="bedForm.get('bedNumber')?.invalid && bedForm.get('bedNumber')?.touched" class="text-danger">
+                    Enter valid bed number
                   </div>
-                  <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description" formControlName="description" class="form-control" required ></textarea>
-                    <div *ngIf="bedForm.get('firstName')?.invalid && bedForm.get('firstName')?.touched" class="text-danger">
-                      Description Required
-                     </div>
+                </div>
+              
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea id="description" formControlName="description" class="form-control"></textarea>
+                  <div *ngIf="bedForm.get('description')?.invalid && bedForm.get('description')?.touched" class="text-danger">
+                    Description Required
                   </div>
-                  <div class="form-group">
-                    <label for="bedCapacity">Bed Capacity *</label>
-                    <input id="bedCapacity" formControlName="bedCapacity" type="number" class="form-control" required />
-                 
-                    <div *ngIf="bedForm.get('bedCapacity')?.invalid && bedForm.get('bedCapacity')?.touched" class="text-danger">
-                      Enter the capacity of bed
-                     </div>
+                </div>
+              
+                <div class="form-group">
+                  <label for="bedCapacity">Bed Capacity *</label>
+                  <input id="bedCapacity" formControlName="bedCapacity" type="number" class="form-control" readonly />
+                </div>
+              
+                <div class="form-group">
+                  <label for="charge">Charge *</label>
+                  <input id="charge" formControlName="charge" type="number" class="form-control" readonly />
+                </div>
+              
+                <div class="form-group">
+                  <label>Status</label>
+                  <select formControlName="status" class="form-control" required>
+                    <option *ngFor="let status of status" [value]="status">{{ status }}</option>
+                  </select>
+                  <div *ngIf="bedForm.get('status')?.invalid && bedForm.get('status')?.touched" class="text-danger">
+                    Select one
                   </div>
-                  <div class="form-group">
-                    <label for="charge">Charge *</label>
-                    <input id="charge" formControlName="charge" type="number" class="form-control" required />
-                    <div *ngIf="bedForm.get('charge')?.invalid && bedForm.get('charge')?.touched" class="text-danger">
-                     Enter valid amount of bed
-                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label>Status</label>
-                    <select formControlName="status" class="form-control">
-                      <option *ngFor="let status of status" [value]="status">{{ status }}</option>
-                    </select>
-                    <div *ngIf="bedForm.get('status')?.invalid && bedForm.get('status')?.touched" class="text-danger">
-                     Select one
-                     </div>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                </div>
+              
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+              
               
                 <h3>Bed List</h3>
                 <table class="table table-bordered">
@@ -63,7 +62,7 @@
                       <th>SN</th>
                       <th>Room Name</th>
                       <th>Description</th>
-                      <th>Bed Capacity</th>
+                      <th>Bed Number</th>
                       <th>Charge</th>
                       <th>Status</th>
                       <th>Action</th>
@@ -74,7 +73,7 @@
                       <td>{{ i + 1 }}</td>
                       <td>{{ room.name }}</td>
                       <td>{{ room.description }}</td>
-                      <td>{{ room.bedCapacity }}</td>
+                      <td>{{ room.bedNumber }}</td>
                       <td>{{ room.charge | currency }}</td>
                       <td>{{ room.status }}</td>
                       <td>

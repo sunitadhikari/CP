@@ -32,7 +32,7 @@ export class ScheduleComponent implements OnInit {
   }
   getDoctorList(){
     this.doctorService.getDoctor().subscribe((res)=>{
-      this.doctorName=res
+      this.doctorName=res.doctors
     })
   }
 
@@ -72,6 +72,7 @@ export class ScheduleComponent implements OnInit {
       })
       alertify.success('Form Filled Successfully')
       this.scheduleForm.reset()
+      this.getSchedule()
     }
     else {
       debugger

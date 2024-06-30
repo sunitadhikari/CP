@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReportService } from '../../../core/service/report-service/report.service';
+import { AppointmentService } from '../../../core/service/appointment/appointment.service';
 
 @Component({
   selector: 'app-dashboard-report',
@@ -14,7 +15,7 @@ export class DashboardReportComponent implements OnInit{
   userRole:string|null |undefined;
   doctorDischargeReportForm!: FormGroup;
   hospitalDischargeReportForm!: FormGroup;
-  constructor(private fb:FormBuilder,private reportservice:ReportService){}
+  constructor(private fb:FormBuilder,private reportservice:ReportService,private appointmetnService:AppointmentService){}
 
   ngOnInit(): void {
     this.userRole= localStorage.getItem('userRole')

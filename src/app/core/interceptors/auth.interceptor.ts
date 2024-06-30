@@ -17,7 +17,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         Authorization: `Bearer ${authToken}`
       }
     });
-    debugger
+    // debugger
     return next(authReq)
   }
 return next(req) 

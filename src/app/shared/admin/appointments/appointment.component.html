@@ -9,50 +9,23 @@
       <div class="panel-body card-body">
 
         <form [formGroup]="appointmentForm" (ngSubmit)="submit()">
-
-          <!-- <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Username<span class="text-danger fw-bold">*</span></label>
-            <div class="col-md-9">
-              <input type="text" class="form-control m-b-5" placeholder="username" formControlName="username"
-                required />
-              <div *ngIf="appointmentForm.get('Username')?.invalid && appointmentForm.get('username')?.touched"
-                class="text-danger">
-                Name is required.
-              </div>
-            </div>
-          </div> -->
-          <!-- <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Email<span class="text-danger fw-bold">*</span></label>
-            <div class="col-md-9">
-              <input type="email" class="form-control m-b-5" placeholder="Email" formControlName="email" required />
-              <div *ngIf="appointmentForm.get('email')?.invalid && appointmentForm.get('email')?.touched"
-                class="text-danger">
-                Valid email is required.
-              </div>
-            </div>
-          </div> -->
-          <!-- departmentName -->
           <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Department Name <span
-                class="text-danger fw-bold">*</span></label>
+            <label class="col-form-label col-md-3 fw-bold">Department Name <span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
               <select class="form-control" formControlName="departmentName" placeholder="Choose one option">
                 <option value="">--Please choose an option--</option>
-                <option *ngFor="let department of departmentNameList" [value]="department.departmentName">{{
-                  department.departmentName }}</option>
+                <option *ngFor="let department of departmentNameList" [value]="department.departmentName">
+                  {{ department.departmentName }}
+                </option>
               </select>
-              <div
-                *ngIf="appointmentForm.get('departmentName')?.invalid && appointmentForm.get('departmentName')?.touched"
-                class="text-danger">
+              <div *ngIf="appointmentForm.get('departmentName')?.invalid && appointmentForm.get('departmentName')?.touched" class="text-danger">
                 Selection of departmentName is required.
               </div>
             </div>
           </div>
-
-
+        
           <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Doctor name<span class="text-danger fw-bold">*</span>
-            </label>
+            <label class="col-form-label col-md-3 fw-bold">Doctor name<span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
               <select class="form-control m-b-5" formControlName="doctorname" required>
                 <option value="">--Please choose an option--</option>
@@ -60,62 +33,58 @@
                   {{ doctor.firstName }} {{ doctor.lastName }}
                 </option>
               </select>
-              <div *ngIf="appointmentForm.get('doctorname')?.invalid && appointmentForm.get('doctorname')?.touched"
-                class="text-danger">
+              <div *ngIf="appointmentForm.get('doctorname')?.invalid && appointmentForm.get('doctorname')?.touched" class="text-danger">
                 Valid Doctor name is required.
               </div>
             </div>
           </div>
+        
           <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold"> Date <span class="text-danger fw-bold">*</span></label>
+            <label class="col-form-label col-md-3 fw-bold">Date <span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <input type="date" class="form-control m-b-5" placeholder="Appointment Date" formControlName="date"
-                required min="{{ tomorrow | date: 'yyyy-MM-dd' }}" />
-              <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched"
-                class="text-danger">
+              <input type="date" class="form-control m-b-5" placeholder="Appointment Date" formControlName="date" required min="{{ tomorrow | date: 'yyyy-MM-dd' }}" />
+              <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched" class="text-danger">
                 Date is required.
               </div>
             </div>
           </div>
-
+        
           <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">Time <span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
               <input type="time" class="form-control m-b-5" placeholder="Time" formControlName="time" required>
-              <div *ngIf="appointmentForm.get('time')?.invalid && appointmentForm.get('time')?.touched"
-                class="text-danger">
+              <div *ngIf="appointmentForm.get('time')?.invalid && appointmentForm.get('time')?.touched" class="text-danger">
                 Time is required
               </div>
             </div>
           </div>
+        
           <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Mobile Number<span class="text-danger fw-bold">*</span>
-            </label>
+            <label class="col-form-label col-md-3 fw-bold">Mobile Number<span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <input type="text" class="form-control m-b-5" placeholder="Mobile Number" formControlName="phone"
-                required>
-              <div *ngIf="appointmentForm.get('phone')?.invalid && appointmentForm.get('phone')?.touched"
-                class="text-danger">
+              <input type="text" class="form-control m-b-5" placeholder="Mobile Number" formControlName="phone" required>
+              <div *ngIf="appointmentForm.get('phone')?.invalid && appointmentForm.get('phone')?.touched" class="text-danger">
                 Valid mobile number is required.
               </div>
             </div>
           </div>
+        
           <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Problem<span class="text-danger fw-bold">*</span> </label>
+            <label class="col-form-label col-md-3 fw-bold">Problem<span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <textarea type="text" class="form-control m-b-5" placeholder="Problem" formControlName="problem"
-                required></textarea>
-              <div *ngIf="appointmentForm.get('problem')?.invalid && appointmentForm.get('problem')?.touched"
-                class="text-danger">8
+              <textarea type="text" class="form-control m-b-5" placeholder="Problem" formControlName="problem" required></textarea>
+              <div *ngIf="appointmentForm.get('problem')?.invalid && appointmentForm.get('problem')?.touched" class="text-danger">
                 Problem is required
               </div>
             </div>
           </div>
+        
           <div class="form-group row m-b-15 justify-content-center">
-            <button type="submit" class="btn btn-success mr-2 col-auto btn ">Submit</button>
-            <button type="reset" class="btn btn-primary  col-auto">Reset</button>
+            <button type="submit" class="btn btn-success mr-2 col-auto btn">Submit</button>
+            <button type="reset" class="btn btn-primary col-auto">Reset</button>
           </div>
         </form>
+        
       </div>
     </div>
 
@@ -130,34 +99,30 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Id</th>
-                          <th nowrap>Username</th>
+                          <th>SN</th>
                           <th nowrap>Email</th>
-                          <th nowrap>Specialist</th>
-                          <th nowrap>Phone</th>
+                          <th nowrap>Department Name</th>
+                          <th nowrap>Doctor Email</th>
                           <th nowrap>Date</th>
                           <th nowrap>Time</th>
-                          <th nowrap>Problem</th>
-                          <th nowrap>Status</th>
 
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let item of appointmentTable; let i = index">
                           <td>{{i+1}}</td>
-                          <td>{{item.username}}</td>
                           <td>{{item.email}}</td>
-                          <td>{{item.specialist}}</td>
-                          <td>{{item.phone}}</td>
+                          <td>{{item.departmentName}}</td>
+                          <td>{{item.doctorname}}</td>
                           <td>{{item.date}}</td>
                           <td>{{item.time}}</td>
-                          <td>{{item.problem}}</td>
                           <td>
                             <div class="d-flex flex-wrap button-group">
-                              <button class="btn btn-warning btn-sm" (click)="edit()">Edit</button>
-                              <button class="btn btn-outline-danger btn-sm ml-4" (click)="delete()">Delete</button>
+                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" (click)="edit()"> <i class="fas fa-edit"></i></button>
+                              <button class="btn btn-outline-danger btn-sm" (click)="delete()"> <i class="fas fa-trash-alt"></i></button>
                             </div>
                           </td>
+                          
                         </tr>
                       </tbody>
                     </table>
@@ -199,7 +164,7 @@
                 <td>{{ appointment.username }}</td>
                 <td>{{ appointment.email }}</td>
                 <td>{{ appointment.departmentName }}</td>
-                <td>{{ appointment.doctorName }}</td>
+                <td>{{ appointment.doctorname }}</td>
                 <td>{{ appointment.date }}</td>
                 <td>{{ appointment.time }}</td>
                 <td>{{ appointment.phone }}</td>

@@ -38,6 +38,12 @@
                         </a>
                     </li>
                     <li class="py-2">
+                        <a (click)="showSection('appointment')">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Appointment</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
                         <a (click)="showSection('patientList')">
                             <i class="fas fa-user-injured"></i>
                             <span>Patient List</span>
@@ -50,9 +56,9 @@
                         </a>
                     </li>
                     <li class="py-2">
-                        <a (click)="showSection('appointment')">
-                            <i class="fas fa-calendar-check"></i>
-                            <span>Appointment</span>
+                        <a (click)="showSection('symptoms')">
+                            <i class="fas fa-stethoscope"></i>
+                            <span>Symptoms</span>
                         </a>
                     </li>
                     <li class="py-2">
@@ -61,12 +67,7 @@
                             <span>Note</span>
                         </a>
                     </li>
-                    <li class="py-2">
-                        <a (click)="showSection('symptoms')">
-                            <i class="fas fa-stethoscope"></i>
-                            <span>Symptoms</span>
-                        </a>
-                    </li>
+                   
                     <li class="py-2">
                         <a (click)="showSection('generateReport')">
                             <i class="fas fa-file-medical"></i>

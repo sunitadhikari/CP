@@ -36,49 +36,50 @@ export class AppointmentComponent implements OnInit {
     })
     this.doctorService.getDoctor().subscribe((res)=>{
       console.log(res);
-      this.doctorName=res
+      this.doctorName=res.doctors
     })
 
       this.appointmentService.getAppointmentsByDoctorEmail().subscribe((res)=>{
         console.log(res);
-        this.getAppointmentByEmailList=res.userAppointments
+        this.getAppointmentByEmailList=res
       })
     
     }
 
 
-  ngOnInit(): void {
-    this.userRole= localStorage.getItem('userRole')
-
-    this.appointmentForm = this.fb.group({
-      username: [''],
-      email: [''],
-      departmentName: ['', Validators.required],
-      doctorname: ['', Validators.required],
-      date: ['', Validators.required],
-      time: ['', Validators.required],
-      phone: [ , [Validators.required, Validators.pattern(/^(9[4-8][0-9]|01[0-9])\d{7}$/)]],
-      problem: ['', Validators.required],
-    })
-    // this.getAppointment();
-    this.getAppointmentByEmail();
-  }
-  submit() {
-    console.log('form filled');
-    if (this.appointmentForm.valid) {
-      this.appointmentService.postAppointment(this.appointmentForm.value).subscribe((data) => {
-        console.log(data);
-        console.log(this.appointmentForm.value);
-        
-        alertify.success('Form filled successfully');
-        this.appointmentForm.reset()
-      })
+    ngOnInit(): void {
+      this.userRole = localStorage.getItem('userRole');
+  
+      this.appointmentForm = this.fb.group({
+        username: [''],
+        email: [''],
+        departmentName: ['', Validators.required],
+        doctorname: ['', Validators.required],
+        date: ['', Validators.required],
+        time: ['', Validators.required],
+        phone: ['', [Validators.required, Validators.pattern(/^(9[4-8][0-9]|01[0-9])\d{7}$/)]],
+        problem: ['', Validators.required],
+      });
+  
+      this.getAppointmentByEmail();
     }
-    else {
-      debugger
-    alertify.error('Invalid form')
+  
+    submit() {
+      console.log('form filled');
+      if (this.appointmentForm.valid) {
+        this.appointmentService.postAppointment(this.appointmentForm.value).subscribe((data) => {
+          console.log(data);
+          console.log(this.appointmentForm.value);
+  
+          alertify.success('Form filled successfully');
+          this.appointmentForm.reset();
+          this.getAppointmentByEmail();
+        });
+      } else {
+        alertify.error('Invalid form');
+      }
     }
-  }
+  
 // getAppointment(){
 //   this.appointmentService.getAppointment().subscribe((data)=>{
 //     console.log('Table filled succesfully');
@@ -89,6 +90,7 @@ getAppointmentByEmail(){
   this.appointmentService.getAppointmentByEmail().subscribe((data)=>{
     console.log('Table filled succesfully');
     this.appointmentTable= data.userAppointments
+    debugger
   })
 }
 edit(){}

@@ -25,27 +25,45 @@ export class BedManagementComponent implements OnInit {
     this.bedForm = this.fb.group({
       name: ['', Validators.required],
       bedNumber: ['', Validators.required],
-      bedCapacity: ['', Validators.required],
-      description: ['', Validators.required],
-      charge: ['', Validators.required],
-      status: ['Active', Validators.required]
+      description: [''],
+      bedCapacity: [''], // Will be populated based on selected room
+      charge: [''], // Will be populated based on selected room
+      status: ['', Validators.required]
     });
     this.roomService.getRoom().subscribe((res)=>{
       console.log(res);
       this.roomName=res
       debugger
-    })
+      this.bedForm.get('name')?.valueChanges.subscribe(roomName => {
+        const selectedRoom = this.roomName.find(room => room.name === roomName);
+        if (selectedRoom) { 
+          this.bedForm.patchValue({
+            bedCapacity: selectedRoom.bedCapacity,
+            charge: selectedRoom.charge
+          });
+        } else {
+          this.bedForm.patchValue({
+            bedCapacity: null,
+            charge: null
+          });
+        }
+      });
+    });
     this.getBed()
     
   }
-
   onSubmit() {
     if (this.bedForm.valid) {
+      debugger
       this.bedService.postBed(this.bedForm.value).subscribe((data) => {
         console.log(data);
+        debugger
+        alertify.success('Successfully added')
+        this.bedForm.reset()
+        this.getBed()
       })
-      alertify.success('Successfully added')
-      this.bedForm.reset()
+    debugger
+
     }
     else {
       alertify.error('Invalid form');
@@ -69,5 +87,9 @@ export class BedManagementComponent implements OnInit {
       error => {
         alertify.error('Failed to delete')
       });
+  }
+  get maxBedNumber(): number {
+    const bedCapacity = this.bedForm.get('bedCapacity')?.value;
+    return bedCapacity ? bedCapacity : Number.MAX_VALUE;
   }
 }

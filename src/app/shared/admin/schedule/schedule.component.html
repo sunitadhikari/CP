@@ -14,7 +14,7 @@
                                 <select class="form-control m-b-5" formControlName="doctorName" required>
                                     <option value="">--Please choose an option--</option>
 
-                                    <option *ngFor="let doctor of doctorName" [value]="doctor.email">{{ doctor.firstName }}</option>
+                                    <option *ngFor="let doctor of doctorName" [value]="doctor.email">{{ doctor.firstName }}{{ doctor.lastName }}</option>
                                   </select>
                                 
                             </div>
@@ -228,7 +228,7 @@
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
-                                                            <th>Id</th>
+                                                            <th>SN</th>
                                                             <th>Doctor Name</th>
                                                             <th nowrap>Availabe Days</th>
                                                             <th nowrap>Start Time</th>
@@ -239,21 +239,15 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let item of schedulePatientTable; let i = index">
+                                                        <tr *ngFor="let item of scheduleTable; let i = index">
                                                             <td>{{i+1}}</td>
+                                                            <td>{{item.doctorName}}</td>
                                                             <td>{{item.availableDays}}</td>
                                                             <td>{{item.startTime}}</td>
                                                             <td>{{item.endTime}}</td>
                                                             <td>{{item.sex}}</td>
                                                             <td>{{item.mobileNumber}}</td>
-                                                            <td>
-                                                                <div class="d-flex flex-wrap button-group">
-                                                                    <button class="btn btn-warning btn-sm"
-                                                                        (click)="edit()">Edit</button>
-                                                                    <button class="btn btn-outline-danger btn-sm ml-4"
-                                                                        (click)="delete()">Delete</button>
-                                                                </div>
-                                                            </td>
+                                                           
                                                         </tr>
                                                     </tbody>
                                                 </table>

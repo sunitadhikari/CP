@@ -23,24 +23,30 @@ export class LabComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      address: ['', Validators.required],
-      phoneNo: [''],
-      mobileNo: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+      department: [''],
+      picture: [''],
       dob: [''],
       sex: ['', Validators.required],
       bloodGroup: [''],
-      status: ['active', Validators.required]
+      specialist: ['', Validators.required],
+      address: ['', Validators.required],
+      phoneNo: [''],
+      mobileNo: ['', Validators.required],
+      careerTitle: ['', Validators.required],
+      biography: [''],
+      status: ['active', Validators.required],
+      role:['labtec']
     })
     this.labTable()
   }
   labTable(){
     this.labService.getLab().subscribe((data)=>{
       console.log(data);
-      this.labList = data
+      this.labList = data.labtecs
     })
-    
   }
-  submit() {
+  onSubmit() {
     // console.log(this.labForm.value);
     if (this.labForm.valid) {
       this.userService.postRegister(this.labForm.value).subscribe((data) => {
