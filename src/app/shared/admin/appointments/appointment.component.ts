@@ -5,6 +5,9 @@ import { AppointmentService } from '../../../core/service/appointment/appointmen
 import * as alertify from 'alertifyjs';
 import { DepartmentService } from '../../../core/service/admin/department.service';
 import { DoctorService } from '../../../core/service/admin/doctor.service';
+import KhaltiCheckout from "khalti-checkout-web";
+import { HttpClient } from '@angular/common/http';
+
 
 
 @Component({
@@ -25,7 +28,9 @@ export class AppointmentComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private appointmentService: AppointmentService,private departmentService:DepartmentService,private doctorService:DoctorService ) {
+  constructor(private fb: FormBuilder,
+    private http: HttpClient,
+    private appointmentService: AppointmentService,private departmentService:DepartmentService,private doctorService:DoctorService ) {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -59,6 +64,7 @@ export class AppointmentComponent implements OnInit {
         time: ['', Validators.required],
         phone: ['', [Validators.required, Validators.pattern(/^(9[4-8][0-9]|01[0-9])\d{7}$/)]],
         problem: ['', Validators.required],
+        isPaid:[false]
       });
   
       this.getAppointmentByEmail();
@@ -97,5 +103,42 @@ edit(){}
 delete(){
   console.log('Data deleted');
 }
+makePayment(item: any): void {
+  const config = {
+    publicKey: "test_public_key_0275cc5e2bae42fb890536aae01e9e73",
+    productIdentity: item._id,
+    productName: "Appointment Payment",
+    productUrl: "http://example.com/appointment",
+    eventHandler: {
+      onSuccess: (payload: any) => {
+        this.updatePaymentStatus(item._id, payload);
+      },
+      onError: (error: any) => {
+        console.log(error);
+        alertify.error("Payment failed");
+      },
+      onClose: () => {
+        console.log('Widget is closing');
+      }
+    },
+    paymentPreference: ["KHALTI", "EBANKING", "MOBILE_BANKING", "CONNECT_IPS", "SCT"]
+  };
+
+  const checkout = new KhaltiCheckout(config);
+  checkout.show({ amount: 1000 });
 }
+
+updatePaymentStatus(id: string, payload: any): void {
+  this.appointmentService.updatePaymentStatus(id, payload).subscribe(
+    (response: any) => {
+      alertify.success("Payment successful");
+      this.getAppointmentByEmail();
+    },
+    (error: any) => {
+      alertify.error("Payment status update failed");
+    }
+  );
+}
+}
+
 // departmentName
