@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedTableComponent } from '../../sharedComponent/shared-table/shared-table.component';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ScheduleService } from '../../../core/service/admin/schedule.service';
 import * as alertify from 'alertifyjs';
@@ -52,19 +52,36 @@ export class ScheduleComponent implements OnInit {
   }
   ngOnInit(): void {
     this.userRole = localStorage.getItem('userRole')
-
     this.scheduleForm = this.fb.group({
       doctorName: ['', Validators.required],
       availableDays: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
-      mobileNumber: ['', Validators.required],
+      mobileNumber: ['', [Validators.required, Validators.pattern('^\\d{10}$')]],
       sex: ['', Validators.required]
-    })
+    }, { validators: this.timeDifferenceValidator });
+  
     this.getSchedule();
     this.getScheduleByDoctor();
     this.getScheduleByPatients()
   }
+  timeDifferenceValidator(group: AbstractControl): ValidationErrors | null {
+    const startTime = group.get('startTime')!.value;
+    const endTime = group.get('endTime')!.value;
+
+    if (startTime && endTime) {
+      const start = new Date(`1970-01-01T${startTime}:00`);
+      const end = new Date(`1970-01-01T${endTime}:00`);
+      const diff = (end.getTime() - start.getTime()) / (1000 * 60 * 60); 
+
+      if (diff >= 2 && diff <= 4) {
+        return null;
+      }
+      return { timeDifference: true };
+    }
+    return null;
+  }
+
   submit() {
     if (this.scheduleForm.valid) {
       this.scheduleService.postSchedule(this.scheduleForm.value).subscribe((data) => {

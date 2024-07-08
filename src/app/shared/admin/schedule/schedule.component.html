@@ -6,104 +6,70 @@
         <div class="col-xl-12">
             <div class=" card p-2" data-sortable-id="form-stuff-1">
                 <div class=" card-body">
-                    <form [formGroup]="scheduleForm">
+                    <form [formGroup]="scheduleForm" (ngSubmit)="submit()">
                         <div class="form-group row m-b-15">
-                            <label class="col-form-label col-md-3 fw-bold">Doctor's Name <span
-                                    class="text-danger fw-bold">*</span></label>
-                            <div class="col-md-9">
-                                <select class="form-control m-b-5" formControlName="doctorName" required>
-                                    <option value="">--Please choose an option--</option>
-
-                                    <option *ngFor="let doctor of doctorName" [value]="doctor.email">{{ doctor.firstName }}{{ doctor.lastName }}</option>
-                                  </select>
-                                
-                            </div>
-                        </div>
-                        <div class="form-group row m-b-15">
-                            <label class="col-form-label col-md-3 fw-bold">Available Days</label>
-                            <div class="col-md-9">
-                                <select class="form-control" name="available" placeholder="Select Option"
-                                    formControlName="availableDays" required>
-                                    <option>Sunday</option>
-                                    <option>Monday</option>
-                                    <option>Tuesday</option>
-                                    <option>Wednesday</option>
-                                    <option>Thursday</option>
-                                    <option>Friday</option>
-                                    <option>Saturday</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row m-b-15">
-                            <label class="col-form-label col-md-3 fw-bold">Start and End Time <span
-                                    class="text-danger fw-bold">*</span></label>
-                            <div class="col d-flex justify-content-between">
-                                <input type="time" class="form-control m-b-5 col-lg-5 " placeholder="Start Time"
-                                    formControlName="startTime" required />
-                                <input type="time" class="form-control m-b-5 col-lg-6" placeholder="End Time"
-                                    formControlName="endTime" required />
-                            </div>
-                        </div>
-
-                        <div class="form-group row m-b-15">
-                            <label class="col-form-label col-md-3 fw-bold">Mobile No <span
-                                    class="text-danger fw-bold">*</span></label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control m-b-5" placeholder="Mobile No"
-                                    formControlName="mobileNumber" required />
-                            </div>
-                        </div>
-                        <!-- <div class="form-group row m-b-15">
-                        <label class="col-form-label col-md-3 fw-bold">Blood Group</label>
-                        <div class="col-md-9">
-                            <select class="form-control">
-                                <option>A+</option>
-                                <option>A-</option>
-                                <option>B+</option>
-                                <option>B-</option>
-                                <option>O+</option>
-                                <option>O-</option>
-                                <option>AB+</option>
-                                <option>AB-</option>
+                          <label class="col-form-label col-md-3 fw-bold">Doctor's Name <span class="text-danger fw-bold">*</span></label>
+                          <div class="col-md-9">
+                            <select class="form-control m-b-5" formControlName="doctorName" required>
+                              <option value="">--Please choose an option--</option>
+                              <option *ngFor="let doctor of doctorName" [value]="doctor.email">{{ doctor.firstName }} {{ doctor.lastName }}</option>
                             </select>
+                          </div>
                         </div>
-                    </div> -->
-                        <div class="form-group row m-b-10 align-items-center ">
-                            <div class="form-group row m-b-10 align-items-center">
-                                <label class="col-md-3 col-form-label fw-bold">Sex <span
-                                        class="text-danger fw-bold">*</span></label>
-                                <div class="col-md-9">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="male" formControlName="sex"
-                                            value="Male" required checked />
-                                        <label class="form-check-label" for="male">Male</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="female" formControlName="sex"
-                                            value="Female" required />
-                                        <label class="form-check-label" for="female">Female</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="other" formControlName="sex"
-                                            value="Other" required />
-                                        <label class="form-check-label" for="other">Other</label>
-                                    </div>
-                                </div>
+                        <div class="form-group row m-b-15">
+                          <label class="col-form-label col-md-3 fw-bold">Available Days</label>
+                          <div class="col-md-9">
+                            <select class="form-control" formControlName="availableDays" required>
+                              <option>Sunday</option>
+                              <option>Monday</option>
+                              <option>Tuesday</option>
+                              <option>Wednesday</option>
+                              <option>Thursday</option>
+                              <option>Friday</option>
+                              <option>Saturday</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group row m-b-15">
+                          <label class="col-form-label col-md-3 fw-bold">Start and End Time <span class="text-danger fw-bold">*</span></label>
+                          <div class="col d-flex justify-content-between">
+                            <input type="time" class="form-control m-b-5 col-lg-5" formControlName="startTime" required />
+                            <input type="time" class="form-control m-b-5 col-lg-6" formControlName="endTime" required />
+                          </div>
+                          <div *ngIf="scheduleForm.hasError('timeDifference')">
+                            <small class="text-danger">Start time and end time must have at least 2 hours and at most 4 hours difference.</small>
+                          </div>
+                        </div>
+                        <div class="form-group row m-b-15">
+                          <label class="col-form-label col-md-3 fw-bold">Mobile No <span class="text-danger fw-bold">*</span></label>
+                          <div class="col-md-9">
+                            <input type="text" class="form-control m-b-5" formControlName="mobileNumber" required />
+                          </div>
+                        </div>
+                        <div class="form-group row m-b-10 align-items-center">
+                          <label class="col-md-3 col-form-label fw-bold">Sex <span class="text-danger fw-bold">*</span></label>
+                          <div class="col-md-9">
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" id="male" formControlName="sex" value="Male" required />
+                              <label class="form-check-label" for="male">Male</label>
                             </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" id="female" formControlName="sex" value="Female" required />
+                              <label class="form-check-label" for="female">Female</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" id="other" formControlName="sex" value="Other" required />
+                              <label class="form-check-label" for="other">Other</label>
+                            </div>
+                          </div>
                         </div>
-                        <!-- <div class="form-group row m-b-15">
-                        <label class="col-form-label col-md-3 fw-bold">Date of Birth <span
-                                class="text-danger fw-bold">*</span></label>
-                        <div class="col-md-9">
-                            <input type="date" class="form-control m-b-5" placeholder="First Name" />
-                        </div>
-                    </div> -->
                         <div class="form-group row m-b-15 justify-content-center">
-                            <button type="submit" class="btn btn-success mr-2 col-auto btn"
-                                (click)="submit()">Submit</button>
-                            <button type="reset" class="btn btn-primary  col-auto">Reset</button>
+                          <button type="submit" class="btn btn-success mr-2 col-auto">Submit</button>
+                          <button type="reset" class="btn btn-primary col-auto">Reset</button>
                         </div>
-                    </form>
+                      </form>
+                      
+                      
                 </div>
             </div>
             <div class="row mt-4">
