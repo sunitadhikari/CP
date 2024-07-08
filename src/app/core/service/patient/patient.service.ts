@@ -13,7 +13,7 @@ export class PatientService {
   apiUrl: String = environment.api_url
 
   private postPatientApi = environment.api_url + "postPatient"
-  private getPatientApi = environment.api_url + 'getPatients'
+  private getPatientApi = environment.api_url + 'getPatient'
 
   postPatient(data: any): Observable<any> {
     return this.http.post(this.postPatientApi, data)

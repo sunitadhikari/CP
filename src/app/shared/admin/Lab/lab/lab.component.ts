@@ -13,6 +13,7 @@ import { UserService } from '../../../../core/service/user/user.service';
   styleUrl: './lab.component.css'
 })
 export class LabComponent implements OnInit {
+
   labForm!: FormGroup
   labList: any[] = []
   constructor(private fb: FormBuilder, private labService: LabTechService, private userService:UserService) { }
@@ -59,4 +60,6 @@ export class LabComponent implements OnInit {
       alertify.error('Form is not valid.')
     }
   }
+  edit(){}
+delete(){}
 }

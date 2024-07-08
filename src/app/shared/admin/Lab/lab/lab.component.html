@@ -141,8 +141,8 @@
                         <td>{{ item.address }}</td>
                         <td>{{ item.status }}</td>
                         <td>
-                            <button class="btn btn-warning btn-sm" >Edit</button>
-                            <button class="btn btn-outline-danger btn-sm ml-4">Delete</button>
+                            <button (submit)="edit()" class="btn btn-warning btn-sm" >Edit</button>
+                            <button (submit)="delete()" class="btn btn-outline-danger btn-sm ml-4">Delete</button>
                           </td>
                     </tr>
                 </tbody>

@@ -161,6 +161,7 @@
                                 <th>Sex</th>
                                 <th>Specialist</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody id="doctorTable">
@@ -174,6 +175,14 @@
                                 <td>{{item.sex}}</td>
                                 <td>{{item.specialist}}</td>
                                 <td>{{item.status}}</td>
+                                <td>
+                                    <div class="d-flex flex-wrap button-group">
+                                        <button class="btn btn-warning btn-sm"
+                                            (click)="edit()">Edit</button>
+                                        <button class="btn btn-outline-danger btn-sm ml-4"
+                                            (click)="delete()">Delete</button>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

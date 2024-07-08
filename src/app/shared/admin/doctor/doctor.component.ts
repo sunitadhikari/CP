@@ -78,4 +78,6 @@ getDepartmentListData(){
 
     
   }
+  edit(){}
+  delete(){}
 }
