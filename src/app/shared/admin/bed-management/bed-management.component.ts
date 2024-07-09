@@ -33,7 +33,6 @@ export class BedManagementComponent implements OnInit {
     this.roomService.getRoom().subscribe((res)=>{
       console.log(res);
       this.roomName=res
-      debugger
       this.bedForm.get('name')?.valueChanges.subscribe(roomName => {
         const selectedRoom = this.roomName.find(room => room.name === roomName);
         if (selectedRoom) { 
@@ -54,15 +53,15 @@ export class BedManagementComponent implements OnInit {
   }
   onSubmit() {
     if (this.bedForm.valid) {
-      debugger
+      
       this.bedService.postBed(this.bedForm.value).subscribe((data) => {
         console.log(data);
-        debugger
+        
         alertify.success('Successfully added')
         this.bedForm.reset()
         this.getBed()
       })
-    debugger
+    
 
     }
     else {

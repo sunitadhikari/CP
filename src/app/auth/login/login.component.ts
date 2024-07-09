@@ -27,7 +27,6 @@ ngOnInit(): void {
   submit(){
     if(this.loginForm.valid){
       this.userService.postUserLogin(this.loginForm.value).subscribe((res)=>{
-        debugger
         if (res && res.message === 'Login Sucessfull'){
           console.log(res);
           console.log(this.loginForm.value)
@@ -37,7 +36,6 @@ ngOnInit(): void {
           // localStorage.setItem('userRole',JSON.stringify(res.role))
           // localStorage.setItem('userToken',JSON.stringify(res.token))
           localStorage.setItem('userToken',res.token)
-          debugger
           this.router.navigate(['/dashboard'])
           
           alertify.success('Login  Sucessfull')

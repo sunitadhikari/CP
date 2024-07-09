@@ -92,7 +92,6 @@ export class ScheduleComponent implements OnInit {
       this.getSchedule()
     }
     else {
-      debugger
       alertify.error('Invalid Form ')
     }
   }

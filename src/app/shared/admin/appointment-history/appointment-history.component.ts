@@ -30,11 +30,9 @@ export class AppointmentHistoryComponent implements OnInit {
     this.appointment()
   }
   appointment() {
-    debugger
     this.appointmentService.getAppointmentHistory().subscribe((data) => {
       console.log('Data fetched');
       this.appointmentTable = data
-      debugger
     })
   }
  

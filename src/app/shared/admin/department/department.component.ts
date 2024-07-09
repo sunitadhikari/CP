@@ -37,7 +37,6 @@ department : any[] =[]
   deleteDepartment(id: string) {
     this.departmentService.deleteDepartment(id).subscribe(
       (response) => {
-        debugger
         alertify.success('Successfully Deleted')
         this.getDepartmentList()
 
