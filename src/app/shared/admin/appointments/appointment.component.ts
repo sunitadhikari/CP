@@ -128,14 +128,14 @@ makePayment(item: any): void {
 }
 
 updatePaymentStatus(id: string, payload: any): void {
-  console.log('Updating payment status:', { id, payload }); // Log the data before sending
+  console.log('Updating payment status:', { id, payload }); 
   this.appointmentService.updatePaymentStatus(id, payload).subscribe(
     (response: any) => {
       alertify.success('Payment successful');
       this.getAppointmentByEmail();
     },
     (error: any) => {
-      console.log('Error updating payment status:', error); // Log the error
+      console.log('Error updating payment status:', error);
       alertify.error('Payment status update failed');
     }
   );
