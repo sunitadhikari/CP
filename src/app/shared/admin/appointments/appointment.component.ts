@@ -54,7 +54,6 @@ export class AppointmentComponent implements OnInit {
 
     ngOnInit(): void {
       this.userRole = localStorage.getItem('userRole');
-  
       this.appointmentForm = this.fb.group({
         username: [''],
         email: [''],
@@ -64,9 +63,8 @@ export class AppointmentComponent implements OnInit {
         time: ['', Validators.required],
         phone: ['', [Validators.required, Validators.pattern(/^(9[4-8][0-9]|01[0-9])\d{7}$/)]],
         problem: ['', Validators.required],
-        isPaid:[false]
+        isPaid: [false]
       });
-  
       this.getAppointmentByEmail();
     }
   
@@ -92,36 +90,37 @@ export class AppointmentComponent implements OnInit {
 //   this.appointmentTable= data;
 //   })
 // }
-getAppointmentByEmail(){
-  this.appointmentService.getAppointmentByEmail().subscribe((data)=>{
-    console.log('Table filled succesfully');
-    this.appointmentTable= data.userAppointments
-    debugger
-  })
+getAppointmentByEmail(): void {
+  this.appointmentService.getAppointmentByEmail().subscribe((data) => {
+    console.log('Table filled successfully');
+    this.appointmentTable = data.userAppointments;
+  });
 }
+
 edit(){}
 delete(){
   console.log('Data deleted');
 }
 makePayment(item: any): void {
   const config = {
-    publicKey: "test_public_key_0275cc5e2bae42fb890536aae01e9e73",
+    publicKey: 'test_public_key_0275cc5e2bae42fb890536aae01e9e73',
     productIdentity: item._id,
-    productName: "Appointment Payment",
-    productUrl: "http://example.com/appointment",
+    productName: 'Appointment Payment',
+    productUrl: 'http://example.com/appointment',
     eventHandler: {
       onSuccess: (payload: any) => {
+        console.log('Payload:', payload); // Log the payload
         this.updatePaymentStatus(item._id, payload);
       },
       onError: (error: any) => {
         console.log(error);
-        alertify.error("Payment failed");
+        alertify.error('Payment failed');
       },
       onClose: () => {
         console.log('Widget is closing');
       }
     },
-    paymentPreference: ["KHALTI", "EBANKING", "MOBILE_BANKING", "CONNECT_IPS", "SCT"]
+    paymentPreference: ['KHALTI', 'EBANKING', 'MOBILE_BANKING', 'CONNECT_IPS', 'SCT']
   };
 
   const checkout = new KhaltiCheckout(config);
@@ -129,16 +128,20 @@ makePayment(item: any): void {
 }
 
 updatePaymentStatus(id: string, payload: any): void {
+  console.log('Updating payment status:', { id, payload }); // Log the data before sending
   this.appointmentService.updatePaymentStatus(id, payload).subscribe(
     (response: any) => {
-      alertify.success("Payment successful");
+      alertify.success('Payment successful');
       this.getAppointmentByEmail();
     },
     (error: any) => {
-      alertify.error("Payment status update failed");
+      console.log('Error updating payment status:', error); // Log the error
+      alertify.error('Payment status update failed');
     }
   );
 }
-}
 
+
+
+}
 // departmentName

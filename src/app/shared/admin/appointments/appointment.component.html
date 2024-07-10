@@ -100,41 +100,45 @@
                       <thead>
                         <tr>
                           <th>SN</th>
-                          <th nowrap>Email</th>
-                          <th nowrap>Department Name</th>
-                          <th nowrap>Doctor Email</th>
-                          <th nowrap>Date</th>
-                          <th nowrap>Time</th>
-                          <th nowrap>Paid</th>
-                          <th nowrap>Action</th>
-
+                          <th>Email</th>
+                          <th>Department Name</th>
+                          <th>Doctor Email</th>
+                          <th>Date</th>
+                          <th>Time</th>
+                          <th>Paid</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let item of appointmentTable; let i = index">
-                          <td>{{i+1}}</td>
-                          <td>{{item.email}}</td>
-                          <td>{{item.departmentName}}</td>
-                          <td>{{item.doctorname}}</td>
-                          <td>{{item.date}}</td>
-                          <td>{{item.time}}</td>
-                          <td>{{item.isPaid ? 'Yes' : 'No'}}</td>
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ item.email }}</td>
+                          <td>{{ item.departmentName }}</td>
+                          <td>{{ item.doctorname }}</td>
+                          <td>{{ item.date }}</td>
+                          <td>{{ item.time }}</td>
+                          <td>{{ item.isPaid ? 'Yes' : 'No' }}</td>
                           <td>
                             <div class="d-flex flex-wrap button-group">
                               <button
-                              class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2"
-                              *ngIf="!item.isPaid"
-                              (click)="makePayment(item)"
-                            >
-                              <i class="fas fa-dollar"></i>Pay
-                            </button>                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" (click)="edit()"> <i class="fas fa-edit"></i></button>
-                              <button class="btn btn-outline-danger btn-sm" (click)="delete()"> <i class="fas fa-trash-alt"></i></button>
+                                class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2"
+                                *ngIf="!item.isPaid"
+                                (click)="makePayment(item)"
+                              >
+                                <i class="fas fa-dollar"></i>Pay
+                              </button>
+                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" (click)="edit()"> 
+                                <i class="fas fa-edit"></i>
+                              </button>
+                              <button class="btn btn-outline-danger btn-sm" (click)="delete()"> 
+                                <i class="fas fa-trash-alt"></i>
+                              </button>
                             </div>
                           </td>
-                          
                         </tr>
                       </tbody>
                     </table>
+                    
                   </div>
                   <!-- end table-responsive -->
                 </div>
