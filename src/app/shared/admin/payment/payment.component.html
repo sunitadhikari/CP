@@ -36,55 +36,33 @@
     </div>
 </div> -->
 <div class="container mt-5">
-    <h2 class="mb-4">Payments</h2>
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Payment ID</th>
-            <th scope="col">Date</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Status</th>
-            <th scope="col">Payment Method</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>001</td>
-            <td>2024-07-01</td>
-            <td>$150.00</td>
-            <td>Completed</td>
-            <td>Credit Card</td>
-            <td>
-              <button class="btn btn-primary btn-sm">View</button>
-              <button class="btn btn-danger btn-sm">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>002</td>
-            <td>2024-07-02</td>
-            <td>$200.00</td>
-            <td>Pending</td>
-            <td>PayPal</td>
-            <td>
-              <button class="btn btn-primary btn-sm">View</button>
-              <button class="btn btn-danger btn-sm">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>003</td>
-            <td>2024-07-03</td>
-            <td>$300.00</td>
-            <td>Failed</td>
-            <td>Bank Transfer</td>
-            <td>
-              <button class="btn btn-primary btn-sm">View</button>
-              <button class="btn btn-danger btn-sm">Delete</button>
-            </td>
-          </tr>
-          <!-- Add more rows as needed -->
-        </tbody>
-      </table>
-    </div>
+  <h2 class="mb-4">Payments</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Payment ID</th>
+          <th scope="col">Date</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Status</th>
+          <th scope="col">Payment Method</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of paidAppointments">
+          <td>{{ payment._id }}</td>
+          <td>{{ payment.date | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ payment.amount | currency }}</td>
+          <td>{{ payment.isPaid ? 'Completed' : 'Pending' }}</td>
+          <td>{{ payment.paymentMethod }}Khalti</td>
+          <td>
+            <button class="btn btn-primary btn-sm">View</button>
+            <button class="btn btn-danger btn-sm" (click)="deletePayment(payment._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
+

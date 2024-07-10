@@ -15,6 +15,7 @@ export class AppointmentService {
  private getAppointmentApiUrl = this.apiUrl + 'getAppointment'
  private getAppointmentHistoryApiUrl = this.apiUrl + 'docAppointmentsEmail'
  private getAppointmentEmailApiUrl = this.apiUrl + 'appointmentsByEmail'
+ private paidAppointmentsApiUrl = this.apiUrl + 'paidAppointments'
  private updatePaymentStatusApiUrl = this.apiUrl + 'updatePaymentStatus';
  private getDoctorsByDepartmentApiUrl = this.apiUrl + 'getDoctorsByDepartment';
 
@@ -32,6 +33,9 @@ return this.http.get(this.getAppointmentEmailApiUrl)
 }
 getAppointmentHistory():Observable<any>{
 return this.http.get(this.getAppointmentHistoryApiUrl)
+}
+paidAppointmentsHistory():Observable<any>{
+return this.http.get(this.paidAppointmentsApiUrl)
 }
 getAppointmentsByDoctorEmail():Observable<any>{
 return this.http.get(this.getAppointmentHistoryApiUrl)
