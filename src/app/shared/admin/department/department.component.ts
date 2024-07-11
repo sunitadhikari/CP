@@ -45,7 +45,6 @@ department : any[] =[]
       error => {
         console.error('Error deleting department:', error);
         this.getDepartmentList()
-
       }
     );
   }
