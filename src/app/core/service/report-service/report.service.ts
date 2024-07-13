@@ -14,12 +14,18 @@ export class ReportService {
 
   private postHospitalReportApiUrl = environment.api_url + "hospitalDischargeReport"
   private postDoctorReportApiUrl = environment.api_url + 'doctorDischargeReport'
+  private getHospitalReportApiUrl = environment.api_url + 'gethospitalDischargeReport'
+  // private getHospitalReportApiUrl = `${this.apiUrl}/hospitalDischargeReport`;
+
 
   postDoctorReport(data: any): Observable<any> {
     return this.http.post(this.postDoctorReportApiUrl, data)
   }
   postHospitalReport(data: any): Observable<any> {
     return this.http.post(this.postHospitalReportApiUrl, data)
+  }
+  getHospitalDischargeReports(): Observable<any> {
+    return this.http.get<any>(this.getHospitalReportApiUrl);
   }
 
 }

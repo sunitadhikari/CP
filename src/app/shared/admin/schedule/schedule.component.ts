@@ -36,7 +36,7 @@ export class ScheduleComponent implements OnInit {
     })
   }
 
-  getScheduleByDoctor() {
+  getScheduleByDoctorFun() {
     this.scheduleService.getScheduleByDoctor().subscribe((data => {
       console.log('api data is ', data);
       this.scheduleDoctorTable = data.data
@@ -62,7 +62,7 @@ export class ScheduleComponent implements OnInit {
     }, { validators: this.timeDifferenceValidator });
   
     this.getSchedule();
-    this.getScheduleByDoctor();
+    this.getScheduleByDoctorFun();
     this.getScheduleByPatients()
   }
   timeDifferenceValidator(group: AbstractControl): ValidationErrors | null {

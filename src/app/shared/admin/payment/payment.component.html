@@ -1,43 +1,32 @@
-<!-- <div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-8 offset-lg-2">
-            <div class="card">
-                <div class="card-header">
-                    Add New Payment
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="date">Date:</label>
-                            <input type="date" class="form-control" id="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="amount">Amount:</label>
-                            <input type="number" class="form-control" id="amount" placeholder="Enter amount" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Description:</label>
-                            <input type="text" class="form-control" id="description" placeholder="Enter description" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="status">Status:</label>
-                            <select class="form-control" id="status" required>
-                                <option value="">Select status</option>
-                                <option value="paid">Paid</option>
-                                <option value="pending">Pending</option>
-                                <option value="failed">Failed</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <div class="container mt-5">
   <h2 class="mb-4">Payments</h2>
   <div class="table-responsive">
+    <div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': isModalVisible}" [ngStyle]="{'display': isModalVisible ? 'block' : 'none'}">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Appointment Details</h5>
+            <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Appointment ID:</strong> {{ selectedAppointment?._id }}</p>
+            <p><strong>Email:</strong> {{ selectedAppointment?.email }}</p>
+            <p><strong>Department:</strong> {{ selectedAppointment?.departmentName }}</p>
+            <p><strong>Doctor Name:</strong> {{ selectedAppointment?.doctorname }}</p>
+            <p><strong>Date:</strong> {{ selectedAppointment?.date | date: 'yyyy-MM-dd' }}</p>
+            <p><strong>Time:</strong> {{ selectedAppointment?.time }}</p>
+            <p><strong>Phone:</strong> {{ selectedAppointment?.phone }}</p>
+            <p><strong>Problem:</strong> {{ selectedAppointment?.problem }}</p>
+            <p><strong>Status:</strong> {{ selectedAppointment?.isPaid ? 'Completed' : 'Pending' }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <table class="table table-bordered table-hover">
       <thead class="thead-dark">
         <tr>
@@ -57,7 +46,7 @@
           <td>{{ payment.isPaid ? 'Completed' : 'Pending' }}</td>
           <td>{{ payment.paymentMethod }}Khalti</td>
           <td>
-            <button class="btn btn-primary btn-sm">View</button>
+            <button class="btn btn-primary btn-sm" (click)="viewAppointment(payment)">View</button>
             <button class="btn btn-danger btn-sm" (click)="deletePayment(payment._id)">Delete</button>
           </td>
         </tr>
@@ -65,4 +54,3 @@
     </table>
   </div>
 </div>
-
