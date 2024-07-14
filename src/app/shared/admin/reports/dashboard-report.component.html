@@ -46,15 +46,20 @@
       <form [formGroup]="hospitalDischargeReportForm" (ngSubmit)="submitHospitalReport()">
         <div class="form-group">
           <label for="patientName">Patient Name</label>
-          <input type="text" class="form-control" id="patientName" placeholder="Enter patient name" required>
+          <select class="form-control" id="patientName" formControlName="patientName">
+            <option value="">Select patient</option>
+            <option *ngFor="let patient of patientData" [value]="patient._id">
+              {{ patient.firstName }} {{ patient.lastName }}
+            </option>
+          </select>
         </div>
         <div class="form-group">
           <label for="patientAge">Patient Age</label>
-          <input type="number" class="form-control" id="patientAge" placeholder="Enter patient age" required>
+          <input type="number" class="form-control" id="patientAge" formControlName="patientAge" placeholder="Enter patient age" readonly required>
         </div>
         <div class="form-group">
           <label for="patientGender">Patient Gender</label>
-          <select class="form-control" id="patientGender" required>
+          <select class="form-control" id="patientGender" formControlName="patientGender" required>
             <option value="">Select gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -63,41 +68,76 @@
         </div>
         <div class="form-group">
           <label for="admissionDate">Admission Date</label>
-          <input type="date" class="form-control" id="admissionDate" required>
+          <input type="date" class="form-control" id="admissionDate" formControlName="admissionDate" required>
         </div>
         <div class="form-group">
           <label for="dischargeDate">Discharge Date</label>
-          <input type="date" class="form-control" id="dischargeDate" required>
+          <input type="date" class="form-control" id="dischargeDate" formControlName="dischargeDate" required>
+          <div *ngIf="hospitalDischargeReportForm.hasError('dateGapInvalid') && hospitalDischargeReportForm.get('dischargeDate')?.touched">
+            <small class="text-danger">Discharge date must be 1-2 days after the admission date.</small>
+          </div>
         </div>
         <div class="form-group">
           <label for="finalDiagnosis">Final Diagnosis</label>
-          <textarea class="form-control" id="finalDiagnosis" rows="3" placeholder="Enter final diagnosis"
-            required></textarea>
+          <textarea class="form-control" id="finalDiagnosis" formControlName="finalDiagnosis" rows="3" placeholder="Enter final diagnosis" required></textarea>
         </div>
         <div class="form-group">
           <label for="summaryOfTreatment">Summary of Treatment</label>
-          <textarea class="form-control" id="summaryOfTreatment" rows="3" placeholder="Enter summary of treatment"
-            required></textarea>
+          <textarea class="form-control" id="summaryOfTreatment" formControlName="summaryOfTreatment" rows="3" placeholder="Enter summary of treatment" required></textarea>
         </div>
         <div class="form-group">
           <label for="dischargeMedications">Discharge Medications</label>
-          <textarea class="form-control" id="dischargeMedications" rows="3" placeholder="Enter discharge medications"
-            required></textarea>
+          <textarea class="form-control" id="dischargeMedications" formControlName="dischargeMedications" rows="3" placeholder="Enter discharge medications" required></textarea>
         </div>
         <div class="form-group">
           <label for="followUpInstructions">Follow-up Instructions</label>
-          <textarea class="form-control" id="followUpInstructions" rows="3" placeholder="Enter follow-up instructions"
-            required></textarea>
+          <textarea class="form-control" id="followUpInstructions" formControlName="followUpInstructions" rows="3" placeholder="Enter follow-up instructions" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit Report</button>
       </form>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2>Hospital Discharge Reports</h2>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Report ID</th>
+                  <th>Patient Name</th>
+                  <th>Admission Date</th>
+                  <th>Discharge Date</th>
+                  <th>Doctor</th>
+                  <!-- Add more headers as per your report structure -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let report of hospitalReports">
+                  <td>{{ report._id }}</td>
+                  <td>{{ report.patientName }}</td>
+                  <td>{{ report.admissionDate | date }}</td>
+                  <td>{{ report.dischargeDate | date }}</td>
+                  <td>{{ report.doctorName }}</td>
+                  <!-- Add more columns as per your report structure -->
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-center">
+              <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+            </div>
+      
+            
+          </div>
+        </div>
+      </div>
+      
     </div>
   </div>
+  
 </div>
 
 
 
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="userRole === 'patient'">
   <div class="card">
     <div class="card-header">
       <h2 class="">Doctor's Discharge Reports</h2>

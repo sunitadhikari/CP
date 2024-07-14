@@ -10,12 +10,12 @@ export class ScheduleService {
 
   constructor(private http:HttpClient) { }
 
-  // apiUrl:String = environment.api_url;
+  apiUrl:String = environment.api_url;
 
-  // private postScheduleApiUrl = this.apiUrl + 'postSchedule'
+  private postScheduleApiUrl = this.apiUrl + 'postSchedule'
   // private getScheduleApiUrl = this.apiUrl + 'getSchedule'
   // private getschedulebyEmailApiUrl = this.apiUrl + 'getschedulebyEmail'
-  // private getschedulebyDoctorApiUrl = this.apiUrl + 'getschedulebyDoctor'
+  private getschedulebyDoctorApiUrl = this.apiUrl + 'getschedulebyDoctor'
 
   // postSchedule(data:any):Observable<any>{
   //   return this.http.post(this.postScheduleApiUrl, data)
@@ -26,8 +26,8 @@ export class ScheduleService {
   // getScheduleByEmail():Observable<any>{
   //   return this.http.get(this.getschedulebyEmailApiUrl)
   // }
-  // getScheduleByDoctor():Observable<any>{
-  //   return this.http.get(this.getschedulebyDoctorApiUrl)
-  // }
+  getScheduleByDoctor():Observable<any>{
+    return this.http.get(this.getschedulebyDoctorApiUrl)
+  }
 }
 
