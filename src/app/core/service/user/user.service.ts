@@ -13,7 +13,7 @@ export class UserService {
 
   private registerApi = environment.api_url + "userSignup"
   private getUserRegister = environment.api_url + "getUserSignup"
-  private postLogin = environment.api_url + "postLogin"
+  private postLogin = environment.api_url + "signin"
 
   postRegister(data: any): Observable<any> {
     return this.http.post(this.registerApi, data);
