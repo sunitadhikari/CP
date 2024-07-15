@@ -1,4 +1,4 @@
-<div class="row"*ngIf="userRole === 'patient'">
+<div class="row" *ngIf="userRole === 'patient'">
   <div class="col-xl-12">
     <div class="panel panel-inverse card" data-sortable-id="form-stuff-1">
       <div class="panel-heading bg-light">
@@ -10,20 +10,23 @@
         <form [formGroup]="appointmentForm" (ngSubmit)="submit()">
 
           <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Department Name <span class="text-danger fw-bold">*</span></label>
+            <label class="col-form-label col-md-3 fw-bold">Department Name <span
+                class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <select class="form-control" formControlName="departmentName" placeholder="Choose one option" >
+              <select class="form-control" formControlName="departmentName" placeholder="Choose one option">
                 <option value="">--Please choose an option--</option>
                 <option *ngFor="let department of departmentNameList" [value]="department.departmentName">
                   {{ department.departmentName }}
                 </option>
               </select>
-              <div *ngIf="appointmentForm.get('departmentName')?.invalid && appointmentForm.get('departmentName')?.touched" class="text-danger">
+              <div
+                *ngIf="appointmentForm.get('departmentName')?.invalid && appointmentForm.get('departmentName')?.touched"
+                class="text-danger">
                 Selection of departmentName is required.
               </div>
             </div>
           </div>
-        
+
           <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">Doctor name<span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
@@ -33,58 +36,67 @@
                   {{ doctor.firstName }} {{ doctor.lastName }}
                 </option>
               </select>
-              <div *ngIf="appointmentForm.get('doctorname')?.invalid && appointmentForm.get('doctorname')?.touched" class="text-danger">
+              <div *ngIf="appointmentForm.get('doctorname')?.invalid && appointmentForm.get('doctorname')?.touched"
+                class="text-danger">
                 Valid Doctor name is required.
               </div>
             </div>
           </div>
-        
+
           <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">Date <span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <input type="date" class="form-control m-b-5" placeholder="Appointment Date" formControlName="date" required min="{{ tomorrow | date: 'yyyy-MM-dd' }}" />
-              <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched" class="text-danger">
+              <input type="date" class="form-control m-b-5" placeholder="Appointment Date" formControlName="date"
+                required min="{{ tomorrow | date: 'yyyy-MM-dd' }}" />
+              <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched"
+                class="text-danger">
                 Date is required.
               </div>
             </div>
           </div>
-        
+
           <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">Time <span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
               <input type="time" class="form-control m-b-5" placeholder="Time" formControlName="time" required>
-              <div *ngIf="appointmentForm.get('time')?.invalid && appointmentForm.get('time')?.touched" class="text-danger">
+              <div *ngIf="appointmentForm.get('time')?.invalid && appointmentForm.get('time')?.touched"
+                class="text-danger">
                 Time is required
               </div>
             </div>
           </div>
-        
+
           <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Mobile Number<span class="text-danger fw-bold">*</span></label>
+            <label class="col-form-label col-md-3 fw-bold">Mobile Number<span
+                class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <input type="text" class="form-control m-b-5" placeholder="Mobile Number" formControlName="phone" required>
-              <div *ngIf="appointmentForm.get('phone')?.invalid && appointmentForm.get('phone')?.touched" class="text-danger">
+              <input type="text" class="form-control m-b-5" placeholder="Mobile Number" formControlName="phone"
+                required>
+              <div *ngIf="appointmentForm.get('phone')?.invalid && appointmentForm.get('phone')?.touched"
+                class="text-danger">
                 Valid mobile number is required.
               </div>
             </div>
           </div>
-        
+
           <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">Problem<span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <textarea type="text" class="form-control m-b-5" placeholder="Problem" formControlName="problem" required></textarea>
-              <div *ngIf="appointmentForm.get('problem')?.invalid && appointmentForm.get('problem')?.touched" class="text-danger">
+              <textarea type="text" class="form-control m-b-5" placeholder="Problem" formControlName="problem"
+                required></textarea>
+              <div *ngIf="appointmentForm.get('problem')?.invalid && appointmentForm.get('problem')?.touched"
+                class="text-danger">
                 Problem is required
               </div>
             </div>
           </div>
-        
+
           <div class="form-group row m-b-15 justify-content-center">
             <button type="submit" class="btn btn-success mr-2 col-auto btn">Submit</button>
             <button type="reset" class="btn btn-primary col-auto">Reset</button>
           </div>
         </form>
-        
+
       </div>
     </div>
     <div class="container-fulid">
@@ -119,17 +131,14 @@
                           <td>{{ item.isPaid ? 'Yes' : 'No' }}</td>
                           <td>
                             <div class="d-flex flex-wrap button-group">
-                              <button
-                                class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2"
-                                *ngIf="!item.isPaid"
-                                (click)="makePayment(item)"
-                              >
+                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" *ngIf="!item.isPaid"
+                                (click)="makePayment(item)">
                                 <i class="fas fa-dollar"></i>Pay
                               </button>
-                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" (click)="edit()"> 
+                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" (click)="edit()">
                                 <i class="fas fa-edit"></i>
                               </button>
-                              <button class="btn btn-outline-danger btn-sm" (click)="deleteAppointment(item._id)"> 
+                              <button class="btn btn-outline-danger btn-sm" (click)="deleteAppointment(item._id)">
                                 <i class="fas fa-trash-alt"></i>
                               </button>
                             </div>
@@ -137,7 +146,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    
+
                   </div>
                   <!-- end table-responsive -->
                 </div>
@@ -150,7 +159,7 @@
     </div>
   </div>
 </div>
-<div class="container" *ngIf="userRole === 'doctor'">
+ <div class="container" *ngIf="userRole === 'doctor'">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -162,12 +171,9 @@
                 <th>SN</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Department Name</th>
-                <th>Doctor Name</th>
-                <th>Date</th>
-                <th>Time</th>
                 <th>Phone</th>
                 <th>Problem</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -175,12 +181,22 @@
                 <td>{{ i + 1 }}</td>
                 <td>{{ appointment.username }}</td>
                 <td>{{ appointment.email }}</td>
-                <td>{{ appointment.departmentName }}</td>
-                <td>{{ appointment.doctorname }}</td>
-                <td>{{ appointment.date }}</td>
-                <td>{{ appointment.time }}</td>
                 <td>{{ appointment.phone }}</td>
                 <td>{{ appointment.problem }}</td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary" (click)="openModal(appointment, 'prescribe')">
+                      <i class="fas fa-prescription-bottle-alt"></i> {{ appointment.prescription ? 'View Prescription' : 'Prescribe' }}
+                    </button>
+                    <button type="button" class="btn btn-secondary mx-2" (click)="openModal(appointment, 'view')">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <!-- <button type="button" (click)="openModal(appointment._id,'view')"
+                    >view</button> -->
+                  </div>
+                </td>
+                <!-- 6694055bf903027a0d788989
+                6694055bf903027a0d788989 -->
               </tr>
             </tbody>
           </table>
@@ -188,4 +204,58 @@
       </div>
     </div>
   </div>
+</div> 
+
+ <div class="modal" tabindex="-1" role="dialog" [class.show]="isModalOpen" [ngStyle]="{display: isModalOpen ? 'block' : 'none'}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ modalTitle }}</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="modalMode === 'view' || modalMode === 'prescribe'">
+          <form *ngIf="modalMode === 'prescribe'" [formGroup]="prescriptionForm" (ngSubmit)="submitPrescription()">
+            <div class="form-group">
+              <label for="prescription">Prescription:</label>
+              <textarea id="prescription" class="form-control" formControlName="prescription" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="dosage">Dosage:</label>
+              <input type="text" id="dosage" class="form-control" formControlName="dosage" required>
+            </div>
+            <div class="form-group">
+              <label for="instructions">Instructions:</label>
+              <textarea id="instructions" class="form-control" formControlName="instructions" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Prescription</button>
+          </form>
+        <div *ngIf="modalMode === 'view'">
+            <div class="form-group">
+              <label for="viewPrescription">Prescription:</label>
+              <p>{{ selectedAppointment.prescription?.prescription }}</p>
+            </div>
+            <div class="form-group">
+              <label for="viewDosage">Dosage:</label>
+              <p>{{ selectedAppointment.prescription?.dosage }}</p>
+            </div>
+            <div class="form-group">
+              <label for="viewInstructions">Instructions:</label>
+              <p>{{ selectedAppointment.prescription?.instructions }}</p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="modalMode === 'view'">
+          <p>Email: {{ selectedAppointment.email }}</p>
+          <p>Phone: {{ selectedAppointment.phone }}</p>
+          <p>Problem: {{ selectedAppointment.problem }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+

@@ -1,25 +1,58 @@
 <div class="container mt-5">
   <h2 class="mb-4">Payments</h2>
   <div class="table-responsive">
-    <div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': isModalVisible}" [ngStyle]="{'display': isModalVisible ? 'block' : 'none'}">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': isModalVisible}"
+      [ngStyle]="{'display': isModalVisible ? 'block' : 'none'}">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header bg-primary text-white">
             <h5 class="modal-title">Appointment Details</h5>
-            <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+            <button type="button" class="close text-white" aria-label="Close" (click)="closeModal()">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <p><strong>Appointment ID:</strong> {{ selectedAppointment?._id }}</p>
-            <p><strong>Email:</strong> {{ selectedAppointment?.email }}</p>
-            <p><strong>Department:</strong> {{ selectedAppointment?.departmentName }}</p>
-            <p><strong>Doctor Name:</strong> {{ selectedAppointment?.doctorname }}</p>
-            <p><strong>Date:</strong> {{ selectedAppointment?.date | date: 'yyyy-MM-dd' }}</p>
-            <p><strong>Time:</strong> {{ selectedAppointment?.time }}</p>
-            <p><strong>Phone:</strong> {{ selectedAppointment?.phone }}</p>
-            <p><strong>Problem:</strong> {{ selectedAppointment?.problem }}</p>
-            <p><strong>Status:</strong> {{ selectedAppointment?.isPaid ? 'Completed' : 'Pending' }}</p>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Appointment ID:</div>
+              <div class="col-sm-8">{{ selectedAppointment?._id }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Email:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.email }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Department:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.departmentName }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Doctor Name:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.doctorname }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Date:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.date | date: 'yyyy-MM-dd' }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Time:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.time }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Phone:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.phone }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Problem:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.problem }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Status:</div>
+              <div class="col-sm-8">
+                <span
+                  [ngClass]="{'badge badge-success': selectedAppointment?.isPaid, 'badge badge-warning': !selectedAppointment?.isPaid}">
+                  {{ selectedAppointment?.isPaid ? 'Completed' : 'Pending' }}
+                </span>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
@@ -27,6 +60,7 @@
         </div>
       </div>
     </div>
+
     <table class="table table-bordered table-hover">
       <thead class="thead-dark">
         <tr>
@@ -46,8 +80,12 @@
           <td>{{ payment.isPaid ? 'Completed' : 'Pending' }}</td>
           <td>{{ payment.paymentMethod }}Khalti</td>
           <td>
-            <button class="btn btn-primary btn-sm" (click)="viewAppointment(payment)">View</button>
-            <button class="btn btn-danger btn-sm" (click)="deletePayment(payment._id)">Delete</button>
+            <div class="btn-group" role="group">
+              <button class="btn btn-primary btn-sm" (click)="viewAppointment(payment)">
+                <i class="fas fa-eye"></i></button>
+              <button class="btn btn-danger btn-sm mx-2" (click)="deletePayment(payment._id)">
+                <i class="fas fa-trash"></i></button>
+            </div>
           </td>
         </tr>
       </tbody>
