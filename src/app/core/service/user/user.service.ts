@@ -11,7 +11,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
   apiUrl: string = environment.api_url
 
-  private registerApi = environment.api_url + "userSignup"
+  private registerApi = environment.api_url + "signupUser"
   private getPatientsApi = environment.api_url + "getPatients"
   private getUserRegister = environment.api_url + "getUserSignup"
   private postLogin = environment.api_url + "signin"
