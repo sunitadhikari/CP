@@ -1,0 +1,38 @@
+<div class="container">
+    <h2>Admit New Patient</h2>
+    <form [formGroup]="admissionForm" (ngSubmit)="submitAdmissionForm()">
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" formControlName="firstName" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" formControlName="lastName" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" formControlName="dob" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select formControlName="gender" class="form-control" required>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="contactNumber">Contact Number:</label>
+        <input type="tel" formControlName="contactNumber" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea formControlName="address" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="medicalHistory">Medical History:</label>
+        <textarea formControlName="medicalHistory" class="form-control"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Admit Patient</button>
+    </form>
+  </div>

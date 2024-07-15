@@ -216,6 +216,12 @@
                         </a>
                     </li>
                     <li class="py-2">
+                        <a (click)="showSection('admitPatient')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Admit</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
                         <a (click)="showSection('send-mail')">
                             <i class="fas fa-tachometer-alt"></i>
                             <span>Email</span>
@@ -310,6 +316,9 @@
         <div>
             <div *ngIf="currentSection=== 'overview'">
                 <app-dashboard-overview></app-dashboard-overview>
+            </div>
+            <div *ngIf="currentSection=== 'admitPatient'">
+                <app-admit-patient></app-admit-patient>
             </div>
             <div *ngIf="currentSection=== 'doctor'">
                 <app-doctor></app-doctor>
