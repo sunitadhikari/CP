@@ -33,7 +33,7 @@ export class SymptomsComponent implements OnInit {
   ngOnInit(): void {
     this.getDocList()
     this.symptomsForm = this.formBuilder.group({
-      doctor: [''],
+      // doctor: [''],
       symptoms: ['', [Validators.required, Validators.minLength(10)]],
       patient: ['']
 

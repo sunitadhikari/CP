@@ -1,0 +1,25 @@
+.modal-header {
+    background-color: #007bff;
+  }
+  
+  .modal-header .close {
+    color: #fff;
+  }
+  
+  .badge-success {
+    background-color: #28a745;
+  }
+  
+  .badge-warning {
+    background-color: #ffc107;
+  }
+  
+  .font-weight-bold {
+    font-weight: bold;
+  }
+  
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
+  
