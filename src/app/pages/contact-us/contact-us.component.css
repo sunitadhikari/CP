@@ -1,0 +1,64 @@
+.hero-section {
+    background: url('https://whyy.org/wp-content/uploads/2022/05/bigstock-Beautiful-stethoscope-with-ref-18223118.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 150px 0;
+}
+
+.welcome {
+    width: fit-content;
+    margin: auto;
+}
+
+.welcome h1 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 3rem;
+    font-weight: bolder;
+    padding: 5px;
+}
+
+/* contact.component.css */
+.contact-item {
+    color: #343a40;
+    /* Adjust color as needed */
+}
+
+.contact-item i {
+    color: #007bff;
+    /* Adjust icon color */
+}
+
+.contact-item h5 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.welcome p {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.list-group-item {
+    font-size: 1.1rem;
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+h1,
+h2 {
+    color: #343a40;
+}
+
+.contact-item h5 {
+    font-size: 2rem;
+    font-weight: bolder;
+}
+.contact-item p{
+    font-size: 1rem;
+    font-weight: 500;
+}

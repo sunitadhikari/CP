@@ -77,6 +77,7 @@ export class AppointmentComponent implements OnInit {
  
     this.loadInitialData();
     this.fetchPrescriptionsForAppointments();
+    this.getAppointmentTable()
   }
 
   loadInitialData(): void {
@@ -118,12 +119,18 @@ export class AppointmentComponent implements OnInit {
       alertify.error('Invalid form');
     }
   }
-
+getAppointmentTable(){
+  this.appointmentService.getAppointmentByEmail().subscribe((res)=>{
+    console.log(res);
+    this.appointmentTable = res.userAppointments
+  })
+}
   deleteAppointment(id: string) {
     this.appointmentService.deleteAppointment(id).subscribe(
       (response) => {
         alertify.success('Deleted Successfully');
         this.loadInitialData();
+        this.getAppointmentTable()
       },
       (error) => {
         console.error('Error deleting Appointment:', error);

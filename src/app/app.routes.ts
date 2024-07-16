@@ -9,6 +9,7 @@ import { DashboardNavigationComponent } from './shared/admin/dashboard-navigatio
 import { DashboardOverviewComponent } from './shared/admin/overview/dashboard-overview.component';
 import { authGuard } from './auth.guard';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 
 export const routes: Routes = [
     {
@@ -49,4 +50,8 @@ export const routes: Routes = [
         path: 'about-us',
         component: AboutUsComponent
     },
+    {
+        path:'contact-us',
+        component:ContactUsComponent
+    }
 ];
