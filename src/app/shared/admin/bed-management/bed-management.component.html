@@ -27,8 +27,40 @@
 
   <hr>
 
-
   <div class="row mt-4">
+    <div class="col-12">
+      <h2 class="mb-4 text-center">Department Beds Overview</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Department</th>
+              <th scope="col">Bed Numbers</th>
+              <th scope="col">Charges</th>
+              <th scope="col">Occupied Beds</th>
+              <!-- <th scope="col">Unoccupied Beds</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bed of beds | paginate: { itemsPerPage: 10, currentPage: p }">
+              <td>{{ bed.department }}</td>
+              <td>{{ bed.bedNumbers }}</td>
+              <td>{{ bed.charges | currency }}</td>
+              <td [ngClass]="{'text-danger': bed.occupied, 'text-success': !bed.occupied}">
+                {{ bed.occupied ? 'Occupied' : 'Unoccupied' }}
+              </td>
+              <!-- <td [ngClass]="{'text-danger': bed.occupied, 'text-success': !bed.occupied}">
+                {{ bed.totalBeds - bed.occupied }}
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+  
+  <!-- <div class="row mt-4">
     <div class="col-md-8">
       <h2>Department Beds Overview</h2>
       <table class="table">
@@ -62,9 +94,9 @@
           <span>Department: {{ bed.department }}</span>
           <span>Charges: {{ bed.charges }}</span>
           <span>Status: {{ bed.isOccupied ? 'Occupied' : 'Available' }}</span>
-          <!-- <button *ngIf="!bed.isOccupied" class="btn btn-sm btn-danger float-right" (click)="occupyBed(bed._id)">Occupy Bed</button> -->
+          <button *ngIf="!bed.isOccupied" class="btn btn-sm btn-danger float-right" (click)="occupyBed(bed._id)">Occupy Bed</button>
         </li>
       </ul>
     </div>
-  </div>
+  </div> -->
 </div>
