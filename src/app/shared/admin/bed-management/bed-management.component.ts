@@ -20,7 +20,10 @@ export class BedManagementComponent implements OnInit {
   bedForm: FormGroup;
   departments: any[] = [];
   departmentBeds: any[] = []; 
+  filteredBeds: any[] = [];
   p: number = 1;
+  filterForm: FormGroup;
+
 
   constructor(
     private bedService: BedService,
@@ -29,22 +32,50 @@ export class BedManagementComponent implements OnInit {
   ) {
     this.bedForm = this.fb.group({
       department: ['', Validators.required],
-      bedNumbers: ['', Validators.required],
-      charges: [0, Validators.required] ,
+      bedNumbers: ['', [Validators.required, Validators.pattern(/^\d+(,\d+)*$/)]],
+      charges: [0, [Validators.required, Validators.min(0)]],
       occupied: [false]
 
     })
+    this.filterForm = this.fb.group({
+      department: [''],
+      status: ['all'] // 'all', 'occupied', 'unoccupied'
+    });
   }
 
   ngOnInit(): void {
     this.fetchBeds();
     this.fetchDepartments();
   }
+  applyFilters(): void {
+    const departmentFilter = this.filterForm.value.department;
+    const statusFilter = this.filterForm.value.status;
 
+    this.filteredBeds = this.beds.filter(bed => {
+      // Filter by department
+      const matchDepartment = !departmentFilter || bed.department === departmentFilter;
+
+      // Filter by status
+      let matchStatus = true;
+      if (statusFilter === 'occupied') {
+        matchStatus = bed.occupied;
+      } else if (statusFilter === 'unoccupied') {
+        matchStatus = !bed.occupied;
+      }
+
+      return matchDepartment && matchStatus;
+    });
+  }
+
+  resetFilters(): void {
+    this.filterForm.reset({ status: 'all' });
+    this.applyFilters();
+  }
   fetchBeds(): void {
     this.bedService.getBeds().subscribe(
       (data) => {
         this.beds = data;
+        this.applyFilters(); 
       },
       (error) => {
         console.error('Error fetching beds:', error);
@@ -66,7 +97,6 @@ export class BedManagementComponent implements OnInit {
 
 addBed(): void {
   if (this.bedForm.valid) {
-   // Ensure 'bedNumber' matches the formControlName in your HTML
 
     this.bedService.addBed(this.bedForm.value).subscribe(
       (data) => {
