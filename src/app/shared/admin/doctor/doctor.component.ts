@@ -81,5 +81,27 @@ getDepartmentListData(){
     
   }
   edit(){}
-  delete(){}
+  // delete(id:string){
+  //   this.doctorService.deleteDoctor(id).subscribe((res)=>{
+  //      alertify.success('Suffessfully deleted')
+  //      this.getDoctorList()
+  //       console.log('Doctor Deeleted:', res);
+  //   },
+  // error=>{
+  //   console.log('Error deleting doctor:', error);
+  // }
+  // )
+  // }
+  delete(id: string): void {
+    this.doctorService.deleteDoctor(id).subscribe(
+      res => {
+        alertify.success('Successfully deleted');
+        this.getDoctorList();
+        console.log('Doctor Deleted:', res);
+      },
+      error => {
+        console.log('Error deleting doctor:', error);
+      }
+    );
+  }
 }
