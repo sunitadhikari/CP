@@ -13,11 +13,11 @@
             <label class="col-form-label col-md-3 fw-bold">Department Name <span
                 class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <select class="form-control" formControlName="departmentName" placeholder="Choose one option">
+              <!-- <select class="form-control" formControlName="departmentName" placeholder="Choose one option"> -->
+                <select id="departmentName" class="form-control" formControlName="departmentName" (change)="filterDoctors()">
+
                 <option value="">--Please choose an option--</option>
-                <option *ngFor="let department of departmentNameList" [value]="department.departmentName">
-                  {{ department.departmentName }}
-                </option>
+                <option *ngFor="let department of departmentNameList" [value]="department.departmentName">{{ department.departmentName }}</option>
               </select>
               <div
                 *ngIf="appointmentForm.get('departmentName')?.invalid && appointmentForm.get('departmentName')?.touched"
@@ -32,9 +32,8 @@
             <div class="col-md-9">
               <select class="form-control m-b-5" formControlName="doctorname" required>
                 <option value="">--Please choose an option--</option>
-                <option *ngFor="let doctor of doctorName" [value]="doctor.email">
-                  {{ doctor.firstName }} {{ doctor.lastName }}
-                </option>
+                <option *ngFor="let doctor of filteredDoctors" [value]="doctor.email">{{ doctor.firstName }} {{ doctor.lastName }}</option>
+
               </select>
               <div *ngIf="appointmentForm.get('doctorname')?.invalid && appointmentForm.get('doctorname')?.touched"
                 class="text-danger">
@@ -43,7 +42,7 @@
             </div>
           </div>
 
-          <div class="form-group row m-b-15">
+          <!-- <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">Date <span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
               <input type="date" class="form-control m-b-5" placeholder="Appointment Date" formControlName="date"
@@ -53,18 +52,8 @@
                 Date is required.
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Time <span class="text-danger fw-bold">*</span></label>
-            <div class="col-md-9">
-              <input type="time" class="form-control m-b-5" placeholder="Time" formControlName="time" required>
-              <div *ngIf="appointmentForm.get('time')?.invalid && appointmentForm.get('time')?.touched"
-                class="text-danger">
-                Time is required
-              </div>
-            </div>
-          </div>
 
           <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">Mobile Number<span

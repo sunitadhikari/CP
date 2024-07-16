@@ -69,9 +69,9 @@
                     </li>
                    
                     <li class="py-2">
-                        <a (click)="showSection('generateReport')">
+                        <a (click)="showSection('dailyReport')">
                             <i class="fas fa-file-medical"></i>
-                            <span>Generate Report</span>
+                            <span>Daily Report</span>
                         </a>
                     </li>
                     <li class="py-2">
@@ -315,6 +315,9 @@
         <div>
             <div *ngIf="currentSection=== 'overview'">
                 <app-dashboard-overview></app-dashboard-overview>
+            </div>
+            <div *ngIf="currentSection=== 'dailyReport'">
+                <app-daily-report></app-daily-report>
             </div>
             <div *ngIf="currentSection=== 'admitPatient'">
                 <app-admit-patient></app-admit-patient>
