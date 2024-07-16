@@ -23,6 +23,8 @@ export class AppointmentComponent implements OnInit {
   departmentNameList: any[] = [];
   getAppointmentByEmailList: any[] = [];
   doctorName: any[] = [];
+  filteredDoctors: any[] = [];
+
   tomorrow: string;
   userRole: string | null | undefined;
   isModalOpen = false;
@@ -47,9 +49,11 @@ export class AppointmentComponent implements OnInit {
     this.tomorrow = tomorrow.toISOString().split('T')[0];
     this.departmentService.getDepartment().subscribe((res) => {
       this.departmentNameList = res;
+      debugger
     });
     this.doctorService.getDoctor().subscribe((res) => {
       this.doctorName = res.doctors;
+      debugger
     });
 
     this.appointmentService.getAppointmentsByDoctorEmail().subscribe((res) => {
@@ -63,8 +67,6 @@ export class AppointmentComponent implements OnInit {
       email: [''],
       departmentName: ['', Validators.required],
       doctorname: ['', Validators.required],
-      date: ['', Validators.required],
-      time: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern(/^(9[4-8][0-9]|01[0-9])\d{7}$/)]],
       problem: ['', Validators.required],
       isPaid: [false]
@@ -89,7 +91,6 @@ export class AppointmentComponent implements OnInit {
     this.appointmentService.getAppointmentsByDoctorEmail().subscribe((res) => {
       this.getAppointmentByEmailList = res.appointmentwithName;
     });
-   
   }
   fetchPrescriptionsForAppointments(): void {
     this.getAppointmentByEmailList.forEach((appointment) => {
@@ -105,6 +106,15 @@ export class AppointmentComponent implements OnInit {
         );
       }
     });
+  }
+  filterDoctors(): void {
+    const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
+    if (selectedDepartment) {
+      this.filteredDoctors = this.doctorName.filter(doctor => doctor.department === selectedDepartment);
+      debugger
+    } else {
+      this.filteredDoctors = [];
+    }
   }
 
   submit() {
@@ -179,34 +189,6 @@ export class AppointmentComponent implements OnInit {
       });
     }
   }
-  // openModal(appointment: any, mode: 'view' | 'prescribe'): void {
-  //   this.selectedAppointment = appointment;
-  //   this.modalMode = mode;
-  //   this.modalTitle = mode === 'prescribe' ? 'Prescribe Medication' : 'Appointment Details';
-  //   this.isModalOpen = true;
-
-  //   if (mode === 'prescribe' && appointment.prescription) {
-  //     this.prescriptionForm.patchValue({
-  //       prescription: appointment.prescription.prescription,
-  //       dosage: appointment.prescription.dosage,
-  //       instructions: appointment.prescription.instructions
-  //     });
-  //   }
-
-  //   if (mode === 'view' && appointment.prescription?._id) {
-  //     this.prescriptionService.getPrescriptionById(appointment.prescription._id).subscribe(
-  //       (data) => {
-  //         this.prescription = data;
-  //       },
-  //       (error) => {
-  //         console.error('Error fetching prescription:', error);
-  //       }
-  //     );
-  //   }
-  // }
-  // TypeScript code in your Angular component
-
-
   closeModal(): void {
     this.isModalOpen = false;
     this.prescriptionForm.reset();
