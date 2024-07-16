@@ -111,3 +111,29 @@ body {
   overflow: hidden;
   overflow-x: auto;
 }
+/* Customize footer styles */
+.footer {
+  background-color: #343a40; /* Dark background color */
+  color: #fff; /* Text color */
+  font-family: Arial, sans-serif; /* Example of using a different font */
+}
+
+.footer h5 {
+  color: #fff; /* Heading text color */
+}
+
+.footer .footer-text {
+  color: #ccc; /* Footer text color */
+}
+
+.footer p {
+  margin-bottom: 0; /* Remove default margin */
+}
+
+.footer hr {
+  border-color: #555; /* Horizontal line color */
+}
+
+.footer .small {
+  color: #999; /* Copyright text color */
+}

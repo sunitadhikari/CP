@@ -52,13 +52,24 @@
                         </label>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Department</button>
+                    <!-- <button type="submit" class="btn btn-primary">{{ editing ? 'Update Department' : 'Add Department' }}</button>
+                    
+                    <button type="button" class="btn btn-secondary ml-2" (click)="cancelEdit()">Cancel</button> -->
+                    <button type="submit" class="btn btn-primary">{{ editingDepartmentId ? 'Update Department' : 'Add Department' }}</button>
+                    <button type="button" class="btn btn-secondary ml-2" (click)="cancelEdit()">Cancel</button>
+                  
                   </form>
                   
             </div>
         </div>
         <div class="container-fluid mt-5">
             <h2>Department List</h2>
+            <div class="input-group mb-3 mt-3">
+              <input type="text" class="form-control" placeholder="Search departments..." [(ngModel)]="searchTerm" (input)="filterDepartments()">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()">Clear</button>
+              </div>
+            </div>
             <table class="table table-striped mt-4">
                 <thead>
                     <tr>
@@ -72,20 +83,26 @@
                     </tr>
                 </thead>
                 <tbody >
-                  <tr *ngFor="let item of department; let i=index">
-                    <td>{{i +1}}</td>
+                  <tr *ngFor="let item of filteredDepartments | paginate: { itemsPerPage: 10, currentPage: p } let i = index">
+                    <td>{{ i + 1 }}</td>
                     <td>{{item.mainDepartment}}</td>
                     <td>{{item.departmentName}}</td>
                     <td>{{item.flaticon}}</td>
                     <td>{{item.description}}</td>
                     <td>{{item.status}}</td>
-                    <td><button type="button" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> </button>
-                        <button type="button" class="btn btn-sm btn-danger" (click)="deleteDepartment(item._id)"><i class="fas fa-trash-alt"></i>
+                    <td>
+                      <button type="button" class="btn btn-sm btn-primary" (click)="editDepartment(item)">
+                        <i class="fas fa-edit"></i> Edit
+                      </button>
+                      <!-- <button type="button" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> </button> -->
+                        <button type="button" class="btn btn-sm btn-danger mx-2" (click)="deleteDepartment(item._id)"><i class="fas fa-trash-alt"></i>
                             </button>
                     </td>
                   </tr>   
                 </tbody>
             </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
         </div>
 
     </div>

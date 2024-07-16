@@ -8,6 +8,7 @@ import { DoctorDetailComponent } from './pages/doctor-detail/doctor-detail.compo
 import { DashboardNavigationComponent } from './shared/admin/dashboard-navigation/dashboard-navigation.component';
 import { DashboardOverviewComponent } from './shared/admin/overview/dashboard-overview.component';
 import { authGuard } from './auth.guard';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 export const routes: Routes = [
     {
@@ -29,20 +30,23 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         component: DashboardNavigationComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
-        path:'doctor',
-        component:DoctorsComponent
+        path: 'doctor',
+        component: DoctorsComponent
     },
 
     {
-        path:'doctorDetail:id',
-        component:DoctorDetailComponent
+        path: 'doctorDetail:id',
+        component: DoctorDetailComponent
     },
     {
-        path:'overview',
-        component:DashboardOverviewComponent
+        path: 'overview',
+        component: DashboardOverviewComponent
     },
-
+    {
+        path: 'about-us',
+        component: AboutUsComponent
+    },
 ];

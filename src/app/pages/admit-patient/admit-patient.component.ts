@@ -6,14 +6,14 @@ import { DepartmentService } from '../../core/service/admin/department.service';
 import { BedService } from '../../core/service/bed/bed.service';
 import { map } from 'rxjs';
 import * as alertify from 'alertifyjs';
-import { NgxPaginationModule } from 'ngx-pagination'; 
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
 @Component({
   selector: 'app-admit-patient',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,NgxPaginationModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgxPaginationModule],
   templateUrl: './admit-patient.component.html',
   styleUrl: './admit-patient.component.css'
 })
@@ -42,7 +42,7 @@ export class AdmitPatientComponent implements OnInit {
       medicalHistory: [''],
       department: ['', Validators.required],
       bedNumber: ['', Validators.required],
-      admittedAt: ['']
+      admittedAt: [new Date()]
     });
   }
 
@@ -64,7 +64,7 @@ export class AdmitPatientComponent implements OnInit {
         const departmentsSet = new Set(data.filter(bed => bed.department).map(bed => bed.department));
         this.departments = Array.from(departmentsSet);
         console.log('Departments:', this.departments);
-  
+
         // Filter unoccupied beds
         this.beds = data.filter(bed => !bed.occupied);
         console.log('Unoccupied Beds:', this.beds);
@@ -74,7 +74,7 @@ export class AdmitPatientComponent implements OnInit {
       }
     );
   }
-  
+
   // getDepartments() {
   //   this.bedService.getBeds().subscribe(
   //     (data: any[]) => {
@@ -103,7 +103,7 @@ export class AdmitPatientComponent implements OnInit {
       );
     }
   }
-  
+
   // onDepartmentChange() {
   //   const selectedDepartment = this.admissionForm.get('department')?.value;
   //   if (selectedDepartment) {
@@ -118,7 +118,7 @@ export class AdmitPatientComponent implements OnInit {
   //     );
   //   }
   // }
-  
+
 
 
   // submitAdmissionForm(): void {
@@ -179,7 +179,7 @@ export class AdmitPatientComponent implements OnInit {
     if (this.admissionForm.valid) {
       const formData = this.admissionForm.value;
       const bedNumber = formData.bedNumber; // Ensure this matches the value in the form
-  
+
       this.bedService.updateBedOccupiedStatus(bedNumber, true).subscribe(
         () => {
           this.patientService.createPatientAdmission(formData).subscribe(
@@ -204,5 +204,5 @@ export class AdmitPatientComponent implements OnInit {
       alertify.error('Invalid form');
     }
   }
-  
+
 }
