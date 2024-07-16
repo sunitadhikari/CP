@@ -9,19 +9,19 @@ body {
     background: url('https://manipalpokhara.edu.np/wp-content/uploads/2023/03/manipal_home-new.png') no-repeat center center;
     background-size: cover;
     padding: 150px 0;
-   
-
   }
   .container{
     opacity:0.8;
     background-color: #8a8d91;
-    padding:6px;
+    /* padding:6px; */
     background-size: cover;
   }
-  
+  .services-section{
+    background: #c8c6c6;
+  }
   .hero-section h1 {
     font-size: 3.5rem;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     color:rgb(11, 10, 10);
     font-weight: bold;
    
@@ -29,26 +29,12 @@ body {
 
   .hero-section .lead {
     font-size: 1.25rem;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     color:black;
     font-weight: bolder;
    
   }
-  
-  /* Services Section */
-  .services-section .card {
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .services-section .card:hover {
-    transform: scale(1.05);
-  }
-  
-  .services-section .card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+
   
   /* About Us Section */
   .about-us-section h2 {

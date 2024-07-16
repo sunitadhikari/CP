@@ -21,5 +21,30 @@ export class PatientService {
   getPatient(): Observable<any> {
     return this.http.get(this.getPatientApi)
   }
+
+
+  getAllPatientsAdmission(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/patients`);
+  }
+
+  // Get a patient by ID
+  getPatientAdmissionById(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/patients/${id}`);
+  }
+
+  // Create a new patient
+  createPatientAdmission(patientData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/patients`, patientData);
+  }
+
+  // Update a patient
+  updatePatientAdmission(id: string, patientData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/patients/${id}`, patientData);
+  }
+
+  // Delete a patient
+  deletePatientAdmission(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/patients/${id}`);
+  }
 }
 

@@ -29,6 +29,7 @@ import { NoteComponent } from '../../../pages/note/note.component';
 import { MedicalHistoryComponent } from "../../../pages/patient/medical-history/medical-history.component";
 import { AppointmentComponent } from '../appointments/appointment.component';
 import { DoctorPrescriptionComponent } from "../../../pages/doctor-prescription/doctor-prescription.component";
+import { AdmitPatientComponent } from '../../../pages/admit-patient/admit-patient.component';
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -42,7 +43,7 @@ import { DoctorPrescriptionComponent } from "../../../pages/doctor-prescription/
         PatientComponent, AppointmentHistoryComponent,
         SymptomsComponent, ViewHistoryComponent, SendMailComponent,
         BedManagementComponent, RoomManagementComponent, NoteComponent, AppointmentComponent,
-        PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements,
+        PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements,AdmitPatientComponent,
         LabComponent, MedicalHistoryComponent, AppointmentComponent, DoctorPrescriptionComponent]
 })
 export class DashboardNavigationComponent implements OnInit{
