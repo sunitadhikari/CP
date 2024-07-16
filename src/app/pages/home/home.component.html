@@ -1,58 +1,43 @@
 <app-navbar></app-navbar>
-<style>
-    .image-overlay {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        background-color: rgba(108, 104, 104, 0.5);
-        /* Adjust opacity here */
-        color: rgb(251, 249, 249);
-        padding: 20px;
-    }
-
-    .image-overlay h2 {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    .image-overlay p {
-        font-size: 16px;
-        margin-bottom: 0;
-    }
-</style>
-    <div class="image-container w-100">
-        <img src="../../assets/homepage.jpg" alt="Background Image" class="img-fluid w-100 h-50">
-        <div class="image-overlay">
-            <div class="d-flex flex-column">
-<span>Aapatal | Caring For Life</span>
-<span>"Your Health, Our Priority: Building a Better Tomorrow."</span>
-            </div>
-            <h2>Title Here</h2>
-            <p>Description of the image</p>
-        </div>
+<!-- Hero Section -->
+<section class="hero-section text-center text-white">
+    <div class="container">
+      <h1 class="display-4">Welcome to Our Hospital</h1>
+      <p class="lead">Providing quality healthcare services to you and your family.</p>
+      <a href="#" class="btn btn-primary btn-lg">Learn More</a>
     </div>
-<app-footer></app-footer>
-
-
-
-
-<div class="container-fluid" style="height: 200px;">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="card" style="height: 200px;"></div>
+  </section>
+  
+  <!-- Services Section -->
+  <section class="services-section py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let service of services">
+          <div class="card h-100">
+            <img src="{{ service.image }}" class="card-img-top" alt="{{ service.title }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ service.title }}</h5>
+              <p class="card-text">{{ service.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- About Us Section -->
+  <section class="about-us-section py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <h2>About Us</h2>
+          <p>We are dedicated to providing the best healthcare services to our community. Our team of experienced medical professionals is here to ensure you receive the highest quality care.</p>
+          <p>Our hospital is equipped with state-of-the-art technology and modern facilities to offer a wide range of medical services, from routine check-ups to complex surgeries.</p>
         </div>
         <div class="col-lg-6">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card" style="height: 200px;"></div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card" style="height: 200px;"></div>
-
-                </div>
-            </div>
+          <img src="https://via.placeholder.com/500x300" class="img-fluid rounded" alt="About Us">
         </div>
+      </div>
     </div>
-</div>
+  </section>
+  

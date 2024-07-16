@@ -1,30 +1,45 @@
-.navbar-scroll .nav-link,
-.navbar-scroll .navbar-toggler .fa-bars {
-  color: #fff;
+/* General styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
 }
 
-/* Color of the links AFTER scroll */
-.navbar-scrolled .nav-link,
-.navbar-scrolled .navbar-toggler .fa-bars {
-  color: #4f4f4f;
+/* Navbar styles */
+.navbar {
+  background-color: #000; /* Black background */
 }
 
-/* Color of the navbar AFTER scroll */
-.navbar-scrolled {
-  background-color: #fff;
+.navbar-brand {
+  color: #fff !important; /* White text */
+  font-size: 2rem;
+  font-weight: bold;
 }
 
-/* An optional height of the navbar AFTER scroll */
-.navbar.navbar-scroll.navbar-scrolled {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-.navbar-nav .nav-item .nav-link {
-  display: flex;
-  align-items: center;
+.navbar-toggler {
+  border: none;
 }
 
-.navbar-nav .nav-item .nav-link i {
-  margin-right: 5px;
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
+.navbar-nav .nav-link {
+  color: #fff !important; /* White text */
+  margin-right: 15px;
+  padding: 0.05rem 0.5rem;
+  font-weight:bold;
+  font-size: 1rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #24f539 !important; /* Black text */
+  /* background-color: #ccc5c5;  */
+  border-radius: 5px;
+}
+
+.navbar-nav .nav-item.active .nav-link {
+  color: #000 !important; /* Black text */
+  background-color: #fff; /* White background */
+  border-radius: 5px;
+}
