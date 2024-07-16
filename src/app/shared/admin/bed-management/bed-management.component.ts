@@ -39,7 +39,7 @@ export class BedManagementComponent implements OnInit {
     })
     this.filterForm = this.fb.group({
       department: [''],
-      status: ['all'] // 'all', 'occupied', 'unoccupied'
+      status: ['all'] 
     });
   }
 
@@ -52,10 +52,8 @@ export class BedManagementComponent implements OnInit {
     const statusFilter = this.filterForm.value.status;
 
     this.filteredBeds = this.beds.filter(bed => {
-      // Filter by department
       const matchDepartment = !departmentFilter || bed.department === departmentFilter;
 
-      // Filter by status
       let matchStatus = true;
       if (statusFilter === 'occupied') {
         matchStatus = bed.occupied;
@@ -93,14 +91,12 @@ export class BedManagementComponent implements OnInit {
       }
     );
   }
- // Angular Component
 
 addBed(): void {
   if (this.bedForm.valid) {
 
     this.bedService.addBed(this.bedForm.value).subscribe(
       (data) => {
-        // this.beds.push(data); // Assuming 'data' is the new bed object returned from the API
         alertify.success('Beds added successfully');
         this.bedForm.reset();
       },
