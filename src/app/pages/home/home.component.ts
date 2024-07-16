@@ -13,56 +13,12 @@ import { FooterComponent } from '../../shared/footer/footer.component';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  // services = [
-  //   {
-  //     title: 'Service 1',
-  //     description: 'Description of service 1. This service offers comprehensive healthcare solutions.',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     title: 'Service 2',
-  //     description: 'Description of service 2. This service provides specialized care for all patients.',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     title: 'Service 2',
-  //     description: 'Description of service 2. This service provides specialized care for all patients.',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     title: 'Service 2',
-  //     description: 'Description of service 2. This service provides specialized care for all patients.',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     title: 'Service 2',
-  //     description: 'Description of service 2. This service provides specialized care for all patients.',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     title: 'Service 2',
-  //     description: 'Description of service 2. This service provides specialized care for all patients.',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     title: 'Service 2',
-  //     description: 'Description of service 2. This service provides specialized care for all patients.',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     title: 'Service 2',
-  //     description: 'Description of service 2. This service provides specialized care for all patients.',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     title: 'Service 2',
-  //     description: 'Description of service 2. This service provides specialized care for all patients.',
-  //     image: 'https://via.placeholder.com/150'
-  //   },
-  //   {
-  //     title: 'Service 3',
-  //     description: 'Description of service 3. We offer advanced medical treatments and procedures.',
-  //     image: 'https://via.placeholder.com/150'
-  //   }
-  // ];
+  features = [
+    { title: 'Patient Management', description: 'Manage patient information efficiently.', logo: 'assets/patient-management.png' },
+    { title: 'Doctor Scheduling', description: 'Automate doctor appointments.', logo: 'assets/doctor-scheduling.png' },
+    { title: 'Billing System', description: 'Manage patient invoices and payments.', logo: 'assets/billing-system.png' },
+    { title: 'Inventory Management', description: 'Track hospital inventory.', logo: 'assets/inventory-management.png' },
+    { title: 'Reports & Analytics', description: 'Generate comprehensive reports.', logo: 'assets/reports-analytics.png' },
+    { title: 'Emergency Services', description: 'Streamline emergency care processes.', logo: 'assets/emergency-services.png' }
+  ];
 }

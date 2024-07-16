@@ -28,7 +28,8 @@ export class BedManagementComponent implements OnInit {
     this.bedForm = this.fb.group({
       department: ['', Validators.required],
       bedNumbers: ['', Validators.required],
-      charges: [0, Validators.required] 
+      charges: [0, Validators.required] ,
+      occupied: [false]
 
     })
   }

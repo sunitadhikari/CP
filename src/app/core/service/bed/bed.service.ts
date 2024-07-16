@@ -37,7 +37,10 @@ getBeds(): Observable<any> {
 addBed(data: any): Observable<any> {
   return this.http.post(this.apiUrl1, data);
 }
-
+updateBedOccupiedStatus(bedId: string, occupied: boolean): Observable<any> {
+  const url = `${this.apiUrl}/${bedId}/update-occupied-status`;
+  return this.http.put(url, { occupied });
+}
 occupyBed(bedId: string): Observable<any> {
   return this.http.put(`${this.apiUrl}/${bedId}/occupy`, {});
 }}

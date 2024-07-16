@@ -9,25 +9,22 @@
 </section>
 
 <!-- Services Section -->
-<section class="services-section mx-auto">
-      <h1 class=" fw-bold text-center">Aaspatal</h1>
-      <p class="w-50 fw-bold text-center">Aaspatal is a web-based software that helps in facilitating the functioning of hospitals. It streamlines and integrates the operations, processes and information flow in hospitals and is designed to manage all the aspects of hospitals in a single platform. It combines all the information related to patients, doctors, staff, hospital administration into one software.</p>
+<section class="services-section mx-auto text-center ">
+      <h1 class="  ">Aaspatal</h1>
+      <p class=" fw-bold mx-auto">Aaspatal is a web-based software that helps in facilitating the functioning of hospitals. It streamlines and integrates the operations, processes and information flow in hospitals and is designed to manage all the aspects of hospitals in a single platform. It combines all the information related to patients, doctors, staff, hospital administration into one software.</p>
 </section>
 
-<!-- About Us Section -->
-<section class="about-us-section py-5 bg-light">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 mb-4">
-        <h2>About Us</h2>
-        <p>We are dedicated to providing the best healthcare services to our community. Our team of experienced medical
-          professionals is here to ensure you receive the highest quality care.</p>
-        <p>Our hospital is equipped with state-of-the-art technology and modern facilities to offer a wide range of
-          medical services, from routine check-ups to complex surgeries.</p>
-      </div>
-      <div class="col-lg-6">
-        <img src="https://via.placeholder.com/500x300" class="img-fluid rounded" alt="About Us">
+<div class="containers  w-100">
+  <div class="row w-100">
+    <h3 class="fw-bold text-center display-4" p-3>Key Features</h3>
+    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let feature of features">
+      <div class="card h-100 text-center">
+        <img src="{{ feature.logo }}" class="card-img-top p-4" alt="{{ feature.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ feature.title }}</h5>
+          <p class="card-text">{{ feature.description }}</p>
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>

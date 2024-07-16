@@ -13,41 +13,77 @@ body {
   .container{
     opacity:0.8;
     background-color: #8a8d91;
-    /* padding:6px; */
     background-size: cover;
   }
-  .services-section{
+.containers{
+  background-color: rgb(152, 189, 198);
+}
+
+  .services-section {
     background: #c8c6c6;
+    color: #1c1a1a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .services-section h1 {
+    margin-bottom: 20px;
+    font-weight: bolder;
+  }
+  
+  .services-section p {
+    color: #555; 
+    width: 40%;
+    margin: 0 auto; 
+    font-weight: bold;
+    font-size: medium;
   }
   .hero-section h1 {
     font-size: 3.5rem;
-    /* margin-bottom: 20px; */
     color:rgb(11, 10, 10);
     font-weight: bold;
-   
   }
 
   .hero-section .lead {
     font-size: 1.25rem;
-    /* margin-bottom: 30px; */
     color:black;
     font-weight: bolder;
    
   }
+/* General card styling */
+.card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-img-top {
+  width: 50%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  color: #007bff;
+}
+
+.card-text {
+  color: #555;
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: #333;
+}
+span{
+padding-top:3%;
+font-size: larger;
+font-weight:bolder;
+}
 
   
-  /* About Us Section */
-  .about-us-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .about-us-section p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
-  
-  .about-us-section img {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
   
