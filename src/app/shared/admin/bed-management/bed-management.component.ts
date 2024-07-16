@@ -5,12 +5,13 @@ import { BedService } from '../../../core/service/bed/bed.service';
 import * as alertify from 'alertifyjs';
 import { RoomManagementService } from '../../../core/service/room-management/room-management.service';
 import { DepartmentService } from '../../../core/service/admin/department.service';
+import { NgxPaginationModule } from 'ngx-pagination'; 
 
 
 @Component({
   selector: 'app-bed-management',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,FormsModule],
+  imports: [ReactiveFormsModule, CommonModule,FormsModule,NgxPaginationModule],
   templateUrl: './bed-management.component.html',
   styleUrl: './bed-management.component.css'
 })
@@ -18,7 +19,8 @@ export class BedManagementComponent implements OnInit {
   beds: any[] = [];
   bedForm: FormGroup;
   departments: any[] = [];
-  departmentBeds: any[] = []; // Holds department beds info (occupied and unoccupied)
+  departmentBeds: any[] = []; 
+  p: number = 1;
 
   constructor(
     private bedService: BedService,

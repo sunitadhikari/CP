@@ -1,0 +1,53 @@
+.table {
+    margin-bottom: 1rem;
+    background-color: transparent;
+  }
+  
+  .table th, .table td {
+    padding: 1rem;
+    vertical-align: middle;
+  }
+  
+  .table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  .table-bordered {
+    border: 1px solid #dee2e6;
+  }
+  
+  .table-bordered th, .table-bordered td {
+    border: 1px solid #dee2e6;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .thead-dark th {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #454d55;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-danger {
+    color: #dc3545 !important;
+  }
+  
+  .text-success {
+    color: #28a745 !important;
+  }
+  
+  .badge-danger {
+    background-color: #dc3545;
+  }
+  
+  .badge-success {
+    background-color: #28a745;
+  }
+  

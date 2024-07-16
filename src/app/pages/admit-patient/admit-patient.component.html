@@ -63,4 +63,38 @@
     </div>
     <button type="submit" class="btn btn-primary">Admit Patient</button>
   </form>
+  <div class="table-responsive mt-4">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Date of Birth</th>
+          <th>Gender</th>
+          <th>Contact Number</th>
+          <th>Address</th>
+          <th>Medical History</th>
+          <th>Department </th>
+          <th>Bed Number</th>
+          <th>Admitted At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of patients | paginate: { itemsPerPage: 5, currentPage: p }">
+          <td>{{ patient.firstName }}</td>
+          <td>{{ patient.lastName }}</td>
+          <td>{{ patient.dob | date:'yyyy-MM-dd' }}</td>
+          <td>{{ patient.gender }}</td>
+          <td>{{ patient.contactNumber }}</td>
+          <td>{{ patient.address }}</td>
+          <td>{{ patient.medicalHistory }}</td>
+          <td>{{ patient.department }}</td>
+          <td>{{ patient.bedNumber }}</td>
+          <td>{{ patient.admittedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

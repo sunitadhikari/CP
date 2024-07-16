@@ -6,12 +6,14 @@ import { DepartmentService } from '../../core/service/admin/department.service';
 import { BedService } from '../../core/service/bed/bed.service';
 import { map } from 'rxjs';
 import * as alertify from 'alertifyjs';
+import { NgxPaginationModule } from 'ngx-pagination'; 
+
 
 
 @Component({
   selector: 'app-admit-patient',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,NgxPaginationModule],
   templateUrl: './admit-patient.component.html',
   styleUrl: './admit-patient.component.css'
 })
@@ -19,6 +21,9 @@ export class AdmitPatientComponent implements OnInit {
   admissionForm: FormGroup;
   departments: string[] = [];
   beds: any[] = [];
+  patients: any[] = [];
+  p: number = 1;
+
   // constructor(private fb: FormBuilder, private patientService: PatientService,
   //   private departmentService: DepartmentService, private bedService: BedService
 
@@ -36,12 +41,21 @@ export class AdmitPatientComponent implements OnInit {
       address: [''],
       medicalHistory: [''],
       department: ['', Validators.required],
-      bedNumber: ['', Validators.required]
+      bedNumber: ['', Validators.required],
+      admittedAt: ['']
     });
   }
 
   ngOnInit(): void {
     this.getDepartments();
+    this.patientService.getAllPatientsAdmission().subscribe(
+      data => {
+        this.patients = data;
+      },
+      error => {
+        console.error('Error fetching patients data', error);
+      }
+    );
   }
   getDepartments() {
     this.bedService.getBeds().subscribe(
