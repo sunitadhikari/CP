@@ -1,30 +1,131 @@
 <app-navbar></app-navbar>
-<!-- Hero Section -->
 <section class="hero-section text-center text-white">
-  <div class="container">
-    <h1 class="display-4">Welcome to Our Hospital</h1>
+  <div class="container welcome">
+    <h1 class="display-6">Welcome to Our Hospital</h1>
     <p class="lead">Providing quality healthcare services to you and your family.</p>
     <a href="#" class="btn btn-primary btn-lg">Learn More</a>
   </div>
 </section>
 
-<!-- Services Section -->
 <section class="services-section mx-auto text-center ">
-      <h1 class="  ">Aaspatal</h1>
-      <p class=" fw-bold mx-auto">Aaspatal is a web-based software that helps in facilitating the functioning of hospitals. It streamlines and integrates the operations, processes and information flow in hospitals and is designed to manage all the aspects of hospitals in a single platform. It combines all the information related to patients, doctors, staff, hospital administration into one software.</p>
+  <h1 class=" display-4 ">Aaspatal</h1>
+  <p class=" fw-bold mx-auto">Aaspatal is a web-based software that helps in facilitating the functioning of hospitals.
+    It streamlines and integrates the operations, processes and information flow in hospitals and is designed to manage
+    all the aspects of hospitals in a single platform. It combines all the information related to patients, doctors,
+    staff, hospital administration into one software.</p>
 </section>
 
-<div class="containers  w-100">
-  <div class="row w-100">
-    <h3 class="fw-bold text-center display-4" p-3>Key Features</h3>
+<div class="container-fluid feature mx-auto">
+  <h2 class="text-center py-5 display-4 ">Our Features</h2>
+  <div class="row mx-auto">
     <div class="col-lg-4 col-md-6 mb-4" *ngFor="let feature of features">
-      <div class="card h-100 text-center">
-        <img src="{{ feature.logo }}" class="card-img-top p-4" alt="{{ feature.title }}">
+      <div class="card h-100 text-center p-3 mx-auto">
         <div class="card-body">
-          <h5 class="card-title">{{ feature.title }}</h5>
+          <i [class]="feature.icon + ' fa-3x mb-3'"></i>
+          <h5 class="card-title display-6">{{ feature.title }}</h5>
           <p class="card-text">{{ feature.description }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- footer -->
+<div id="footer" class="footer w-100 ">
+  <!-- BEGIN container -->
+  <div class="container ">
+    <!-- BEGIN row -->
+    <div class="row">
+      <!-- BEGIN col-3 -->
+      <div class="col-lg-3">
+        <h4 class="footer-header text-light fw-bold">ABOUT US</h4>
+        <p class="text-light">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec tristique dolor, ac efficitur velit. Nulla
+          lobortis tempus convallis. Nulla aliquam lectus eu porta pulvinar. Mauris semper justo erat.
+        </p>
+        <p class="mb-lg-4 mb-0 text-light">
+          Vestibulum porttitor lorem et vestibulum pharetra. Phasellus sit amet mi congue, hendrerit mi ut, dignissim
+          eros.
+        </p>
+      </div>
+      <!-- END col-3 -->
+      <!-- BEGIN col-3 -->
+      <!-- <div class="col-lg-3">
+        <h4 class="footer-header">RELATED LINKS</h4>
+        <ul class="fa-ul mb-lg-4 mb-0">
+          <li><i class="fa fa-li fa-angle-right"></i> <a href="dashboard">Shopping Help</a></li>
+          <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Terms of Use</a></li>
+          <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Contact Us</a></li>
+          <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Careers</a></li>
+          <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Payment Method</a></li>
+          <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Sales & Refund</a></li>
+          <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Sitemap</a></li>
+          <li><i class="fa fa-li fa-angle-right"></i> <a href="#">Privacy & Policy</a></li>
+        </ul>
+      </div> -->
+      <!-- END col-3 -->
+      <!-- BEGIN col-3 -->
+      <div class="col-lg-3">
+        <h4 class="footer-header">Key Features</h4>
+        <ul class="list-unstyled list-product mb-lg-4 mb-0">
+          <li>
+           
+          
+              <h4 class="info-title">Appointment Management</h4>
+         
+          </li>
+          <li>
+          
+          
+              <h4 class="info-title">Doctors Detail</h4>
+        
+          </li>
+          <li>
+            
+          
+        
+          </li>
+          <li>
+           
+          
+              <h4 class="info-title">Outpatient Management</h4>
+        
+          </li>
+        </ul>
+      </div>
+      <!-- END col-3 -->
+      <!-- BEGIN col-3 -->
+      <div class="col-lg-3">
+        <h4 class="footer-header">OUR CONTACT</h4>
+        <address class="mb-lg-4 mb-0">
+          <strong>Twitter, Inc.</strong><br />
+          1355 Market Street, Suite 900<br />
+          San Francisco, CA 94103<br /><br />
+          <abbr title="Phone">Phone:</abbr> (123) 456-7890<br />
+          <abbr title="Fax">Fax:</abbr> (123) 456-7891<br />
+          <abbr title="Email">Email:</abbr> <a href="mailto:sales@myshop.com">aaspatalsewa&#64;myshop.com</a><br />
+          <abbr title="Skype">Skype:</abbr> <a href="skype:myshop">myshop</a>
+        </address>
+      </div>
+      <!-- END col-3 -->
+    </div>
+    <!-- END row -->
+  </div>
+</div>
+<!-- END #footer -->
+
+<!-- BEGIN #footer-copyright -->
+<div id="footer-copyright" class="footer-copyright w-100 ">
+  <!-- BEGIN container -->
+  <div class="container">
+    <div class="payment-method">
+      <img src="../assets/img/payment/payment-method.png" alt="" />
+    </div>
+    <div class="copyright">
+      Copyright &copy; 2019 SeanTheme. All rights reserved.
+    </div>
+  </div>
+  <!-- END container -->
+</div>
+
+<!-- END #footer-copyright -->

@@ -10,7 +10,9 @@ body {
     background-size: cover;
     padding: 150px 0;
   }
-  .container{
+  .welcome{
+    padding-top: 20px;
+    padding-bottom: 20px;
     opacity:0.8;
     background-color: #8a8d91;
     background-size: cover;
@@ -23,6 +25,7 @@ body {
     background: #c8c6c6;
     color: #1c1a1a;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding:100px 0 100px 0;
   }
   
   .services-section h1 {
@@ -49,41 +52,62 @@ body {
     font-weight: bolder;
    
   }
-/* General card styling */
-.card {
-  border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
 
-.card:hover {
-  transform: scale(1.05);
-}
-
-.card-img-top {
-  width: 50%;
-  height: auto;
-  margin: 0 auto;
-}
-
-.card-title {
-  font-size: 1.25rem;
-  color: #007bff;
-}
-
-.card-text {
-  color: #555;
-}
-
-h2 {
-  font-size: 2.5rem;
-  color: #333;
-}
-span{
-padding-top:3%;
-font-size: larger;
-font-weight:bolder;
-}
-
+   .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f1f0;
+    
+  }
   
+  .card:hover {
+    transform: scale(1.05);
+    background-color: rgb(197, 201, 204);
+  }
   
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #04080b;
+    padding-bottom: 10px;
+  }
+  
+  .card-text {
+    color: #555;
+    font-size: 15px;
+  }
+  .feature{
+   background-color: #a7bcba;
+   padding-bottom: 60px;
+  }
+  .feature h2 {
+    font-size: 3rem;
+    color: #131313;
+    font-weight: bold;
+  }
+  
+  .fa-3x {
+    font-size: 3em;
+    color: #626162;
+  }
+.footer{
+  background-color: #2e2e36;
+  width: 100%;
+  overflow: hidden;
+  overflow-x: auto;
+}
