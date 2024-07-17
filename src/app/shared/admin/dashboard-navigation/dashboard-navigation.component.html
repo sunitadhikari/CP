@@ -153,6 +153,12 @@
                         </a>
                     </li>
                     <li class="py-2">
+                        <a (click)="showSection('normal-opd')">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Normal OPD Report</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
                         <a (click)="showSection('send-mail')">
                             <i class="fas fa-cogs"></i>
                             <span>Mail</span>
@@ -315,6 +321,9 @@
         <div>
             <div *ngIf="currentSection=== 'overview'">
                 <app-dashboard-overview></app-dashboard-overview>
+            </div>
+            <div *ngIf="currentSection=== 'normal-opd'">
+                <app-medical-pescribe></app-medical-pescribe>
             </div>
             <div *ngIf="currentSection=== 'dailyReport'">
                 <app-daily-report></app-daily-report>
