@@ -42,7 +42,7 @@ export class DashboardReportComponent implements OnInit{
     this.userService.getPatients().subscribe((res)=>{
       console.log(res);
       this.patientData=res
-      debugger
+      
     })
 
     this.hospitalDischargeReportForm = this.fb.group({
@@ -105,7 +105,7 @@ export class DashboardReportComponent implements OnInit{
         patientGender: selectedPatient.sex || '',
         // Add other fields as necessary
       });
-      debugger
+      
     }
   }
   fetchHospitalReports(): void {
@@ -113,7 +113,7 @@ export class DashboardReportComponent implements OnInit{
     this.reportservice.getHospitalDischargeReports().subscribe(
       (data) => {
         this.hospitalReports = data; 
-debugger
+
       },
       (error) => {
         console.error('Error fetching hospital reports:', error);

@@ -26,3 +26,4 @@ export class SymptomsService {
     return this.http.get(this.getSymptomsPatientApiUrl)
   }
 }
+

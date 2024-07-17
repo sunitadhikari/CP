@@ -69,7 +69,7 @@ getDepartmentListData(){
         debugger
        console.log(data);
        alertify.success('Doctor Added Successfully')
-       debugger
+       
        this.doctorForm.reset()
       })
 
