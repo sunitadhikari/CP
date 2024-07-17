@@ -66,7 +66,7 @@ getDepartmentListData(){
    
     if(this.doctorForm.valid){
       this.userService.postRegister(this.doctorForm.value).subscribe((data)=>{
-        debugger
+        
        console.log(data);
        alertify.success('Doctor Added Successfully')
        

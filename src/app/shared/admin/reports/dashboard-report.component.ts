@@ -59,7 +59,7 @@ export class DashboardReportComponent implements OnInit{
 
     this.hospitalDischargeReportForm.get('patientName')?.valueChanges.subscribe((patientId) => {
       this.onPatientSelect(patientId);
-      debugger
+      
     });
     this.fetchHospitalReports();
 
