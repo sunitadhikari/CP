@@ -32,17 +32,12 @@ export class ReceptionComponent implements OnInit{
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      department: [''],
       picture: [''],
       dob: [''],
       sex: ['', Validators.required],
       bloodGroup: [''],
-      specialist: ['', Validators.required],
       address: ['', Validators.required],
-      phoneNo: [''],
       mobileNo: ['', Validators.required],
-      careerTitle: ['', Validators.required],
-      biography: [''],
       status: ['active', Validators.required],
       role:['reception']
     });
