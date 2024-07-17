@@ -28,7 +28,7 @@ export class DepartmentComponentimplements {
   ngOnInit(): void {
     this.departmentForm = this.formBuilder.group({
       departmentName: ['', Validators.required],
-      // mainDepartment: ['', Validators.required],
+      mainDepartment: ['', Validators.required],
       flaticon: [''],
       description: [''],
       status: ['active', Validators.required]
