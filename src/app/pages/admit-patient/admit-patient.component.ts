@@ -7,6 +7,7 @@ import { BedService } from '../../core/service/bed/bed.service';
 import { map } from 'rxjs';
 import * as alertify from 'alertifyjs';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { WardService } from '../../core/service/ward-service/ward.service';
 
 
 
@@ -19,18 +20,17 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class AdmitPatientComponent implements OnInit {
   admissionForm: FormGroup;
-  departments: string[] = [];
   beds: any[] = [];
   patients: any[] = [];
-  p: number = 1;
+  wards: any[] = [];
+  wardsData: any[] = [];
 
-  // constructor(private fb: FormBuilder, private patientService: PatientService,
-  //   private departmentService: DepartmentService, private bedService: BedService
-
-  constructor(private fb: FormBuilder, private bedService: BedService,
+  constructor(
+    private fb: FormBuilder,
+    private bedService: BedService,
     private patientService: PatientService,
     private departmentService: DepartmentService,
-
+    private wardService: WardService
   ) {
     this.admissionForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -40,13 +40,22 @@ export class AdmitPatientComponent implements OnInit {
       contactNumber: ['', Validators.required],
       address: [''],
       medicalHistory: [''],
-      department: ['', Validators.required],
+      ward: ['', Validators.required],
       bedNumber: ['', Validators.required],
       admittedAt: [new Date()]
     });
+    this.wardService.getAllWards().subscribe(
+      (res: any[]) => {
+        this.wardsData = res; // Assign the response to the local wards array
+      },
+      error => {
+        console.error('Error fetching wards:', error);
+      }
+    );
   }
 
   ngOnInit(): void {
+    this.fetchData();
     this.getDepartments();
     this.patientService.getAllPatientsAdmission().subscribe(
       data => {
@@ -57,17 +66,30 @@ export class AdmitPatientComponent implements OnInit {
       }
     );
   }
+
+  fetchData(): void {
+    this.bedService.getBeds().subscribe(
+      (data: any[]) => {
+        // Filter unoccupied beds
+        this.beds = data.filter(bed => !bed.occupied);
+      },
+      error => {
+        console.error('Error fetching beds:', error);
+      }
+    );
+
+    
+  }
+
   getDepartments() {
     this.bedService.getBeds().subscribe(
       (data: any[]) => {
         // Filter unique departments
-        const departmentsSet = new Set(data.filter(bed => bed.department).map(bed => bed.department));
-        this.departments = Array.from(departmentsSet);
-        console.log('Departments:', this.departments);
+        const departmentsSet = new Set(data.filter(bed => bed.ward).map(bed => bed.ward));
+        this.wards = Array.from(departmentsSet);
 
         // Filter unoccupied beds
         this.beds = data.filter(bed => !bed.occupied);
-        console.log('Unoccupied Beds:', this.beds);
       },
       error => {
         console.error('Error fetching beds:', error);
@@ -75,27 +97,13 @@ export class AdmitPatientComponent implements OnInit {
     );
   }
 
-  // getDepartments() {
-  //   this.bedService.getBeds().subscribe(
-  //     (data: any[]) => {
-  //       // Filter unique departments
-  //       const departmentsSet = new Set(data.filter(bed => bed.department).map(bed => bed.department));
-  //       this.departments = Array.from(departmentsSet);
-  //       console.log('Departments:', this.departments);
-  //     },
-  //     error => {
-  //       console.error('Error fetching beds:', error);
-  //     }
-  //   );
-  // }
-  onDepartmentChange() {
-    const selectedDepartment = this.admissionForm.get('department')?.value;
-    if (selectedDepartment) {
+  onDepartmentChange(): void {
+    const selectedWard = this.admissionForm.get('ward')?.value;
+    if (selectedWard) {
       this.bedService.getBeds().subscribe(
         (data: any[]) => {
-          // Filter beds by selected department and unoccupied status
-          this.beds = data.filter(bed => bed.department === selectedDepartment && !bed.occupied);
-          console.log('Filtered Beds:', this.beds);
+          // Filter beds by selected ward and unoccupied status
+          this.beds = data.filter(bed => bed.ward === selectedWard && !bed.occupied);
         },
         error => {
           console.error('Error fetching beds:', error);
@@ -104,89 +112,18 @@ export class AdmitPatientComponent implements OnInit {
     }
   }
 
-  // onDepartmentChange() {
-  //   const selectedDepartment = this.admissionForm.get('department')?.value;
-  //   if (selectedDepartment) {
-  //     this.bedService.getBeds().subscribe(
-  //       (data: any[]) => {
-  //         this.beds = data.filter(bed => bed.department === selectedDepartment);
-  //         console.log('Beds:', this.beds);
-  //       },
-  //       error => {
-  //         console.error('Error fetching beds:', error);
-  //       }
-  //     );
-  //   }
-  // }
-
-
-
-  // submitAdmissionForm(): void {
-  //   if (this.admissionForm.valid) {   
-  //     const formData = this.admissionForm.value;
-  //     const bedNumber = formData.bedNumber;
-  //     this.patientService.createPatientAdmission(this.admissionForm.value).subscribe(
-  //       (data) => {
-  //         console.log('Patient created successfully:', data);
-  //         // Reset form after successful submission
-  //         this.admissionForm.reset();
-  //       },
-  //       (error) => {
-  //         console.error('Error creating patient:', error);
-  //       }
-  //     );
-  //   } else {
-  //     console.error('Invalid admission form');
-  //   }
-  // }
-  // submitAdmissionForm(): void {
-  //   if (this.admissionForm.valid) {
-  //     const formData = this.admissionForm.value;
-  //     const bedNumber = formData.bedNumber;
-
-  //     // Step 1: Update bed's occupied status to true
-  //     this.bedService.updateBedOccupiedStatus(bedNumber, true).subscribe(
-  //       () => {
-  //         // Step 2: If bed update is successful, admit the patient
-  //         this.patientService.createPatientAdmission(formData).subscribe(
-  //           (data) => {
-  //             console.log('Patient created successfully:', data);
-  //             alertify.success('Patient admitted successfully');
-  //             // Reset form after successful submission
-  //             this.admissionForm.reset();
-  //           },
-  //           (error) => {
-  //             console.error('Error creating patient:', error);
-  //             alertify.error('Failed to admit patient');
-  //             // Handle error if patient creation fails
-  //             // Optionally, roll back bed occupied status update here if needed
-  //           }
-  //         );
-  //       },
-  //       (error) => {
-  //         console.error('Error updating bed status:', error);
-  //         alertify.error('Failed to update bed status');
-  //         // Handle error if updating bed status fails
-  //       }
-  //     );
-  //   } else {
-  //     console.error('Invalid admission form');
-  //     alertify.error('Invalid form');
-  //     // Handle invalid form submission
-  //   }
-  // }
   submitAdmissionForm(): void {
     if (this.admissionForm.valid) {
       const formData = this.admissionForm.value;
-      const bedNumber = formData.bedNumber; // Ensure this matches the value in the form
+      const bedNumber = formData.bedNumber;
 
       this.bedService.updateBedOccupiedStatus(bedNumber, true).subscribe(
         () => {
           this.patientService.createPatientAdmission(formData).subscribe(
-            (data) => {
-              console.log('Patient created successfully:', data);
+            () => {
               alertify.success('Patient admitted successfully');
               this.admissionForm.reset();
+              this.fetchData(); // Refresh data after admission
             },
             (error) => {
               console.error('Error creating patient:', error);
@@ -204,5 +141,4 @@ export class AdmitPatientComponent implements OnInit {
       alertify.error('Invalid form');
     }
   }
-
 }

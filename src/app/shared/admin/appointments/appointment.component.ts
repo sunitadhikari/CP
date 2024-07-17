@@ -7,6 +7,8 @@ import { DepartmentService } from '../../../core/service/admin/department.servic
 import { DoctorService } from '../../../core/service/admin/doctor.service';
 import KhaltiCheckout from "khalti-checkout-web";
 import { HttpClient } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 import { PrescriptionService } from '../../../core/service/prescription-Service/prescription.service';
 
 @Component({
@@ -14,7 +16,7 @@ import { PrescriptionService } from '../../../core/service/prescription-Service/
   standalone: true,
   templateUrl: './appointment.component.html',
   styleUrls: ['./appointment.component.css'],
-  imports: [CommonModule, NgIf, ReactiveFormsModule, FormsModule]
+  imports: [CommonModule, NgIf, ReactiveFormsModule, FormsModule,NgxPaginationModule]
 })
 export class AppointmentComponent implements OnInit {
   appointmentForm!: FormGroup;
@@ -35,6 +37,8 @@ export class AppointmentComponent implements OnInit {
   modalMode: 'view' | 'prescribe' = 'view';
   prescription: any; // Variable to hold prescription data
   opdReports: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
 
 
   constructor(
@@ -79,7 +83,14 @@ export class AppointmentComponent implements OnInit {
       instructions: ['', Validators.required]
     });
     this.prescriptionService.getOpdReports().subscribe((data) => {
-      this.opdReports = data;})
+      this.opdReports = data;
+      
+      // const matchingReport = this.opdReports.find(report => report.email === this.selectedAppointment.email);
+      // if (matchingReport) {
+      //   this.selectedAppointment.departmentName = matchingReport.departmentName;
+      //   this.selectedAppointment.doctorName = matchingReport.doctorname;
+      // }
+    })
     this.loadInitialData();
     this.fetchPrescriptionsForAppointments();
     this.getAppointmentTable()
@@ -132,12 +143,12 @@ export class AppointmentComponent implements OnInit {
       alertify.error('Invalid form');
     }
   }
-getAppointmentTable(){
-  this.appointmentService.getAppointmentByEmail().subscribe((res)=>{
-    console.log(res);
-    this.appointmentTable = res.userAppointments
-  })
-}
+  getAppointmentTable() {
+    this.appointmentService.getAppointmentByEmail().subscribe((res) => {
+      console.log(res);
+      this.appointmentTable = res.userAppointments
+    })
+  }
   deleteAppointment(id: string) {
     this.appointmentService.deleteAppointment(id).subscribe(
       (response) => {
@@ -165,7 +176,7 @@ getAppointmentTable(){
         onError: (error: any) => {
           alertify.error('Payment failed');
         },
-        onClose: () => {}
+        onClose: () => { }
       },
       paymentPreference: ['KHALTI', 'EBANKING', 'MOBILE_BANKING', 'CONNECT_IPS', 'SCT']
     };
@@ -190,7 +201,7 @@ getAppointmentTable(){
     this.modalMode = mode;
     this.modalTitle = mode === 'prescribe' ? 'Prescribe Medication' : 'Appointment Details';
     this.isModalOpen = true;
-    
+
     if (mode === 'prescribe' && appointment.prescription) {
       this.prescriptionForm.patchValue({
         prescription: appointment.prescription.prescription,
@@ -220,5 +231,5 @@ getAppointmentTable(){
       );
     }
   }
-  edit(){}
+  edit() { }
 }

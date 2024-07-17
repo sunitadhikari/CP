@@ -33,6 +33,7 @@ import { AdmitPatientComponent } from '../../../pages/admit-patient/admit-patien
 import { DailyReportComponent } from '../../../pages/daily-report/daily-report.component';
 import { MedicalPescribeComponent } from '../../../pages/medical-pescribe/medical-pescribe.component';
 import { ReceptionComponent } from "../../../pages/reception/reception/reception.component";
+import { WardComponent } from '../../../pages/ward/ward.component';
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -44,7 +45,7 @@ import { ReceptionComponent } from "../../../pages/reception/reception/reception
     PatientListComponent, AddPatientComponent, DashboardFeedbackComponent, UserManagementComponent,
     PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
     PatientComponent, AppointmentHistoryComponent, MedicalPescribeComponent,
-    SymptomsComponent, ViewHistoryComponent, SendMailComponent,
+    SymptomsComponent, ViewHistoryComponent, SendMailComponent,WardComponent,
     BedManagementComponent, RoomManagementComponent, NoteComponent, AppointmentComponent,
     PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements, AdmitPatientComponent, DailyReportComponent,
     LabComponent, MedicalHistoryComponent, AppointmentComponent, DoctorPrescriptionComponent, ReceptionComponent]
