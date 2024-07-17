@@ -16,6 +16,7 @@ export class UserService {
   private getUserRegister = environment.api_url + "getUserSignup"
   private postLogin = environment.api_url + "signin"
   private loginProfileApi = environment.api_url + "profile"
+  private getDoctorsApi = environment.api_url + "getDoctors"
 
   postRegister(data: any): Observable<any> {
     return this.http.post(this.registerApi, data);
@@ -27,6 +28,10 @@ export class UserService {
   getPatients(): Observable<any> {
     return this.http.get(this.getPatientsApi)
   }
+  getDoctors(): Observable<any> {
+    return this.http.get(this.getDoctorsApi)
+  }
+ 
   getProfile(): Observable<any> {
     return this.http.get(this.loginProfileApi)
   }
