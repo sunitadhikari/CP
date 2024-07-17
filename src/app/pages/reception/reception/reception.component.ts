@@ -63,8 +63,6 @@ export class ReceptionComponent implements OnInit{
     else{
       alertify.error('Invalid Form')
     }
-
-    
   }
   edit(){}
 
