@@ -1,0 +1,68 @@
+<div class="container">
+    <h2>Ward Management</h2>
+  
+    <!-- Add Ward Form -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Add New Ward</h5>
+        <form (ngSubmit)="addWard()">
+          <!-- <div class="form-group">
+            <label for="wardName">Ward Name</label>
+            <input type="text" class="form-control" id="wardName" required
+                   [(ngModel)]="newWard.wardName" name="wardName">
+          </div> -->
+          <div class="form-group">
+            <label for="wardType">Ward Type</label>
+            <select class="form-control" id="wardType" required
+            [(ngModel)]="newWard.wardType" name="wardType">
+      <option value="General">General Ward</option>
+      <option value="ICU">Intensive Care Unit (ICU)</option>
+      <option value="Emergency">Emergency Ward</option>
+      <option value="Maternity">Maternity Ward</option>
+      <option value="Pediatrics">Pediatrics Ward</option>
+      <option value="Surgical">Surgical Ward</option>
+      <option value="Orthopedic">Orthopedic Ward</option>
+      <option value="Cardiology">Cardiology Ward</option>
+      <option value="Oncology">Oncology Ward</option>
+      <option value="Psychiatric">Psychiatric Ward</option>
+      <!-- Add more specific ward types as needed -->
+    </select>
+          </div>
+          <div class="form-group">
+            <label for="capacity">Capacity</label>
+            <input type="number" class="form-control" id="capacity" required
+                   [(ngModel)]="newWard.capacity" name="capacity">
+          </div>
+     
+          <button type="submit" class="btn btn-primary" [disabled]="isLoading">Add Ward</button>
+          <span *ngIf="isLoading" class="ml-3"><i class="fa fa-spinner fa-spin"></i> Loading...</span>
+          <!-- <span *ngIf="error" class="text-danger ml-3">{{ error }}</span> -->
+        </form>
+      </div>
+    </div>
+  
+    <!-- List of Wards -->
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">List of Wards</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Ward Name</th>
+              <th>Ward Type</th>
+              <th>Capacity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ward of wards">
+              <td>{{ ward.wardName }}</td>
+              <td>{{ ward.wardType }}</td>
+              <td>{{ ward.capacity }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="wards.length === 0" class="text-center mt-3">No wards found.</div>
+      </div>
+    </div>
+  </div>
+  

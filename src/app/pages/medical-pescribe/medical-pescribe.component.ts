@@ -17,8 +17,8 @@ export class MedicalPescribeComponent implements OnInit {
   filteredPrescriptions: any[] = [];
   searchTerm: string = '';
   currentPage: number = 1;
-  prescriptions: any[] = [];
   itemsPerPage: number = 10;
+  prescriptions: any[] = [];
   selectedPrescription: any = null;
 
   constructor(private prescriptionsService: PrescriptionService) {

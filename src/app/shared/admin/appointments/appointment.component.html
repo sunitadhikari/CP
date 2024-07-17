@@ -193,6 +193,45 @@
   </div>
 </div> 
 
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">sn</th>
+        <th scope="col">Email</th>
+        <th scope="col">Department</th>
+        <th scope="col">Doctor</th>
+        <th scope="col">Date</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Problem</th>
+        <th scope="col">Prescriptions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of opdReports | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ report.email }}</td>
+        <td>{{ report.departmentName }}</td>
+        <td>{{ report.doctorname }}</td>
+        <td>{{ report.date | date: 'shortDate' }}</td>
+        <td>{{ report.phone }}</td>
+        <td>{{ report.problem }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let prescription of report.prescriptions">
+              <b>Prescription:</b> {{ prescription.prescription }}<br>
+              <b>Dosage:</b> {{ prescription.dosage }}<br>
+              <b>Instructions:</b> {{ prescription.instructions }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+
  <div class="modal" tabindex="-1" role="dialog" [class.show]="isModalOpen" [ngStyle]="{display: isModalOpen ? 'block' : 'none'}">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -234,9 +273,15 @@
             </div>
           </div>
           <div *ngIf="modalMode === 'view'">
+            <div class="form-group" *ngFor="let prescription of opdReports">
+              <label for="viewPrescription">Prescription:</label>
+              <p>{{ prescription.prescription }}</p>
+            </div>
             <p>Email: {{ selectedAppointment.email }}</p>
             <p>Phone: {{ selectedAppointment.phone }}</p>
             <p>Problem: {{ selectedAppointment.problem }}</p>
+            <p>Department: {{ selectedAppointment.departmentName }}</p>
+    <p>Doctor: {{ selectedAppointment.doctorName }}</p>
           </div>
           
       </div>
@@ -244,5 +289,5 @@
   </div>
 </div>
 
-
+  </div>
 

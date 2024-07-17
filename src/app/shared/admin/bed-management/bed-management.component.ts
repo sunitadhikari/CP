@@ -6,6 +6,7 @@ import * as alertify from 'alertifyjs';
 import { RoomManagementService } from '../../../core/service/room-management/room-management.service';
 import { DepartmentService } from '../../../core/service/admin/department.service';
 import { NgxPaginationModule } from 'ngx-pagination'; 
+import { WardService } from '../../../core/service/ward-service/ward.service';
 
 
 @Component({
@@ -23,19 +24,28 @@ export class BedManagementComponent implements OnInit {
   filteredBeds: any[] = [];
   p: number = 1;
   filterForm: FormGroup;
+  wards:any[]=[]
+  selectedWard: any; // Define selectedWard property
+
 
 
   constructor(
     private bedService: BedService,
     private departmentService: DepartmentService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private wardService:WardService
   ) {
     this.bedForm = this.fb.group({
-      department: ['', Validators.required],
+      ward: ['', Validators.required],
       bedNumbers: ['', [Validators.required, Validators.pattern(/^\d+(,\d+)*$/)]],
       charges: [0, [Validators.required, Validators.min(0)]],
       occupied: [false]
 
+    })
+    this.wardService.getAllWards().subscribe((res)=>{
+      console.log(res);
+      this.wards=res
+      debugger
     })
     this.filterForm = this.fb.group({
       department: [''],
@@ -91,24 +101,60 @@ export class BedManagementComponent implements OnInit {
       }
     );
   }
-
-addBed(): void {
-  if (this.bedForm.valid) {
-
+  addBed(): void {
+    console.log('Add Bed function called'); // Add this line for debugging
+  
+    if (this.bedForm.invalid) {
+     alertify.error('please enter valid dat a')
+    }
+  
+    const selectedDepartment = this.bedForm.get('ward')?.value;
+    const bedNumbers = this.bedForm.get('bedNumbers')?.value;
+  
+    this.selectedWard = this.wards.find(ward => ward.wardType === selectedDepartment);
+  
+    if (!this.selectedWard) {
+      console.error('Selected ward type not found.');
+      return;
+    }
+  
+    if (bedNumbers > this.selectedWard.capacity) {
+      console.error('Bed count exceeds ward capacity.');
+      return;
+    }
+  
     this.bedService.addBed(this.bedForm.value).subscribe(
-      (data) => {
+      () => {
         alertify.success('Beds added successfully');
         this.bedForm.reset();
+        this.fetchBeds();
       },
       (error) => {
         console.error('Error adding beds:', error);
         alertify.error('Failed to add beds');
       }
     );
-  } else {
-    alertify.error('Invalid form');
   }
-}
+  
+
+// }
+// // addBed(): void {
+// //   if (this.bedForm.valid) {
+
+// //     this.bedService.addBed(this.bedForm.value).subscribe(
+// //       (data) => {
+// //         alertify.success('Beds added successfully');
+// //         this.bedForm.reset();
+// //       },
+// //       (error) => {
+// //         console.error('Error adding beds:', error);
+// //         alertify.error('Failed to add beds');
+// //       }
+// //     );
+// //   } else {
+// //     alertify.error('Invalid form');
+// //   }
+// }
 
 
   
