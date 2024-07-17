@@ -84,14 +84,26 @@
       <textarea formControlName="medicalHistory" class="form-control"></textarea>
     </div>
     <div class="form-group">
+      <label for="department">Department:</label>
+      <select formControlName="department" class="form-control" required>
+        <option disabled selected>Select the department</option>
+        <option *ngFor="let item of departmentsData" [value]="item.departmentName">{{ item.departmentName }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="checkedBy">Checked By:</label>
+      <select formControlName="checkedBy" class="form-control" required>
+        <option disabled selected>Select the checkedBy</option>
+        <option *ngFor="let doctor of filteredDoctors" [value]="doctor.email">{{ doctor.firstName }} {{ doctor.lastName }}</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="ward">Ward:</label>
       <select formControlName="ward" class="form-control" (change)="onDepartmentChange()" required>
         <option disabled selected>Select the ward</option>
         <option *ngFor="let item of wardsData" [value]="item.wardType">{{ item.wardType }}</option>
       </select>
-      
     </div>
-    
     <div class="form-group">
       <label for="bedNumber">Bed Number:</label>
       <select formControlName="bedNumber" class="form-control" required>
@@ -102,35 +114,40 @@
     <button type="submit" class="btn btn-primary">Admit Patient</button>
   </form>
   
+  
   <div class="table-responsive mt-4">
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
+          <td>SN</td>
+          <th>Patient Name</th>
           <th>Date of Birth</th>
           <th>Gender</th>
           <th>Contact Number</th>
           <th>Address</th>
           <th>Medical History</th>
-          <th>Department </th>
+          <th>Department</th>
+          <th>Ward</th>
           <th>Bed Number</th>
           <th>Admitted At</th>
+          <th>Checked By</th>
         </tr>
       </thead>
       <tbody>
         <!-- <tr *ngFor="let patient of patients | paginate: { itemsPerPage: 5, currentPage: p }"> -->
-        <tr *ngFor="let patient of patients ">
-          <td>{{ patient.firstName }}</td>
-          <td>{{ patient.lastName }}</td>
-          <td>{{ patient.dob | date:'yyyy-MM-dd' }}</td>
-          <td>{{ patient.gender }}</td>
-          <td>{{ patient.contactNumber }}</td>
-          <td>{{ patient.address }}</td>
-          <td>{{ patient.medicalHistory }}</td>
-          <td>{{ patient.department }}</td>
-          <td>{{ patient.bedNumber }}</td>
-          <td>{{ patient.admittedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+        <tr *ngFor="let patient of patients let i=index;">
+          <td>{{i+1}}</td>
+          <td>{{ patient.firstName }} {{ patient.lastName }}</td>
+      <td>{{ patient.dob | date }}</td>
+      <td>{{ patient.gender }}</td>
+      <td>{{ patient.contactNumber }}</td>
+      <td>{{ patient.address }}</td>
+      <td>{{ patient.medicalHistory }}</td>
+      <td>{{ patient.department }}</td>
+      <td>{{ patient.ward }}</td>
+      <td>{{ patient.bedNumber }}</td>
+      <td>{{ patient.admittedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td>{{ patient.checkedBy }}</td>
         </tr>
       </tbody>
     </table>
