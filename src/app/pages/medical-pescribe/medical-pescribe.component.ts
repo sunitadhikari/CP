@@ -23,7 +23,7 @@ export class MedicalPescribeComponent implements OnInit {
   constructor(private prescriptionsService: PrescriptionService) {}
 
   ngOnInit(): void {
-    this.prescriptionsService.getpres().subscribe(data => {
+    this.prescriptionsService.getpresByEmail().subscribe(data => {
       this.prescriptions = data;  this.filteredPrescriptions = data;
     });
   }

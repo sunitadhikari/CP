@@ -11,7 +11,7 @@ export class PrescriptionService {
   private apiUrl: string = environment.api_url;
   private postPatientApi: string = this.apiUrl + 'postPatient';
   private getPatientApi: string = this.apiUrl + 'getPatient';
-  private getpresApi: string = this.apiUrl + 'pres';
+  private getpresByEmailApi: string = this.apiUrl + 'prescriptions';
 
   constructor(private http: HttpClient) {}
 
@@ -40,7 +40,7 @@ export class PrescriptionService {
   getPatient(): Observable<any> {
     return this.http.get(this.getPatientApi);
   }
-  getpres(): Observable<any> {
-    return this.http.get(this.getpresApi);
+  getpresByEmail(): Observable<any> {
+    return this.http.get(this.getpresByEmailApi);
   }
 }
