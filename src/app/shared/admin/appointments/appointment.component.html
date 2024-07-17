@@ -219,26 +219,26 @@
             </div>
             <button type="submit" class="btn btn-primary">Save Prescription</button>
           </form>
-        <div *ngIf="modalMode === 'view'">
-            <div class="form-group">
+          <div *ngIf="modalMode === 'view'">
+            <div class="form-group" *ngFor="let prescription of opdReports">
               <label for="viewPrescription">Prescription:</label>
-              <p>{{ selectedAppointment.prescription?.prescription }}</p>
+              <p>{{ prescription.prescription }}</p>
             </div>
-            <div class="form-group">
+            <div class="form-group" *ngFor="let prescription of selectedAppointment.prescriptions">
               <label for="viewDosage">Dosage:</label>
-              <p>{{ selectedAppointment.prescription?.dosage }}</p>
+              <p>{{ prescription.dosage }}</p>
             </div>
-            <div class="form-group">
+            <div class="form-group" *ngFor="let prescription of selectedAppointment.prescriptions">
               <label for="viewInstructions">Instructions:</label>
-              <p>{{ selectedAppointment.prescription?.instructions }}</p>
+              <p>{{ prescription.instructions }}</p>
             </div>
           </div>
-        </div>
-        <div *ngIf="modalMode === 'view'">
-          <p>Email: {{ selectedAppointment.email }}</p>
-          <p>Phone: {{ selectedAppointment.phone }}</p>
-          <p>Problem: {{ selectedAppointment.problem }}</p>
-        </div>
+          <div *ngIf="modalMode === 'view'">
+            <p>Email: {{ selectedAppointment.email }}</p>
+            <p>Phone: {{ selectedAppointment.phone }}</p>
+            <p>Problem: {{ selectedAppointment.problem }}</p>
+          </div>
+          
       </div>
     </div>
   </div>

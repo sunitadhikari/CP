@@ -1,10 +1,10 @@
 <div class="container mt-4">
-    <div class="row mb-3">
+    <!-- <div class="row mb-3">
       <div class="col">
         <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" (input)="onSearchChange()">
       </div>
-    </div>
-    <div class="table-responsive">
+    </div> -->
+    <!-- <div class="table-responsive">
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -31,7 +31,48 @@
           </tr>
         </tbody>
       </table>
+    </div> -->
+    <!-- opd-report.component.html -->
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchTerm" (ngModelChange)="filterReports()" />
     </div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">sn</th>
+        <th scope="col">Email</th>
+        <th scope="col">Department</th>
+        <th scope="col">Doctor</th>
+        <th scope="col">Date</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Problem</th>
+        <th scope="col">Prescriptions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of filteredPrescriptions | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ report.email }}</td>
+        <td>{{ report.departmentName }}</td>
+        <td>{{ report.doctorname }}</td>
+        <td>{{ report.date | date: 'shortDate' }}</td>
+        <td>{{ report.phone }}</td>
+        <td>{{ report.problem }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let prescription of report.prescriptions">
+              <b>Prescription:</b> {{ prescription.prescription }}<br>
+              <b>Dosage:</b> {{ prescription.dosage }}<br>
+              <b>Instructions:</b> {{ prescription.instructions }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
     <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
   </div>
   

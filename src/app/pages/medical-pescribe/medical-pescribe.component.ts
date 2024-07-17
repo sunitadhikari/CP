@@ -13,28 +13,46 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './medical-pescribe.component.css'
 })
 export class MedicalPescribeComponent implements OnInit {
-  prescriptions: any[] = [];
+  opdReports: any[] = [];
   filteredPrescriptions: any[] = [];
+  searchTerm: string = '';
   currentPage: number = 1;
-  selectedPrescription: any = null;
+  prescriptions: any[] = [];
   itemsPerPage: number = 10;
-  searchText: string = '';
+  selectedPrescription: any = null;
 
-  constructor(private prescriptionsService: PrescriptionService) {}
+  constructor(private prescriptionsService: PrescriptionService) {
+    this.prescriptionsService.getOpdReports().subscribe((data) => {
+      this.opdReports = data;
+      this.filteredPrescriptions = data;
+    });
+  }
 
   ngOnInit(): void {
     this.prescriptionsService.getpresByEmail().subscribe(data => {
-      this.prescriptions = data;  this.filteredPrescriptions = data;
+      this.prescriptions = data;  
     });
+
   }
   selectPrescription(prescription: any): void {
     this.selectedPrescription = prescription;
   }
-  onSearchChange(): void {
-    this.filteredPrescriptions = this.prescriptions.filter(prescription => 
-      prescription.prescription.toLowerCase().includes(this.searchText.toLowerCase()) ||
-      prescription.dosage.toLowerCase().includes(this.searchText.toLowerCase()) ||
-      prescription.instructions.toLowerCase().includes(this.searchText.toLowerCase())
-    );
+  filterReports(): void {
+    this.filteredPrescriptions = this.opdReports.filter(report => {
+      const searchStr = this.searchTerm.toLowerCase();
+      return (
+        report.email.toLowerCase().includes(searchStr) ||
+        report.departmentName.toLowerCase().includes(searchStr) ||
+        report.doctorname.toLowerCase().includes(searchStr) ||
+        new Date(report.date).toLocaleDateString().toLowerCase().includes(searchStr) ||
+        report.phone.toLowerCase().includes(searchStr) ||
+        report.problem.toLowerCase().includes(searchStr) ||
+        report.prescriptions.some((prescription: any) =>
+          prescription.prescription.toLowerCase().includes(searchStr) ||
+          prescription.dosage.toLowerCase().includes(searchStr) ||
+          prescription.instructions.toLowerCase().includes(searchStr)
+        )
+      );
+    });
   }
 }

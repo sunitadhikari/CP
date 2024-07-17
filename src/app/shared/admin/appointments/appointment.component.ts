@@ -34,6 +34,8 @@ export class AppointmentComponent implements OnInit {
   modalTitle = '';
   modalMode: 'view' | 'prescribe' = 'view';
   prescription: any; // Variable to hold prescription data
+  opdReports: any[] = [];
+
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +43,7 @@ export class AppointmentComponent implements OnInit {
     private appointmentService: AppointmentService,
     private departmentService: DepartmentService,
     private prescriptionService: PrescriptionService,
-    private doctorService: DoctorService
+    private doctorService: DoctorService,
   ) {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -76,7 +78,8 @@ export class AppointmentComponent implements OnInit {
       dosage: ['', Validators.required],
       instructions: ['', Validators.required]
     });
- 
+    this.prescriptionService.getOpdReports().subscribe((data) => {
+      this.opdReports = data;})
     this.loadInitialData();
     this.fetchPrescriptionsForAppointments();
     this.getAppointmentTable()

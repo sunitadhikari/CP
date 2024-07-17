@@ -12,6 +12,8 @@ export class PrescriptionService {
   private postPatientApi: string = this.apiUrl + 'postPatient';
   private getPatientApi: string = this.apiUrl + 'getPatient';
   private getpresByEmailApi: string = this.apiUrl + 'prescriptions';
+  private getOpdReportsApi: string = this.apiUrl + 'opdreport';
+
 
   constructor(private http: HttpClient) {}
 
@@ -32,7 +34,9 @@ export class PrescriptionService {
   deletePrescription(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}prescription/${id}`);
   }
-
+  getOpdReports(): Observable<any> {
+    return this.http.get<any>(this.getOpdReportsApi);
+  }
   postPatient(data: any): Observable<any> {
     return this.http.post(this.postPatientApi, data);
   }
