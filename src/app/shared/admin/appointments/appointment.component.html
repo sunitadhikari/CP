@@ -42,7 +42,7 @@
             </div>
           </div>
 
-          <!-- <div class="form-group row m-b-15">
+          <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">Date <span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
               <input type="date" class="form-control m-b-5" placeholder="Appointment Date" formControlName="date"
@@ -52,7 +52,7 @@
                 Date is required.
               </div>
             </div>
-          </div> -->
+          </div>
 
 
           <div class="form-group row m-b-15">
@@ -104,7 +104,6 @@
                           <th>Department Name</th>
                           <th>Doctor Email</th>
                           <th>Date</th>
-                          <th>Time</th>
                           <th>Paid</th>
                           <th>Action</th>
                         </tr>
@@ -115,8 +114,7 @@
                           <td>{{ item.email }}</td>
                           <td>{{ item.departmentName }}</td>
                           <td>{{ item.doctorname }}</td>
-                          <td>{{ item.date }}</td>
-                          <td>{{ item.time }}</td>
+                          <td>{{ item.date  | date: 'short'}}</td>
                           <td>{{ item.isPaid ? 'Yes' : 'No' }}</td>
                           <td>
                             <div class="d-flex flex-wrap button-group">

@@ -55,7 +55,6 @@ export class AppointmentComponent implements OnInit {
       this.doctorName = res.doctors;
       debugger
     });
-
     this.appointmentService.getAppointmentsByDoctorEmail().subscribe((res) => {
       this.getAppointmentByEmailList = res.appointmentwithName;
     });
@@ -65,6 +64,7 @@ export class AppointmentComponent implements OnInit {
     this.appointmentForm = this.fb.group({
       username: [''],
       email: [''],
+      date: ['', [Validators.required]],
       departmentName: ['', Validators.required],
       doctorname: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern(/^(9[4-8][0-9]|01[0-9])\d{7}$/)]],
