@@ -86,12 +86,7 @@
                             <span>Profile</span>
                         </a>
                     </li>
-                    <li class="py-2">
-                        <a (click)="showSection('setting')">
-                            <i class="fas fa-cogs"></i>
-                            <span>Setting</span>
-                        </a>
-                    </li>
+                    
                     <li class="py-2">
                         <a (click)="logout()">
                             <i class="fas fa-sign-out-alt"></i>
@@ -101,12 +96,7 @@
                 </ng-container>
                 <ng-container *ngIf="userRole === 'labtec'">
                     <li class="nav-header">Lab Techn</li>
-                    <li class="py-2">
-                        <a (click)="showSection('setting')">
-                            <i class="fas fa-cogs"></i>
-                            <span>Setting</span>
-                        </a>
-                    </li>
+                   
                     <li class="py-2">
                         <a (click)="showSection('send-mail')">
                             <i class="fas fa-cogs"></i>
@@ -141,9 +131,9 @@
                 <ng-container *ngIf="userRole === 'reception'">
                     <li class="nav-header">Reception</li>
                     <li class="py-2">
-                        <a (click)="showSection('setting')">
+                        <a (click)="showSection('reception-Symptoms')">
                             <i class="fas fa-cogs"></i>
-                            <span>Setting</span>
+                            <span>Symptoms</span>
                         </a>
                     </li>
                     <li class="py-2">
@@ -334,13 +324,6 @@
                             <span>Schedule</span>
                         </a>
                     </li>
-              
-                    <li class="py-2">
-                        <a (click)="showSection('setting')">
-                            <i class="fas fa-cogs"></i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
                     <li class="py-2">
                         <a (click)="showSection('profile')">
                             <i class="fas fa-user"></i>
@@ -472,6 +455,9 @@
             </div>
             <div *ngIf="currentSection=== 'prescriptionByDoctor'">
                 <app-doctor-prescription></app-doctor-prescription>
+            </div>
+            <div *ngIf="currentSection=== 'reception-Symptoms'">
+                <app-rec-symptoms></app-rec-symptoms>
             </div>
 
         </div>

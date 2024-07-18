@@ -1,0 +1,38 @@
+
+<div class="card table-responsive container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">sn</th>
+          <th scope="col">Symptoms</th>
+          <th scope="col">Patient Name</th>
+          <th scope="col">Doctor Assign</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let symptoms of symptomsData  let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ symptoms.patient }}</td>
+          <td>{{ symptoms.symptoms }}</td>
+          <td>
+            <button type="button" class="btn btn-sm btn-primary" (click)="assignDoctor()">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+          </td>
+          
+          
+          <td>
+            <ul>
+              <li *ngFor="let prescription of symptoms.prescriptions">
+                <b>Doctor  Name:</b> {{ prescription.prescription }}<br>
+                <b>Symptoms</b> {{ prescription.dosage }}<br>
+                <b>Instructions:</b> {{ prescription.instructions }}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
