@@ -21,7 +21,8 @@
                 <h3 class="card-title">Add Doctor</h3>
             </div>
             <div class="card-body">
-                <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+                <!-- <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()"> -->
+                <form [formGroup]="doctorForm" >
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="firstName">First Name *</label>
@@ -141,7 +142,8 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Doctor</button>
+                    <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+                        {{ editingDoctor ? 'Update Doctor' : 'Add Doctor' }}</button>
                 </form>
             </div>
 
@@ -153,8 +155,8 @@
                         <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Full Name </th>
+                                <!-- <th>Last Name</th> -->
                                 <th>Email</th>
                                 <th>Department</th>
                                 <th>Date of Birth</th>
@@ -167,8 +169,8 @@
                         <tbody id="doctorTable">
                             <tr *ngFor="let item of doctorList; let i =index">
                                 <td>{{i+1}}</td>
-                                <td>{{item.firstName}}</td>
-                                <td>{{item.lastName}}</td>
+                                <td>{{item.firstName}} {{item.lastName}}</td>
+                                <!-- <td>{{item.lastName}}</td> -->
                                 <td>{{item.email}}</td>
                                 <td>{{item.department}}</td>
                                 <td>{{item.dob}}</td>
@@ -177,8 +179,8 @@
                                 <td>{{item.status}}</td>
                                 <td>
                                     <div class="d-flex flex-wrap button-group">
-                                        <!-- <button class="btn btn-warning btn-sm"
-                                            (click)="edit()">Edit</button> -->
+                                        <button class="btn btn-warning btn-sm"
+                                            (click)="editDoctor(item)">Edit</button>
                                         <button class="btn btn-outline-danger btn-sm ml-4"
                                             (click)="delete(item._id)">Delete</button>
                                     </div>

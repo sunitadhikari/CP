@@ -19,6 +19,8 @@ export class DoctorComponent  implements OnInit {
   doctorForm!: FormGroup;
   doctorList : any[] =[];
   departmentList : any[] =[];
+  editingDoctor: any = null;
+
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private doctorService:DoctorService,private departmentService:DepartmentService, private userService : UserService) {
 
    }
@@ -30,17 +32,17 @@ export class DoctorComponent  implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      department: [''],
+      department: ['',Validators.required],
       picture: [''],
-      dob: [''],
+      dob: ['',Validators.required],
       sex: ['', Validators.required],
-      bloodGroup: [''],
+      bloodGroup: ['',Validators.required],
       specialist: ['', Validators.required],
       address: ['', Validators.required],
       phoneNo: [''],
       mobileNo: ['', Validators.required],
       careerTitle: ['', Validators.required],
-      biography: [''],
+      biography: ['',Validators.required],
       status: ['active', Validators.required],
       role:['doctor']
     });
@@ -62,63 +64,112 @@ getDepartmentListData(){
 
     })
   }
-  onSubmit() {
+  // onSubmit() {
    
-    if(this.doctorForm.valid){
-      this.userService.postRegister(this.doctorForm.value).subscribe((data)=>{
-        
-       console.log(data);
-       alertify.success('Doctor Added Successfully')
-       
-       this.doctorForm.reset()
-      })
+  //   if(this.doctorForm.valid){
+  //     this.userService.postRegister(this.doctorForm.value).subscribe((data)=>{
+  //       debugger
+  //      console.log(data);
+  //      alertify.success('Doctor Added Successfully')
+  //      debugger
+  //      this.doctorForm.reset()
+  //     })
 
-    }
-    else{
-      alertify.error('Invalid Form')
-    }
+  //   }
+  //   else{
+  //     alertify.error('Invalid Form')
+  //   }
 
     
+  // }
+  onSubmit(): void {
+    if (this.doctorForm.valid) {
+      if (this.editingDoctor) {
+        this.updateDoctor();
+      } else {
+        this.createDoctor();
+      }
+    } else {
+      alertify.error('Invalid Form');
+    }
   }
-  edit(doctor:any):void{
-// this.editDoctorId = doctor._id;
-this.doctorForm.patchValue({
-  firstName:doctor.firstName,
-  lastName:doctor.lastName,
-  email:doctor.email,
-  password:doctor.password,
-  confirmPassword:doctor.confirmPassword,
-  department:doctor.department,
-  picture:doctor.picture,
-  dob:doctor.dob,
-  sex:doctor.sex,
-  bloodGroup:doctor.bloodGroup,
-  specialist:doctor.specialist,
-  address:doctor.address,
-  phoneNo:doctor.phoneNo,
-  mobileNo:doctor.mobileNo,
-  careerTitle:doctor.careerTitle,
-  biography:doctor.biography,
-  status:doctor.status,
-  role:doctor.role,
 
-})
-  }
-  cancelEdit():void{
-    // this.editDoctorId= null;
-    this.doctorForm.reset();
-  }
-  delete(id: string): void {
-    this.doctorService.deleteDoctor(id).subscribe(
-      res => {
-        alertify.success('Successfully deleted');
+  createDoctor(): void {
+    this.userService.postRegister(this.doctorForm.value).subscribe(
+      (data) => {
+        alertify.success('Doctor Added Successfully');
+        this.doctorForm.reset();
         this.getDoctorList();
-        console.log('Doctor Deleted:', res);
       },
-      error => {
-        console.log('Error deleting doctor:', error);
+      (error) => {
+        console.error('Error creating doctor:', error);
+        alertify.error('Failed to create doctor');
       }
     );
   }
 
+  updateDoctor(): void {
+    this.userService.updateUser(this.editingDoctor._id, this.doctorForm.value).subscribe(
+      (data) => {
+        alertify.success('Doctor updated successfully');
+        this.editingDoctor = null;
+        this.doctorForm.reset();
+        this.getDoctorList();
+      },
+      (error) => {
+        console.error('Error updating doctor:', error);
+        alertify.error('Failed to update doctor');
+      }
+    );
+  }
+
+  // updateDoctor(): void {
+  //   this.userService.updateUser(this.editingDoctor._id, this.doctorForm.value).subscribe(
+  //     (data) => {
+  //       alertify.success('Doctor updated successfully');
+  //       this.editingDoctor = null;
+  //       this.doctorForm.reset();
+  //       this.getDoctorList();
+  //     },
+  //     (error) => {
+  //       console.error('Error updating doctor:', error);
+  //       alertify.error('Failed to update doctor');
+  //     }
+  //   );
+  // }
+
+  editDoctor(doctor: any): void {
+    this.editingDoctor = doctor;
+    this.doctorForm.patchValue({
+      firstName: doctor.firstName,
+      lastName: doctor.lastName,
+      email: doctor.email,
+      department: doctor.department,
+      picture: doctor.picture,
+      dob: doctor.dob,
+      sex: doctor.sex,
+      bloodGroup: doctor.bloodGroup,
+      specialist: doctor.specialist,
+      address: doctor.address,
+      phoneNo: doctor.phoneNo,
+      mobileNo: doctor.mobileNo,
+      careerTitle: doctor.careerTitle,
+      biography: doctor.biography,
+      status: doctor.status
+    });
+  }
+
+  delete(id: string): void {
+    this.userService.deleteUser(id).subscribe(
+      (res) => {
+        alertify.success('Successfully deleted');
+        this.getDoctorList();
+        console.log('Doctor Deleted:', res);
+      },
+      (error) => {
+        console.error('Error deleting doctor:', error);
+        alertify.error('Failed to delete doctor');
+      }
+    );
+  }
 }

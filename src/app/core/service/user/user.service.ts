@@ -17,6 +17,8 @@ export class UserService {
   private postLogin = environment.api_url + "signin"
   private loginProfileApi = environment.api_url + "profile"
   private getDoctorsApi = environment.api_url + "getDoctors"
+   private updateUserApi = environment.api_url + "users/"
+  private deleteUserApi = environment.api_url + "delUsers/"
 
   postRegister(data: any): Observable<any> {
     return this.http.post(this.registerApi, data);
@@ -38,4 +40,12 @@ export class UserService {
   postUserLogin(data: any): Observable<any> {
     return this.http.post(this.postLogin, data)
   }
-}
+  updateUser(userId: string, userData: any): Observable<any> {
+    return this.http.put(`${this.updateUserApi}${userId}`, userData);
+  }
+  
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete(`${this.deleteUserApi}${userId}`);
+  }
+  }
+
