@@ -13,15 +13,14 @@
       <tbody>
         <tr *ngFor="let symptoms of symptomsData  let i = index">
           <th scope="row">{{ i + 1 }}</th>
-          <td>{{ symptoms.patient }}</td>
           <td>{{ symptoms.symptoms }}</td>
+          <td>{{ symptoms.patient }}</td>
+         
           <td>
             <button type="button" class="btn btn-sm btn-primary" (click)="assignDoctor()">
-                <i class="fas fa-edit"></i> Edit
+                <i class="fas fa-edit"></i> Assign
               </button>
           </td>
-          
-          
           <td>
             <ul>
               <li *ngFor="let prescription of symptoms.prescriptions">
