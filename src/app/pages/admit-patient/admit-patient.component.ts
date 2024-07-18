@@ -63,13 +63,13 @@ export class AdmitPatientComponent implements OnInit {
 
   fetchDepartments() {
     this.departmentService.getDepartment().subscribe((data: any) => {
-      this.departmentsData = data; 
+      this.departmentsData = data.departments; 
     });
     this.wardService.getAllWards().subscribe((data)=>{
       this.wardsData=data
     })
     this.patientService.getAllPatientsAdmission().subscribe((res)=>{
-      this.patients=res
+      this.patients=res.patients
     })
   }
 
