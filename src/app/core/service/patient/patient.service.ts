@@ -15,6 +15,7 @@ export class PatientService {
   private postPatientApi = environment.api_url + "postPatient"
   private getPatientApi = environment.api_url + 'getPatient'
   private getBedStatusApi = environment.api_url + 'bedsStatus'
+  private dischargePatientsApi = environment.api_url + 'patients'
 
   postPatient(data: any): Observable<any> {
     return this.http.post(this.postPatientApi, data)
@@ -27,7 +28,7 @@ export class PatientService {
   getAllPatientsAdmission(): Observable<any> {
     return this.http.get(`${this.apiUrl}patients`);
   }
-
+  
   // Get a patient by ID
   getPatientAdmissionById(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}patients/${id}`);
@@ -54,5 +55,10 @@ export class PatientService {
     };
     return this.http.get<any[]>(`${this.getBedStatusApi}`, { params });
   }
+  dischargePatient(patientId: string, dischargeDate: Date): Observable<any> {
+    const body = { dischargeDate: dischargeDate};
+    return this.http.put(`${this.apiUrl}patients/${patientId}/discharge`, body);
+  }
+
 }
 

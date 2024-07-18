@@ -148,6 +148,10 @@
       <td>{{ patient.bedNumber }}</td>
       <td>{{ patient.admittedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
       <td>{{ patient.checkedBy }}</td>
+      <td>
+        <!-- <button class="btn btn-danger" (click)="dischargePatient(patient._id)">Discharge</button> -->
+        <button class="btn btn-danger" (click)="dischargePatient(patient._id)">Discharge</button>
+      </td>
         </tr>
       </tbody>
     </table>
