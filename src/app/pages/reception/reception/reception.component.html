@@ -114,7 +114,9 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add reception</button>
+                    <!-- <button type="submit" class="btn btn-primary">Add reception</button> -->
+                    <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+                        {{ editingreception ? 'Update Reception' : 'Add Reception' }}</button>
                 </form>
             </div>
 
@@ -151,7 +153,7 @@
                                 <td>
                                     <div class="d-flex flex-wrap button-group">
                                         <button class="btn btn-warning btn-sm"
-                                            (click)="edit()">Edit</button>
+                                            (click)="edit(item)">Edit</button>
                                         <button class="btn btn-outline-danger btn-sm ml-4"
                                             (click)="delete(item._id)">Delete</button>
                                     </div>
