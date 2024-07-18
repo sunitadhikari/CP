@@ -80,18 +80,34 @@ getDepartmentListData(){
 
     
   }
-  edit(){}
-  // delete(id:string){
-  //   this.doctorService.deleteDoctor(id).subscribe((res)=>{
-  //      alertify.success('Suffessfully deleted')
-  //      this.getDoctorList()
-  //       console.log('Doctor Deeleted:', res);
-  //   },
-  // error=>{
-  //   console.log('Error deleting doctor:', error);
-  // }
-  // )
-  // }
+  edit(doctor:any):void{
+// this.editDoctorId = doctor._id;
+this.doctorForm.patchValue({
+  firstName:doctor.firstName,
+  lastName:doctor.lastName,
+  email:doctor.email,
+  password:doctor.password,
+  confirmPassword:doctor.confirmPassword,
+  department:doctor.department,
+  picture:doctor.picture,
+  dob:doctor.dob,
+  sex:doctor.sex,
+  bloodGroup:doctor.bloodGroup,
+  specialist:doctor.specialist,
+  address:doctor.address,
+  phoneNo:doctor.phoneNo,
+  mobileNo:doctor.mobileNo,
+  careerTitle:doctor.careerTitle,
+  biography:doctor.biography,
+  status:doctor.status,
+  role:doctor.role,
+
+})
+  }
+  cancelEdit():void{
+    // this.editDoctorId= null;
+    this.doctorForm.reset();
+  }
   delete(id: string): void {
     this.doctorService.deleteDoctor(id).subscribe(
       res => {
@@ -104,4 +120,5 @@ getDepartmentListData(){
       }
     );
   }
+
 }

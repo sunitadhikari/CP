@@ -23,4 +23,7 @@ getDoctor():Observable <any>{
 deleteDoctor(id: string): Observable<any> {
   return this.http.delete<any>(`${environment.api_url}delDoctor/${id}`);
 }
+updateDoctor(id:string, data:any):Observable<any>{
+  return this.http.put<any>(`${this.apiUrl}updateDoctor/${id}`, data);
+}
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <h2>Admit New Patient</h2>
   <!-- <form [formGroup]="admissionForm" (ngSubmit)="submitAdmissionForm()">
     <div class="form-group">
@@ -131,6 +131,7 @@
           <th>Bed Number</th>
           <th>Admitted At</th>
           <th>Checked By</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -148,6 +149,14 @@
       <td>{{ patient.bedNumber }}</td>
       <td>{{ patient.admittedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
       <td>{{ patient.checkedBy }}</td>
+      <th>
+        <button type="button" class="btn btn-sm btn-primary" (click)="editAdmit()">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+        <!-- <button type="button" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> </button> -->
+          <button type="button" class="btn btn-sm btn-danger mx-2" (click)="deleteAdmit()"><i class="fas fa-trash-alt"></i>
+              </button>
+      </th>
         </tr>
       </tbody>
     </table>
