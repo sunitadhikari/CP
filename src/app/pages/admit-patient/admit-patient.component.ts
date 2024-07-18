@@ -114,21 +114,52 @@ export class AdmitPatientComponent implements OnInit {
       }
     );
   }
-
   onDepartmentChange(): void {
     const selectedWard = this.admissionForm.get('ward')?.value;
     if (selectedWard) {
-      this.bedService.getBeds().subscribe(
+      this.patientService.getBedsByWardAndStatus(selectedWard, false).subscribe(
         (data: any[]) => {
-          // Filter beds by selected ward and unoccupied status
-          this.beds = data.filter(bed => bed.ward === selectedWard && !bed.occupied);
+          // Filter unoccupied beds
+          this.beds = data;
         },
         error => {
           console.error('Error fetching beds:', error);
         }
       );
+    } else {
+      this.beds = [];
     }
   }
+  // onDepartmentChange(): void {
+  //   const selectedWard = this.admissionForm.get('ward')?.value;
+  //   if (selectedWard) {
+  //     this.bedService.getBedsByWard(selectedWard).subscribe(
+  //       (data: any[]) => {
+  //         // Filter unoccupied beds
+  //         this.beds = data.filter(bed => !bed.occupied);
+  //       },
+  //       error => {
+  //         console.error('Error fetching beds:', error);
+  //       }
+  //     );
+  //   } else {
+  //     this.beds = [];
+  //   }
+  // }
+  // onDepartmentChange(): void {
+  //   const selectedWard = this.admissionForm.get('ward')?.value;
+  //   if (selectedWard) {
+  //     this.bedService.getBeds().subscribe(
+  //       (data: any[]) => {
+  //         // Filter beds by selected ward and unoccupied status
+  //         this.beds = data.filter(bed => bed.ward === selectedWard && !bed.occupied);
+  //       },
+  //       error => {
+  //         console.error('Error fetching beds:', error);
+  //       }
+  //     );
+  //   }
+  // }
 
   submitAdmissionForm(): void {
     if (this.admissionForm.valid) {
