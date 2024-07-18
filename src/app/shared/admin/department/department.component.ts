@@ -42,7 +42,7 @@ department : any[] =[]
   }
   getDepartmentList(){
     this.departmentService.getDepartment().subscribe((data) => {
-     this.department =data
+     this.department =data.departments
      this.filteredDepartments = [...this.department];
       console.log(this.department);
       

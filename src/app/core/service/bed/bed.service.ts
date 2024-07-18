@@ -27,11 +27,15 @@ export class BedService {
 
 private apiUrl = `${environment.api_url}beds`;
 private apiUrl1 = `${environment.api_url}add-bed`;
+private apiUrl2 = `${environment.api_url}getCountbeds`;
 
 constructor(private http: HttpClient) {}
 
 getBeds(): Observable<any> {
   return this.http.get(this.apiUrl);
+}
+getBedsCounts(): Observable<any> {
+  return this.http.get(this.apiUrl2);
 }
 getBedsByWard(ward: string): Observable<any[]> {
   const params = {
