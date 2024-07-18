@@ -54,7 +54,7 @@ export class AppointmentComponent implements OnInit {
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.tomorrow = tomorrow.toISOString().split('T')[0];
     this.departmentService.getDepartment().subscribe((res) => {
-      this.departmentNameList = res;
+      this.departmentNameList = res.departments;
     });
     this.doctorService.getDoctor().subscribe((res) => {
       this.doctorName = res.doctors;
