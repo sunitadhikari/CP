@@ -1,46 +1,47 @@
 <form [formGroup]="reportForm" (ngSubmit)="onSubmit()" class="needs-validation">
-    <div class="form-group">
-      <label for="patientName">Patient Name:</label>
-      <input type="text" id="patientName" class="form-control" formControlName="patientName" required>
-      <div class="invalid-feedback">
-        Patient name is required.
-      </div>
+  <div class="form-group">
+    <label for="patientName">Patient Name:</label>
+    <select id="patientName" class="form-control" formControlName="patient" required>
+      <option *ngFor="let item of admitPatient" [value]="item._id">
+        {{ item.firstName }} {{ item.lastName }}
+      </option>
+    </select>
+    <div class="invalid-feedback">
+      Patient name is required.
     </div>
-  
-    <div class="form-group">
-      <label for="date">Date:</label>
-      <input type="date" id="date" class="form-control" formControlName="date" required>
-      <div class="invalid-feedback">
-        Date is required.
-      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="date">Date:</label>
+    <input type="date" id="date" class="form-control" formControlName="date" required>
+    <div class="invalid-feedback">
+      Date is required.
     </div>
-  
-    <div class="form-group">
-      <label for="symptoms">Symptoms:</label>
-      <textarea id="symptoms" class="form-control" formControlName="symptoms" rows="4" required></textarea>
-      <div class="invalid-feedback">
-        Symptoms are required.
-      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="symptoms">Symptoms:</label>
+    <textarea id="symptoms" class="form-control" formControlName="symptoms" rows="4" required></textarea>
+    <div class="invalid-feedback">
+      Symptoms are required.
     </div>
-  
-    <div class="form-group">
-      <label for="diagnosis">Diagnosis:</label>
-      <textarea id="diagnosis" class="form-control" formControlName="diagnosis" rows="4" required></textarea>
-      <div class="invalid-feedback">
-        Diagnosis is required.
-      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="diagnosis">Diagnosis:</label>
+    <textarea id="diagnosis" class="form-control" formControlName="diagnosis" rows="4" required></textarea>
+    <div class="invalid-feedback">
+      Diagnosis is required.
     </div>
-  
-    <div class="form-group">
-      <label for="treatment">Treatment:</label>
-      <textarea id="treatment" class="form-control" formControlName="treatment" rows="4" required></textarea>
-      <div class="invalid-feedback">
-        Treatment is required.
-      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="treatment">Treatment:</label>
+    <textarea id="treatment" class="form-control" formControlName="treatment" rows="4" required></textarea>
+    <div class="invalid-feedback">
+      Treatment is required.
     </div>
-  
-    <!-- Add more fields as needed -->
-  
-    <button type="submit" class="btn btn-primary" [disabled]="!reportForm.valid">Submit</button>
-  </form>
-  
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!reportForm.valid">Submit</button>
+</form>
