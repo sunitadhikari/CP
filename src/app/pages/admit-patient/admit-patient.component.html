@@ -149,6 +149,7 @@
       <td>{{ patient.bedNumber }}</td>
       <td>{{ patient.admittedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
       <td>{{ patient.checkedBy }}</td>
+<<<<<<< HEAD
       <th>
         <button type="button" class="btn btn-sm btn-primary" (click)="editAdmit()">
           <i class="fas fa-edit"></i> Edit
@@ -157,6 +158,12 @@
           <button type="button" class="btn btn-sm btn-danger mx-2" (click)="deleteAdmit()"><i class="fas fa-trash-alt"></i>
               </button>
       </th>
+=======
+      <td>
+        <!-- <button class="btn btn-danger" (click)="dischargePatient(patient._id)">Discharge</button> -->
+        <button class="btn btn-danger" (click)="dischargePatient(patient._id)">Discharge</button>
+      </td>
+>>>>>>> fc264bf02403ac65768c509b001398501742c949
         </tr>
       </tbody>
     </table>

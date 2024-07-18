@@ -86,6 +86,17 @@ export class AdmitPatientComponent implements OnInit {
       this.admissionForm.get('checkedBy')?.setValue(''); // Reset checkedBy selection
     });
   }
+  dischargePatient(patientId: string): void {
+    const dischargeDate = new Date();
+    this.patientService.dischargePatient(patientId, dischargeDate).subscribe(
+      (response) => {
+        console.log('Patient discharged:', response);
+      },
+      (error) => {
+        console.error('Error discharging patient:', error);
+      }
+    );
+  }
 
   fetchData(): void {
     this.bedService.getBeds().subscribe(
