@@ -10,6 +10,7 @@ import { DashboardOverviewComponent } from './shared/admin/overview/dashboard-ov
 import { authGuard } from './auth.guard';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { ServicesComponent } from './core/service/user/services.component';
 
 export const routes: Routes = [
     {
@@ -53,5 +54,9 @@ export const routes: Routes = [
     {
         path:'contact-us',
         component:ContactUsComponent
+    },
+    {
+        path:'services',
+        component:ServicesComponent
     }
 ];

@@ -42,8 +42,8 @@ export class DepartmentComponentimplements {
   }
   getDepartmentList() {
     this.departmentService.getDepartment().subscribe((data) => {
-      this.department = data
-      this.filteredDepartments = [...this.department];
+     this.department =data.departments
+     this.filteredDepartments = [...this.department];
       console.log(this.department);
 
     })

@@ -22,4 +22,9 @@ getSymptoms(){
   })
 }
 assignDoctor(){}
+getDoctor(){
+  // this.doctor
+}
+
+
 }
