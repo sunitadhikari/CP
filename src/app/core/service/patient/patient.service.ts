@@ -14,6 +14,7 @@ export class PatientService {
 
   private postPatientApi = environment.api_url + "postPatient"
   private getPatientApi = environment.api_url + 'getPatient'
+  private getBedStatusApi = environment.api_url + 'bedsStatus'
 
   postPatient(data: any): Observable<any> {
     return this.http.post(this.postPatientApi, data)
@@ -45,6 +46,13 @@ export class PatientService {
   // Delete a patient
   deletePatientAdmission(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}patients/${id}`);
+  }
+  getBedsByWardAndStatus(ward: string, occupied: boolean): Observable<any[]> {
+    const params = {
+      ward: ward,
+      occupied: occupied.toString()
+    };
+    return this.http.get<any[]>(`${this.getBedStatusApi}`, { params });
   }
 }
 

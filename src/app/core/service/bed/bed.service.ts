@@ -33,6 +33,12 @@ constructor(private http: HttpClient) {}
 getBeds(): Observable<any> {
   return this.http.get(this.apiUrl);
 }
+getBedsByWard(ward: string): Observable<any[]> {
+  const params = {
+    ward: ward
+  };
+  return this.http.get<any[]>(`${this.apiUrl}`, { params });
+}
 
 addBed(data: any): Observable<any> {
   return this.http.post(this.apiUrl1, data);
