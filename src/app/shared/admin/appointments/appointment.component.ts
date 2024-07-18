@@ -37,6 +37,7 @@ export class AppointmentComponent implements OnInit {
   modalMode: 'view' | 'prescribe' = 'view';
   prescription: any; // Variable to hold prescription data
   opdReports: any[] = [];
+  opdReportsinDoctor: any[]=[];
   currentPage: number = 1;
   itemsPerPage: number = 10;
 
@@ -92,7 +93,10 @@ export class AppointmentComponent implements OnInit {
     })
     this.loadInitialData();
     this.fetchPrescriptionsForAppointments();
-    this.getAppointmentTable()
+    this.getAppointmentTable();
+    this.prescriptionService.getOpdReportsinDoctor().subscribe((data)=>{
+      this.opdReportsinDoctor=data;
+    })
   }
 
   loadInitialData(): void {

@@ -208,7 +208,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let report of opdReports | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
+      <!-- <tr *ngFor="let report of opdReportsinDoctor | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index"> -->
+      <tr *ngFor="let report of opdReportsinDoctor ; let i = index">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ report.email }}</td>
         <td>{{ report.departmentName }}</td>
@@ -230,7 +231,7 @@
   </table>
 </div>
 
-    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    <!-- <pagination-controls (pageChange)="currentPage = $event"></pagination-controls> -->
 
  <div class="modal" tabindex="-1" role="dialog" [class.show]="isModalOpen" [ngStyle]="{display: isModalOpen ? 'block' : 'none'}">
   <div class="modal-dialog" role="document">
