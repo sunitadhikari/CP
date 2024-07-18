@@ -145,7 +145,7 @@ export class AppointmentComponent implements OnInit {
   getAppointmentTable() {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
-      this.appointmentTable = res.userAppointments
+      this.appointmentTable = res.appointmentByName
     })
   }
   deleteAppointment(id: string) {

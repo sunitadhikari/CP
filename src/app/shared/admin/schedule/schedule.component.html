@@ -201,11 +201,11 @@
                                                             <th nowrap>End Time</th>
                                                             <th nowrap>Sex</th>
                                                             <th nowrap>Mobile Number</th>
-                                                            <th nowrap>Actions</th>
+                                                            <!-- <th nowrap>Actions</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let item of scheduleTable; let i = index">
+                                                        <tr *ngFor="let item of schedulePatientTable; let i = index">
                                                             <td>{{i+1}}</td>
                                                             <td>{{item.doctorName}}</td>
                                                             <td>{{item.availableDays}}</td>
