@@ -12,7 +12,8 @@ export class ReceptionService {
   apiUrl: String = environment.api_url
 
   private postPatientApi = environment.api_url + "postPatient"
-  private getPatientApi = environment.api_url + 'getPatient'
+  private getPatientApi = environment.api_url + 'getusersdatabyEmail'
+
 
  
 }

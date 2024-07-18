@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DepartmentService } from '../../../core/service/admin/department.service';
 import * as alertify from 'alertifyjs';
-import { NgxPaginationModule } from 'ngx-pagination'; 
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-department',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,NgxPaginationModule,FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, NgxPaginationModule, FormsModule],
   templateUrl: './department.component.html',
   styleUrl: './department.component.css'
 })
@@ -17,14 +17,14 @@ export class DepartmentComponentimplements {
   departmentForm!: FormGroup;
   p: number = 1;
   editingDepartmentId: string | null = null;
-  editing: boolean = false; 
+  editing: boolean = false;
   searchTerm: string = '';
   filteredDepartments: any[] = [];
 
 
 
   constructor(private formBuilder: FormBuilder, private departmentService: DepartmentService) { }
-department : any[] =[]
+  department: any[] = []
   ngOnInit(): void {
     this.departmentForm = this.formBuilder.group({
       departmentName: ['', Validators.required],
@@ -40,14 +40,14 @@ department : any[] =[]
       department.departmentName.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
-  getDepartmentList(){
+  getDepartmentList() {
     this.departmentService.getDepartment().subscribe((data) => {
      this.department =data.departments
      this.filteredDepartments = [...this.department];
       console.log(this.department);
-      
+
     })
-  } 
+  }
   clearSearch(): void {
     this.searchTerm = '';
     this.filterDepartments();
@@ -111,7 +111,7 @@ department : any[] =[]
 
 
 
- 
+
   cancelEdit(): void {
     this.editingDepartmentId = null;
     this.departmentForm.reset();

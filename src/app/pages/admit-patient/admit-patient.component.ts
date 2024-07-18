@@ -201,4 +201,8 @@ export class AdmitPatientComponent implements OnInit {
       alertify.error('Invalid form');
     }
   }
+  editAdmit(){
+
+  }
+  deleteAdmit(){}
 }

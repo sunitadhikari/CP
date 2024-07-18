@@ -55,11 +55,10 @@ export class AppointmentComponent implements OnInit {
     this.tomorrow = tomorrow.toISOString().split('T')[0];
     this.departmentService.getDepartment().subscribe((res) => {
       this.departmentNameList = res;
-      debugger
     });
     this.doctorService.getDoctor().subscribe((res) => {
       this.doctorName = res.doctors;
-      debugger
+      
     });
     this.appointmentService.getAppointmentsByDoctorEmail().subscribe((res) => {
       this.getAppointmentByEmailList = res.appointmentwithName;
@@ -109,7 +108,7 @@ export class AppointmentComponent implements OnInit {
   }
   fetchPrescriptionsForAppointments(): void {
     this.getAppointmentByEmailList.forEach((appointment) => {
-      debugger
+      
       if (appointment.prescription?._id) {
         this.prescriptionService.getPrescriptionById(appointment.prescription._id).subscribe(
           (data) => {
@@ -126,7 +125,7 @@ export class AppointmentComponent implements OnInit {
     const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
     if (selectedDepartment) {
       this.filteredDoctors = this.doctorName.filter(doctor => doctor.department === selectedDepartment);
-      debugger
+      
     } else {
       this.filteredDoctors = [];
     }

@@ -3,7 +3,9 @@ import { DepartmentService } from '../../../core/service/admin/department.servic
 import { WardService } from '../../../core/service/ward-service/ward.service';
 import { PatientService } from '../../../core/service/patient/patient.service';
 import { BedService } from '../../../core/service/bed/bed.service';
+
 import { Chart, ChartConfiguration, ChartData, ChartType } from 'chart.js';
+// import { Chart, ChartConfiguration, ChartData, ChartType } from 'chart.js';
 @Component({
   selector: 'app-dashboard',
   standalone: true,

@@ -34,6 +34,7 @@ import { DailyReportComponent } from '../../../pages/daily-report/daily-report.c
 import { MedicalPescribeComponent } from '../../../pages/medical-pescribe/medical-pescribe.component';
 import { ReceptionComponent } from "../../../pages/reception/reception/reception.component";
 import { WardComponent } from '../../../pages/ward/ward.component';
+import { RecSymptomsComponent } from "../../../pages/reception/rec-symptoms/rec-symptoms.component";
 
 @Component({
     selector: 'app-dashboard-navigation',
@@ -45,10 +46,10 @@ import { WardComponent } from '../../../pages/ward/ward.component';
     PatientListComponent, AddPatientComponent, DashboardFeedbackComponent, UserManagementComponent,
     PaymentComponent, DoctorsComponent, DoctorComponent, DashboardComponent,
     PatientComponent, AppointmentHistoryComponent, MedicalPescribeComponent,
-    SymptomsComponent, ViewHistoryComponent, SendMailComponent,WardComponent,
+    SymptomsComponent, ViewHistoryComponent, SendMailComponent, WardComponent,
     BedManagementComponent, RoomManagementComponent, NoteComponent, AppointmentComponent,
     PrescriptionComponent, ScheduleComponent, DepartmentComponentimplements, AdmitPatientComponent, DailyReportComponent,
-    LabComponent, MedicalHistoryComponent, AppointmentComponent, DoctorPrescriptionComponent, ReceptionComponent]
+    LabComponent, MedicalHistoryComponent, AppointmentComponent, DoctorPrescriptionComponent, ReceptionComponent, RecSymptomsComponent]
 })
 export class DashboardNavigationComponent implements OnInit{
   currentSection: string = 'dashboard';
@@ -58,7 +59,7 @@ export class DashboardNavigationComponent implements OnInit{
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'reception'
+    this.currentSection = 'reception-Symptoms'
 }
   ngOnInit(): void {
       this.userRole= localStorage.getItem('userRole')

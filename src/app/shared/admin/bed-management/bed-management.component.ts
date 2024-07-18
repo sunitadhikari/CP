@@ -45,7 +45,7 @@ export class BedManagementComponent implements OnInit {
     this.wardService.getAllWards().subscribe((res)=>{
       console.log(res);
       this.wards=res
-      debugger
+    
     })
     this.filterForm = this.fb.group({
       department: [''],

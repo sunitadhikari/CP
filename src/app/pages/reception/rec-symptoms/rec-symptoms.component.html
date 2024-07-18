@@ -1,0 +1,73 @@
+
+<div class="card table-responsive container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">sn</th>
+          <th scope="col">Symptoms</th>
+          <th scope="col">Patient Name</th>
+          <th scope="col">Doctor Assign</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let symptoms of symptomsData  let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ symptoms.symptoms }}</td>
+          <td>{{ symptoms.patient }}</td>
+         
+          <td>
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal" (click)="assignDoctor()">
+                <i class="fas fa-edit"></i> Assign
+              </button>
+          </td>
+          <td>
+            <ul>
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="myModalLabel">Patient Symptoms</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" >
+                      <form>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Patient</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="patient">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Symptoms</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="" placeholder="symptoms">
+                        </div>
+    <label for="patientName">Patient Name:</label>
+    <select id="patientName" class="form-control" formControlName="patient" required>
+      <!-- <option *ngFor="let item of doctorList" [value]="item._id">
+        {{ item.firstName }} {{ item.lastName }}
+      </option> -->
+    </select>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+                      <!-- Small form goes here -->
+                       <!-- <div>
+
+                       </div>
+                      <p><strong>Patient</strong> {{ selectedPrescription?.appointmentId }}</p>
+                      <p><strong>Symptoms</strong> {{ selectedPrescription?.prescription }}</p>
+                      <p><strong>Doctor:</strong> {{ selectedPrescription?.dosage }}</p> -->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

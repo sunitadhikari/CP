@@ -52,15 +52,7 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="department">Department</label>
-                            <!-- <input type="text" class="form-control" id="department" formControlName="department"
-                                placeholder="Enter department"> -->
-                                <select class="form-control m-b-5" formControlName="department" required>
-                                    <option value="">--Please choose an option--</option>
-                                    <option *ngFor="let department of departmentList" [value]="department.departmentName">{{ department.departmentName }}</option>
-                                  </select>
-                        </div>
+                  
                         <div class="form-group col-md-6">
                             <label for="picture">Picture</label>
                             <input type="file" class="form-control-file" id="picture" formControlName="picture">
@@ -87,11 +79,7 @@
                             <input type="text" class="form-control" id="bloodGroup" formControlName="bloodGroup"
                                 placeholder="Enter blood group">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="specialist">specialist *</label>
-                            <input type="text" class="form-control" id="specialist" formControlName="specialist"
-                                placeholder="Enter specialist" required>
-                        </div>
+                        
                     </div>
                     <div class="form-group">
                         <label for="address">Address *</label>
@@ -99,29 +87,14 @@
                             placeholder="Enter address" required>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="phoneNo">Phone No</label>
-                            <input type="text" class="form-control" id="phoneNo" formControlName="phoneNo"
-                                placeholder="Enter phone number">
-                        </div>
+                
                         <div class="form-group col-md-6">
                             <label for="mobileNo">Mobile No *</label>
                             <input type="text" class="form-control" id="mobileNo" formControlName="mobileNo"
                                 placeholder="Enter mobile number" required>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="careerTitle">Career Title *</label>
-                            <input type="text" class="form-control" id="careerTitle" formControlName="careerTitle"
-                                placeholder="Enter career title" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="biography">Short Biography</label>
-                            <textarea class="form-control" id="biography" formControlName="biography" rows="3"
-                                placeholder="Enter short biography"></textarea>
-                        </div>
-                    </div>
+                   
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Status</label>
