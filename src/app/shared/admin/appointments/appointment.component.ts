@@ -54,7 +54,7 @@ export class AppointmentComponent implements OnInit {
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.tomorrow = tomorrow.toISOString().split('T')[0];
     this.departmentService.getDepartment().subscribe((res) => {
-      this.departmentNameList = res;
+      this.departmentNameList = res.departments;
     });
     this.doctorService.getDoctor().subscribe((res) => {
       this.doctorName = res.doctors;
@@ -145,7 +145,7 @@ export class AppointmentComponent implements OnInit {
   getAppointmentTable() {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
-      this.appointmentTable = res.userAppointments
+      this.appointmentTable = res.appointmentByName
     })
   }
   deleteAppointment(id: string) {
