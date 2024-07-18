@@ -21,6 +21,8 @@ export class ReceptionComponent implements OnInit{
   receptionForm!: FormGroup;
   receptionList : any[] =[];
   departmentList : any[] =[];
+  editingreception: any = null;
+
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private receptionService:ReceptionService,private departmentService:DepartmentService, private userService : UserService) {
 
    }
@@ -46,29 +48,104 @@ export class ReceptionComponent implements OnInit{
       status: ['active', Validators.required],
       role:['reception']
     });
+    this.fetchVerifiedReceptionUsers();
 
   }
+  fetchVerifiedReceptionUsers(){
+    this.userService.getReception().subscribe((res)=>{
+      this.receptionList=res
 
-  onSubmit() {
+    })
+  }
+  createReceptionr(): void {
+    this.userService.postRegister(this.receptionForm.value).subscribe(
+      (data) => {
+        alertify.success('Doctor Added Successfully');
+        this.receptionForm.reset();
+        this.fetchVerifiedReceptionUsers();
+      },
+      (error) => {
+        console.error('Error creating doctor:', error);
+        alertify.error('Failed to create doctor');
+      }
+    );
+  }
+  // onSubmit() {
    
-    if(this.receptionForm.valid){
-      this.userService.postRegister(this.receptionForm.value).subscribe((data)=>{
+  //   if(this.receptionForm.valid){
+  //     this.userService.postRegister(this.receptionForm.value).subscribe((data)=>{
       
-       console.log(data);
-       alertify.success('reception Added Successfully')
+  //      console.log(data);
+  //      alertify.success('reception Added Successfully')
      
-       this.receptionForm.reset()
-      })
-    }
-    else{
-      alertify.error('Invalid Form')
-    }
+  //      this.receptionForm.reset()
+  //     })
+  //   }
+  //   else{
+  //     alertify.error('Invalid Form')
+  //   }
 
     
+  // }
+  onSubmit(): void {
+    if (this.receptionForm.valid) {
+      if (this.editingreception) {
+        this.updateReception();
+      } else {
+        this.createReceptionr();
+      }
+    } else {
+      alertify.error('Invalid Form');
+    }
   }
-  edit(){}
+  updateReception(): void {
+    this.userService.updateUser(this.editingreception._id, this.receptionForm.value).subscribe(
+      (data) => {
+        alertify.success('Doctor updated successfully');
+        this.editingreception = null;
+        this.receptionForm.reset();
+        this.fetchVerifiedReceptionUsers();
+      },
+      (error) => {
+        console.error('Error updating doctor:', error);
+        alertify.error('Failed to update doctor');
+      }
+    );
+  }
 
+  edit(reception:any){ 
+    this.editingreception = reception;
+    this.receptionForm.patchValue({
+      firstName: reception.firstName,
+      lastName: reception.lastName,
+      email: reception.email,
+      // password: reception.password,
+      // confirmPassword: reception.confirmPassword,
+      department: reception.department,
+      picture: reception.picture,
+      dob: reception.dob,
+      sex: reception.sex,
+      bloodGroup: reception.bloodGroup,
+      specialist: reception.specialist,
+      address: reception.address,
+      phoneNo: reception.phoneNo,
+      mobileNo: reception.mobileNo,
+      careerTitle: reception.careerTitle,
+      biography: reception.biography,
+      status: reception.status
+    });
+  }
   delete(id: string): void {
-   
+    this.userService.deleteUser(id).subscribe(
+      (res) => {
+        alertify.success('Successfully deleted');
+        this.fetchVerifiedReceptionUsers();
+        console.log('Doctor Deleted:', res);
+      },
+      (error) => {
+        console.error('Error deleting doctor:', error);
+        alertify.error('Failed to delete doctor');
+      }
+    );
   }
 }
