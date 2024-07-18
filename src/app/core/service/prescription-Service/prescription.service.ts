@@ -13,7 +13,7 @@ export class PrescriptionService {
   private getPatientApi: string = this.apiUrl + 'getPatient';
   private getpresByEmailApi: string = this.apiUrl + 'prescriptions';
   private getOpdReportsApi: string = this.apiUrl + 'opdreport';
-
+  private getOpdReportsinDoctorApi: string = this.apiUrl + 'opdreportinDoctor';
 
   constructor(private http: HttpClient) {}
 
@@ -46,5 +46,8 @@ export class PrescriptionService {
   }
   getpresByEmail(): Observable<any> {
     return this.http.get(this.getpresByEmailApi);
+  }
+  getOpdReportsinDoctor(): Observable<any> {
+    return this.http.get<any>(this.getOpdReportsinDoctorApi);
   }
 }
