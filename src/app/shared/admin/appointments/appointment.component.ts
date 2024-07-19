@@ -105,11 +105,13 @@ export class AppointmentComponent implements OnInit {
     });
     this.doctorService.getDoctor().subscribe((res) => {
       this.doctorName = res.doctors;
+
     });
     this.appointmentService.getAppointmentsByDoctorEmail().subscribe((res) => {
       this.getAppointmentByEmailList = res.appointmentwithName;
     });
   }
+  
   fetchPrescriptionsForAppointments(): void {
     this.getAppointmentByEmailList.forEach((appointment) => {
       
@@ -125,16 +127,42 @@ export class AppointmentComponent implements OnInit {
       }
     });
   }
-  filterDoctors(): void {
-    const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
-    if (selectedDepartment) {
-      this.filteredDoctors = this.doctorName.filter(doctor => doctor.department === selectedDepartment);
+  // filterDoctors(): void {
+  //   const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
+  //   if (selectedDepartment) {
+  //     this.filteredDoctors = this.doctorName.filter(doctor => doctor.department === selectedDepartment);
       
+  //   } else {
+  //     this.filteredDoctors = [];
+  //   }
+  // }
+  // filterDoctors() {
+  //   const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
+  //   if (selectedDepartment) {
+  //     this.filteredDoctors = this.doctorName.filter(doctors => doctors.department === selectedDepartment);
+  //     debugger
+  //   } else {
+  //     this.filteredDoctors = []; // Show all doctors if no department is selected
+  //   }
+  // }
+  filterDoctors() {
+    const selectedDepartment = this.appointmentForm.get('departmentName')?.value.trim();
+    
+    if (selectedDepartment) {
+      this.filteredDoctors = this.doctorName.filter(doctor => 
+        doctor.department.trim() === selectedDepartment
+      );
+      debugger
     } else {
-      this.filteredDoctors = [];
+      this.filteredDoctors = [this.doctorName]; 
+      debugger
     }
+  
+    console.log('Filtered Doctors:', this.filteredDoctors);
+    console.log('Type of filteredDoctors:', Array.isArray(this.filteredDoctors)); // Should log true
   }
-
+  
+  
   submit() {
     if (this.appointmentForm.valid) {
       this.appointmentService.postAppointment(this.appointmentForm.value).subscribe((data) => {

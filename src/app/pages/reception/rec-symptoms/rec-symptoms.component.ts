@@ -60,7 +60,6 @@ export class RecSymptomsComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // Handle form submission logic
     console.log(this.modalForm.value);
   }
 }
