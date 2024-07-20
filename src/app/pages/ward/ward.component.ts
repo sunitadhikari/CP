@@ -60,6 +60,8 @@ export class WardComponent implements OnInit {
           wardType: '',
           capacity: 0
         };
+        alertify.success('Ward already exits')
+
         this.isLoading = false;
       },
       (error) => {

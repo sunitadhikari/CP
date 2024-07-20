@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
         this.userService.postRegister(this.signupForm.value).subscribe((data) => {
           console.log(data);
         })
-        alertify.success("User data registered.")
+        alertify.success("User data registered. Please check you gmail")
         this.router.navigate(['/login'])
       }
       else {
