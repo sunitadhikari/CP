@@ -20,10 +20,10 @@ export class WardService {
     return this.http.post<any>(`${this.apiUrl}postWards`, wardData);
   }
   updateWard(id: string, ward: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, ward);
+    return this.http.put<any>(`${this.apiUrl}editWard/${id}`, ward);
   }
 
   deleteWard(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}deleteWard/${id}`);
   }
 }
