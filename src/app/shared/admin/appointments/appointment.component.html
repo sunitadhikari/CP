@@ -14,10 +14,12 @@
                 class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
               <!-- <select class="form-control" formControlName="departmentName" placeholder="Choose one option"> -->
-                <select id="departmentName" class="form-control" formControlName="departmentName" (change)="filterDoctors()">
+              <select id="departmentName" class="form-control" formControlName="departmentName"
+                (change)="filterDoctors()">
 
                 <option value="">--Please choose an option--</option>
-                <option *ngFor="let department of departmentNameList" [value]="department.departmentName">{{ department.departmentName }}</option>
+                <option *ngFor="let department of departmentNameList" [value]="department.departmentName">{{
+                  department.departmentName }}</option>
               </select>
               <div
                 *ngIf="appointmentForm.get('departmentName')?.invalid && appointmentForm.get('departmentName')?.touched"
@@ -26,28 +28,28 @@
               </div>
             </div>
           </div>
+
           <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">
               Doctor name<span class="text-danger fw-bold">*</span>
             </label>
-            <!-- label doctir name -->
+
             <div class="col-md-9">
               <select class="form-control m-b-5" formControlName="doctorname" required>
                 <option value="">--Please choose an option--</option>
                 <option *ngFor="let item of doctorName" [value]="item.email">
                   {{ item.firstName }} {{ item.lastName }}
                 </option>
-                
+
               </select>
-              <div *ngIf="appointmentForm.get('doctorname')?.invalid && appointmentForm.get('doctorname')?.touched" class="text-danger">
+              <div *ngIf="appointmentForm.get('doctorname')?.invalid && appointmentForm.get('doctorname')?.touched"
+                class="text-danger">
                 Valid Doctor name is required.
               </div>
             </div>
           </div>
-          
-          
-          
-          
+
+
 
           <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">Date <span class="text-danger fw-bold">*</span></label>
@@ -121,7 +123,7 @@
                           <!-- <td>{{ item.email }}</td> -->
                           <td>{{ item.departmentName }}</td>
                           <td>{{ item.doctorname }}</td>
-                          <td>{{ item.date  | date: 'short'}}</td>
+                          <td>{{ item.date | date: 'short'}}</td>
                           <td>{{ item.isPaid ? 'Yes' : 'No' }}</td>
                           <td>
                             <div class="d-flex flex-wrap button-group">
@@ -153,7 +155,7 @@
     </div>
   </div>
 </div>
- <div class="container" *ngIf="userRole === 'doctor'">
+<div class="container" *ngIf="userRole === 'doctor'">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -180,7 +182,8 @@
                 <td>
                   <div class="btn-group" role="group">
                     <button type="button" class="btn btn-primary" (click)="openModal(appointment, 'prescribe')">
-                      <i class="fas fa-prescription-bottle-alt"></i> {{ appointment.prescription ? 'View Prescription' : 'Prescribe' }}
+                      <i class="fas fa-prescription-bottle-alt"></i> {{ appointment.prescription ? 'View Prescription' :
+                      'Prescribe' }}
                     </button>
                     <button type="button" class="btn btn-secondary mx-2" (click)="openModal(appointment, 'view')">
                       <i class="fas fa-eye"></i>
@@ -198,13 +201,13 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
 
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">sn</th>
+        <th scope="col">SN</th>
         <th scope="col">Email</th>
         <th scope="col">Department</th>
         <th scope="col">Doctor</th>
@@ -215,7 +218,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let report of opdReports | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
+      <!-- <tr *ngFor="let report of opdReportsinDoctor | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index"> -->
+      <tr *ngFor="let report of opdReportsinDoctor ; let i = index">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ report.email }}</td>
         <td>{{ report.departmentName }}</td>
@@ -237,9 +241,10 @@
   </table>
 </div>
 
-    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+<!-- <pagination-controls (pageChange)="currentPage = $event"></pagination-controls> -->
 
- <div class="modal" tabindex="-1" role="dialog" [class.show]="isModalOpen" [ngStyle]="{display: isModalOpen ? 'block' : 'none'}">
+<div class="modal" tabindex="-1" role="dialog" [class.show]="isModalOpen"
+  [ngStyle]="{display: isModalOpen ? 'block' : 'none'}">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -288,13 +293,12 @@
             <p>Phone: {{ selectedAppointment.phone }}</p>
             <p>Problem: {{ selectedAppointment.problem }}</p>
             <p>Department: {{ selectedAppointment.departmentName }}</p>
-    <p>Doctor: {{ selectedAppointment.doctorName }}</p>
+            <p>Doctor: {{ selectedAppointment.doctorName }}</p>
           </div>
-          
+
+        </div>
       </div>
     </div>
   </div>
+
 </div>
-
-  </div>
-
