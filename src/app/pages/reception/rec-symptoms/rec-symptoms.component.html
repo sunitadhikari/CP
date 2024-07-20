@@ -35,7 +35,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="modalForm">
+        <form [formGroup]="modalForm" (ngSubmit)="submit()">
           <div class="form-group">
             <label for="patient">Patient</label>
             <input type="text" class="form-control" id="patient" formControlName="patient" placeholder="Patient">
@@ -47,12 +47,12 @@
           <div class="form-group">
             <label for="patientName">Doctor Name:</label>
             <select id="patientName" class="form-control" formControlName="doctor" required>
-              <option *ngFor="let item of doctorList" [value]="item._id">
+              <option *ngFor="let item of doctorList" [value]="item.email">
                 {{ item.firstName }} {{ item.lastName }}
               </option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" >Submit</button>
         </form>
       </div>
       <div class="modal-footer">

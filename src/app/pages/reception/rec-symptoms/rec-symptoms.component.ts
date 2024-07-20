@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { SymptomsService } from '../../../core/service/symptoms/symptoms.service';
 import { UserService } from '../../../core/service/user/user.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import * as alertify from 'alertifyjs';
+
 
 @Component({
   selector: 'app-rec-symptoms',
@@ -61,5 +63,15 @@ export class RecSymptomsComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.modalForm.value);
+  }
+  submit(){
+    if(this.modalForm.valid){
+      this.symptomsService.postSymptoms(this.modalForm.value).subscribe((data)=>{
+        console.log('data');
+        alertify.success("FORM FILLED SUCCESSFUL"); 
+        this.modalForm.reset()
+      })
+    }
+  
   }
 }
