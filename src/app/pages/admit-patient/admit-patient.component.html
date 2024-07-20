@@ -119,7 +119,7 @@
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr>
-          <td>SN</td>
+          <th>SN</th>
           <th>Patient Name</th>
           <th>Date of Birth</th>
           <th>Gender</th>
@@ -132,6 +132,7 @@
           <th>Admitted At</th>
           <th>Checked By</th>
           <th>Action</th>
+          <th>Discharge</th>
         </tr>
       </thead>
       <tbody>
@@ -149,27 +150,23 @@
       <td>{{ patient.bedNumber }}</td>
       <td>{{ patient.admittedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
       <td>{{ patient.checkedBy }}</td>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       <th>
-        <button type="button" class="btn btn-sm btn-primary" (click)="editAdmit()">
-          <i class="fas fa-edit"></i> Edit
-        </button>
-        <!-- <button type="button" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> </button> -->
-          <button type="button" class="btn btn-sm btn-danger mx-2" (click)="deleteAdmit()"><i class="fas fa-trash-alt"></i>
-              </button>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-sm btn-primary" (click)="editAdmit()">
+            <i class="fas fa-edit"></i> 
+          </button>
+          <button type="button" class="btn btn-sm btn-danger mx-2" (click)="deleteAdmit()">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
       </th>
-=======
-=======
->>>>>>> a883fe24bd7c074aeb386efd06b5faf31aff7828
+      
       <td>
         <!-- <button class="btn btn-danger" (click)="dischargePatient(patient._id)">Discharge</button> -->
         <button class="btn btn-danger" (click)="dischargePatient(patient._id)">Discharge</button>
       </td>
-<<<<<<< HEAD
->>>>>>> fc264bf02403ac65768c509b001398501742c949
-=======
->>>>>>> a883fe24bd7c074aeb386efd06b5faf31aff7828
+
         </tr>
       </tbody>
     </table>

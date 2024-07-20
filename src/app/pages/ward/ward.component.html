@@ -35,7 +35,7 @@
           </div>
      
           <button type="submit" class="btn btn-primary" [disabled]="isLoading">Add Ward</button>
-          <span *ngIf="isLoading" class="ml-3"><i class="fa fa-spinner fa-spin"></i> Loading...</span>
+          <!-- <span *ngIf="isLoading" class="ml-3"><i class="fa fa-spinner fa-spin"></i> Loading...</span> -->
           <!-- <span *ngIf="error" class="text-danger ml-3">{{ error }}</span> -->
         </form>
       </div>
@@ -76,19 +76,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ward of wards | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
-              <td>{{ ward.wardType }}</td>
-              <td>{{ ward.capacity }}</td>
+            <tr *ngFor="let item of wards | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
+              <td>{{ item.wardType }}</td>
+              <td>{{ item.capacity }}</td>
               <td>
-                <button class="btn btn-primary btn-sm mr-2" (click)="editWardMode(ward)">Edit</button>
-                <button class="btn btn-danger btn-sm" (click)="deleteWard(ward)">Delete</button>
+                <button class="btn btn-primary btn-sm mr-2" (click)="editWardMode(item)">Edit</button>
+                <button class="btn btn-danger btn-sm" (click)="deleteWard(item)">Delete</button>
               </td>
             </tr>
           </tbody>
         </table>
         <div *ngIf="wards.length === 0" class="text-center mt-3">No wards found.</div>
       </div>
-      <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+      <!-- <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls> -->
 
     </div>
   

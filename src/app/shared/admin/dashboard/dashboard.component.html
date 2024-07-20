@@ -125,6 +125,48 @@
       </div>
       <!-- end col-3 -->
     </div>
-    <canvas id="myChart" style="width: 50px; height: 50px; border:2px solid black"></canvas>
-    <canvas id="doughnutChart"></canvas>
-</div>
+    <div class="row">
+      <!-- Admissions Chart -->
+      <div class="col-xl-6 col-md-12">
+        <div class="widget widget-stats">
+          <div class="stats-info">
+            <h4>Admissions Chart</h4>
+            <div [chart]="admissionsChart"></div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Beds Chart -->
+      <div class="col-xl-6 col-md-12">
+        <div class="widget widget-stats">
+          <div class="stats-info">
+            <h4>Beds Chart</h4>
+            <div [chart]="bedsChart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Row for Wards and Departments Charts -->
+    <div class="row">
+      <!-- Wards Chart -->
+      <div class="col-xl-6 col-md-12">
+        <div class="widget widget-stats">
+          <div class="stats-info">
+            <h4>Wards Chart</h4>
+            <div [chart]="wardsChart"></div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Departments Chart -->
+      <div class="col-xl-6 col-md-12">
+        <div class="widget widget-stats">
+          <div class="stats-info">
+            <h4>Departments Chart</h4>
+            <div [chart]="departmentsChart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
