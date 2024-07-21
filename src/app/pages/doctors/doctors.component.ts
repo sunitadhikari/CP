@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { Router } from '@angular/router';
+import { DoctorService } from '../../core/service/admin/doctor.service';
 
 @Component({
   selector: 'app-doctors',
@@ -11,64 +12,19 @@ import { Router } from '@angular/router';
   templateUrl: './doctors.component.html',
   styleUrl: './doctors.component.css'
 })
-export class DoctorsComponent {
-  constructor(private route: Router) { }
-  // @Input() doctor: any;
-  // doctors = [
-  //   {
-  //     id: 1,
-  //     name: 'Dr. John Doe',
-  //     specialty: 'Internal Medicine',
-  //     email: 'john.doe@example.com',
-  //     phone: '(123) 456-7890',
-  //     image: 'assets/doctor.jpg'
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Dr. Jane Smith',
-  //     specialty: 'Pediatrics',
-  //     email: 'jane.smith@example.com',
-  //     phone: '(123) 456-7891',
-  //     image: 'assets/doctor2.jpg'
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Dr. William Brown',
-  //     specialty: 'Cardiology',
-  //     email: 'william.brown@example.com',
-  //     phone: '(123) 456-7892',
-  //     image: 'assets/doctor.jpg'
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Dr. John Doe',
-  //     specialty: 'Internal Medicine',
-  //     email: 'john.doe@example.com',
-  //     phone: '(123) 456-7890',
-  //     image: 'assets/doctor1.jpg'
-  //   },
-  //   {
-  //     id: 5,
-  //     name: 'Dr. Jane Smith',
-  //     specialty: 'Pediatrics',
-  //     email: 'jane.smith@example.com',
-  //     phone: '(123) 456-7891',
-  //     image: 'assets/doctor2.jpg'
-  //   },
-  //   {
-  //     id: 6,
-  //     name: 'Dr. William Brown',
-  //     specialty: 'Cardiology',
-  //     email: 'william.brown@example.com',
-  //     phone: '(123) 456-7892',
-  //     image: 'assets/doctor1.jpg'
-  //   }
-  //   // Add more doctor objects as needed
-  // ];
+export class DoctorsComponent implements OnInit {
+  constructor(private route: Router, private doctorService: DoctorService) {
+  }
 
-  // submit(id?: number) {
-  //   if (id) {
-  //     this.route.navigate(['/doctorDetail', id])
-  //   }
-  // }
+  doctors: any[] = []
+  ngOnInit(): void {
+    this.getDoctor()
+  }
+  getDoctor() {
+    this.doctorService.getDoctor().subscribe((data) => {
+      console.log('data');
+      this.doctors = data;
+    })
+  }
+  submit(id: string) { }
 }

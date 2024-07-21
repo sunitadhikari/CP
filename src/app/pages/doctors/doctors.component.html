@@ -1,33 +1,25 @@
-<!-- <app-navbar></app-navbar>
+<app-navbar></app-navbar>
 
-<div class="container mt-4">
-    <div class="image-container w-100">
-        <img src="../../../assets/doctor.jpg" alt="Doctor" class=" w-100">
-        <div class="image-text text-success fw-bold ">Home / Doctors</div>
-    </div>
-</div>
-
-
-<div class="title mx-auto my-5 w-40" style="margin : auto">
-    <span class="text-success fw-bold fs-3 text-center">Our Doctors</span>
-    <p>Medicare National Hospital & Research Center’s team of medical experts compliments the high technology that is
+<section class="hero-section text-center text-white">
+    <div class="container welcome">
+        <!-- <h1 class="display-6 fw-bold">Our Doctors</h1> -->
+        <!-- <p class="lead ">Medicare National Hospital & Research Center’s team of medical experts compliments the high technology that is
         integrated into our treatment services. Their compassion, dedication and commitment give patients the peace of
-        mind that comes from knowing they are receiving the best care possible.</p>
-</div>
-<div class="container my-4">
-    <div class="row">
-        <div class="col-md-4" *ngFor="let doctor of doctors">
-            <img src="{{doctor.image}}" class="card-img-top" alt="{{doctor.name}}">
-            <div class="card-body">
-                <h5 class="card-title text-danger">{{doctor.name}}</h5>
-                <p class="card-text text-success fw-bold fs-3">{{doctor.specialty}}</p>
-                <p class="card-text">
-                    <small class="text-muted">Email: {{doctor.email}}</small><br>
-                    <small class="text-muted">Phone: {{doctor.phone}}</small>
-                </p>
-                <button type="submit" (click)="submit(doctor.id)"  class="btn btn-primary mb-4">View Profile</button>
+        mind that comes from knowing they are receiving the best care possible.</p> -->
+    </div>
+</section>
+<div class="container-fluid feature mx-auto">
+    <h2 class="text-center py-5 display-4 ">Doctors</h2>
+    <div class="row mx-auto">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of doctors">
+            <div class="card h-100 text-center p-3 mx-auto">
+                <div class="card-body">
+                    <img src="{{item.image}}" alt="">
+                    <h5 class="card-title display-6">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<app-footer></app-footer> -->
+<app-footer></app-footer>

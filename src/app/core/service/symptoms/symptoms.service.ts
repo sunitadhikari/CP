@@ -15,7 +15,7 @@ export class SymptomsService {
   private postSymptomsApiUrl = this.api_Url + 'postSymptoms'
   private postSymptomsApiReception = this.api_Url + 'getSymptoms'
   private getSymptomsApiUrl = this.api_Url + 'getSymptomsbyDoctor'
-  private getSymptomsPatientApiUrl = this.api_Url + 'getsymptomsbypatient`'
+  private getSymptomsPatientApiUrl = this.api_Url + 'getsymptomsbypatient'
 
   postSymptoms(data: any): Observable<any> {
     return this.http.post(this.postSymptomsApiUrl, data)

@@ -21,4 +21,18 @@
     height: 25vh; /* Sets the height to 25% of the viewport height */
     object-fit: cover;
 }
-
+.hero-section {
+    background: url('https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL2JlY29taW5nLWRvY3Rvci5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjgyOH19fQ==') no-repeat center center;
+    background-size: cover;
+    padding: 150px 0;
+  }
+  .welcome{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    opacity:0.8;
+    background-size: cover;
+    color: black;
+  }
+  .lead{
+    font-weight:600px;
+  }
