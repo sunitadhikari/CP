@@ -36,7 +36,7 @@ export class ReportService {
   }
 // Inside your report service
 getPatientById(patientId: string): Observable<any> {
-  return this.http.get<any>(`apiUrldoctorDischargeReport/${patientId}`);
+  return this.http.get<any>(`getDoctorReportApiUrl/${patientId}`);
 }
 
 }

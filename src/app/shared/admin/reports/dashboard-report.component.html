@@ -91,13 +91,11 @@
           <select class="form-control" id="patientName" formControlName="patientName" (change)="onPatientSelectForAdmin($event)">
             <option *ngFor="let patient of patientDataByDoctor" [value]="patient._id">{{ patient.patientName }}</option>
           </select>
-          
-     
         </div>
         <div class="form-group">
           <label for="patientAge">Patient Age</label>
           <input type="number" class="form-control" id="patientAge" formControlName="patientAge"
-            placeholder="Enter patient age" readonly required>
+            placeholder="Enter patient age" required>
         </div>
         <div class="form-group">
           <label for="patientGender">Patient Gender</label>
@@ -115,8 +113,7 @@
         <div class="form-group">
           <label for="dischargeDate">Discharge Date</label>
           <input type="date" class="form-control" id="dischargeDate" formControlName="dischargeDate" required>
-          <div
-            *ngIf="hospitalDischargeReportForm.hasError('dateGapInvalid') && hospitalDischargeReportForm.get('dischargeDate')?.touched">
+          <div *ngIf="hospitalDischargeReportForm.hasError('dateGapInvalid') && hospitalDischargeReportForm.get('dischargeDate')?.touched">
             <small class="text-danger">Discharge date must be 1-2 days after the admission date.</small>
           </div>
         </div>
@@ -142,6 +139,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit Report</button>
       </form>
+      
       <div class="container">
         <div class="row">
           <div class="col">
@@ -154,6 +152,7 @@
                   <th>Admission Date</th>
                   <th>Discharge Date</th>
                   <th>Doctor</th>
+                  <th>Follow Plan</th>
                   <!-- Add more headers as per your report structure -->
                 </tr>
               </thead>
@@ -164,6 +163,7 @@
                   <td>{{ report.admissionDate | date }}</td>
                   <td>{{ report.dischargeDate | date }}</td>
                   <td>{{ report.doctorName }}</td>
+                  <td>{{ report.followUpInstructions }}</td>
                   <!-- Add more columns as per your report structure -->
                 </tr>
               </tbody>

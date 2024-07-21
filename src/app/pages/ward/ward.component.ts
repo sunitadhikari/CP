@@ -63,10 +63,14 @@ export class WardComponent implements OnInit {
         alertify.success('Ward already exits')
 
         this.isLoading = false;
+        this.loadWards();
+
       },
       (error) => {
         this.error = error.message;
         this.isLoading = false;
+        this.loadWards();
+
       }
     );
   }
@@ -118,10 +122,14 @@ export class WardComponent implements OnInit {
         this.wards[index] = data;
         this.editWard = null;
         this.isLoading = false;
+        this.loadWards();
+
       },
       (error) => {
         this.error = error.message;
         this.isLoading = false;
+        this.loadWards();
+
       }
     );
   }
@@ -132,10 +140,14 @@ export class WardComponent implements OnInit {
       () => {
         this.wards = this.wards.filter((w) => w._id !== ward._id);
         this.isLoading = false;
+        this.loadWards();
+
       },
       (error) => {
         this.error = error.message;
         this.isLoading = false;
+        this.loadWards();
+
       }
     );
   }

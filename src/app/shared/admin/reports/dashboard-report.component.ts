@@ -54,20 +54,26 @@ export class DashboardReportComponent implements OnInit{
       followUpPlan: ['']
     });
   
-    this.userService.getPatients().subscribe((res)=>{
-      console.log(res);
-      this.patientData=res
+    // this.userService.getPatients().subscribe((res)=>{
+    //   console.log(res);
+    //   this.patientData=res
       
-    })
+    // })
     this.reportservice.getDischargeReportsByDoctor().subscribe((res)=>{
       console.log(res);
       this.patientDataByDoctor=res
 
     })
+    this.reportservice.getHospitalDischargeReports().subscribe((res)=>{
+      console.log(res);
+      this.patientData=res
+
+    })
 
     this.hospitalDischargeReportForm = this.fb.group({
       patientName: ['', Validators.required],
-      patientAge: [{ value: '', disabled: true }, Validators.required],
+      // patientAge: [{ value: '', disabled: true }, Validators.required],
+      patientAge: ['', Validators.required],
       patientGender: ['', Validators.required],
       admissionDate: ['', Validators.required],
       dischargeDate: ['', Validators.required],
@@ -179,34 +185,36 @@ fetchAdmittedPatients(): void {
   // }
   onPatientSelectForAdmin(event: Event): void {
     const selectElement = event.target as HTMLSelectElement; // Cast the event target to HTMLSelectElement
-    const patientId = selectElement.value; // Get the selected value
+    const selectedPatientId = selectElement.value;
   
-    if (patientId) {
-      this.reportservice.getPatientById(patientId).subscribe(
-        patient => {
-          this.patchFormWithPatientDataForAdmin(patient);
-        },
-        error => {
-          console.error('Error fetching patient details:', error);
-        }
-      );
-    } else {
-      this.hospitalDischargeReportForm.reset();
+    const selectedPatient = this.patientDataByDoctor.find(patient => patient._id === selectedPatientId);
+    if (selectedPatient) {
+      this.hospitalDischargeReportForm.patchValue({
+        patientName: selectedPatient.patientName,
+        patientAge: selectedPatient.patientAge,
+        patientGender: selectedPatient.gender,
+        admissionDate: selectedPatient.admittedAt.substring(0, 10),  // Format date if needed
+        dischargeDate: selectedPatient.dischargeDate.substring(0, 10), // Format date if needed
+        finalDiagnosis: selectedPatient.diagnosis,
+        summaryOfTreatment: selectedPatient.treatmentGiven,
+        dischargeMedications: selectedPatient.dischargeInstructions,
+        followUpInstructions: selectedPatient.followUpPlan,
+      });
     }
   }
-  patchFormWithPatientDataForAdmin(patient: any): void {
-    this.hospitalDischargeReportForm.patchValue({
-      patientName: `${patient.patientName} `,
-      patientAge: this.calculateAge(patient.dob),
-      patientGender: patient.gender,
-      admissionDate: patient.admissionDate ? new Date(patient.admissionDate).toISOString().split('T')[0] : '',
-      dischargeDate: patient.dischargeDate ? new Date(patient.dischargeDate).toISOString().split('T')[0] : '',
-      finalDiagnosis: patient.finalDiagnosis || '',
-      summaryOfTreatment: patient.summaryOfTreatment || '',
-      dischargeMedications: patient.dischargeMedications || '',
-      followUpInstructions: patient.followUpInstructions || ''
-    });
-  }
+  // patchFormWithPatientDataForAdmin(patient: any): void {
+  //   this.hospitalDischargeReportForm.patchValue({
+  //     patientName: `${patient.patientName} `,
+  //     patientAge: this.calculateAge(patient.dob),
+  //     patientGender: patient.gender,
+  //     admissionDate: patient.admissionDate ? new Date(patient.admissionDate).toISOString().split('T')[0] : '',
+  //     dischargeDate: patient.dischargeDate ? new Date(patient.dischargeDate).toISOString().split('T')[0] : '',
+  //     finalDiagnosis: patient.finalDiagnosis || '',
+  //     summaryOfTreatment: patient.summaryOfTreatment || '',
+  //     dischargeMedications: patient.dischargeMedications || '',
+  //     followUpInstructions: patient.followUpInstructions || ''
+  //   });
+  // }
 
 calculateAge(dob: string): number {
   const birthDate = new Date(dob);
