@@ -33,7 +33,7 @@ export class DepartmentComponentimplements {
       departmentName: ['', Validators.required],
       mainDepartment: ['', Validators.required],
       flaticon: [''],
-      description: [''],
+      description: ['', Validators.required],
       status: ['active', Validators.required]
     });
     this.getDepartmentList()
@@ -88,6 +88,7 @@ export class DepartmentComponentimplements {
             this.editingDepartmentId = null;
             this.departmentForm.reset();
             this.getDepartmentList();
+
           },
           (error) => {
             console.error('Error updating department:', error);
@@ -108,12 +109,15 @@ export class DepartmentComponentimplements {
           }
         );
       }
+      alertify.success('Department added successfully.')
+
     } else {
       console.error('Form is invalid.');
       this.confirmationService.showErrorMessage('Form is invalid');
 
       
     }
+
   }
 
   editDepartment(department: any): void {
