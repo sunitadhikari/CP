@@ -10,16 +10,58 @@
 </section>
 <div class="container-fluid feature mx-auto">
     <h2 class="text-center py-5 display-4 ">Doctors</h2>
-    <div class="row mx-auto">
-        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of doctors">
+    <!-- <div class="row mx-auto">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let doctor of doctors">
             <div class="card h-100 text-center p-3 mx-auto">
                 <div class="card-body">
-                    <img src="{{item.image}}" alt="">
-                    <h5 class="card-title display-6">{{ item.title }}</h5>
-                    <p class="card-text">{{ item.description }}</p>
+                    <img src="{{doctor.image}}" alt="">
+                    <h5 class="card-title display-6">{{ doctor.title }}</h5>
+                    <p class="card-text">{{ doctor.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+<!-- <div class="row">
+    <div class="col-md-4 col-sm-6" *ngFor="let doctor of doctors">
+      <div class="card mb-4">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{ doctor.picture }}" class="card-img" alt="{{ doctor.name }}">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ doctor.firstName }} {{doctor.lastName}}</h5>
+              <p class="card-text">{{ doctor.department }}</p>
+              <p class="card-text">{{ doctor.status }}</p>
+              <p class="card-text">{{ doctor.biography }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+<div class="container-fluid background">
+    <div class="row mx-auto container ">
+        <div class="col-md-4 col-sm-6" *ngFor="let item of try">
+            <div class="card mb-4">
+                <div class="row no-gutters">
+                    <div class="display flex  mx-auto">
+                        <img [src]="item.image" class="card-img-top " alt="{{ item.name }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{ item.name }}</h5>
+                            <p class="card-text"><span class="fw-bold">Department: </span>{{ item.department }}</p>
+                            <p class="card-text">{{ item.active }}</p>
+                            <p class="card-text">{{ item.biography }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <app-footer></app-footer>

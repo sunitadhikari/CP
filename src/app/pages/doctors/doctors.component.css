@@ -36,3 +36,56 @@
   .lead{
     font-weight:600px;
   }
+
+  .card {
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+  
+  .card-img {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  .card {
+    max-width: 300px;
+    margin: 10px;
+  }
+  
+  .card-img-top {
+    
+    height: auto;
+    object-fit: cover;
+    /* Set a fixed height to ensure all images have the same size */
+    height: 150px;
+  }
+  
+  .biography {
+    max-height: 100px;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .background{
+    background-image: url('https://st2.depositphotos.com/2065849/7859/i/450/depositphotos_78594982-stock-photo-medical-drip-on-the-background.jpg');
+  }
+  
+  
