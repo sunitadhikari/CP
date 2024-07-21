@@ -13,12 +13,20 @@
             <label for="departmentName">Department Name *</label>
             <input type="text" class="form-control" id="departmentName" formControlName="departmentName"
               placeholder="Enter department name" required>
+              <div *ngIf="departmentForm.get('departmentName')?.invalid && departmentForm.get('departmentName')?.touched"
+                class="text-danger">
+                Department Name is required
+              </div>
           </div>
           <div class="form-group">
             <label for="mainDepartment">Main Department *</label>
             <input type="text" class="form-control" id="mainDepartment" formControlName="mainDepartment"
               placeholder="Enter main department name" required>
-          </div>
+              <div *ngIf="departmentForm.get('mainDepartment')?.invalid && departmentForm.get('mainDepartment')?.touched"
+              class="text-danger">
+              Main Department is required
+            </div>
+            </div>
           <div class="form-group">
             <label for="flaticon">Flaticon</label>
             <input type="text" class="form-control" id="flaticon" formControlName="flaticon"
@@ -28,6 +36,10 @@
             <label for="description">Description</label>
             <textarea class="form-control" id="description" formControlName="description" rows="3"
               placeholder="Enter description"></textarea>
+              <div *ngIf="departmentForm.get('description')?.invalid && departmentForm.get('description')?.touched"
+                class="text-danger">
+                Description is required
+              </div>
           </div>
           <div class="form-group">
             <label>Status</label>
