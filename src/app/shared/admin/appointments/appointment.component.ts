@@ -40,6 +40,7 @@ export class AppointmentComponent implements OnInit {
   opdReportsinDoctor: any[]=[];
   currentPage: number = 1;
   itemsPerPage: number = 10;
+  p: number = 1;
 
 
   constructor(
@@ -177,7 +178,7 @@ export class AppointmentComponent implements OnInit {
   getAppointmentTable() {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
-      this.appointmentTable = res.appointmentByName
+      this.appointmentTable = res.userAppointments
     })
   }
   deleteAppointment(id: string) {
@@ -193,8 +194,7 @@ export class AppointmentComponent implements OnInit {
       }
     );
   }
-
-  makePayment(item: any): void {
+  makePayment(item: any, amount: number): void {
     const config = {
       publicKey: 'test_public_key_0275cc5e2bae42fb890536aae01e9e73',
       productIdentity: item._id,
@@ -202,22 +202,27 @@ export class AppointmentComponent implements OnInit {
       productUrl: 'http://example.com/appointment',
       eventHandler: {
         onSuccess: (payload: any) => {
-          this.updatePaymentStatus(item._id, payload);
+          this.updatePaymentStatus(item._id, payload, amount);
         },
         onError: (error: any) => {
           alertify.error('Payment failed');
         },
-        onClose: () => { }
+        onClose: () => {}
       },
       paymentPreference: ['KHALTI', 'EBANKING', 'MOBILE_BANKING', 'CONNECT_IPS', 'SCT']
     };
-
+  
     const checkout = new KhaltiCheckout(config);
-    checkout.show({ amount: 1000 });
+    checkout.show({ amount: 10 * 100 }); // Khalti amount is in paisa
   }
-
-  updatePaymentStatus(id: string, payload: any): void {
-    this.appointmentService.updatePaymentStatus(id, payload).subscribe(
+  
+  updatePaymentStatus(id: string, payload: any, amount: number): void {
+    const paymentData = {
+      ...payload,
+      amount: amount
+    };
+    
+    this.appointmentService.updatePaymentStatus(id, paymentData).subscribe(
       (response: any) => {
         alertify.success('Payment successful');
         this.loadInitialData();
@@ -227,6 +232,39 @@ export class AppointmentComponent implements OnInit {
       }
     );
   }
+  // makePayment(item: any): void {
+  //   const config = {
+  //     publicKey: 'test_public_key_0275cc5e2bae42fb890536aae01e9e73',
+  //     productIdentity: item._id,
+  //     productName: 'Appointment Payment',
+  //     productUrl: 'http://example.com/appointment',
+  //     eventHandler: {
+  //       onSuccess: (payload: any) => {
+  //         this.updatePaymentStatus(item._id, payload);
+  //       },
+  //       onError: (error: any) => {
+  //         alertify.error('Payment failed');
+  //       },
+  //       onClose: () => { }
+  //     },
+  //     paymentPreference: ['KHALTI', 'EBANKING', 'MOBILE_BANKING', 'CONNECT_IPS', 'SCT']
+  //   };
+
+  //   const checkout = new KhaltiCheckout(config);
+  //   checkout.show({ amount: 1000 });
+  // }
+
+  // updatePaymentStatus(id: string, payload: any): void {
+  //   this.appointmentService.updatePaymentStatus(id, payload).subscribe(
+  //     (response: any) => {
+  //       alertify.success('Payment successful');
+  //       this.loadInitialData();
+  //     },
+  //     (error: any) => {
+  //       alertify.error('Payment status update failed');
+  //     }
+  //   );
+  // }
   openModal(appointment: any, mode: 'view' | 'prescribe'): void {
     this.selectedAppointment = appointment;
     this.modalMode = mode;
