@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { PrescriptionService } from '../../../core/service/prescription-Service/prescription.service';
+import { ConfirmationService } from '../../confirmation/confirmation.service';
 
 @Component({
   selector: 'app-appointment',
@@ -50,6 +51,7 @@ export class AppointmentComponent implements OnInit {
     private departmentService: DepartmentService,
     private prescriptionService: PrescriptionService,
     private doctorService: DoctorService,
+    private confirmationService : ConfirmationService
   ) {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -178,7 +180,7 @@ export class AppointmentComponent implements OnInit {
   getAppointmentTable() {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
-      this.appointmentTable = res.userAppointments
+      this.appointmentTable = res.appointmentByName
     })
   }
   deleteAppointment(id: string) {

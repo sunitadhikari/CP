@@ -91,11 +91,10 @@
   .biography {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3; /* Change this number to adjust the number of visible lines */
+    -webkit-line-clamp: 5; 
     overflow: hidden;
     text-overflow: ellipsis;
   }
   
   .biography.expanded {
-    -webkit-line-clamp: unset; /* Remove the line clamp when expanded */
-  }
+    -webkit-line-clamp: unset; }

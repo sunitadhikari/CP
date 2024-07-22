@@ -52,7 +52,7 @@ export class LabComponent implements OnInit {
     if (this.labForm.valid) {
       this.userService.postRegister(this.labForm.value).subscribe((data) => {
         console.log(data);
-        alertify.success('Form Valid')
+        alertify.success('Check your mail for validation')
         this.labForm.reset()
       })
     }
