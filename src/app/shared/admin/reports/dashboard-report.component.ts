@@ -1,41 +1,57 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { ReportService } from '../../../core/service/report-service/report.service';
 import { AppointmentService } from '../../../core/service/appointment/appointment.service';
 import { UserService } from '../../../core/service/user/user.service';
-import { NgxPaginationModule } from 'ngx-pagination'; 
+import { NgxPaginationModule } from 'ngx-pagination';
+import * as alertify from 'alertifyjs';
+import KhaltiCheckout from "khalti-checkout-web";
 import { HttpClient } from '@angular/common/http';
+import { BillService } from '../../../core/service/bill-service/bill.service';
+
 
 
 @Component({
   selector: 'app-dashboard-report',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,NgxPaginationModule],
+  imports: [CommonModule, ReactiveFormsModule, NgxPaginationModule, FormsModule],
   templateUrl: './dashboard-report.component.html',
   styleUrl: './dashboard-report.component.css'
 })
 
-export class DashboardReportComponent implements OnInit{
-  userRole:string|null |undefined;
+export class DashboardReportComponent implements OnInit {
+  userRole: string | null | undefined;
   doctorDischargeReportForm!: FormGroup;
   hospitalDischargeReportForm!: FormGroup;
-  patientData:any[]=[]
-  patientDataByDoctor :any[]=[]
-  Admittedpatients:any[]=[]
-  hospitalReports: any[] = []; 
+  patientData: any[] = []
+  patientDataByDoctor: any[] = []
+  Admittedpatients: any[] = []
+  hospitalReports: any[] = [];
   loading: boolean = false;
   currentPage: number = 1;
   itemsPerPage: number = 10;
   selectedPatient: any;
 
-  constructor(private fb:FormBuilder,private reportservice:ReportService,private appointmetnService:AppointmentService
-,private userService:UserService,private http: HttpClient
+  cashDetails: string = '';
+  billForm!: FormGroup;
+  selectedReport: any;
+  paymentType: string = 'cash';
+  billGenerated: boolean = false;
+  paidAmount: number = 0;
 
-  ){}
+
+  constructor(
+    private fb: FormBuilder,
+    private reportservice: ReportService,
+    private appointmetnService: AppointmentService,
+    private userService: UserService, private http: HttpClient,
+    private billService: BillService
+
+  ) { }
 
   ngOnInit(): void {
-    this.userRole= localStorage.getItem('userRole')
+    this.userRole = localStorage.getItem('userRole')
     this.doctorDischargeReportForm = this.fb.group({
       patientName: [{ value: '', disabled: true }],
       patientAge: [{ value: '', disabled: true }],
@@ -51,25 +67,39 @@ export class DashboardReportComponent implements OnInit{
       diagnosis: [''],
       treatmentGiven: [''],
       dischargeInstructions: [''],
-      followUpPlan: ['']
+      followUpPlan: [''],
+      dischargeRequest: [true]
     });
-  
+
     // this.userService.getPatients().subscribe((res)=>{
     //   console.log(res);
     //   this.patientData=res
-      
+
     // })
-    this.reportservice.getDischargeReportsByDoctor().subscribe((res)=>{
+    this.reportservice.getDischargeReportsByDoctor().subscribe((res) => {
       console.log(res);
-      this.patientDataByDoctor=res
+      this.patientDataByDoctor = res
 
     })
-    this.reportservice.getHospitalDischargeReports().subscribe((res)=>{
+    this.reportservice.getHospitalDischargeReports().subscribe((res) => {
       console.log(res);
-      this.patientData=res
+      this.patientData = res
 
     })
+    this.billForm = this.fb.group({
+      patientName: [{ value: '' }, Validators.required],
+      patientAge: [{ value: '' }, Validators.required],
+      patientGender: [{ value: '' }, Validators.required],
+      admissionDate: [{ value: '' }, Validators.required],
+      dischargeDate: [{ value: '' }, Validators.required],
+      finalDiagnosis: [{ value: '' }, Validators.required],
+      summaryOfTreatment: [{ value: '' }, Validators.required],
+      dischargeMedications: [{ value: '' }, Validators.required],
+      followUpInstructions: [{ value: '' }, Validators.required],
+      paymentType: ['cash', Validators.required],
+      amount: ['', Validators.required]
 
+    });
     this.hospitalDischargeReportForm = this.fb.group({
       patientName: ['', Validators.required],
       // patientAge: [{ value: '', disabled: true }, Validators.required],
@@ -80,20 +110,17 @@ export class DashboardReportComponent implements OnInit{
       finalDiagnosis: ['', Validators.required],
       summaryOfTreatment: ['', Validators.required],
       dischargeMedications: ['', Validators.required],
-      followUpInstructions: ['', Validators.required]
-    }, { validators: this.dateGapValidator() });
+      followUpInstructions: ['', Validators.required],
+      hospitalDischargeRequest: [true]
+    },);
 
-    // this.hospitalDischargeReportForm.get('patientName')?.valueChanges.subscribe((patientId) => {
-    //   this.onPatientSelect(patientId);
-      
-    // });
     this.hospitalDischargeReportForm.get('patientName')?.valueChanges.subscribe((patientId) => {
       this.onPatientSelectForAdmin(patientId);
-      
+
     });
     this.fetchHospitalReports();
     this.fetchAdmittedPatients();
-    
+
 
   }
 
@@ -130,7 +157,7 @@ export class DashboardReportComponent implements OnInit{
     this.loading = true;
     this.reportservice.getHospitalDischargeReports().subscribe(
       (data) => {
-        this.hospitalReports = data; 
+        this.hospitalReports = data;
 
       },
       (error) => {
@@ -138,20 +165,112 @@ export class DashboardReportComponent implements OnInit{
       }
     );
   }
- 
+
+  openModal(report: any): void {
+    this.billForm.patchValue({
+      patientName: report.patientName,
+      patientAge: report.patientAge,
+      patientGender: report.patientGender,
+      admissionDate: report.admissionDate,
+      dischargeDate: report.dischargeDate,
+      finalDiagnosis: report.finalDiagnosis,
+      summaryOfTreatment: report.summaryOfTreatment,
+      dischargeMedications: report.dischargeMedications,
+      followUpInstructions: report.followUpInstructions
+    });
+    this.billGenerated = false; // Reset billGenerated when opening the modal
+  }
+
+  confirmBill(): void {
+    if (this.billForm.valid) {
+      const billData = this.billForm.value;
+      console.log('Bill Data:', billData); // Check the complete bill data
+      debugger; // Use this to step through and inspect billData
+      // Handle bill data, e.g., send it to the backend
+      this.billService.saveBill(billData).subscribe(
+        response => {
+          console.log('Bill saved successfully:', response);
+          this.billGenerated = true;
+          alertify.success('Cash payment processed successfully.');
+        },
+        error => {
+          console.error('Failed to save bill', error);
+          alertify.error('Failed to save bill');
+          this.billGenerated = true;
+          this.paidAmount = parseFloat(billData.amount);
+        }
+      );
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+  
+  // processCashPayment(): void {
+  //   const formValues = this.billForm.value;
+  //   const billData = {
+  //     ...formValues,
+  //     amountPaid: parseFloat(formValues.cashDetails),
+  //     paymentType: 'cash'
+  //   };
+  //   console.log(billData);
+  
+  //   this.billService.saveBill(billData).subscribe(
+  //     response => {
+  //       console.log('Bill saved successfully:', response);
+  //       this.billGenerated = true;
+  //       alertify.success('Cash payment processed successfully.');
+  //     },
+  //     error => {
+  //       console.error('Failed to save bill', error);
+  //       alertify.error('Failed to save bill');
+  //     }
+  //   );
+  // }
   
 
-fetchAdmittedPatients(): void {
-  this.reportservice.getAdmnittedPatientReports().subscribe((res)=>{
-    this.Admittedpatients=res.patient
-  })
-}
-// onPatientSelect(patient: any): void {
-//   this.selectedPatient = patient;
-//   this.patchFormWithPatientData(patient);
-// }
+  // savePaymentDetails(paymentType: string, paymentData: any): void {
+  //   const billData = {
+  //     ...this.billForm.value,
+  //     paymentType,
+  //     paymentData
+  //   };
+  //   debugger
+  //   this.billService.saveBill(billData).subscribe(
+  //     response => {
+  //       console.log('Bill saved:', response);
+  //       this.billGenerated = true;
+  //     },
+  //     error => {
+  //       console.error('Failed to save bill', error);
+  //     }
+  //   );
+  // }
 
- patchFormWithPatientData(patient: any): void {
+  generateAndDownloadBill(billData: any): void {
+    this.http.post('/api/generate-bill', billData, { responseType: 'blob' }).subscribe(
+      (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'hospital-bill.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      (error) => {
+        alertify.error('Failed to generate and download bill');
+      }
+    );
+  }
+
+  
+  
+  fetchAdmittedPatients(): void {
+    this.reportservice.getAdmnittedPatientReports().subscribe((res) => {
+      this.Admittedpatients = res.patient
+    })
+  }
+
+  patchFormWithPatientData(patient: any): void {
     this.doctorDischargeReportForm.patchValue({
       patientName: `${patient.firstName} ${patient.lastName}`,
       patientAge: this.calculateAge(patient.dob),
@@ -166,94 +285,91 @@ fetchAdmittedPatients(): void {
       // dischargeDate: patient.dischargeDate ? new Date(patient.dischargeDate).toLocaleDateString() : ''
     });
   }
-  // onPatientSelectForAdmin(event: Event): void {
-  //   const target = event.target as HTMLSelectElement;
-  //   const patientId = target.value;
-  
-  //   if (patientId) {
-  //     this.reportservice.getPatientById(patientId).subscribe(
-  //       patient => {
-  //         this.patchFormWithPatientDataForAdmin(patient);
-  //       },
-  //       error => {
-  //         console.error('Error fetching patient details:', error);
-  //       }
-  //     );
-  //   } else {
-  //     this.hospitalDischargeReportForm.reset();
-  //   }
-  // }
+
   onPatientSelectForAdmin(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement; // Cast the event target to HTMLSelectElement
+    console.log('Event:', event); // Debugging
+    const selectElement = event.target as HTMLSelectElement;
+
+    if (!selectElement || !selectElement.value) {
+      console.error('Invalid event target:', event.target);
+      return;
+    }
+
     const selectedPatientId = selectElement.value;
-  
-    const selectedPatient = this.patientDataByDoctor.find(patient => patient._id === selectedPatientId);
+    console.log('Selected Patient ID:', selectedPatientId); // Debugging
+    const selectedPatient = this.patientDataByDoctor?.find(patient => patient._id === selectedPatientId);
+
     if (selectedPatient) {
+      console.log('Selected Patient:', selectedPatient); // Debugging
       this.hospitalDischargeReportForm.patchValue({
         patientName: selectedPatient.patientName,
         patientAge: selectedPatient.patientAge,
         patientGender: selectedPatient.gender,
-        admissionDate: selectedPatient.admittedAt.substring(0, 10),  // Format date if needed
-        dischargeDate: selectedPatient.dischargeDate.substring(0, 10), // Format date if needed
+        admissionDate: selectedPatient.admittedAt.substring(0, 10),
+        dischargeDate: selectedPatient.dischargeDate?.substring(0, 10),
         finalDiagnosis: selectedPatient.diagnosis,
         summaryOfTreatment: selectedPatient.treatmentGiven,
         dischargeMedications: selectedPatient.dischargeInstructions,
         followUpInstructions: selectedPatient.followUpPlan,
       });
+    } else {
+      console.error('Selected patient not found');
     }
   }
-  // patchFormWithPatientDataForAdmin(patient: any): void {
-  //   this.hospitalDischargeReportForm.patchValue({
-  //     patientName: `${patient.patientName} `,
-  //     patientAge: this.calculateAge(patient.dob),
-  //     patientGender: patient.gender,
-  //     admissionDate: patient.admissionDate ? new Date(patient.admissionDate).toISOString().split('T')[0] : '',
-  //     dischargeDate: patient.dischargeDate ? new Date(patient.dischargeDate).toISOString().split('T')[0] : '',
-  //     finalDiagnosis: patient.finalDiagnosis || '',
-  //     summaryOfTreatment: patient.summaryOfTreatment || '',
-  //     dischargeMedications: patient.dischargeMedications || '',
-  //     followUpInstructions: patient.followUpInstructions || ''
-  //   });
-  // }
 
-calculateAge(dob: string): number {
-  const birthDate = new Date(dob);
-  const ageDifMs = Date.now() - birthDate.getTime();
-  const ageDate = new Date(ageDifMs); 
-  return Math.abs(ageDate.getUTCFullYear() - 1970);
-}
-submitDoctorReport(): void {
-  this.doctorDischargeReportForm.enable();  // Enable all controls temporarily
 
-  if (this.doctorDischargeReportForm.valid) {
-    this.reportservice.postDoctorReport(this.doctorDischargeReportForm.value)
-      .subscribe(
+
+  calculateAge(dob: string): number {
+    const birthDate = new Date(dob);
+    const ageDifMs = Date.now() - birthDate.getTime();
+    const ageDate = new Date(ageDifMs);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+  submitDoctorReport(): void {
+    this.doctorDischargeReportForm.enable();  // Enable all controls temporarily
+
+    if (this.doctorDischargeReportForm.valid) {
+      debugger
+      this.reportservice.postDoctorReport(this.doctorDischargeReportForm.value)
+        .subscribe(
+          (response) => {
+            console.log('Doctors discharge report submitted successfully:', response);
+            this.doctorDischargeReportForm.reset();
+            this.doctorDischargeReportForm.disable();  // Disable controls again
+          },
+          (error) => {
+            debugger
+
+            console.error('Error submitting doctors discharge report:', error);
+            this.doctorDischargeReportForm.disable();  // Disable controls if there's an error
+          }
+        );
+    } else {
+      console.error('Form is invalid!');
+      this.doctorDischargeReportForm.disable();  // Disable controls if form is invalid
+    }
+  }
+  submitHospitalReport(): void {
+    alert('button is clicked')
+    const value = this.hospitalDischargeReportForm.valid
+    debugger
+    if (this.hospitalDischargeReportForm.valid) {
+      debugger
+
+      this.reportservice.postHospitalReport(this.hospitalDischargeReportForm.value).subscribe(
         (response) => {
-          console.log('Doctors discharge report submitted successfully:', response);
-          this.doctorDischargeReportForm.reset();
-          this.doctorDischargeReportForm.disable();  // Disable controls again
+          console.log('Hospital discharge report submitted successfully:', response);
+          this.hospitalDischargeReportForm.reset();
         },
         (error) => {
-          console.error('Error submitting doctors discharge report:', error);
-          this.doctorDischargeReportForm.disable();  // Disable controls if there's an error
+          debugger
+
+          console.error('Error submitting hospital discharge report:', error);
         }
       );
-  } else {
-    console.error('Form is invalid!');
-    this.doctorDischargeReportForm.disable();  // Disable controls if form is invalid
+    }
   }
-}
-submitHospitalReport(): void {
-  if (this.hospitalDischargeReportForm.valid) {
-    this.reportservice.postHospitalReport(this.hospitalDischargeReportForm.value).subscribe(
-      (response) => {
-        console.log('Hospital discharge report submitted successfully:', response);
-        this.hospitalDischargeReportForm.reset();
-      },
-      (error) => {
-        console.error('Error submitting hospital discharge report:', error);
-      }
-    );
+  closeModal(): void {
+
   }
-}
 }
