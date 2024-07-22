@@ -96,6 +96,12 @@
                 </ng-container>
                 <ng-container *ngIf="userRole === 'labtec'">
                     <li class="nav-header">Lab Techn</li>
+                    <li class="py-2">
+                        <a (click)="showSection('report')">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
                    
                     <li class="py-2">
                         <a (click)="showSection('send-mail')">
@@ -107,12 +113,6 @@
                         <a (click)="showSection('profile')">
                             <i class="fas fa-user"></i>
                             <span>Profile</span>
-                        </a>
-                    </li>
-                    <li class="py-2">
-                        <a (click)="showSection('report')">
-                            <i class="fas fa-file-alt"></i>
-                            <span>Report</span>
                         </a>
                     </li>
                     <!-- <li class="py-2">
@@ -251,6 +251,12 @@
                         </a>
                     </li>
                     <li class="py-2">
+                        <a (click)="showSection('appointment')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Appointment</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
                         <a (click)="showSection('department')">
                             <i class="fas fa-building"></i>
                             <span>Department</span>
@@ -380,7 +386,7 @@
             </div>
             <div *ngIf="currentSection === 'patientList' ">
                 <app-patient-list></app-patient-list>
-            </div>
+            </div>f
             <div *ngIf="currentSection === 'appointment'">
                 <app-appointment></app-appointment>
             </div>
@@ -388,7 +394,7 @@
                 <app-room-management></app-room-management>
             </div>
             <div *ngIf="currentSection === 'report'">
-                <app-dashboard-report></app-dashboard-report>
+                <app-dashboard-report></app-dashboard-report>..
             </div>
             <div *ngIf="currentSection=== 'notification'">
                 <app-dashboard-notification></app-dashboard-notification>
