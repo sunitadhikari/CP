@@ -88,4 +88,14 @@
     background-image: url('https://st2.depositphotos.com/2065849/7859/i/450/depositphotos_78594982-stock-photo-medical-drip-on-the-background.jpg');
   }
   
+  .biography {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Change this number to adjust the number of visible lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   
+  .biography.expanded {
+    -webkit-line-clamp: unset; /* Remove the line clamp when expanded */
+  }
