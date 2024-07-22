@@ -80,7 +80,7 @@ getDocList(){
   getSymptomsPatient() {
     this.symptomsService.getSymptomsPatient().subscribe((response) => {
       console.log(response);
-      this.patientTable = response;
+      this.patientTable = response.Symptoms;
     })
   }
   getSymptomsDoctor(){
