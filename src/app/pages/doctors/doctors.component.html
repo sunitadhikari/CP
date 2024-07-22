@@ -2,10 +2,6 @@
 
 <section class="hero-section text-center text-white">
     <div class="container welcome">
-        <!-- <h1 class="display-6 fw-bold">Our Doctors</h1> -->
-        <!-- <p class="lead ">Medicare National Hospital & Research Center’s team of medical experts compliments the high technology that is
-        integrated into our treatment services. Their compassion, dedication and commitment give patients the peace of
-        mind that comes from knowing they are receiving the best care possible.</p> -->
     </div>
 </section>
 <div class="container-fluid feature mx-auto">
@@ -43,19 +39,23 @@
     </div>
   </div> -->
 <div class="container-fluid background">
-    <div class="row mx-auto container ">
-        <div class="col-md-4 col-sm-6" *ngFor="let item of try">
+    <div class="row mx-auto ">
+        <div class="col-md-3 col-sm-6" *ngFor="let item of doctors">
             <div class="card mb-4">
                 <div class="row no-gutters">
                     <div class="display flex  mx-auto">
-                        <img [src]="item.image" class="card-img-top " alt="{{ item.name }}">
+                        <img [src]="item.picture" class="card-img-top h-20 w-100" alt="{{ item.name }}">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title text-center">{{ item.name }}</h5>
+                            <h5 class="card-title text-center">{{ item.firstName }} {{item.lastName}}</h5>
                             <p class="card-text"><span class="fw-bold">Department: </span>{{ item.department }}</p>
-                            <p class="card-text">{{ item.active }}</p>
-                            <p class="card-text">{{ item.biography }}</p>
+                            <p class="card-text" [ngClass]="{'expanded':isExpanded}">{{ item.biography }}</p>
+                            <a href="" (click)="toogleBiography()">{{isExpanded ? 'See Less': 'See More' }}</a>
+                            <p class="card-text fw-bold">{{ item.active }}</p>
+                            <a href="dashboard" class="mx-auto justify-content-center ">
+                            <button type="submit"  class="bg-success" (submit)="submit()">Book Appointment</button>
+                            </a>
                         </div>
                     </div>
                 </div>

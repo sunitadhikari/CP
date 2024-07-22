@@ -10,13 +10,14 @@ import { HttpClient } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { PrescriptionService } from '../../../core/service/prescription-Service/prescription.service';
+import { ConfirmationService } from '../../confirmation/confirmation.service';
 
 @Component({
   selector: 'app-appointment',
   standalone: true,
   templateUrl: './appointment.component.html',
   styleUrls: ['./appointment.component.css'],
-  imports: [CommonModule, NgIf, ReactiveFormsModule, FormsModule,NgxPaginationModule]
+  imports: [CommonModule, NgIf, ReactiveFormsModule, FormsModule, NgxPaginationModule]
 })
 export class AppointmentComponent implements OnInit {
   appointmentForm!: FormGroup;
@@ -37,7 +38,7 @@ export class AppointmentComponent implements OnInit {
   modalMode: 'view' | 'prescribe' = 'view';
   prescription: any; // Variable to hold prescription data
   opdReports: any[] = [];
-  opdReportsinDoctor: any[]=[];
+  opdReportsinDoctor: any[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 10;
   p: number = 1;
@@ -50,6 +51,7 @@ export class AppointmentComponent implements OnInit {
     private departmentService: DepartmentService,
     private prescriptionService: PrescriptionService,
     private doctorService: DoctorService,
+    private confirmationService: ConfirmationService
   ) {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -60,7 +62,7 @@ export class AppointmentComponent implements OnInit {
     });
     this.doctorService.getDoctor().subscribe((res) => {
       this.doctorName = res.doctors;
-      
+
     });
     this.appointmentService.getAppointmentsByDoctorEmail().subscribe((res) => {
       this.getAppointmentByEmailList = res.appointmentwithName;
@@ -85,7 +87,7 @@ export class AppointmentComponent implements OnInit {
     });
     this.prescriptionService.getOpdReports().subscribe((data) => {
       this.opdReports = data;
-      
+
       // const matchingReport = this.opdReports.find(report => report.email === this.selectedAppointment.email);
       // if (matchingReport) {
       //   this.selectedAppointment.departmentName = matchingReport.departmentName;
@@ -95,8 +97,8 @@ export class AppointmentComponent implements OnInit {
     this.loadInitialData();
     this.fetchPrescriptionsForAppointments();
     this.getAppointmentTable();
-    this.prescriptionService.getOpdReportsinDoctor().subscribe((data)=>{
-      this.opdReportsinDoctor=data;
+    this.prescriptionService.getOpdReportsinDoctor().subscribe((data) => {
+      this.opdReportsinDoctor = data;
     })
   }
 
@@ -112,10 +114,10 @@ export class AppointmentComponent implements OnInit {
       this.getAppointmentByEmailList = res.appointmentwithName;
     });
   }
-  
+
   fetchPrescriptionsForAppointments(): void {
     this.getAppointmentByEmailList.forEach((appointment) => {
-      
+
       if (appointment.prescription?._id) {
         this.prescriptionService.getPrescriptionById(appointment.prescription._id).subscribe(
           (data) => {
@@ -132,7 +134,7 @@ export class AppointmentComponent implements OnInit {
   //   const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
   //   if (selectedDepartment) {
   //     this.filteredDoctors = this.doctorName.filter(doctor => doctor.department === selectedDepartment);
-      
+
   //   } else {
   //     this.filteredDoctors = [];
   //   }
@@ -141,35 +143,33 @@ export class AppointmentComponent implements OnInit {
   //   const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
   //   if (selectedDepartment) {
   //     this.filteredDoctors = this.doctorName.filter(doctors => doctors.department === selectedDepartment);
-  //     debugger
   //   } else {
   //     this.filteredDoctors = []; // Show all doctors if no department is selected
   //   }
   // }
   filterDoctors() {
     const selectedDepartment = this.appointmentForm.get('departmentName')?.value.trim();
-    
+
     if (selectedDepartment) {
-      this.filteredDoctors = this.doctorName.filter(doctor => 
+      this.filteredDoctors = this.doctorName.filter(doctor =>
         doctor.department.trim() === selectedDepartment
       );
-      debugger
     } else {
-      this.filteredDoctors = [this.doctorName]; 
-      debugger
+      this.filteredDoctors = [this.doctorName];
     }
-  
+
     console.log('Filtered Doctors:', this.filteredDoctors);
     console.log('Type of filteredDoctors:', Array.isArray(this.filteredDoctors)); // Should log true
   }
-  
-  
+
+
   submit() {
     if (this.appointmentForm.valid) {
       this.appointmentService.postAppointment(this.appointmentForm.value).subscribe((data) => {
         alertify.success('Form filled successfully');
         this.appointmentForm.reset();
         this.loadInitialData();
+        this.getAppointmentTable()
       });
     } else {
       alertify.error('Invalid form');
@@ -178,21 +178,32 @@ export class AppointmentComponent implements OnInit {
   getAppointmentTable() {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
-      this.appointmentTable = res.userAppointments
+      this.appointmentTable = res.appointmentByName
     })
   }
-  deleteAppointment(id: string) {
-    this.appointmentService.deleteAppointment(id).subscribe(
-      (response) => {
-        alertify.success('Deleted Successfully');
-        this.loadInitialData();
-        this.getAppointmentTable()
-      },
-      (error) => {
-        console.error('Error deleting Appointment:', error);
-        this.loadInitialData();
-      }
-    );
+  async deleteAppointment(id: string) {
+    console.log('Button clicked');
+    const confirmed = await this.confirmationService.showConfirmationPopup();
+    if (confirmed) {
+      this.appointmentService.deleteAppointment(id).subscribe(
+        (response) => {
+          this.confirmationService.showSuccessMessage('Delete Successfully')
+          this.loadInitialData();
+          console.log('Appointment deleted', response);
+          this.getAppointmentTable();
+
+        },
+        (error) => {
+          this.confirmationService.showErrorMessage('Sorry, cannot s deleted')
+          console.error('Error deleting Appointment:', error);
+          this.loadInitialData();
+          this.getAppointmentTable()
+        });
+    }
+    else{
+      this.confirmationService.showErrorMessage('Delete operation cancelled')
+    }
+
   }
   makePayment(item: any, amount: number): void {
     const config = {
@@ -207,21 +218,21 @@ export class AppointmentComponent implements OnInit {
         onError: (error: any) => {
           alertify.error('Payment failed');
         },
-        onClose: () => {}
+        onClose: () => { }
       },
       paymentPreference: ['KHALTI', 'EBANKING', 'MOBILE_BANKING', 'CONNECT_IPS', 'SCT']
     };
-  
+
     const checkout = new KhaltiCheckout(config);
     checkout.show({ amount: 10 * 100 }); // Khalti amount is in paisa
   }
-  
+
   updatePaymentStatus(id: string, payload: any, amount: number): void {
     const paymentData = {
       ...payload,
       amount: amount
     };
-    
+
     this.appointmentService.updatePaymentStatus(id, paymentData).subscribe(
       (response: any) => {
         alertify.success('Payment successful');

@@ -58,12 +58,11 @@ export class DepartmentComponentimplements {
   async deleteDepartment(id: string) {
     console.log('button isclicked');
     const confirmed = await this.confirmationService.showConfirmationPopup();
-    debugger
     if (confirmed) {
       this.departmentService.deleteDepartment(id).subscribe(
         (response) => {
           this.getDepartmentList();
-          this.confirmationService.showSuccessMessage('Delete Successfully Done');
+          this.confirmationService.showSuccessMessage('Delete Successfully ');
           console.log('Department deleted:', response);
         },
         (error) => {
