@@ -17,4 +17,7 @@ export class BillService {
   saveBill(billData: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/save-bill`, billData);
   }
+  getAllPayments(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/payments`);
+  }
 }
