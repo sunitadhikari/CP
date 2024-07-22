@@ -61,7 +61,8 @@ export class RecSymptomsComponent implements OnInit {
     this.modalForm.patchValue({
       patient: symptoms.patient,
       symptoms: symptoms.symptoms,
-      doctor: symptoms.doctor
+      //doctor: symptoms.doctor
+      doctor: ''
     });
   }
 
@@ -70,10 +71,15 @@ export class RecSymptomsComponent implements OnInit {
   }
   submit(){
     if(this.modalForm.valid){
-      this.symptomsService.postSymptoms(this.modalForm.value).subscribe((data)=>{
-        console.log('data');
+      //this.symptomsService.postSymptoms(this.modalForm.value).subscribe((data)=>{
+        this.symptomsService.assignDoctor(this.selectedSymptoms._id, this.modalForm.value.doctor).subscribe((data)=>{  
+        console.log('data',data);
         alertify.success("FORM FILLED SUCCESSFUL"); 
         this.modalForm.reset()
+      },
+      (error) => {
+        alertify.error('Failed to assign doctor.');
+        console.log(error);
       })
     }
   
