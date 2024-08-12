@@ -178,11 +178,12 @@
                                 <td>{{item.specialist}}</td>
                                 <td>{{item.status}}</td>
                                 <td>
-                                    <div class="d-flex flex-wrap button-group">
-                                        <button class="btn btn-warning btn-sm"
-                                            (click)="editDoctor(item)">Edit</button>
-                                        <button class="btn btn-outline-danger btn-sm ml-4"
-                                            (click)="delete(item._id)">Delete</button>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-sm btn-primary"
+                                            (click)="editDoctor(item)"> <i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger mx-2" 
+                                            (click)="delete(item._id)">                  <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>

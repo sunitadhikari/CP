@@ -5,15 +5,17 @@
         <th scope="col">SN</th>
         <th scope="col">Symptoms</th>
         <th scope="col">Patient Name</th>
+        <th scope="col">Doctor Name</th>
         <th scope="col">Doctor Assign</th>
 
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let symptoms of symptomsData  let i = index">
-        <th scope="row">{{ i + 1 }}</th>
+      <tr *ngFor="let symptoms of symptomsData  | paginate: { itemsPerPage: 10, currentPage: page }; let i = index">
+        <th scope="row">{{ (page - 1) * 10 + i + 1 }}</th>
         <td>{{ symptoms.symptoms }}</td>
         <td>{{ symptoms.patient }}</td>
+        <td>{{ symptoms.doctor }}</td>
         <td>
           <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal" (click)="openModal(symptoms)">
             <i class="fas fa-edit"></i> Assign
@@ -22,6 +24,8 @@
       </tr>
     </tbody>
   </table>
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
 </div>
 
 
@@ -38,11 +42,11 @@
         <form [formGroup]="modalForm" (ngSubmit)="submit()">
           <div class="form-group">
             <label for="patient">Patient</label>
-            <input type="text" class="form-control" id="patient" formControlName="patient" placeholder="Patient">
+            <input type="text" class="form-control" id="patient" formControlName="patient" placeholder="Patient" readonly>
           </div>
           <div class="form-group">
             <label for="symptoms">Symptoms</label>
-            <input type="text" class="form-control" id="symptoms" formControlName="symptoms" placeholder="Symptoms">
+            <input type="text" class="form-control" id="symptoms" formControlName="symptoms" placeholder="Symptoms" readonly>
           </div>
           <div class="form-group">
             <label for="patientName">Doctor Name:</label>

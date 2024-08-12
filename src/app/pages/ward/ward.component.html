@@ -13,21 +13,15 @@
           </div> -->
           <div class="form-group">
             <label for="wardType">Ward Type</label>
-            <select class="form-control" id="wardType" required
-            [(ngModel)]="newWard.wardType" name="wardType">
-      <option value="General">General Ward</option>
-      <option value="ICU">Intensive Care Unit (ICU)</option>
-      <option value="Emergency">Emergency Ward</option>
-      <option value="Maternity">Maternity Ward</option>
-      <option value="Pediatrics">Pediatrics Ward</option>
-      <option value="Surgical">Surgical Ward</option>
-      <option value="Orthopedic">Orthopedic Ward</option>
-      <option value="Cardiology">Cardiology Ward</option>
-      <option value="Oncology">Oncology Ward</option>
-      <option value="Psychiatric">Psychiatric Ward</option>
-      <!-- Add more specific ward types as needed -->
-    </select>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="wardType" 
+              required 
+              [(ngModel)]="newWard.wardType" 
+              name="wardType">
           </div>
+          
           <div class="form-group">
             <label for="capacity">Capacity</label>
             <input type="number" class="form-control" id="capacity" required
@@ -88,7 +82,7 @@
         </table>
         <div *ngIf="wards.length === 0" class="text-center mt-3">No wards found.</div>
       </div>
-      <!-- <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls> -->
+      <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
 
     </div>
   

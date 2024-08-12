@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5" *ngIf="userRole !== 'reception'">
   <h2 class="mb-4">Payments</h2>
   <div class="table-responsive">
     <div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': isModalVisible}"
@@ -76,7 +76,7 @@
         <tr *ngFor="let payment of paidAppointments">
           <td>{{ payment._id }}</td>
           <td>{{ payment.date | date: 'yyyy-MM-dd' }}</td>
-          <td>{{ payment.amount | currency }}</td>
+          <td>{{ payment.amount || 10 | currency:'NPR':'symbol':'1.2-2' }}</td>
           <td>{{ payment.isPaid ? 'Completed' : 'Pending' }}</td>
           <td>{{ payment.paymentMethod }}Khalti</td>
           <td>
@@ -87,6 +87,43 @@
                 <i class="fas fa-trash"></i></button>
             </div>
           </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row" *ngIf="userRole === 'reception'">
+  <div class="container mt-4" >
+    <h2>Payment List</h2>
+    <table class="table table-responsive table-striped">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Admission Date</th>
+          <th>Discharge Date</th>
+          <th>Amount</th>
+          <th>Discharge Medications</th>
+          <th>Follow-Up Instructions</th>
+          <th>Final Diagnosis</th>
+          <th>Patient Age</th>
+          <th>Patient Gender</th>
+          <th>Summary of Treatment</th>
+          <th>Payment Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments">
+          <td>{{ payment.patientName }}</td>
+          <td>{{ payment.admissionDate | date:'shortDate' }}</td>
+          <td>{{ payment.dischargeDate | date:'shortDate' }}</td>
+          <td>{{ payment.amount }}</td>
+          <td>{{ payment.dischargeMedications }}</td>
+          <td>{{ payment.followUpInstructions }}</td>
+          <td>{{ payment.finalDiagnosis }}</td>
+          <td>{{ payment.patientAge }}</td>
+          <td>{{ payment.patientGender }}</td>
+          <td>{{ payment.summaryOfTreatment }}</td>
+          <td>{{ payment.paymentType }}</td>
         </tr>
       </tbody>
     </table>

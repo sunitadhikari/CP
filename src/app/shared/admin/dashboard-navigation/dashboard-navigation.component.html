@@ -96,6 +96,12 @@
                 </ng-container>
                 <ng-container *ngIf="userRole === 'labtec'">
                     <li class="nav-header">Lab Techn</li>
+                    <li class="py-2">
+                        <a (click)="showSection('report')">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
                    
                     <li class="py-2">
                         <a (click)="showSection('send-mail')">
@@ -107,12 +113,6 @@
                         <a (click)="showSection('profile')">
                             <i class="fas fa-user"></i>
                             <span>Profile</span>
-                        </a>
-                    </li>
-                    <li class="py-2">
-                        <a (click)="showSection('report')">
-                            <i class="fas fa-file-alt"></i>
-                            <span>Report</span>
                         </a>
                     </li>
                     <!-- <li class="py-2">
@@ -143,6 +143,12 @@
                         </a>
                     </li>
                     <li class="py-2">
+                        <a (click)="showSection('payment')">
+                            <i class="fas fa-cogs"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
                         <a (click)="showSection('profile')">
                             <i class="fas fa-user"></i>
                             <span>Profile</span>
@@ -154,6 +160,12 @@
                             <span>Report</span>
                         </a>
                     </li>
+                    <!-- <li class="py-2">
+                        <a (click)="showSection('report')">
+                            <i class="fas fa-file-medical-alt"></i>
+                            <span>Report</span>
+                        </a>
+                    </li> -->
                     <!-- <li class="py-2">
                         <a (click)="showSection('sendMail')">
                             <i class="fas fa-envelope"></i>
@@ -248,6 +260,12 @@
                         <a (click)="showSection('dashboard')">
                             <i class="fas fa-tachometer-alt"></i>
                             <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('appointment')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Appointment</span>
                         </a>
                     </li>
                     <li class="py-2">
@@ -388,7 +406,7 @@
                 <app-room-management></app-room-management>
             </div>
             <div *ngIf="currentSection === 'report'">
-                <app-dashboard-report></app-dashboard-report>
+                <app-dashboard-report></app-dashboard-report>..
             </div>
             <div *ngIf="currentSection=== 'notification'">
                 <app-dashboard-notification></app-dashboard-notification>

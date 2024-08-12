@@ -1,41 +1,108 @@
 <div class="container-fluid">
 
-  <div class="card"  *ngIf="userRole === 'doctor'">
+  <div class="card" *ngIf="userRole === 'doctor'">
     <div class="card-header">
       <h3 class="card-title">Doctor's Discharge Report</h3>
     </div>
     <div class="card-body">
       <form [formGroup]="doctorDischargeReportForm" (ngSubmit)="submitDoctorReport()">
         <div class="form-group">
+          <label for="patientSelect">Select Patient</label>
+          <select id="patientSelect" class="form-control" (change)="onPatientSelect($event)">
+            <option *ngFor="let patient of Admittedpatients" [value]="patient._id">
+              {{patient.firstName}} {{patient.lastName}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
           <label for="patientName">Patient Name</label>
-          <input type="text" class="form-control" id="patientName" placeholder="Enter patient name" required>
+          <input type="text" class="form-control" id="patientName" formControlName="patientName"
+           
+            placeholder="Enter patient name" readonly>
         </div>
         <div class="form-group">
           <label for="patientAge">Patient Age</label>
-          <input type="number" class="form-control" id="patientAge" placeholder="Enter patient age" required>
+          <input type="number" class="form-control" id="patientAge" formControlName="patientAge"
+           
+            placeholder="Enter patient age" readonly>
         </div>
-      
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <input type="text" class="form-control" id="gender" formControlName="gender" placeholder="Enter gender"
+           
+            readonly>
+        </div>
+        <div class="form-group">
+          <label for="contactNumber">Contact Number</label>
+          <input type="text" class="form-control" id="contactNumber" formControlName="contactNumber"
+           
+            placeholder="Enter contact number" readonly>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter address"
+           
+            readonly>
+        </div>
+        <div class="form-group">
+          <label for="bloodGroup">Medical History</label>
+          <textarea class="form-control" id="medicalHistory" formControlName="medicalHistory" rows="3"
+           
+            placeholder="Enter medical history" readonly></textarea>
+        </div>
+        <div class="form-group">
+          <label for="department">Department</label>
+          <input type="text" class="form-control" id="department" formControlName="department"
+            placeholder="Enter department" readonly>
+        </div>
+        <div class="form-group">
+          <label for="ward">Ward</label>
+          <input type="text" class="form-control" id="ward" formControlName="ward" placeholder="Enter ward" readonly>
+        </div>
+        <div class="form-group">
+          <label for="bedNumber">Bed Number</label>
+          <input type="text" class="form-control" id="bedNumber" formControlName="bedNumber"
+            placeholder="Enter bed number" readonly>
+        </div>
+        <div class="form-group">
+          <label for="admittedAt">Admitted At</label>
+          <input type="text" class="form-control" id="admittedAt" formControlName="admittedAt"
+           
+            placeholder="Enter admission date" readonly>
+        </div>
+        <div class="form-group">
+          <label for="dischargeDate">Estimated Discharge Date</label>
+          <input type="date" class="form-control" id="dischargeDate" formControlName="dischargeDate"
+            placeholder="Enter discharge date">
+        </div>
         <div class="form-group">
           <label for="diagnosis">Diagnosis</label>
-          <textarea class="form-control" id="diagnosis" rows="3" placeholder="Enter diagnosis" required></textarea>
+          <textarea class="form-control" id="diagnosis" formControlName="diagnosis" rows="3"
+           
+            placeholder="Enter diagnosis"></textarea>
         </div>
         <div class="form-group">
           <label for="treatmentGiven">Treatment Given</label>
-          <textarea class="form-control" id="treatmentGiven" rows="3" placeholder="Enter treatment given"
-            required></textarea>
+          <textarea class="form-control" id="treatmentGiven" formControlName="treatmentGiven" rows="3"
+           
+            placeholder="Enter treatment given"></textarea>
         </div>
         <div class="form-group">
           <label for="dischargeInstructions">Discharge Instructions</label>
-          <textarea class="form-control" id="dischargeInstructions" rows="3" placeholder="Enter discharge instructions"
-            required></textarea>
+          <textarea class="form-control" id="dischargeInstructions" formControlName="dischargeInstructions" rows="3"
+           
+            placeholder="Enter discharge instructions"></textarea>
         </div>
         <div class="form-group">
           <label for="followUpPlan">Follow-up Plan</label>
-          <textarea class="form-control" id="followUpPlan" rows="3" placeholder="Enter follow-up plan"
-            required></textarea>
+          <textarea class="form-control" id="followUpPlan" formControlName="followUpPlan" rows="3"
+           
+            placeholder="Enter follow-up plan"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit Report</button>
       </form>
+
+
     </div>
   </div>
   <div class="card" *ngIf="userRole === 'admin'">
@@ -46,16 +113,15 @@
       <form [formGroup]="hospitalDischargeReportForm" (ngSubmit)="submitHospitalReport()">
         <div class="form-group">
           <label for="patientName">Patient Name</label>
-          <select class="form-control" id="patientName" formControlName="patientName">
-            <option value="">Select patient</option>
-            <option *ngFor="let patient of patientData" [value]="patient._id">
-              {{ patient.firstName }} {{ patient.lastName }}
-            </option>
+          <select class="form-control" id="patientName" formControlName="patientName"
+            (change)="onPatientSelectForAdmin($event)">
+            <option *ngFor="let patient of patientDataByDoctor" [value]="patient._id">{{ patient.patientName }}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="patientAge">Patient Age</label>
-          <input type="number" class="form-control" id="patientAge" formControlName="patientAge" placeholder="Enter patient age" readonly required>
+          <input type="number" class="form-control" id="patientAge" formControlName="patientAge"
+            placeholder="Enter patient age" required>
         </div>
         <div class="form-group">
           <label for="patientGender">Patient Gender</label>
@@ -73,28 +139,34 @@
         <div class="form-group">
           <label for="dischargeDate">Discharge Date</label>
           <input type="date" class="form-control" id="dischargeDate" formControlName="dischargeDate" required>
-          <div *ngIf="hospitalDischargeReportForm.hasError('dateGapInvalid') && hospitalDischargeReportForm.get('dischargeDate')?.touched">
+          <div
+            *ngIf="hospitalDischargeReportForm.hasError('dateGapInvalid') && hospitalDischargeReportForm.get('dischargeDate')?.touched">
             <small class="text-danger">Discharge date must be 1-2 days after the admission date.</small>
           </div>
         </div>
         <div class="form-group">
           <label for="finalDiagnosis">Final Diagnosis</label>
-          <textarea class="form-control" id="finalDiagnosis" formControlName="finalDiagnosis" rows="3" placeholder="Enter final diagnosis" required></textarea>
+          <textarea class="form-control" id="finalDiagnosis" formControlName="finalDiagnosis" rows="3"
+            placeholder="Enter final diagnosis" required></textarea>
         </div>
         <div class="form-group">
           <label for="summaryOfTreatment">Summary of Treatment</label>
-          <textarea class="form-control" id="summaryOfTreatment" formControlName="summaryOfTreatment" rows="3" placeholder="Enter summary of treatment" required></textarea>
+          <textarea class="form-control" id="summaryOfTreatment" formControlName="summaryOfTreatment" rows="3"
+            placeholder="Enter summary of treatment" required></textarea>
         </div>
         <div class="form-group">
           <label for="dischargeMedications">Discharge Medications</label>
-          <textarea class="form-control" id="dischargeMedications" formControlName="dischargeMedications" rows="3" placeholder="Enter discharge medications" required></textarea>
+          <textarea class="form-control" id="dischargeMedications" formControlName="dischargeMedications" rows="3"
+            placeholder="Enter discharge medications" required></textarea>
         </div>
         <div class="form-group">
           <label for="followUpInstructions">Follow-up Instructions</label>
-          <textarea class="form-control" id="followUpInstructions" formControlName="followUpInstructions" rows="3" placeholder="Enter follow-up instructions" required></textarea>
+          <textarea class="form-control" id="followUpInstructions" formControlName="followUpInstructions" rows="3"
+            placeholder="Enter follow-up instructions" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit Report</button>
       </form>
+
       <div class="container">
         <div class="row">
           <div class="col">
@@ -107,6 +179,7 @@
                   <th>Admission Date</th>
                   <th>Discharge Date</th>
                   <th>Doctor</th>
+                  <th>Follow Plan</th>
                   <!-- Add more headers as per your report structure -->
                 </tr>
               </thead>
@@ -117,6 +190,7 @@
                   <td>{{ report.admissionDate | date }}</td>
                   <td>{{ report.dischargeDate | date }}</td>
                   <td>{{ report.doctorName }}</td>
+                  <td>{{ report.followUpInstructions }}</td>
                   <!-- Add more columns as per your report structure -->
                 </tr>
               </tbody>
@@ -124,15 +198,15 @@
             <div class="text-center">
               <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
             </div>
-      
-            
+
+
           </div>
         </div>
       </div>
-      
+
     </div>
   </div>
-  
+
 </div>
 
 
@@ -165,12 +239,11 @@
           <td>Treatment Given</td>
           <td>Discharge Instructions</td>
           <td>Follow-up Plan</td>
-
         </tbody>
       </table>
     </div>
   </div>
-  <div class="card" >
+  <div class="card">
     <div class="card-header">
       <h2 class="">Hospital Discharge Reports</h2>
 

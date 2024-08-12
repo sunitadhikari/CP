@@ -4,12 +4,14 @@ import { SymptomsService } from '../../../core/service/symptoms/symptoms.service
 import { UserService } from '../../../core/service/user/user.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as alertify from 'alertifyjs';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 @Component({
   selector: 'app-rec-symptoms',
   standalone: true,
-  imports: [CommonModule,FormsModule,CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,FormsModule,CommonModule,ReactiveFormsModule,NgxPaginationModule],
   templateUrl: './rec-symptoms.component.html',
   styleUrl: './rec-symptoms.component.css'
 })
@@ -18,6 +20,8 @@ export class RecSymptomsComponent implements OnInit {
   doctorList: any[] = [];
   modalForm!: FormGroup;
   selectedSymptoms: any;
+  page: number = 1;
+
 
   constructor(
     private symptomsService: SymptomsService,
@@ -57,7 +61,8 @@ export class RecSymptomsComponent implements OnInit {
     this.modalForm.patchValue({
       patient: symptoms.patient,
       symptoms: symptoms.symptoms,
-      doctor: symptoms.doctor
+      //doctor: symptoms.doctor
+      doctor: ''
     });
   }
 
@@ -66,10 +71,15 @@ export class RecSymptomsComponent implements OnInit {
   }
   submit(){
     if(this.modalForm.valid){
-      this.symptomsService.postSymptoms(this.modalForm.value).subscribe((data)=>{
-        console.log('data');
+      //this.symptomsService.postSymptoms(this.modalForm.value).subscribe((data)=>{
+        this.symptomsService.assignDoctor(this.selectedSymptoms._id, this.modalForm.value.doctor).subscribe((data)=>{  
+        console.log('data',data);
         alertify.success("FORM FILLED SUCCESSFUL"); 
         this.modalForm.reset()
+      },
+      (error) => {
+        alertify.error('Failed to assign doctor.');
+        console.log(error);
       })
     }
   

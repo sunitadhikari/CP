@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../../core/service/appointment/appointment.service';
 import alertify from 'alertifyjs';
 import { CommonModule } from '@angular/common';
+import { BillService } from '../../../core/service/bill-service/bill.service';
 
 @Component({
   selector: 'app-payment',
@@ -13,12 +14,22 @@ import { CommonModule } from '@angular/common';
 export class PaymentComponent implements OnInit {
   paidAppointments: any[] = [];
   isModalVisible = false;
+  payments: any[] = [];
   selectedAppointment: any;
+  userRole: string | null | undefined;
 
-  constructor(private appointmentService: AppointmentService) {}
+
+  constructor(
+    private appointmentService: AppointmentService,
+    private paymentService:BillService
+
+  ) {}
 
   ngOnInit(): void {
     this.getPaidAppointments();
+    this.getAllPayments();
+    this.userRole = localStorage.getItem('userRole');
+
   }
 
   getPaidAppointments(): void {
@@ -48,5 +59,17 @@ export class PaymentComponent implements OnInit {
 
   closeModal(): void {
     this.isModalVisible = false;
+  }
+
+  getAllPayments(): void {
+    this.paymentService.getAllPayments().subscribe(
+      data => {
+        this.payments = data;
+        console.log('Payments:', this.payments);
+      },
+      error => {
+        console.error('Failed to retrieve payments', error);
+      }
+    );
   }
 }

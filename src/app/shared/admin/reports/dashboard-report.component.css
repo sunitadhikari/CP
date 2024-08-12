@@ -1,0 +1,21 @@
+/* Custom Modal Styles */
+.modal-content {
+    border-radius: 8px;
+  }
+  
+  .modal-header {
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .modal-body {
+    padding: 2rem;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .alert-success {
+    margin-top: 1rem;
+  }
+  
