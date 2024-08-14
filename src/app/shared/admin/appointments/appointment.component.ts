@@ -11,13 +11,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { PrescriptionService } from '../../../core/service/prescription-Service/prescription.service';
 import { ConfirmationService } from '../../confirmation/confirmation.service';
+import { ConfirmationService } from '../../confirmation/confirmation.service';
 
 @Component({
   selector: 'app-appointment',
   standalone: true,
   templateUrl: './appointment.component.html',
   styleUrls: ['./appointment.component.css'],
-  imports: [CommonModule, NgIf, ReactiveFormsModule, FormsModule, NgxPaginationModule]
+  imports: [CommonModule, NgIf, ReactiveFormsModule, FormsModule,  NgxPaginationModule]
 })
 export class AppointmentComponent implements OnInit {
   appointmentForm!: FormGroup;
@@ -52,8 +53,7 @@ export class AppointmentComponent implements OnInit {
     private departmentService: DepartmentService,
     private prescriptionService: PrescriptionService,
     private doctorService: DoctorService,
-    private confirmationService: ConfirmationService,
-
+    private confirmationService: ConfirmationService
   ) {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -102,7 +102,6 @@ export class AppointmentComponent implements OnInit {
     this.getAppointmentTable();
     this.prescriptionService.getOpdReportsinDoctor().subscribe((data) => {
       this.opdReportsinDoctor = data;
-
     })
   }
 
@@ -185,23 +184,20 @@ export class AppointmentComponent implements OnInit {
       this.appointmentTable = res.appointmentByName
     })
   }
-  getAppointmentatAdmin(){
-    this.appointmentService.getAppointmentatAdmin().subscribe((data)=>{
-      this.appointmentAdmin=data
-    })
-  }
   async deleteAppointment(id: string) {
     console.log('Button clicked');
     const confirmed = await this.confirmationService.showConfirmationPopup();
     if (confirmed) {
-      this.appointmentService.deleteAppointment(id).subscribe((response) => {
+      this.appointmentService.deleteAppointment(id).subscribe(
+        (response) => {
           this.confirmationService.showSuccessMessage('Delete Successfully')
           this.loadInitialData();
           console.log('Appointment deleted', response);
           this.getAppointmentTable();
+
         },
         (error) => {
-          this.confirmationService.showErrorMessage('Failed to delete')
+          this.confirmationService.showErrorMessage('Sorry, cannot s deleted')
           console.error('Error deleting Appointment:', error);
           this.loadInitialData();
           this.getAppointmentTable()

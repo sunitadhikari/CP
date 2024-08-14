@@ -71,7 +71,18 @@ export class DashboardReportComponent implements OnInit {
       dischargeRequest: [true]
     });
 
-    // this.userService.getPatients().subscribe((res)=>{
+
+    // // this.userService.getPatients().subscribe((res)=>{
+    //   console.log(res);
+    //   this.patientData=res
+
+    // })
+    this.reportservice.getDischargeReportsByDoctor().subscribe((res) => {
+      console.log(res);
+      this.patientDataByDoctor = res
+
+    })
+    this.reportservice.getHospitalDischargeReports().subscribe((res) => {
     //   console.log(res);
     //   this.patientData=res
 
@@ -102,7 +113,8 @@ export class DashboardReportComponent implements OnInit {
     });
     this.hospitalDischargeReportForm = this.fb.group({
       patientName: ['', Validators.required],
-      // patientAge: [{ value: '', disabled: true }, Validators.required],
+      // // patientAge: [{ value: '', disabled: true }, Validators.required],
+      patientAge: ['', Validators.required],
       patientAge: ['', Validators.required],
       patientGender: ['', Validators.required],
       admissionDate: ['', Validators.required],
@@ -123,7 +135,6 @@ export class DashboardReportComponent implements OnInit {
 
 
   }
-  submitLabReport(){}
 
   dateGapValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
@@ -153,6 +164,7 @@ export class DashboardReportComponent implements OnInit {
       this.patchFormWithPatientData(selectedPatient);
     }
   }
+
 
   fetchHospitalReports(): void {
     this.loading = true;
