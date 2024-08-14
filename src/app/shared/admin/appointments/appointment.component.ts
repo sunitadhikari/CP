@@ -53,7 +53,8 @@ export class AppointmentComponent implements OnInit {
     private departmentService: DepartmentService,
     private prescriptionService: PrescriptionService,
     private doctorService: DoctorService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+
   ) {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -102,6 +103,7 @@ export class AppointmentComponent implements OnInit {
     this.getAppointmentTable();
     this.prescriptionService.getOpdReportsinDoctor().subscribe((data) => {
       this.opdReportsinDoctor = data;
+
     })
   }
 
@@ -182,6 +184,11 @@ export class AppointmentComponent implements OnInit {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
       this.appointmentTable = res.appointmentByName
+    })
+  }
+  getAppointmentatAdmin(){
+    this.appointmentService.getAppointmentatAdmin().subscribe((data)=>{
+      this.appointmentAdmin=data
     })
   }
   async deleteAppointment(id: string) {

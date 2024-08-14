@@ -15,47 +15,32 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="patientSelect">Select Patient</label>
-          <select id="patientSelect" class="form-control" (change)="onPatientSelect($event)">
-            <option *ngFor="let patient of Admittedpatients" [value]="patient._id">
-              {{patient.firstName}} {{patient.lastName}}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
           <label for="patientName">Patient Name</label>
-          <input type="text" class="form-control" id="patientName" formControlName="patientName"
-            placeholder="Enter patient name" readonly>
+          <input type="text" class="form-control" id="patientName" formControlName="patientName" placeholder="Enter patient name" readonly>
         </div>
         <div class="form-group">
           <label for="patientAge">Patient Age</label>
-          <input type="number" class="form-control" id="patientAge" formControlName="patientAge"
-            placeholder="Enter patient age" readonly>
+          <input type="number" class="form-control" id="patientAge" formControlName="patientAge" placeholder="Enter patient age" readonly>
         </div>
         <div class="form-group">
           <label for="gender">Gender</label>
-          <input type="text" class="form-control" id="gender" formControlName="gender" placeholder="Enter gender"
-            readonly>
+          <input type="text" class="form-control" id="gender" formControlName="gender" placeholder="Enter gender" readonly>
         </div>
         <div class="form-group">
           <label for="contactNumber">Contact Number</label>
-          <input type="text" class="form-control" id="contactNumber" formControlName="contactNumber"
-            placeholder="Enter contact number" readonly>
+          <input type="text" class="form-control" id="contactNumber" formControlName="contactNumber" placeholder="Enter contact number" readonly>
         </div>
         <div class="form-group">
           <label for="address">Address</label>
-          <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter address"
-            readonly>
+          <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter address" readonly>
         </div>
         <div class="form-group">
           <label for="medicalHistory">Medical History</label>
-          <textarea class="form-control" id="medicalHistory" formControlName="medicalHistory" rows="3"
-            placeholder="Enter medical history" readonly></textarea>
+          <textarea class="form-control" id="medicalHistory" formControlName="medicalHistory" rows="3" placeholder="Enter medical history" readonly></textarea>
         </div>
         <div class="form-group">
           <label for="department">Department</label>
-          <input type="text" class="form-control" id="department" formControlName="department"
-            placeholder="Enter department" readonly>
+          <input type="text" class="form-control" id="department" formControlName="department" placeholder="Enter department" readonly>
         </div>
         <div class="form-group">
           <label for="ward">Ward</label>
@@ -63,44 +48,35 @@
         </div>
         <div class="form-group">
           <label for="bedNumber">Bed Number</label>
-          <input type="text" class="form-control" id="bedNumber" formControlName="bedNumber"
-            placeholder="Enter bed number" readonly>
+          <input type="text" class="form-control" id="bedNumber" formControlName="bedNumber" placeholder="Enter bed number" readonly>
         </div>
         <div class="form-group">
           <label for="admittedAt">Admitted At</label>
-          <input type="text" class="form-control" id="admittedAt" formControlName="admittedAt"
-            placeholder="Enter admission date" readonly>
+          <input type="text" class="form-control" id="admittedAt" formControlName="admittedAt" placeholder="Enter admission date" readonly>
         </div>
         <div class="form-group">
           <label for="dischargeDate">Estimated Discharge Date</label>
-          <input type="date" class="form-control" id="dischargeDate" formControlName="dischargeDate"
-            placeholder="Enter discharge date">
+          <input type="date" class="form-control" id="dischargeDate" formControlName="dischargeDate" placeholder="Enter discharge date" >
         </div>
         <div class="form-group">
           <label for="diagnosis">Diagnosis</label>
-          <textarea class="form-control" id="diagnosis" formControlName="diagnosis" rows="3"
-            placeholder="Enter diagnosis"></textarea>
+          <textarea class="form-control" id="diagnosis" formControlName="diagnosis" rows="3" placeholder="Enter diagnosis"></textarea>
         </div>
         <div class="form-group">
           <label for="treatmentGiven">Treatment Given</label>
-          <textarea class="form-control" id="treatmentGiven" formControlName="treatmentGiven" rows="3"
-            placeholder="Enter treatment given"></textarea>
+          <textarea class="form-control" id="treatmentGiven" formControlName="treatmentGiven" rows="3" placeholder="Enter treatment given"></textarea>
         </div>
         <div class="form-group">
           <label for="dischargeInstructions">Discharge Instructions</label>
-          <textarea class="form-control" id="dischargeInstructions" formControlName="dischargeInstructions" rows="3"
-            placeholder="Enter discharge instructions"></textarea>
+          <textarea class="form-control" id="dischargeInstructions" formControlName="dischargeInstructions" rows="3" placeholder="Enter discharge instructions"></textarea>
         </div>
         <div class="form-group">
           <label for="followUpPlan">Follow-up Plan</label>
-          <textarea class="form-control" id="followUpPlan" formControlName="followUpPlan" rows="3"
-            placeholder="Enter follow-up plan"></textarea>
+          <textarea class="form-control" id="followUpPlan" formControlName="followUpPlan" rows="3" placeholder="Enter follow-up plan"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit Report</button>
       </form>
-
-
-
+      
 
     </div>
   </div>
@@ -112,8 +88,7 @@
       <form [formGroup]="hospitalDischargeReportForm" (ngSubmit)="submitHospitalReport()">
         <div class="form-group">
           <label for="patientName">Patient Name</label>
-          <select class="form-control" id="patientName" formControlName="patientName"
-            (change)="onPatientSelectForAdmin($event)">
+          <select class="form-control" id="patientName" formControlName="patientName" (change)="onPatientSelectForAdmin($event)">
             <option *ngFor="let patient of patientDataByDoctor" [value]="patient._id">{{ patient.patientName }}</option>
           </select>
         </div>
@@ -138,40 +113,33 @@
         <div class="form-group">
           <label for="dischargeDate">Discharge Date</label>
           <input type="date" class="form-control" id="dischargeDate" formControlName="dischargeDate" required>
-          <div
-           
-            *ngIf="hospitalDischargeReportForm.hasError('dateGapInvalid') && hospitalDischargeReportForm.get('dischargeDate')?.touched">
+          <div *ngIf="hospitalDischargeReportForm.hasError('dateGapInvalid') && hospitalDischargeReportForm.get('dischargeDate')?.touched">
             <small class="text-danger">Discharge date must be 1-2 days after the admission date.</small>
           </div>
         </div>
         <div class="form-group">
           <label for="finalDiagnosis">Final Diagnosis</label>
           <textarea class="form-control" id="finalDiagnosis" formControlName="finalDiagnosis" rows="3"
-           
             placeholder="Enter final diagnosis" required></textarea>
         </div>
         <div class="form-group">
           <label for="summaryOfTreatment">Summary of Treatment</label>
           <textarea class="form-control" id="summaryOfTreatment" formControlName="summaryOfTreatment" rows="3"
-           
             placeholder="Enter summary of treatment" required></textarea>
         </div>
         <div class="form-group">
           <label for="dischargeMedications">Discharge Medications</label>
           <textarea class="form-control" id="dischargeMedications" formControlName="dischargeMedications" rows="3"
-           
             placeholder="Enter discharge medications" required></textarea>
         </div>
         <div class="form-group">
           <label for="followUpInstructions">Follow-up Instructions</label>
           <textarea class="form-control" id="followUpInstructions" formControlName="followUpInstructions" rows="3"
-           
             placeholder="Enter follow-up instructions" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit Report</button>
       </form>
-
-
+      
       <div class="container">
         <div class="row">
           <div class="col">
@@ -185,7 +153,6 @@
                   <th>Discharge Date</th>
                   <th>Doctor</th>
                   <th>Follow Plan</th>
-                  <th>Follow Plan</th>
                   <!-- Add more headers as per your report structure -->
                 </tr>
               </thead>
@@ -196,7 +163,6 @@
                   <td>{{ report.admissionDate | date }}</td>
                   <td>{{ report.dischargeDate | date }}</td>
                   <td>{{ report.doctorName }}</td>
-                  <td>{{ report.followUpInstructions }}</td>
                   <td>{{ report.followUpInstructions }}</td>
                   <!-- Add more columns as per your report structure -->
                 </tr>
@@ -246,6 +212,7 @@
           <td>Treatment Given</td>
           <td>Discharge Instructions</td>
           <td>Follow-up Plan</td>
+
         </tbody>
       </table>
     </div>
@@ -285,115 +252,83 @@
     </div>
   </div>
 </div>
-<div class="container-fluid" *ngIf="userRole === 'reception'">
-  <div class="card">
-    <div class="card-header">
-      <h2 class=""> Discharge Reports</h2>
-    </div>
-    <div class="card-body">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Patient Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Admission Date</th>
-            <th>Discharge Date</th>
-            <th>Final Diagnosis</th>
-            <th>Summary of Treatment</th>
-            <th>Discharge Medications</th>
-            <th>Follow-up Instructions</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="doctorsReportTableBody">
-          <tr *ngFor="let report of patientData">
-            <td>{{ report.patientName }}</td>
-            <td>{{ report.patientAge }}</td>
-            <td>{{ report.patientGender }}</td>
-            <td>{{ report.admissionDate | date: 'yyyy-MM-dd' }}</td>
-            <td>{{ report.dischargeDate | date: 'yyyy-MM-dd' }}</td>
-            <td>{{ report.finalDiagnosis }}</td>
-            <td>{{ report.summaryOfTreatment }}</td>
-            <td>{{ report.dischargeMedications }}</td>
-            <td>{{ report.followUpInstructions }}</td>
-            <td>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#billModal" (click)="openModal(report)">
-                Generate Bill
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="card" *ngIf="userRole === 'labtech'">
+  <div class="card-header">
+    <h3 class="card-title">Doctor's Discharge Report</h3>
   </div>
-</div>
+  <div class="card-body">
+    <form [formGroup]="doctorDischargeReportForm" (ngSubmit)="submitDoctorReport()">
+      <div class="form-group">
+        <label for="patientSelect">Select Patient</label>
+        <select id="patientSelect" class="form-control" (change)="onPatientSelect($event)">
+          <option *ngFor="let patient of Admittedpatients" [value]="patient._id">
+            {{patient.firstName}} {{patient.lastName}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="patientName">Patient Name</label>
+        <input type="text" class="form-control" id="patientName" formControlName="patientName" placeholder="Enter patient name" readonly>
+      </div>
+      <div class="form-group">
+        <label for="patientAge">Patient Age</label>
+        <input type="number" class="form-control" id="patientAge" formControlName="patientAge" placeholder="Enter patient age" readonly>
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <input type="text" class="form-control" id="gender" formControlName="gender" placeholder="Enter gender" readonly>
+      </div>
+      <div class="form-group">
+        <label for="contactNumber">Contact Number</label>
+        <input type="text" class="form-control" id="contactNumber" formControlName="contactNumber" placeholder="Enter contact number" readonly>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter address" readonly>
+      </div>
+      <div class="form-group">
+        <label for="medicalHistory">Medical History</label>
+        <textarea class="form-control" id="medicalHistory" formControlName="medicalHistory" rows="3" placeholder="Enter medical history" readonly></textarea>
+      </div>
+      <div class="form-group">
+        <label for="department">Department</label>
+        <input type="text" class="form-control" id="department" formControlName="department" placeholder="Enter department" readonly>
+      </div>
+      <div class="form-group">
+        <label for="ward">Ward</label>
+        <input type="text" class="form-control" id="ward" formControlName="ward" placeholder="Enter ward" readonly>
+      </div>
+      <div class="form-group">
+        <label for="bedNumber">Bed Number</label>
+        <input type="text" class="form-control" id="bedNumber" formControlName="bedNumber" placeholder="Enter bed number" readonly>
+      </div>
+      <div class="form-group">
+        <label for="admittedAt">Admitted At</label>
+        <input type="text" class="form-control" id="admittedAt" formControlName="admittedAt" placeholder="Enter admission date" readonly>
+      </div>
+      <div class="form-group">
+        <label for="dischargeDate">Estimated Discharge Date</label>
+        <input type="date" class="form-control" id="dischargeDate" formControlName="dischargeDate" placeholder="Enter discharge date" >
+      </div>
+      <div class="form-group">
+        <label for="diagnosis">Diagnosis</label>
+        <textarea class="form-control" id="diagnosis" formControlName="diagnosis" rows="3" placeholder="Enter diagnosis"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="treatmentGiven">Treatment Given</label>
+        <textarea class="form-control" id="treatmentGiven" formControlName="treatmentGiven" rows="3" placeholder="Enter treatment given"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="dischargeInstructions">Discharge Instructions</label>
+        <textarea class="form-control" id="dischargeInstructions" formControlName="dischargeInstructions" rows="3" placeholder="Enter discharge instructions"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="followUpPlan">Follow-up Plan</label>
+        <textarea class="form-control" id="followUpPlan" formControlName="followUpPlan" rows="3" placeholder="Enter follow-up plan"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Report</button>
+    </form>
+    
 
-<!-- Bill Modal -->
-<div class="modal fade" id="billModal" tabindex="-1" aria-labelledby="billModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="billModalLabel">Generate Bill</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="billForm" (ngSubmit)="confirmBill()">
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="patientName" class="form-label">Patient Name</label>
-              <input type="text" class="form-control" formControlName="patientName" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="patientAge" class="form-label">Patient Age</label>
-              <input type="text" class="form-control" formControlName="patientAge" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="patientGender" class="form-label">Patient Gender</label>
-              <input type="text" class="form-control" formControlName="patientGender" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="admissionDate" class="form-label">Admission Date</label>
-              <input type="text" class="form-control" formControlName="admissionDate" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="dischargeDate" class="form-label">Discharge Date</label>
-              <input type="text" class="form-control" formControlName="dischargeDate" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="finalDiagnosis" class="form-label">Final Diagnosis</label>
-              <input type="text" class="form-control" formControlName="finalDiagnosis" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="summaryOfTreatment" class="form-label">Summary of Treatment</label>
-              <input type="text" class="form-control" formControlName="summaryOfTreatment" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="dischargeMedications" class="form-label">Discharge Medications</label>
-              <input type="text" class="form-control" formControlName="dischargeMedications" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="followUpInstructions" class="form-label">Follow-Up Instructions</label>
-              <input type="text" class="form-control" formControlName="followUpInstructions" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="paymentType" class="form-label">Payment Type</label>
-              <select class="form-select" formControlName="paymentType">
-                <option value="cash">Cash</option>
-              </select>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="cashDetails" class="form-label">Cash Details</label>
-              <input type="text" class="form-control" formControlName="amount">
-            </div>
-          </div>
-        
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" (click)="confirmBill()">Confirm</button>
-      </div>
-    </div>
   </div>
 </div>

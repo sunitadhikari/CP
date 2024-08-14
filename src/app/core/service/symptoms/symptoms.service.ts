@@ -22,7 +22,7 @@ export class SymptomsService {
   postSymptoms(data: any): Observable<any> {
     return this.http.post(this.postSymptomsApiUrl, data)
   }
-  getSymptoms(): Observable<any> {
+  getSymptoms():Observable<any>{
     return this.http.get(this.postSymptomsApiReception)
   }
   getSymptomsDoctor(): Observable<any> {
@@ -37,7 +37,5 @@ export class SymptomsService {
   assignDoctor(id: string, doctor: string): Observable<any> {
     return this.http.put(`${this.assignDoctorApiUrl}/${id}`, { doctor });
   }
-  deleteSymptoms(id: string): Observable<any> {
-    return this.http.delete<any>(environment.api_url + (`delsymptoms/${id}`))
-  }
 }
+
