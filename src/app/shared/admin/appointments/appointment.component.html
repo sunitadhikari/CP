@@ -150,6 +150,104 @@
     </div>
   </div>
 </div>
+<div class="row" *ngIf="userRole === 'admin'">
+  <div class="col-xl-12">
+    <div class="container">
+      <div class="row">
+        <h2 class="fw-bold">Appointment List</h2>
+        <div class="card">
+          <div class="card-body">
+            <div class="col-lg-12">
+              <div class="panel panel-inverse" data-sortable-id="table-basic-4">
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead  class="bg-dark text-light fw-bold w-co">
+                        <tr class="bg-dark">
+                          <th class="fw-bold text-dark">SN</th>
+                          <!-- <th>Email</th> -->
+                           <th class="fw-bold text-dark">Patient Name</th>
+                          <th class="fw-bold text-dark">Department Name</th>
+                          <th class="fw-bold text-dark">Doctor Name</th>
+                          <th class="fw-bold text-dark">Date</th>
+                          <th class="fw-bold text-dark">Checked</th> 
+                          <th class="fw-bold text-dark">Paid</th> 
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of appointmentAdmin; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <!-- <td>{{ item.email }}</td> -->
+                           <td>Patient name</td>
+                          <td>{{ item.departmentName }}</td>
+                          <td>{{ item.doctorname }}</td>
+                          <td>{{ item.date | date: 'short'}}</td>
+                          <td>Yes</td>
+                          <td [ngClass]="item.isPaid ? 'text-success'  : 'text-danger'" class="fw-bold">{{ item.isPaid ? 'Yes' : 'No' }}</td>
+                          
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- end table-responsive -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="userRole === 'labtech'">
+  <div class="col-xl-12">
+    <div class="container">
+      <div class="row">
+        <h2 class="fw-bold">Appointment List</h2>
+        <div class="card">
+          <div class="card-body">
+            <div class="col-lg-12">
+              <div class="panel panel-inverse" data-sortable-id="table-basic-4">
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead  class="bg-dark text-light fw-bold w-co">
+                        <tr class="bg-dark">
+                          <th class="fw-bold text-dark">SN</th>
+                          <!-- <th>Email</th> -->
+                           <th class="fw-bold text-dark">Patient Name</th>
+                          <th class="fw-bold text-dark">Department Name</th>
+                          <th class="fw-bold text-dark">Doctor Name</th>
+                          <th class="fw-bold text-dark">Date</th>
+                          <th class="fw-bold text-dark">Checked</th> 
+                          <th class="fw-bold text-dark">Paid</th> 
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of appointmentAdmin; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <!-- <td>{{ item.email }}</td> -->
+                           <td>Patient name</td>
+                          <td>{{ item.departmentName }}</td>
+                          <td>{{ item.doctorname }}</td>
+                          <td>{{ item.date | date: 'short'}}</td>
+                          <td>Yes</td>
+                          <td [ngClass]="item.isPaid ? 'text-success'  : 'text-danger'" class="fw-bold">{{ item.isPaid ? 'Yes' : 'No' }}</td>
+                          
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- end table-responsive -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container" *ngIf="userRole === 'doctor'">
   <div class="container">
     <div class="row">
@@ -168,7 +266,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let appointment of getAppointmentByEmailList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+              <tr
+                *ngFor="let appointment of getAppointmentByEmailList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                 <td>{{ (p - 1) * 10 + i + 1 }}</td>
                 <td>{{ appointment.username }}</td>
                 <td>{{ appointment.email }}</td>

@@ -16,6 +16,7 @@ export class SymptomsComponent implements OnInit {
   symptomsForm!: FormGroup;
   prescriptionForm!: FormGroup;
   patientTable: any[] = [];
+  patientByEmailTable: any[] = [];
   doctorTable: any[] = [];
   doctorList: any[] = [];
   userRole:string|null |undefined;
@@ -47,6 +48,7 @@ export class SymptomsComponent implements OnInit {
     this.userRole = localStorage.getItem('userRole')
     this.getSymptomsPatient()
     this.getSymptomsDoctor()
+    this.getSymptomsPatientbyEmail()
   }
   launchModal(patient: any) {
     this.currentPatient = patient;
@@ -83,6 +85,15 @@ getDocList(){
       this.patientTable = response.Symptoms;
     })
   }
+
+  getSymptomsPatientbyEmail() {
+    this.symptomsService.getSymptomsPatientbyEmail().subscribe((response) => {
+      console.log(response);
+      this.patientByEmailTable = response.data;
+    })
+  }
+
+
   getSymptomsDoctor(){
     this.symptomsService.getSymptomsDoctor().subscribe((data)=>{
       console.log(data);

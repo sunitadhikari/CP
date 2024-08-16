@@ -11,13 +11,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { PrescriptionService } from '../../../core/service/prescription-Service/prescription.service';
 import { ConfirmationService } from '../../confirmation/confirmation.service';
+import { ConfirmationService } from '../../confirmation/confirmation.service';
 
 @Component({
   selector: 'app-appointment',
   standalone: true,
   templateUrl: './appointment.component.html',
   styleUrls: ['./appointment.component.css'],
-  imports: [CommonModule, NgIf, ReactiveFormsModule, FormsModule, NgxPaginationModule]
+  imports: [CommonModule, NgIf, ReactiveFormsModule, FormsModule,  NgxPaginationModule]
 })
 export class AppointmentComponent implements OnInit {
   appointmentForm!: FormGroup;
@@ -27,6 +28,7 @@ export class AppointmentComponent implements OnInit {
   getAppointmentByEmailList: any[] = [];
   doctorName: any[] = [];
   filteredDoctors: any[] = [];
+  appointmentAdmin:any[]=[];
 
   tomorrow: string;
   userRole: string | null | undefined;
@@ -51,7 +53,8 @@ export class AppointmentComponent implements OnInit {
     private departmentService: DepartmentService,
     private prescriptionService: PrescriptionService,
     private doctorService: DoctorService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+
   ) {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -96,9 +99,11 @@ export class AppointmentComponent implements OnInit {
     })
     this.loadInitialData();
     this.fetchPrescriptionsForAppointments();
+    this.getAppointmentatAdmin()
     this.getAppointmentTable();
     this.prescriptionService.getOpdReportsinDoctor().subscribe((data) => {
       this.opdReportsinDoctor = data;
+
     })
   }
 
@@ -179,6 +184,11 @@ export class AppointmentComponent implements OnInit {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
       this.appointmentTable = res.appointmentByName
+    })
+  }
+  getAppointmentatAdmin(){
+    this.appointmentService.getAppointmentatAdmin().subscribe((data)=>{
+      this.appointmentAdmin=data
     })
   }
   async deleteAppointment(id: string) {

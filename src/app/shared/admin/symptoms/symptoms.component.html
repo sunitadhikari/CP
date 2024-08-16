@@ -25,7 +25,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of patientTable; let i = index">
+            <!-- <tr *ngFor="let item of patientTable; let i = index"> -->
+              <tr *ngFor="let item of patientByEmailTable; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ item.doctor }}</td>
               <td>{{ item.symptoms }}</td>
