@@ -137,18 +137,21 @@ export class ReceptionComponent implements OnInit{
     });
   }
   async delete(id: string): Promise<void> {
-    const confirm = this.confirmationService.showConfirmationPopup();
-    
-    this.userService.deleteUser(id).subscribe(
-      (res) => {
-        alertify.success('Successfully deleted');
-        this.fetchVerifiedReceptionUsers();
-        console.log('Doctor Deleted:', res);
+    const confirm =await this.confirmationService.showConfirmationPopup();
+    if( confirm){
+      this.userService.deleteUser(id).subscribe((res)=>{
+this.confirmationService.showSuccessMessage('Delete Successfully')
+this.fetchVerifiedReceptionUsers()
       },
-      (error) => {
-        console.error('Error deleting doctor:', error);
-        alertify.error('Failed to delete doctor');
-      }
-    );
+    (error)=>{
+this.confirmationService.showErrorMessage('Sorry, cannot bed deleted')
+this.fetchVerifiedReceptionUsers()
+
+    }
+    )
+    }
+  else{
+    this.confirmationService.showErrorMessage('Delete operation cancelled')
+  }
   }
 }
