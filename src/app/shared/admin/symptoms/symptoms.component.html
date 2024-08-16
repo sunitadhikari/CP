@@ -1,0 +1,121 @@
+<div class="container" *ngIf="userRole === 'patient'">
+  <h2 class="my-4">Submit Symptoms</h2>
+  <form [formGroup]="symptomsForm" (ngSubmit)="onSubmit()" class="mb-4">
+    <div class="form-group">
+      <label for="symptoms">Symptoms</label>
+      <textarea id="symptoms" class="form-control" formControlName="symptoms" rows="4"></textarea>
+      <div *ngIf="symptomsForm.get('symptoms')?.invalid && symptomsForm.get('symptoms')?.touched" class="text-danger mt-2">
+        Symptoms are required with a minimum of 10 characters.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="symptomsForm.invalid">Submit</button>
+  </form>
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Symptoms History</h5>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Doctor</th>
+              <th>Symptoms</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr *ngFor="let item of patientTable; let i = index"> -->
+              <tr *ngFor="let item of patientByEmailTable; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ item.doctor }}</td>
+              <td>{{ item.symptoms }}</td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-warning btn-sm" (click)="edit()">Edit</button>
+                  <button class="btn btn-outline-danger btn-sm ml-2" (click)="delete()">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- *ngIf="userRole === 'doctor'" -->
+
+<div class="container-fluid" *ngIf="userRole === 'doctor'" >
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-lg-12">
+          <div class="panel panel-inverse" data-sortable-id="table-basic-4">
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>SN</th>
+                      <th>Patient</th>
+                      <th>Symptoms</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of doctorTable; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ item.patient }}</td>
+                      <td>{{ item.symptoms }}</td>
+                      <td>
+                        <div class="d-flex flex-wrap button-group">
+                          <button type="button" class="btn btn-primary"
+                            (click)="launchModal(item._id)" data-toggle="modal" data-target="#exampleModal">
+                            Launch demo modal
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Prescribe Medication for {{ currentPatient.patient }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="submitPrescription()" #prescribeForm="ngForm">
+          <div class="form-group">
+            <label for="medicine">Medicine:</label>
+            <input type="text" class="form-control" id="medicine" name="medicine" [(ngModel)]="prescription.medicine" required>
+          </div>
+          <div class="form-group">
+            <label for="suggestion">Suggestion:</label>
+            <textarea class="form-control" id="suggestion" name="suggestion" [(ngModel)]="prescription.suggestion" rows="3" required></textarea>
+          </div>
+          <!-- Hidden input to store patient ID or relevant information -->
+          <input type="hidden" id="patientId" name="patientId" [value]="currentPatient.id">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

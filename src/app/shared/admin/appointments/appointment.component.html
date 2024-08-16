@@ -1,0 +1,440 @@
+<div class="row" *ngIf="userRole === 'patient'">
+  <div class="col-xl-12">
+    <div class="panel panel-inverse card" data-sortable-id="form-stuff-1">
+      <div class="panel-heading bg-light">
+        <h4 class=" fw-bold fs-3 text-dark d-flex justify-content-center mx-auto">Add Appoinment</h4>
+        <div class="panel-heading-btn">
+        </div>
+      </div>
+      <div class="panel-body card-body">
+        <form [formGroup]="appointmentForm" (ngSubmit)="submit()">
+
+          <div class="form-group row m-b-15">
+            <label class="col-form-label col-md-3 fw-bold">Department Name <span
+                class="text-danger fw-bold">*</span></label>
+            <div class="col-md-9">
+              <!-- <select class="form-control" formControlName="departmentName" placeholder="Choose one option"> -->
+              <select id="departmentName" class="form-control" formControlName="departmentName"
+                (change)="filterDoctors()">
+
+                <option value="">--Please choose an option--</option>
+                <option *ngFor="let department of departmentNameList" [value]="department.departmentName">{{
+                  department.departmentName }}</option>
+              </select>
+              <div
+                *ngIf="appointmentForm.get('departmentName')?.invalid && appointmentForm.get('departmentName')?.touched"
+                class="text-danger">
+                Selection of departmentName is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row m-b-15">
+            <label class="col-form-label col-md-3 fw-bold">
+              Doctor name<span class="text-danger fw-bold">*</span>
+            </label>
+
+            <div class="col-md-9">
+              <select class="form-control m-b-5" formControlName="doctorname" required>
+                <option value="">--Please choose an option--</option>
+                <option *ngFor="let item of doctorName" [value]="item.email">
+                  {{ item.firstName }} {{ item.lastName }}
+                </option>
+
+              </select>
+              <div *ngIf="appointmentForm.get('doctorname')?.invalid && appointmentForm.get('doctorname')?.touched"
+                class="text-danger">
+                Valid Doctor name is required.
+              </div>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-form-label col-md-3 fw-bold">Date <span class="text-danger fw-bold">*</span></label>
+            <div class="col-md-9">
+              <input type="date" class="form-control m-b-5" placeholder="Appointment Date" formControlName="date"
+                required min="{{ tomorrow | date: 'yyyy-MM-dd' }}" />
+              <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched"
+                class="text-danger">
+                Date is required.
+              </div>
+            </div>
+          </div>
+          <div class="form-group row m-b-15">
+            <label class="col-form-label col-md-3 fw-bold">Mobile Number<span
+                class="text-danger fw-bold">*</span></label>
+            <div class="col-md-9">
+              <input type="text" class="form-control m-b-5" placeholder="Mobile Number" formControlName="phone"
+                required>
+              <div *ngIf="appointmentForm.get('phone')?.invalid && appointmentForm.get('phone')?.touched"
+                class="text-danger">
+                Valid mobile number is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row m-b-15">
+            <label class="col-form-label col-md-3 fw-bold">Problem<span class="text-danger fw-bold">*</span></label>
+            <div class="col-md-9">
+              <textarea type="text" class="form-control m-b-5" placeholder="Problem" formControlName="problem"
+                required></textarea>
+              <div *ngIf="appointmentForm.get('problem')?.invalid && appointmentForm.get('problem')?.touched"
+                class="text-danger">
+                Problem is required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row m-b-15 justify-content-center">
+            <button type="submit" class="btn btn-success mr-2 col-auto btn">Submit</button>
+            <button type="reset" class="btn btn-primary col-auto">Reset</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+    <div class="container-fulid">
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            <div class="col-lg-12">
+              <div class="panel panel-inverse" data-sortable-id="table-basic-4">
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>SN</th>
+                          <!-- <th>Email</th> -->
+                          <th>Department Name</th>
+                          <th>Doctor Name</th>
+                          <th>Date</th>
+                          <th>Paid</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of appointmentTable; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <!-- <td>{{ item.email }}</td> -->
+                          <td>{{ item.departmentName }}</td>
+                          <td>{{ item.doctorname }}</td>
+                          <td>{{ item.date | date: 'short'}}</td>
+                          <td>{{ item.isPaid ? 'Yes' : 'No' }}</td>
+                          <td>
+                            <div class="d-flex flex-wrap button-group">
+                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" *ngIf="!item.isPaid"
+                                (click)="makePayment(item,item.amount)">
+                                <i class="fas fa-dollar"></i>Pay
+                              </button>
+                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" (click)="edit()">
+                                <i class="fas fa-edit"></i>
+                              </button>
+                              <button class="btn btn-outline-danger btn-sm" (click)="deleteAppointment(item._id)">
+                                <i class="fas fa-trash-alt"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                  <!-- end table-responsive -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="userRole === 'admin'">
+  <div class="col-xl-12">
+    <div class="container">
+      <div class="row">
+        <h2 class="fw-bold">Appointment List</h2>
+        <div class="card">
+          <div class="card-body">
+            <div class="col-lg-12">
+              <div class="panel panel-inverse" data-sortable-id="table-basic-4">
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead  class="bg-dark text-light fw-bold w-co">
+                        <tr class="bg-dark">
+                          <th class="fw-bold text-dark">SN</th>
+                          <!-- <th>Email</th> -->
+                           <th class="fw-bold text-dark">Patient Name</th>
+                          <th class="fw-bold text-dark">Department Name</th>
+                          <th class="fw-bold text-dark">Doctor Name</th>
+                          <th class="fw-bold text-dark">Date</th>
+                          <th class="fw-bold text-dark">Checked</th> 
+                          <th class="fw-bold text-dark">Paid</th> 
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of appointmentAdmin; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <!-- <td>{{ item.email }}</td> -->
+                           <td>Patient name</td>
+                          <td>{{ item.departmentName }}</td>
+                          <td>{{ item.doctorname }}</td>
+                          <td>{{ item.date | date: 'short'}}</td>
+                          <td>Yes</td>
+                          <td [ngClass]="item.isPaid ? 'text-success'  : 'text-danger'" class="fw-bold">{{ item.isPaid ? 'Yes' : 'No' }}</td>
+                          
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- end table-responsive -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="userRole === 'labtech'">
+  <div class="col-xl-12">
+    <div class="container">
+      <div class="row">
+        <h2 class="fw-bold">Appointment List</h2>
+        <div class="card">
+          <div class="card-body">
+            <div class="col-lg-12">
+              <div class="panel panel-inverse" data-sortable-id="table-basic-4">
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead  class="bg-dark text-light fw-bold w-co">
+                        <tr class="bg-dark">
+                          <th class="fw-bold text-dark">SN</th>
+                          <!-- <th>Email</th> -->
+                           <th class="fw-bold text-dark">Patient Name</th>
+                          <th class="fw-bold text-dark">Department Name</th>
+                          <th class="fw-bold text-dark">Doctor Name</th>
+                          <th class="fw-bold text-dark">Date</th>
+                          <th class="fw-bold text-dark">Checked</th> 
+                          <th class="fw-bold text-dark">Paid</th> 
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of appointmentAdmin; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <!-- <td>{{ item.email }}</td> -->
+                           <td>Patient name</td>
+                          <td>{{ item.departmentName }}</td>
+                          <td>{{ item.doctorname }}</td>
+                          <td>{{ item.date | date: 'short'}}</td>
+                          <td>Yes</td>
+                          <td [ngClass]="item.isPaid ? 'text-success'  : 'text-danger'" class="fw-bold">{{ item.isPaid ? 'Yes' : 'No' }}</td>
+                          
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- end table-responsive -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="userRole === 'doctor'">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Appointments</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>SN</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Problem</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let appointment of getAppointmentByEmailList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                <td>{{ (p - 1) * 10 + i + 1 }}</td>
+                <td>{{ appointment.username }}</td>
+                <td>{{ appointment.email }}</td>
+                <td>{{ appointment.phone }}</td>
+                <td>{{ appointment.problem }}</td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary" (click)="openModal(appointment, 'prescribe')">
+                      <i class="fas fa-prescription-bottle-alt"></i> {{ appointment.prescription ? 'View Prescription' :
+                      'Prescribe' }}
+                    </button>
+                    <button type="button" class="btn btn-secondary mx-2" (click)="openModal(appointment, 'view')">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container" *ngIf="userRole === 'doctor'">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Appointments</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>SN</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Problem</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let appointment of getAppointmentByEmailList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ appointment.username }}</td>
+                <td>{{ appointment.email }}</td>
+                <td>{{ appointment.phone }}</td>
+                <td>{{ appointment.problem }}</td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary" (click)="openModal(appointment, 'prescribe')">
+                      <i class="fas fa-prescription-bottle-alt"></i> {{ appointment.prescription ? 'View Prescription' :
+                      'Prescribe' }}
+                    </button>
+                    <button type="button" class="btn btn-secondary mx-2" (click)="openModal(appointment, 'view')">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button type="button" (click)="openModal(appointment._id,'view')"
+                    >view</button>
+                  </div>
+                </td>
+       
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">SN</th>
+        <th scope="col">Email</th>
+        <th scope="col">Department</th>
+        <th scope="col">Doctor</th>
+        <th scope="col">Date</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Problem</th>
+        <th scope="col">Prescriptions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of opdReportsinDoctor ; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ report.email }}</td>
+        <td>{{ report.departmentName }}</td>
+        <td>{{ report.doctorname }}</td>
+        <td>{{ report.date | date: 'shortDate' }}</td>
+        <td>{{ report.phone }}</td>
+        <td>{{ report.problem }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let prescription of report.prescriptions">
+              <b>Prescription:</b> {{ prescription.prescription }}<br>
+              <b>Dosage:</b> {{ prescription.dosage }}<br>
+              <b>Instructions:</b> {{ prescription.instructions }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+<!-- <pagination-controls (pageChange)="currentPage = $event"></pagination-controls> -->
+
+<div class="modal" tabindex="-1" role="dialog" [class.show]="isModalOpen"
+  [ngStyle]="{display: isModalOpen ? 'block' : 'none'}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ modalTitle }}</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="modalMode === 'view' || modalMode === 'prescribe'">
+          <form *ngIf="modalMode === 'prescribe'" [formGroup]="prescriptionForm" (ngSubmit)="submitPrescription()">
+            <div class="form-group">
+              <label for="prescription">Prescription:</label>
+              <textarea id="prescription" class="form-control" formControlName="prescription" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="dosage">Dosage:</label>
+              <input type="text" id="dosage" class="form-control" formControlName="dosage" required>
+            </div>
+            <div class="form-group">
+              <label for="instructions">Instructions:</label>
+              <textarea id="instructions" class="form-control" formControlName="instructions" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Prescription</button>
+          </form>
+          <div *ngIf="modalMode === 'view'">
+            <div class="form-group" *ngFor="let prescription of opdReports">
+              <label for="viewPrescription">Prescription:</label>
+              <p>{{ prescription.prescription }}</p>
+            </div>
+            <div class="form-group" *ngFor="let prescription of selectedAppointment.prescriptions">
+              <label for="viewDosage">Dosage:</label>
+              <p>{{ prescription.dosage }}</p>
+            </div>
+            <div class="form-group" *ngFor="let prescription of selectedAppointment.prescriptions">
+              <label for="viewInstructions">Instructions:</label>
+              <p>{{ prescription.instructions }}</p>
+            </div>
+          </div>
+          <div *ngIf="modalMode === 'view'">
+            <div class="form-group" *ngFor="let prescription of opdReports">
+              <label for="viewPrescription">Prescription:</label>
+              <p>{{ prescription.prescription }}</p>
+            </div>
+            <p>Email: {{ selectedAppointment.email }}</p>
+            <p>Phone: {{ selectedAppointment.phone }}</p>
+            <p>Problem: {{ selectedAppointment.problem }}</p>
+            <p>Department: {{ selectedAppointment.departmentName }}</p>
+            <p>Doctor: {{ selectedAppointment.doctorName }}</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

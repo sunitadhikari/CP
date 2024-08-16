@@ -1,0 +1,86 @@
+<div class="register register-with-news-feed">
+  <div class="news-feed">
+    <div class="news-image" style="background-image: url(../../../assets/hospitals.jpg)"></div>
+   
+  </div>
+  <div class="right-content">
+    <h1 class="register-header">
+      Sign Up
+      <small>Create your Aspatal Account. It’s free and always will be.</small>
+    </h1>
+    <div class="register-content">
+      <form [formGroup]="signupForm" action="index.html" method="GET" class="margin-bottom-0">
+        <label class="control-label fw-bold">Name <span class="text-danger">*</span></label>
+        <div class="row row-space-10">
+          <div class="col-md-6 m-b-15">
+            <input type="text" class="form-control" placeholder="First name" formControlName="firstName" required />
+            <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched" class="text-danger">
+             Enter minimum 3 letter
+            </div>
+          </div>
+          <div class="col-md-6 m-b-15">
+            <input type="text" class="form-control" placeholder="Last name" formControlName="lastName" required />
+            <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched" class="text-danger">
+              Enter minimum 3 letter
+
+            </div>
+          </div>
+        </div>
+        <label class="control-label fw-bold">Email <span class="text-danger">*</span></label>
+        <div class="row m-b-15">
+          <div class="col-md-12">
+            <input type="text" class="form-control" formControlName="email" placeholder="Email address" required />
+            <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-danger">
+              Valid email is required.
+            </div>
+          </div>
+        </div>
+        <label class="control-label fw-bold">Phone <span class="text-danger">*</span></label>
+        <div class="row m-b-15">
+          <div class="col-md-12">
+            <input type="text" class="form-control" formControlName="phone" placeholder="Phone Number" required />
+            <div *ngIf="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched" class="text-danger">
+           Valid Phone Number is required
+            </div>
+          </div>
+        </div>
+        <label class="control-label fw-bold">Password <span class="text-danger">*</span></label>
+        <div class="row m-b-15">
+          <div class="col-md-12">
+            <input type="password" formControlName="password" class="form-control" placeholder="Password" required />
+            <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-danger">
+              Required password
+            </div>
+          </div>
+        </div>
+        <label class="control-label fw-bold">Confirm Password <span class="text-danger">*</span></label>
+        <div class="row m-b-15">
+          <div class="col-md-12">
+            <input type="text" class="form-control" formControlName="confirmPassword" placeholder="confirm Password" required />
+            <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched" class="text-danger">
+              Re-enter correct password
+            </div>
+          </div>
+        </div>
+        <div class="checkbox checkbox-css m-b-30">
+          <div class="checkbox checkbox-css m-b-30">
+            <input type="checkbox" formControlName="condition" id="agreement_checkbox" value="" required>
+            <label for="agreement_checkbox">
+            By clicking Sign Up, you agree to our <a href="javascript:;">Terms</a> and that you have read our <a href="javascript:;">Data Policy</a>, including our <a href="javascript:;">Cookie Use</a>.
+            </label>
+          </div>
+        </div>
+        <div class="register-buttons">
+          <button type="submit" (click)="submit()" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+        </div>
+        <div class="m-t-30 m-b-30 p-b-30">
+          Already a member? Click <a href="login">here</a> to login.
+        </div>
+        <hr />
+       
+      </form>
+    </div>
+    <!-- end register-content -->
+  </div>
+  <!-- end right-content -->
+</div>

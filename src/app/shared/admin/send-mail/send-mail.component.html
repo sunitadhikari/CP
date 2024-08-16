@@ -1,0 +1,75 @@
+<!-- <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="card">
+                <div class="card-header">
+                    Compose Email
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label for="to">To:</label>
+                            <input type="email" class="form-control" id="to" formControlName="to" placeholder="Enter recipient's email">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject:</label>
+                            <input type="text" class="form-control" id="subject" formControlName="subject" placeholder="Enter subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <textarea class="form-control" id="message" formControlName="message" rows="5" placeholder="Enter your message"></textarea>
+                        </div>
+                        <div class="text-right">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-primary mx-3" [disabled]="emailForm.invalid">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    Compose Email
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label for="to">To:</label>
+                            <input type="email" class="form-control" id="to" formControlName="to" placeholder="Enter recipient's email">
+                            <div *ngIf="emailForm.get('to')!.invalid && emailForm.get('to')!.touched" class="text-danger">
+                                Valid email is required.
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="subject">Subject:</label>
+                            <input type="text" class="form-control" id="subject" formControlName="subject" placeholder="Enter subject">
+                            <div *ngIf="emailForm.get('subject')!.invalid && emailForm.get('subject')!.touched" class="text-danger">
+                                Subject is required.
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="message">Message:</label>
+                            <textarea class="form-control" id="message" formControlName="message" rows="5" placeholder="Enter your message"></textarea>
+                            <div *ngIf="emailForm.get('message')!.invalid && emailForm.get('message')!.touched" class="text-danger">
+                                Message is required.
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="attachments">Attachments:</label>
+                            <input type="file" class="form-control-file" id="attachments" (change)="onFileChange($event)" multiple>
+                        </div>
+                        <div class="text-right mt-4">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" class="btn btn-primary mx-3" [disabled]="emailForm!.invalid">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="container mt-5" *ngIf="userRole !== 'reception'">
+  <h2 class="mb-4">Payments</h2>
+  <div class="table-responsive">
+    <div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': isModalVisible}"
+      [ngStyle]="{'display': isModalVisible ? 'block' : 'none'}">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Appointment Details</h5>
+            <button type="button" class="close text-white" aria-label="Close" (click)="closeModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Appointment ID:</div>
+              <div class="col-sm-8">{{ selectedAppointment?._id }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Email:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.email }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Department:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.departmentName }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Doctor Name:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.doctorname }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Date:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.date | date: 'yyyy-MM-dd' }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Time:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.time }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Phone:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.phone }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Problem:</div>
+              <div class="col-sm-8">{{ selectedAppointment?.problem }}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-4 font-weight-bold">Status:</div>
+              <div class="col-sm-8">
+                <span
+                  [ngClass]="{'badge badge-success': selectedAppointment?.isPaid, 'badge badge-warning': !selectedAppointment?.isPaid}">
+                  {{ selectedAppointment?.isPaid ? 'Completed' : 'Pending' }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Payment ID</th>
+          <th scope="col">Date</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Status</th>
+          <th scope="col">Payment Method</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of paidAppointments">
+          <td>{{ payment._id }}</td>
+          <td>{{ payment.date | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ payment.amount || 10 | currency:'NPR':'symbol':'1.2-2' }}</td>
+          <td>{{ payment.isPaid ? 'Completed' : 'Pending' }}</td>
+          <td>{{ payment.paymentMethod }}Khalti</td>
+          <td>
+            <div class="btn-group" role="group">
+              <button class="btn btn-primary btn-sm" (click)="viewAppointment(payment)">
+                <i class="fas fa-eye"></i></button>
+              <button class="btn btn-danger btn-sm mx-2" (click)="deletePayment(payment._id)">
+                <i class="fas fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row" *ngIf="userRole === 'reception'">
+  <div class="container mt-4" >
+    <h2>Payment List</h2>
+    <table class="table table-responsive table-striped">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Admission Date</th>
+          <th>Discharge Date</th>
+          <th>Amount</th>
+          <th>Discharge Medications</th>
+          <th>Follow-Up Instructions</th>
+          <th>Final Diagnosis</th>
+          <th>Patient Age</th>
+          <th>Patient Gender</th>
+          <th>Summary of Treatment</th>
+          <th>Payment Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments">
+          <td>{{ payment.patientName }}</td>
+          <td>{{ payment.admissionDate | date:'shortDate' }}</td>
+          <td>{{ payment.dischargeDate | date:'shortDate' }}</td>
+          <td>{{ payment.amount }}</td>
+          <td>{{ payment.dischargeMedications }}</td>
+          <td>{{ payment.followUpInstructions }}</td>
+          <td>{{ payment.finalDiagnosis }}</td>
+          <td>{{ payment.patientAge }}</td>
+          <td>{{ payment.patientGender }}</td>
+          <td>{{ payment.summaryOfTreatment }}</td>
+          <td>{{ payment.paymentType }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<div class="container-fluid">
+  <div class="">
+    <div class="row">
+      <!-- <div class="col-lg-12"> -->
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Add Department</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="departmentName">Department Name *</label>
+            <input type="text" class="form-control" id="departmentName" formControlName="departmentName"
+              placeholder="Enter department name" required>
+              <div *ngIf="departmentForm.get('departmentName')?.invalid && departmentForm.get('departmentName')?.touched"
+                class="text-danger">
+                Department Name is required
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="mainDepartment">Main Department *</label>
+            <input type="text" class="form-control" id="mainDepartment" formControlName="mainDepartment"
+              placeholder="Enter main department name" required>
+              <div *ngIf="departmentForm.get('mainDepartment')?.invalid && departmentForm.get('mainDepartment')?.touched"
+              class="text-danger">
+              Main Department is required
+            </div>
+            </div>
+          <div class="form-group">
+            <label for="flaticon">Flaticon</label>
+            <input type="text" class="form-control" id="flaticon" formControlName="flaticon"
+              placeholder="Enter flaticon">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" formControlName="description" rows="3"
+              placeholder="Enter description"></textarea>
+              <div *ngIf="departmentForm.get('description')?.invalid && departmentForm.get('description')?.touched"
+                class="text-danger">
+                Description is required
+              </div>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="status" id="active" formControlName="status"
+                value="active" checked>
+              <label class="form-check-label" for="active">
+                Active
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="status" id="inactive" formControlName="status"
+                value="inactive">
+              <label class="form-check-label" for="inactive">
+                Inactive
+              </label>
+            </div>
+          </div>
+          <!-- <button type="submit" class="btn btn-primary">{{ editing ? 'Update Department' : 'Add Department' }}</button>
+                    
+                    <button type="button" class="btn btn-secondary ml-2" (click)="cancelEdit()">Cancel</button> -->
+          <button type="submit" class="btn btn-primary">{{ editingDepartmentId ? 'Update Department' : 'Add Department'
+            }}</button>
+          <button type="button" class="btn btn-secondary ml-2" (click)="cancelEdit()">Cancel</button>
+
+        </form>
+
+      </div>
+    </div>
+    <div class="container-fluid mt-5">
+      <h2>Department List</h2>
+      <div class="input-group mb-3 mt-3">
+        <input type="text" class="form-control" placeholder="Search departments..." [(ngModel)]="searchTerm"
+          (input)="filterDepartments()">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()">Clear</button>
+        </div>
+      </div>
+      <table class="table table-striped mt-4">
+        <thead>
+          <tr>
+            <th>SN</th>
+            <th>Main Department</th>
+            <th>Department Name</th>
+            <th>Flaticon</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of filteredDepartments | paginate: { itemsPerPage: 10, currentPage: p } let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{item.mainDepartment}}</td>
+            <td>{{item.departmentName}}</td>
+            <td>{{item.flaticon}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.status}}</td>
+            <td>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm btn-primary" (click)="editDepartment(item)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-danger mx-2" (click)="deleteDepartment(item._id)">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            </td>
+            
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    </div>
+
+  </div>
+</div>

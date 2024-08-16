@@ -1,0 +1,324 @@
+<div class="container-fluid mt-5">
+     <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Add Department</h3>
+        </div>
+        <div class="card-body">
+            <form id="addDepartmentForm">
+                <div class="form-group">
+                    <label for="departmentName">Department Name *</label>
+                    <input type="text" class="form-control" id="departmentName" placeholder="Enter department name" required>
+                </div>
+                <div class="form-group">
+                    <label for="mainDepartment">Main Department *</label>
+                    <input type="text" class="form-control" id="mainDepartment" placeholder="Enter main department name" required>
+                </div>
+                <div class="form-group">
+                    <label for="flaticon">Flaticon</label>
+                    <input type="text" class="form-control" id="flaticon" placeholder="Enter flaticon">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" rows="3" placeholder="Enter description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="picture">Picture *</label>
+                    <input type="file" class="form-control-file" id="picture" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" id="active" value="active" checked>
+                        <label class="form-check-label" for="active">
+                            Active
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" id="inactive" value="inactive">
+                        <label class="form-check-label" for="inactive">
+                            Inactive
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Department</button>
+            </form>
+        </div>
+    </div> 
+     <div class="container mt-5">
+        <h2>Department List</h2>
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Department Name</th>
+                    <th>Main Department</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="departmentList">
+                <td>1</td>
+                <td>Department Name</td>
+                <td>Main Department</td>
+                <td><button type="button" class="btn btn-sm btn-primary" ><i class="fas fa-edit"></i> Edit</button>
+                    <button type="button" class="btn btn-sm btn-danger" ><i class="fas fa-trash-alt"></i> Delete</button>
+               </td>
+            </tbody>
+        </table>
+    </div>
+
+
+     <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Add Doctor</h3>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Enter first name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Enter last name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="email">Email Address *</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="password">Password *</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="department">Department</label>
+                            <input type="text" class="form-control" id="department" placeholder="Enter department">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="picture">Picture</label>
+                            <input type="file" class="form-control-file" id="picture">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" class="form-control" id="dob">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sex">Sex *</label>
+                            <select id="sex" class="form-control" required>
+                                <option selected disabled>Select sex</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="bloodGroup">Blood Group</label>
+                            <input type="text" class="form-control" id="bloodGroup" placeholder="Enter blood group">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="designation">Designation *</label>
+                            <input type="text" class="form-control" id="designation" placeholder="Enter designation" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address *</label>
+                        <textarea class="form-control" id="address" rows="3" placeholder="Enter address" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="phoneNo">Phone No</label>
+                            <input type="text" class="form-control" id="phoneNo" placeholder="Enter phone number">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="mobileNo">Mobile No *</label>
+                            <input type="text" class="form-control" id="mobileNo" placeholder="Enter mobile number" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="careerTitle">Career Title *</label>
+                            <input type="text" class="form-control" id="careerTitle" placeholder="Enter career title" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="biography">Short Biography</label>
+                            <textarea class="form-control" id="biography" rows="3" placeholder="Enter short biography"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Status</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="active" value="active" checked>
+                                <label class="form-check-label" for="active">
+                                    Active
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="inactive" value="inactive">
+                                <label class="form-check-label" for="inactive">
+                                    Inactive
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Doctor</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h2>Doctor Details</h2>
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Date of Birth</th>
+                    <th>Sex</th>
+                    <th>Designation</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="doctorTable">
+                <td>1</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Email</td>
+                <td>Department</td>
+                <td>Date of Birtd</td>
+                <td>Sex</td>
+                <td>Designation</td>
+                <td>Status</td>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Add Person</h3>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Enter first name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Enter last name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="email">Email Address *</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter password">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="phoneNo">Phone No</label>
+                            <input type="text" class="form-control" id="phoneNo" placeholder="Enter phone number">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="mobileNo">Mobile No *</label>
+                            <input type="text" class="form-control" id="mobileNo" placeholder="Enter mobile number" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="bloodGroup">Blood Group</label>
+                            <input type="text" class="form-control" id="bloodGroup" placeholder="Enter blood group">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sex">Sex *</label>
+                            <select id="sex" class="form-control" required>
+                                <option selected disabled>Select sex</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth *</label>
+                        <input type="date" class="form-control" id="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address *</label>
+                        <textarea class="form-control" id="address" rows="3" placeholder="Enter address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="active" value="active" checked>
+                            <label class="form-check-label" for="active">
+                                Active
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="inactive" value="inactive">
+                            <label class="form-check-label" for="inactive">
+                                Inactive
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Person</button>
+                </form>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h2>Person Details</h2>
+            <table class="table table-striped mt-4">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone No</th>
+                        <th>Mobile No</th>
+                        <th>Blood Group</th>
+                        <th>Sex</th>
+                        <th>Date of Birth</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="personTable">
+                    <td>1</td>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>Email</td>
+                        <td>Phone No</td>
+                        <td>Mobile No</td>
+                        <td>Blood Group</td>
+                        <td>Sex</td>
+                        <td>Date of Birtd</td>
+                        <td>Address</td>
+                        <td>Status</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+ 
+User manage mnert
+</div>

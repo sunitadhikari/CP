@@ -1,0 +1,176 @@
+<div class="container-fluid">
+  <h2>Admit New Patient</h2>
+  <!-- <form [formGroup]="admissionForm" (ngSubmit)="submitAdmissionForm()">
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" formControlName="firstName" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" formControlName="lastName" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="dob">Date of Birth:</label>
+      <input type="date" formControlName="dob" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender:</label>
+      <select formControlName="gender" class="form-control" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="contactNumber">Contact Number:</label>
+      <input type="tel" formControlName="contactNumber" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <textarea formControlName="address" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="medicalHistory">Medical History:</label>
+      <textarea formControlName="medicalHistory" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="ward">ward:</label>
+      <select formControlName="ward" class="form-control" (change)="onDepartmentChange()" required>
+        <option disabled selected>Select the ward</option>
+        <option *ngFor="let item of wards" [value]="item.wardType">{{ item.wardType }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="bedNumber">Bed Number:</label>
+      <select formControlName="bedNumber" class="form-control" required>
+        <option disabled selected>Select the bed number</option>
+        <option *ngFor="let bed of beds" [value]="bed.bedNumbers">{{ bed.bedNumbers }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Admit Patient</button>
+  </form> -->
+  <form [formGroup]="admissionForm" (ngSubmit)="submitAdmissionForm()">
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" formControlName="firstName" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" formControlName="lastName" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="dob">Date of Birth:</label>
+      <input type="date" formControlName="dob" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender:</label>
+      <select formControlName="gender" class="form-control" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="contactNumber">Contact Number:</label>
+      <input type="tel" formControlName="contactNumber" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <input formControlName="address" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="medicalHistory">Medical History:</label>
+      <textarea formControlName="medicalHistory" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="department">Department:</label>
+      <select formControlName="department" class="form-control" required>
+        <option disabled selected>Select the department</option>
+        <option *ngFor="let item of departmentsData" [value]="item.departmentName">{{ item.departmentName }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="checkedBy">Checked By:</label>
+      <select formControlName="checkedBy" class="form-control" required>
+        <option disabled selected>Select the checkedBy</option>
+        <option *ngFor="let doctor of filteredDoctors" [value]="doctor.email">{{ doctor.firstName }} {{ doctor.lastName }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="ward">Ward:</label>
+      <select formControlName="ward" class="form-control" (change)="onDepartmentChange()" required>
+        <option disabled selected>Select the ward</option>
+        <option *ngFor="let item of wardsData" [value]="item.wardType">{{ item.wardType }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="bedNumber">Bed Number:</label>
+      <select formControlName="bedNumber" class="form-control" required>
+        <option disabled selected>Select the bed number</option>
+        <option *ngFor="let bed of beds" [value]="bed.bedNumbers">{{ bed.bedNumbers }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Admit Patient</button>
+  </form>
+  
+  
+  <div class="table-responsive mt-4">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>SN</th>
+          <th>Patient Name</th>
+          <th>Date of Birth</th>
+          <th>Gender</th>
+          <th>Contact Number</th>
+          <th>Address</th>
+          <th>Medical History</th>
+          <th>Department</th>
+          <th>Ward</th>
+          <th>Bed Number</th>
+          <th>Admitted At</th>
+          <th>Checked By</th>
+          <th>Action</th>
+          <th>Discharge</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr *ngFor="let patient of patients | paginate: { itemsPerPage: 5, currentPage: p }"> -->
+        <tr *ngFor="let patient of patients let i=index;">
+          <td>{{i+1}}</td>
+          <td>{{ patient.firstName }} {{ patient.lastName }}</td>
+      <td>{{ patient.dob | date }}</td>
+      <td>{{ patient.gender }}</td>
+      <td>{{ patient.contactNumber }}</td>
+      <td>{{ patient.address }}</td>
+      <td>{{ patient.medicalHistory }}</td>
+      <td>{{ patient.department }}</td>
+      <td>{{ patient.ward }}</td>
+      <td>{{ patient.bedNumber }}</td>
+      <td>{{ patient.admittedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td>{{ patient.checkedBy }}</td>
+
+      <th>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-sm btn-primary" (click)="editAdmit()">
+            <i class="fas fa-edit"></i> 
+          </button>
+          <button type="button" class="btn btn-sm btn-danger mx-2" (click)="deleteAdmit()">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </th>
+      
+      <td>
+        <!-- <button class="btn btn-danger" (click)="dischargePatient(patient._id)">Discharge</button> -->
+        <button class="btn btn-danger" (click)="dischargePatient(patient._id)">Discharge</button>
+      </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+</div>

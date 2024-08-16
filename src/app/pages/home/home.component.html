@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<section class="hero-section text-center text-white">
+  <div class="container welcome">
+    <h1 class="display-6">Welcome to Our Hospital</h1>
+    <p class="lead">Providing quality healthcare services to you and your family.</p>
+    <a href="contact-us" class="btn btn-primary btn-lg">Learn More</a>
+  </div>
+</section>
+
+<section class="services-section mx-auto text-center ">
+  <h1 class=" display-4 ">Aaspatal</h1>
+  <p class=" fw-bold mx-auto">Aaspatal is a web-based software that helps in facilitating the functioning of hospitals.
+    It streamlines and integrates the operations, processes and information flow in hospitals and is designed to manage
+    all the aspects of hospitals in a single platform. It combines all the information related to patients, doctors,
+    staff, hospital administration into one software.</p>
+</section>
+
+<div class="container-fluid feature mx-auto">
+  <h2 class="text-center py-5 display-4 ">Our Features</h2>
+  <div class="row mx-auto">
+    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let feature of features">
+      <div class="card h-100 text-center p-3 mx-auto">
+        <div class="card-body">
+          <i [class]="feature.icon + ' fa-3x mb-3'"></i>
+          <h5 class="card-title display-6">{{ feature.title }}</h5>
+          <p class="card-text">{{ feature.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

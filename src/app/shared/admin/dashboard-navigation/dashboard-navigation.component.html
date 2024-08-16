@@ -1,0 +1,484 @@
+<div id="page-container" class="page-sidebar-fixed page-header-fixed">
+    <div id="sidebar" class="sidebar" style="height: 100vh; overflow-y: auto;">
+        <div data-scrollbar="true" data-height="100%">
+            <ul class="nav">
+                <li class="nav-profile">
+                    <a href=" " data-toggle="nav-profile">
+                        <div class="cover with-shadow"></div>
+                        <div class="image">
+                            <img src="../../../assets/hospitals.jpg"  alt="" />
+                        </div>
+                        <div class="info">
+                            <b class="caret pull-right"></b>Aspatal
+                            <small>The Hospital Management</small>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <ul class="nav nav-profile">
+                        <li><a href="javascript:;"><i class="fa fa-cog"></i> Settings</a></li>
+                        <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Send Feedback</a></li>
+                        <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav ">
+                <ng-container *ngIf="userRole === 'doctor'">
+                    <li class="nav-header">Doctor</li>
+                    <li class="py-2">
+                        <a (click)="showSection('dashboard')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('schedule')">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Schedule</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('appointment')">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Appointment</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('patientList')">
+                            <i class="fas fa-user-injured"></i>
+                            <span>Patient List</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('report')">
+                            <i class="fas fa-file-medical-alt"></i>
+                            <span>Discharge Report</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('symptoms')">
+                            <i class="fas fa-stethoscope"></i>
+                            <span>Symptoms</span>
+                        </a>
+                    </li>
+                    <!-- <li class="py-2">
+                        <a (click)="showSection('note')">
+                            <i class="fas fa-notes-medical"></i>
+                            <span>Note</span>
+                        </a>
+                    </li> -->
+                   
+                    <li class="py-2">
+                        <a (click)="showSection('dailyReport')">
+                            <i class="fas fa-file-medical"></i>
+                            <span>Daily Report</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('prescriptionByDoctor')">
+                            <i class="fas fa-file-medical"></i>
+                            <span>Prescription</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('profile')">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    
+                    <li class="py-2">
+                        <a (click)="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="userRole === 'labtec'">
+                    <li class="nav-header">Lab Techn</li>
+                    <li class="py-2">
+                        <a (click)="showSection('report')">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
+                   
+                    <li class="py-2">
+                        <a (click)="showSection('send-mail')">
+                            <i class="fas fa-cogs"></i>
+                            <span>Mail</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('profile')">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <!-- <li class="py-2">
+                        <a (click)="showSection('sendMail')">
+                            <i class="fas fa-envelope"></i>
+                            <span>Send Mail</span>
+                        </a>
+                    </li> -->
+                    <li class="py-2">
+                        <a (click)="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="userRole === 'reception'">
+                    <li class="nav-header">Reception</li>
+                    <li class="py-2">
+                        <a (click)="showSection('reception-Symptoms')">
+                            <i class="fas fa-cogs"></i>
+                            <span>Symptoms</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('send-mail')">
+                            <i class="fas fa-cogs"></i>
+                            <span>Mail</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('payment')">
+                            <i class="fas fa-cogs"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('profile')">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('report')">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
+                    <!-- <li class="py-2">
+                        <a (click)="showSection('report')">
+                            <i class="fas fa-file-medical-alt"></i>
+                            <span>Report</span>
+                        </a>
+                    </li> -->
+                    <!-- <li class="py-2">
+                        <a (click)="showSection('sendMail')">
+                            <i class="fas fa-envelope"></i>
+                            <span>Send Mail</span>
+                        </a>
+                    </li> -->
+                    <li class="py-2">
+                        <a (click)="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="userRole === 'patient'">
+                    <li class="nav-header">Patient</li>
+                    <li class="py-2">
+                        <a (click)="showSection('dashboard')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('appointment')">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Appointment</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('normal-opd')">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Normal OPD Report</span>
+                        </a>
+                    </li>
+                    <!-- <li class="py-2">
+                        <a (click)="showSection('send-mail')">
+                            <i class="fas fa-cogs"></i>
+                            <span>Mail</span>
+                        </a>
+                    </li> -->
+                    <li class="py-2">
+                        <a (click)="showSection('schedule')">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Schedule</span>
+                        </a>
+                    </li>
+                    <!-- <li class="py-2">
+                        <a (click)="showSection('appointmentHistory')">
+                            <i class="fas fa-history"></i>
+                            <span>Appointment History</span>
+                        </a>
+                    </li> -->
+                    <li class="py-2">
+                        <a (click)="showSection('report')">
+                            <i class="fas fa-file-medical-alt"></i>
+                            <span>Report</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('symptoms')">
+                            <i class="fas fa-stethoscope"></i>
+                            <span>Symptoms</span>
+                        </a>
+                    </li>
+                    <!-- <li class="py-2">
+                        <a (click)="showSection('medicalHistory')">
+                            <i class="fas fa-notes-medical"></i>
+                            <span>Medical History</span>
+                        </a>
+                    </li> -->
+                    <!-- <li class="py-2">
+                        <a (click)="showSection('prescription')">
+                            <i class="fas fa-prescription"></i>
+                            <span>Prescription</span>
+                        </a>
+                    </li> -->
+                    <li class="py-2">
+                        <a (click)="showSection('profile')">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="userRole === 'admin'">
+                    <li class="nav-header">Admin</li>
+                    <li class="py-2">
+                        <a (click)="showSection('dashboard')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('appointment')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Appointment</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('department')">
+                            <i class="fas fa-building"></i>
+                            <span>Department</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('ward')">
+                            <i class="fas fa-building"></i>
+                            <span>Ward</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('admitPatient')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Admit</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('bed-management')">
+                            <i class="fas fa-bed"></i>
+                            <span>Bed Management</span>
+                        </a>
+                    </li>
+                    <!-- <li class="py-2">
+                        <a (click)="showSection('room')">
+                            <i class="fas fa-hospital"></i>
+                            <span>Room</span>
+                        </a>
+                    </li> -->
+                    <li class="py-2">
+                        <a (click)="showSection('send-mail')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Email</span>
+                        </a>
+                    </li>
+                  
+                    <li class="py-2">
+                        <a (click)="showSection('doctor')">
+                            <i class="fas fa-user-md"></i>
+                            <span>Doctor</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('reception')">
+                            <i class="fas fa-user-md"></i>
+                            <span>Reception</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('patient')">
+                            <i class="fas fa-user-injured"></i>
+                            <span>Patient</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('lab')">
+                            <i class="fas fa-vials"></i>
+                            <span>Lab</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('report')">
+                            <i class="fas fa-user-injured"></i>
+                            <span>report</span>
+                        </a>
+                    </li>
+                 
+                   
+                    <li class="py-2">
+                        <a (click)="showSection('schedule')">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Schedule</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('profile')">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a (click)="showSection('payment')">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+                   
+                    <li class="py-2">
+                        <a (click)="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ng-container>
+                
+            </ul>
+        </div>
+    </div>
+    <div class="sidebar-bg"></div>
+
+    <div id="content" class="content">
+
+        <div>
+            <div *ngIf="currentSection=== 'overview'">
+                <app-dashboard-overview></app-dashboard-overview>
+            </div>
+            <div *ngIf="currentSection=== 'ward'">
+                <app-ward></app-ward>
+            </div>
+            <div *ngIf="currentSection=== 'normal-opd'">
+                <app-medical-pescribe></app-medical-pescribe>
+            </div>
+            <div *ngIf="currentSection=== 'dailyReport'">
+                <app-daily-report></app-daily-report>
+            </div>
+            <div *ngIf="currentSection=== 'admitPatient'">
+                <app-admit-patient></app-admit-patient>
+            </div>
+            <div *ngIf="currentSection=== 'doctor'">
+                <app-doctor></app-doctor>
+            </div>
+            <div *ngIf="currentSection=== 'reception'">
+                <app-reception></app-reception>
+            </div>
+            <div *ngIf="currentSection === 'addPatient' ">
+                <app-add-patient></app-add-patient>
+            </div>
+            <div *ngIf="currentSection === 'patientList' ">
+                <app-patient-list></app-patient-list>
+            </div>f
+            <div *ngIf="currentSection === 'appointment'">
+                <app-appointment></app-appointment>
+            </div>
+            <div *ngIf="currentSection === 'room'">
+                <app-room-management></app-room-management>
+            </div>
+            <div *ngIf="currentSection === 'report'">
+                <app-dashboard-report></app-dashboard-report>..
+            </div>
+            <div *ngIf="currentSection=== 'notification'">
+                <app-dashboard-notification></app-dashboard-notification>
+            </div>
+            <div *ngIf="currentSection=== 'feedback'">
+                <app-dashboard-feedback></app-dashboard-feedback>
+            </div>
+            <div *ngIf="currentSection=== 'profile'">
+                <app-profil></app-profil>
+            </div>
+            <div *ngIf="currentSection=== 'setting'">
+                <app-setting></app-setting>
+            </div>
+            <div *ngIf="currentSection=== 'profile'">
+                <app-setting></app-setting>
+            </div>
+            <div *ngIf="currentSection=== 'user-management'">
+                <app-user-management></app-user-management>
+            </div>
+            <div *ngIf="currentSection=== 'payment'">
+                <app-payment></app-payment>
+            </div>
+            <div *ngIf="currentSection=== 'add-doctor'">
+                <app-doctor></app-doctor>
+            </div>
+            <div *ngIf="currentSection=== 'dashboard'">
+                <app-dashboard></app-dashboard>
+            </div>
+            <div *ngIf="currentSection=== 'lab'">
+                <app-lab></app-lab>
+            </div>
+            <div *ngIf="currentSection=== 'patient'">
+                <app-patient></app-patient>
+            </div>
+            <div *ngIf="currentSection=== 'appointmentHistory'">
+                <app-appointment-history></app-appointment-history>
+            </div>
+            <div *ngIf="currentSection=== 'symptoms'">
+                <app-symptoms></app-symptoms>
+            </div>
+            <div *ngIf="currentSection=== 'view-history'">
+                <app-view-history></app-view-history>
+            </div>
+            <div *ngIf="currentSection=== 'send-mail'">
+                <app-send-mail></app-send-mail>
+            </div>
+            <div *ngIf="currentSection=== 'prescription'">
+                <app-prescription></app-prescription>
+            </div>
+           
+            <div *ngIf="currentSection=== 'schedule'">
+                <app-schedule></app-schedule>
+            </div>
+            <div *ngIf="currentSection=== 'department'">
+                <app-department></app-department>
+            </div>
+            <div *ngIf="currentSection=== 'bed-management'">
+                <app-bed-management></app-bed-management>
+            </div>
+            <div *ngIf="currentSection=== 'medicalHistory'">
+               <app-medical-history></app-medical-history>  
+            </div>
+            <div *ngIf="currentSection=== 'note'">
+                <app-note></app-note>
+            </div>
+            <div *ngIf="currentSection=== 'prescriptionByDoctor'">
+                <app-doctor-prescription></app-doctor-prescription>
+            </div>
+            <div *ngIf="currentSection=== 'reception-Symptoms'">
+                <app-rec-symptoms></app-rec-symptoms>
+            </div>
+
+        </div>
+    </div>
+</div>

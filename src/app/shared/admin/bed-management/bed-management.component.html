@@ -1,0 +1,130 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <h2>Add Bed</h2>
+      <form [formGroup]="bedForm" (ngSubmit)="addBed()">
+        <div class="form-group">
+          <label for="ward">Ward:</label>
+          <select id="ward" class="form-control" formControlName="ward" required>
+            <option disabled selected>Select the ward</option>
+            <option *ngFor="let item of wards" [value]="item.wardType">{{ item.wardType }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bedNumbers">Bed Number:</label>
+          <input type="number" id="bedNumbers" class="form-control" formControlName="bedNumbers" placeholder="Enter bed number" required>
+          <div *ngIf="bedForm.get('bedNumbers')?.invalid && bedForm.get('bedNumbers')?.touched" class="text-danger">
+            Please enter a valid bed number.
+          </div>
+          <div *ngIf="bedForm.get('bedNumbers')?.value && bedForm.get('bedNumbers')?.value > 0 && bedForm.get('bedNumbers')?.value > selectedWard?.capacity" class="text-danger">
+            Bed count exceeds ward capacity of {{ selectedWard?.capacity }}.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="charges">Charges Per Day:</label>
+          <input type="number" id="charges" class="form-control" formControlName="charges" placeholder="Enter charges" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Add Beds</button>
+      </form>
+      
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row mt-4">
+    <div class="col-12">
+      <h2 class="mb-4 text-center">Department Beds Overview</h2>
+      <!-- <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <label for="departmentFilter">Filter by Department:</label>
+            <select id="departmentFilter" class="form-control" formControlName="department">
+              <option? value="">All Departments</option?>
+              <option *ngFor="let department of departments" ?[value]="department.departmentName">{{ department.departmentName }}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="statusFilter">Filter by Status:</label>
+            <select id="statusFilter" class="form-control" formControlName="status">
+              <option? value="all">All Beds</option?>
+              <option? value="occupied">Occupied Beds</option?>
+              <option? value="unoccupied">Unoccupied Beds</option?>
+            </select>
+          </div>
+          <div class="form-group col-md-2 align-self-end">
+            <button type="submit" class="btn btn-primary btn-block">Apply Filters</button>
+          </div>
+        </div>
+      </form> -->
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Ward</th>
+              <th scope="col">Bed Numbers</th>
+              <th scope="col">Charges</th>
+              <th scope="col">Status</th>
+              <!-- <th scope="col">Unoccupied Beds</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bed of filteredBeds | paginate: { itemsPerPage: 10, currentPage: p }">
+              <td>{{ bed.ward }}</td>
+              <td>{{ bed.bedNumbers }}</td>
+              <td>{{ bed.charges | currency:'NPR':'symbol':'1.2-2' }}</td>
+              <td [ngClass]="{'text-danger': bed.occupied, 'text-success': !bed.occupied}">
+                {{ bed.occupied ? 'Occupied' : 'Unoccupied' }}
+              </td>
+              <!-- <td [ngClass]="{'text-danger': bed.occupied, 'text-success': !bed.occupied}">
+                {{ bed.totalBeds - bed.occupied }}
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+  
+  <!-- <div class="row mt-4">
+    <div class="col-md-8">
+      <h2>Department Beds Overview</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Department</th>
+            <th>Bed</th>
+            <th>Charges</th>
+            <th>Occupied Beds</th>
+            <th>Unoccupied Beds</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bed of beds">
+            <td>{{ bed.department }}</td>
+            <td>{{ bed.bedNumberss }}</td>
+            <td>{{ bed.charges }}</td>
+            <td>{{ bed.occupied }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+  <div class="row mt-4">
+    <div class="col-md-8">
+      <h2>Manage Beds</h2>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let bed of beds">
+          <span>Bed Number: {{ bed.bedNumberss }}</span>
+          <span>Department: {{ bed.department }}</span>
+          <span>Charges: {{ bed.charges }}</span>
+          <span>Status: {{ bed.isOccupied ? 'Occupied' : 'Available' }}</span>
+          <button *ngIf="!bed.isOccupied" class="btn btn-sm btn-danger float-right" (click)="occupyBed(bed._id)">Occupy Bed</button>
+        </li>
+      </ul>
+    </div>
+  </div> -->
+</div>

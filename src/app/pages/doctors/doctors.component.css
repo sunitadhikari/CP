@@ -1,0 +1,100 @@
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 35vh; /* Sets the height to 25% of the viewport height */
+}
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.image-text {
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    font-weight: bold;
+    /* text-shadow: 2px 2px 4px #000000; */
+}
+.card-img-top {
+    height: 25vh; /* Sets the height to 25% of the viewport height */
+    object-fit: cover;
+}
+.hero-section {
+    background: url('https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL2JlY29taW5nLWRvY3Rvci5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjgyOH19fQ==') no-repeat center center;
+    background-size: cover;
+    padding: 150px 0;
+  }
+  .welcome{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    opacity:0.8;
+    background-size: cover;
+    color: black;
+  }
+  .lead{
+    font-weight:600px;
+  }
+
+  .card {
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+  
+  .card-img {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  .card {
+    max-width: 300px;
+    margin: 10px;
+  }
+  
+  .card-img-top {
+    
+    height: auto;
+    object-fit: cover;
+    /* Set a fixed height to ensure all images have the same size */
+    height: 150px;
+  }
+  
+  .biography {
+    max-height: 100px;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .background{
+    background-image: url('https://st2.depositphotos.com/2065849/7859/i/450/depositphotos_78594982-stock-photo-medical-drip-on-the-background.jpg');
+  }
+  
+  .biography {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .biography.expanded {
+    -webkit-line-clamp: unset; }

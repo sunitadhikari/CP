@@ -1,0 +1,67 @@
+<div class="card table-responsive container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">SN</th>
+        <th scope="col">Symptoms</th>
+        <th scope="col">Patient Name</th>
+        <th scope="col">Doctor Name</th>
+        <th scope="col">Doctor Assign</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let symptoms of symptomsData  | paginate: { itemsPerPage: 10, currentPage: page }; let i = index">
+        <th scope="row">{{ (page - 1) * 10 + i + 1 }}</th>
+        <td>{{ symptoms.symptoms }}</td>
+        <td>{{ symptoms.patient }}</td>
+        <td>{{ symptoms.doctor }}</td>
+        <td>
+          <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal" (click)="openModal(symptoms)">
+            <i class="fas fa-edit"></i> Assign
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Patient Symptoms</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="modalForm" (ngSubmit)="submit()">
+          <div class="form-group">
+            <label for="patient">Patient</label>
+            <input type="text" class="form-control" id="patient" formControlName="patient" placeholder="Patient" readonly>
+          </div>
+          <div class="form-group">
+            <label for="symptoms">Symptoms</label>
+            <input type="text" class="form-control" id="symptoms" formControlName="symptoms" placeholder="Symptoms" readonly>
+          </div>
+          <div class="form-group">
+            <label for="patientName">Doctor Name:</label>
+            <select id="patientName" class="form-control" formControlName="doctor" required>
+              <option *ngFor="let item of doctorList" [value]="item.email">
+                {{ item.firstName }} {{ item.lastName }}
+              </option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" >Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,172 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- begin col-3 -->
+    <div class="col-xl-3 col-md-6">
+      <div class="widget widget-stats bg-primary">
+        <div class="stats-icon"><i class="fas fa-building"></i></div>
+        <div class="stats-info">
+          <h4>Total Departments</h4>
+          <p>{{departmentCount}}</p>
+        </div>
+        <div class="stats-link">
+          <a href="javascript:;">View Detail <i class="fas fa-arrow-alt-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="widget widget-stats bg-success">
+        <div class="stats-icon"><i class="fas fa-hospital"></i></div>
+        <div class="stats-info">
+          <h4>Total Wards</h4>
+          <p>3,291,922</p>
+        </div>
+        <div class="stats-link">
+          <a href="javascript:;">View Detail <i class="fas fa-arrow-alt-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- end col-3 -->
+    <!-- begin col-3 -->
+    <div class="col-xl-3 col-md-6">
+      <div class="widget widget-stats bg-info">
+        <div class="stats-icon"><i class="fas fa-procedures"></i></div>
+        <div class="stats-info">
+          <div class="row">
+            <div class="col-md-6">
+              <h4>Daily Admissions</h4>
+              <p>{{dailyAdmittedPatients}}</p>
+            </div>
+            <div class="col-md-6">
+              <h4>Total Admissions</h4>
+              <p>{{patientCount}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="stats-link">
+          <a href="javascript:;">View Detail <i class="fas fa-arrow-alt-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- end col-3 -->
+    <!-- begin col-3 -->
+    <div class="col-xl-3 col-md-6">
+      <div class="widget widget-stats bg-warning">
+        <div class="stats-icon"><i class="fas fa-bed"></i></div>
+        <div class="stats-info">
+          <div class="row">
+            <div class="col-md-4">
+              <h4>Total Beds</h4>
+              <p>{{bedCount}}</p>
+            </div>
+            <div class="col-md-4">
+              <h4>Occupied Beds</h4>
+              <p>{{occupiedBeds}}</p>
+            </div>
+            <div class="col-md-4">
+              <h4>Unoccupied Beds</h4>
+              <p>{{unoccupiedBeds}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="stats-link">
+          <a href="javascript:;">View Detail <i class="fas fa-arrow-alt-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- end col-3 -->
+    <!-- begin col-3 -->
+    <div class="col-xl-3 col-md-6">
+      <div class="widget widget-stats bg-danger">
+        <div class="stats-icon"><i class="fas fa-bed"></i></div>
+        <div class="stats-info">
+          <h4>Available Beds</h4>
+          <p>1000</p>
+        </div>
+        <div class="stats-link">
+          <a href="javascript:;">View Detail <i class="fas fa-arrow-alt-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="widget widget-stats bg-danger">
+        <div class="stats-icon"><i class="fas fa-bed"></i></div>
+        <div class="stats-info">
+          <h4>Available Beds</h4>
+          <p>1000</p>
+        </div>
+        <div class="stats-link">
+          <a href="javascript:;">View Detail <i class="fas fa-arrow-alt-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="widget widget-stats bg-danger">
+        <div class="stats-icon"><i class="fas fa-bed"></i></div>
+        <div class="stats-info">
+          <h4>Available Beds</h4>
+          <p>1000</p>
+        </div>
+        <div class="stats-link">
+          <a href="javascript:;">View Detail <i class="fas fa-arrow-alt-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="widget widget-stats bg-danger">
+        <div class="stats-icon"><i class="fas fa-bed"></i></div>
+        <div class="stats-info">
+          <h4>Available Beds</h4>
+          <p>1000</p>
+        </div>
+        <div class="stats-link">
+          <a href="javascript:;">View Detail <i class="fas fa-arrow-alt-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- end col-3 -->
+  </div>
+  <div class="row">
+    <!-- Admissions Chart -->
+    <div class="col-xl-6 col-md-12">
+      <div class="widget widget-stats">
+        <div class="stats-info">
+          <h4>Admissions Chart</h4>
+          <div [chart]="admissionsChart"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Beds Chart -->
+    <div class="col-xl-6 col-md-12">
+      <div class="widget widget-stats">
+        <div class="stats-info">
+          <h4>Beds Chart</h4>
+          <div [chart]="bedsChart"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row for Wards and Departments Charts -->
+  <div class="row">
+    <!-- Wards Chart -->
+    <div class="col-xl-6 col-md-12">
+      <div class="widget widget-stats">
+        <div class="stats-info">
+          <h4>Wards Chart</h4>
+          <div [chart]="wardsChart"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Departments Chart -->
+    <div class="col-xl-6 col-md-12">
+      <div class="widget widget-stats">
+        <div class="stats-info">
+          <h4>Departments Chart</h4>
+          <div [chart]="departmentsChart"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
