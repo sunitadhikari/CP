@@ -21,7 +21,8 @@ export class ScheduleComponent implements OnInit {
   schedulePatientTable: any[]=[]
   userRole: string | null | undefined;
   constructor(private fb: FormBuilder, private scheduleService: ScheduleService,private doctorService:DoctorService) {
-    this.getDoctorList()
+    this.getDoctorList();
+    this.getScheduleByPatients();
    }
 
   getSchedule() {
@@ -44,9 +45,9 @@ export class ScheduleComponent implements OnInit {
     }))
   }
   getScheduleByPatients() {
-    this.scheduleService.getScheduleByPatient().subscribe((data => {
+    this.scheduleService.getSchedule().subscribe((data => {
       console.log('api data is ', data);
-      this.schedulePatientTable = data.data
+      this.schedulePatientTable = data
 
     }))
   }

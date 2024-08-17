@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { SymptomsService } from '../../../core/service/symptoms/symptoms.service';
 import * as alertify from 'alertifyjs';
 import { DoctorService } from '../../../core/service/admin/doctor.service';
+import { HttpClient } from '@angular/common/http';
+import { ConfirmationService } from '../../confirmation/confirmation.service';
 
 @Component({
   selector: 'app-symptoms',
@@ -26,7 +28,8 @@ export class SymptomsComponent implements OnInit {
   currentPatient: any = {}; // To store the current patient data
   prescription: any = {}; // To store prescription data for the current patient
   constructor(private formBuilder: FormBuilder, private symptomsService: SymptomsService,
-    private doctorService:DoctorService
+    private doctorService:DoctorService,private http: HttpClient,
+    private confirmationService:ConfirmationService
   ) {
 
 
@@ -72,8 +75,9 @@ getDocList(){
     if (this.symptomsForm.valid) {
       this.symptomsService.postSymptoms(this.symptomsForm.value).subscribe((data) => {
         console.log('form valid');
+        this.getSymptomsPatient();
+        alertify.success('Success')
       })
-      alertify.success('Success')
     }
     else {
       alertify.error('Error to submit.')
@@ -100,6 +104,25 @@ getDocList(){
       this.doctorTable = data.data
     })
   }
-  edit() { }
-  delete() { }
+  async delete(symptomId: string) {
+    const confirmed = await this.confirmationService.showConfirmationPopup();
+    if (confirmed) {
+      this.http.delete(`http://localhost:3000/deletesymptom/${symptomId}`).subscribe(
+        (response) => {
+          this.confirmationService.showSuccessMessage('Delete Successfully ');
+          this.getSymptomsPatient(); // Refresh the list
+        },
+        (error) => {
+          this.confirmationService.showErrorMessage('Sorry, Cannot be Deleted');
+        }
+      );
+    }
+    else {
+      this.confirmationService.showErrorMessage('Delete operation cancelled');
+    }
+  }
+
+  edit(symptomId: string): void {
+    // Implement edit functionality
+  }
 }
