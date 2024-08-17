@@ -108,7 +108,7 @@ export class DepartmentComponentimplements {
           }
         );
       }
-      alertify.success('Department added successfully.')
+      // alertify.success('Department added successfully.')
 
     } else {
       console.error('Form is invalid.');

@@ -6,6 +6,7 @@ import * as alertify from 'alertifyjs';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../core/service/user/user.service';
 import { DepartmentService } from '../../../core/service/admin/department.service';
+import { ConfirmationService } from '../../confirmation/confirmation.service';
 
 
 @Component({
@@ -21,8 +22,7 @@ export class DoctorComponent  implements OnInit {
   departmentList : any[] =[];
   editingDoctor: any = null;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private doctorService:DoctorService,private departmentService:DepartmentService, private userService : UserService) {
-
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private doctorService:DoctorService,private departmentService:DepartmentService, private userService : UserService, private confirmationService: ConfirmationService) {
    }
 
   ngOnInit(): void {
@@ -159,17 +159,25 @@ getDepartmentListData(){
     });
   }
 
-  delete(id: string): void {
-    this.userService.deleteUser(id).subscribe(
-      (res) => {
-        alertify.success('Successfully deleted');
-        this.getDoctorList();
-        console.log('Doctor Deleted:', res);
-      },
-      (error) => {
-        console.error('Error deleting doctor:', error);
-        alertify.error('Failed to delete doctor');
-      }
-    );
+  async delete(id: string): Promise<void> {
+const confirm = await this.confirmationService.showConfirmationPopup(); 
+if(confirm){
+this.userService.deleteUser(id).subscribe(
+    (res) => {
+      this.confirmationService.showSuccessMessage('Delete Successfully')
+      console.log('Doctor Deleted:', res);
+      this.getDoctorList();
+
+    },
+    (error) => {
+      console.error('Error deleting doctor:', error);
+      this.confirmationService.showErrorMessage('Sorry, cannot be deleted')
+      this.getDoctorList()
+    }
+  );
+}
+else{
+  this.confirmationService.showErrorMessage('Delete operation cancelled.')
+}
   }
 }

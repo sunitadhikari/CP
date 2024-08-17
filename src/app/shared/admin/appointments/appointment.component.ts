@@ -11,8 +11,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { PrescriptionService } from '../../../core/service/prescription-Service/prescription.service';
 import { ConfirmationService } from '../../confirmation/confirmation.service';
-import { ConfirmationService } from '../../confirmation/confirmation.service';
-
 @Component({
   selector: 'app-appointment',
   standalone: true,

@@ -6,6 +6,7 @@ import { DepartmentService } from '../../../core/service/admin/department.servic
 import { UserService } from '../../../core/service/user/user.service';
 import { ReceptionService } from '../reception.service';
 import { CommonModule } from '@angular/common';
+import { ConfirmationService } from '../../../shared/confirmation/confirmation.service';
 
 @Component({
   selector: 'app-reception',
@@ -23,7 +24,7 @@ export class ReceptionComponent implements OnInit{
   departmentList : any[] =[];
   editingreception: any = null;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private receptionService:ReceptionService,private departmentService:DepartmentService, private userService : UserService) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private receptionService:ReceptionService,private departmentService:DepartmentService, private userService : UserService, private confirmationService:ConfirmationService) {
 
    }
 
@@ -34,17 +35,16 @@ export class ReceptionComponent implements OnInit{
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      department: [''],
       picture: [''],
       dob: [''],
       sex: ['', Validators.required],
       bloodGroup: [''],
-      specialist: ['', Validators.required],
+      // specialist: ['', Validators.required],
       address: ['', Validators.required],
       phoneNo: [''],
       mobileNo: ['', Validators.required],
-      careerTitle: ['', Validators.required],
-      biography: [''],
+      // careerTitle: ['', Validators.required],
+      // biography: [''],
       status: ['active', Validators.required],
       role:['reception']
     });
@@ -135,7 +135,9 @@ export class ReceptionComponent implements OnInit{
       status: reception.status
     });
   }
-  delete(id: string): void {
+  async delete(id: string): Promise<void> {
+    const confirm = this.confirmationService.showConfirmationPopup();
+    
     this.userService.deleteUser(id).subscribe(
       (res) => {
         alertify.success('Successfully deleted');

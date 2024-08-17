@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { WardService } from '../../core/service/ward-service/ward.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import * as alertify from 'alertifyjs';
+import { ConfirmationService } from '../../shared/confirmation/confirmation.service';
 
 @Component({
   selector: 'app-ward',
@@ -26,7 +27,7 @@ export class WardComponent implements OnInit {
   totalItems = 0;
 
 
-  constructor(private wardService: WardService) { }
+  constructor(private wardService: WardService, private fb:FormBuilder, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.loadWards();
@@ -134,21 +135,41 @@ export class WardComponent implements OnInit {
     );
   }
 
-  deleteWard(ward: any) {
-    this.isLoading = true;
-    this.wardService.deleteWard(ward._id).subscribe(
-      () => {
-        this.wards = this.wards.filter((w) => w._id !== ward._id);
-        this.isLoading = false;
-        this.loadWards();
+//  async deleteWard(ward: any) {
+//     this.isLoading = true;
+//     this.wardService.deleteWard(ward._id).subscribe(
+//       () => {
+//         this.wards = this.wards.filter((w) => w._id !== ward._id);
+//         this.isLoading = false;
+//         this.loadWards();
 
+//       },
+//       (error) => {
+//         this.error = error.message;
+//         this.isLoading = false;
+//         this.loadWards();
+
+//       }
+//     );
+//   }
+async deleteWard(id:string){
+ const confirmed = await this.confirmationService.showConfirmationPopup();
+    if(confirmed){
+      this.wardService.deleteWard(id).subscribe((res)=>{
+        this.confirmationService.showSuccessMessage('Delete Successfully')
+        this.loadWards();
+     
       },
-      (error) => {
-        this.error = error.message;
-        this.isLoading = false;
+      (error)=>{
+        this.confirmationService.showErrorMessage('Sorry, cannot be deleted');
         this.loadWards();
-
       }
-    );
-  }
+      );
+    }
+    else{
+      this.confirmationService.showErrorMessage('Delete operation cancelled')
+    }
+  
+}
+
 }
