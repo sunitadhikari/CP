@@ -57,24 +57,45 @@ export class WardComponent implements OnInit {
     this.wardService.createWard(this.newWard).subscribe(
       (data) => {
         this.wards.push(data);
-        this.newWard = {
-          wardType: '',
-          capacity: 0
-        };
-        alertify.success('Ward already exits')
-
-        this.isLoading = false;
+        this.newWard = { wardType: '', capacity: 0 };
+        alertify.success('Ward added successfully');
         this.loadWards();
-
       },
       (error) => {
-        this.error = error.message;
         this.isLoading = false;
+        this.error = error.error.message || 'An error occurred while adding the ward.';
+        if (this.error.includes('Ward type already exists')) {
+         alertify.error('Ward type already exists');
+        } else {
+         alertify.error(this.error);
+        }
         this.loadWards();
-
       }
     );
   }
+  // addWard() {
+  //   this.isLoading = true;
+  //   this.wardService.createWard(this.newWard).subscribe(
+  //     (data) => {
+  //       this.wards.push(data);
+  //       this.newWard = {
+  //         wardType: '',
+  //         capacity: 0
+  //       };
+  //       alertify.success('Ward already exits')
+
+  //       this.isLoading = false;
+  //       this.loadWards();
+
+  //     },
+  //     (error) => {
+  //       this.error = error.message;
+  //       this.isLoading = false;
+  //       this.loadWards();
+
+  //     }
+  //   );
+  // }
   // addWard() {
   //   this.isLoading = true;
   
@@ -152,24 +173,29 @@ export class WardComponent implements OnInit {
 //       }
 //     );
 //   }
-async deleteWard(id:string){
- const confirmed = await this.confirmationService.showConfirmationPopup();
-    if(confirmed){
-      this.wardService.deleteWard(id).subscribe((res)=>{
-        this.confirmationService.showSuccessMessage('Delete Successfully')
+async deleteWard(id: string) {
+  console.log('Deleting ward with ID:', id); // Log ID
+  const confirmed = await this.confirmationService.showConfirmationPopup();
+  if (confirmed) {
+    this.wardService.deleteWard(id).subscribe(
+
+      (res) => {
+        debugger
+        this.confirmationService.showSuccessMessage('Delete Successfully');
         this.loadWards();
-     
       },
-      (error)=>{
+      (error) => {
+        debugger
         this.confirmationService.showErrorMessage('Sorry, cannot be deleted');
         this.loadWards();
       }
-      );
-    }
-    else{
-      this.confirmationService.showErrorMessage('Delete operation cancelled')
-    }
-  
+    );
+    debugger
+  } else {
+    debugger
+    this.confirmationService.showErrorMessage('Delete operation cancelled');
+  }
 }
+
 
 }
