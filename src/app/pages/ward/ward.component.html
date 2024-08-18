@@ -75,7 +75,7 @@
               <td>{{ item.capacity }}</td>
               <td>
                 <button class="btn btn-primary btn-sm mr-2" (click)="editWardMode(item)">Edit</button>
-                <button class="btn btn-danger btn-sm" (click)="deleteWard(item)">Delete</button>
+                <button class="btn btn-danger btn-sm" (click)="deleteWard(item._id)">Delete</button>
               </td>
             </tr>
           </tbody>
