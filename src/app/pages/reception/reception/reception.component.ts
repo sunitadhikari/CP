@@ -60,13 +60,13 @@ export class ReceptionComponent implements OnInit{
   createReceptionr(): void {
     this.userService.postRegister(this.receptionForm.value).subscribe(
       (data) => {
-        alertify.success('Doctor Added Successfully');
+        alertify.success('Reception Added Successfully');
         this.receptionForm.reset();
         this.fetchVerifiedReceptionUsers();
       },
       (error) => {
-        console.error('Error creating doctor:', error);
-        alertify.error('Failed to create doctor');
+        console.error('Error creating reception:', error);
+        alertify.error('Failed to create reception');
       }
     );
   }
@@ -101,14 +101,14 @@ export class ReceptionComponent implements OnInit{
   updateReception(): void {
     this.userService.updateUser(this.editingreception._id, this.receptionForm.value).subscribe(
       (data) => {
-        alertify.success('Doctor updated successfully');
+        alertify.success('reception updated successfully');
         this.editingreception = null;
         this.receptionForm.reset();
         this.fetchVerifiedReceptionUsers();
       },
       (error) => {
-        console.error('Error updating doctor:', error);
-        alertify.error('Failed to update doctor');
+        console.error('Error updating reception:', error);
+        alertify.error('Failed to update reception');
       }
     );
   }
