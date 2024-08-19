@@ -46,3 +46,25 @@
   <button type="submit" class="btn btn-primary" [disabled]="!reportForm.valid">Submit</button>
 </form>
 
+<div class="responsive-table">
+  <table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">Patient Name</th>
+      <th scope="col">Date</th>
+      <th scope="col">Symptoms</th>
+      <th scope="col">Diagnosis</th>
+      <th scope="col">Treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let report of reports">
+      <td>{{report.patient}}</td>
+      <td>{{ report.date | date: 'shortDate' }}</td>
+      <td>{{ report.symptoms }}</td>
+      <td>{{ report.diagnosis }}</td>
+      <td>{{ report.treatment }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

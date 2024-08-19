@@ -32,13 +32,17 @@ export class DashboardReportComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 10;
   selectedPatient: any;
-
+  dischargeBill: any;
   cashDetails: string = '';
   billForm!: FormGroup;
   selectedReport: any;
   paymentType: string = 'cash';
   billGenerated: boolean = false;
   paidAmount: number = 0;
+  dischargeReports: any[] = [];
+  private apiUrl = 'http://localhost:3000/gethospitalDischargeReport';
+  
+
 
 
   constructor(
@@ -46,7 +50,8 @@ export class DashboardReportComponent implements OnInit {
     private reportservice: ReportService,
     private appointmetnService: AppointmentService,
     private userService: UserService, private http: HttpClient,
-    private billService: BillService
+    private billService: BillService,
+    
 
   ) { }
 
@@ -111,6 +116,9 @@ export class DashboardReportComponent implements OnInit {
       summaryOfTreatment: ['', Validators.required],
       dischargeMedications: ['', Validators.required],
       followUpInstructions: ['', Validators.required],
+      department :  ['', Validators.required],
+      ward:  ['', Validators.required],
+      bedNumber:  ['', Validators.required],
       hospitalDischargeRequest: [true]
     },);
 
@@ -119,9 +127,27 @@ export class DashboardReportComponent implements OnInit {
 
     });
     this.fetchHospitalReports();
-    this.fetchAdmittedPatients();
+    this.fetchAdmittedPatients(); 
+    this.fetchDischargeReports(); 
 
 
+  }
+
+  fetchDischargeReports(): void {
+    this.http.get<any>(this.apiUrl).subscribe(
+      (reports) => {
+        this.dischargeReports = reports;
+        console.log(this.dischargeReports);
+      },
+      (error) => {
+        console.error('Error fetching discharge reports:', error);
+      }
+    );
+  }
+
+  openModalD(report: any): void {
+    this.dischargeBill = report;
+    console.log('Selected report:', this.dischargeBill);
   }
 
   dateGapValidator(): ValidatorFn {
@@ -312,6 +338,12 @@ export class DashboardReportComponent implements OnInit {
         summaryOfTreatment: selectedPatient.treatmentGiven,
         dischargeMedications: selectedPatient.dischargeInstructions,
         followUpInstructions: selectedPatient.followUpPlan,
+        department : selectedPatient.department,
+        ward: selectedPatient.ward,
+        bedNumber: selectedPatient.bedNumber,
+        // 
+
+
       });
     } else {
       console.error('Selected patient not found');

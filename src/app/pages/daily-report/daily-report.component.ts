@@ -29,6 +29,7 @@ export class DailyReportComponent implements OnInit {
   reportForm!: FormGroup;
   admitPatient: AdmittedPatient[] = [];
   // admitPatient: [] = [];
+  reports: any[] = []
   selectedPatient: any;
   today: string | undefined; // Add this variable
   constructor(private fb: FormBuilder,
@@ -47,6 +48,7 @@ export class DailyReportComponent implements OnInit {
     });
 
     this.fetchAdmittedPatients();
+    this.fetchReports();
   }
   fetchAdmittedPatients(): void {
     const apiUrl = 'http://localhost:3000/admittedpatientbyDepartment';
@@ -56,6 +58,17 @@ export class DailyReportComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching admitted patients:', error);
+      }
+    );
+  }
+  fetchReports(): void {
+    const apiUrl1 = 'http://localhost:3000/getDailyReport';
+    this.http.get<any[]>(apiUrl1).subscribe(
+      (response) => {
+        this.reports = response; 
+      },
+      (error) => {
+        console.error('Error fetching reports:', error);
       }
     );
   }
