@@ -32,7 +32,7 @@ export class DoctorComponent  implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      department: ['',Validators.required],
+      department: [''],
       picture: [''],
       dob: ['',Validators.required],
       sex: ['', Validators.required],
