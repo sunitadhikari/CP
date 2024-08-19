@@ -32,4 +32,10 @@ export class ScheduleService {
   getScheduleByDoctor():Observable<any>{
     return this.http.get(this.getschedulebyDoctorApiUrl)
   }
+  deleteSchedule(id:String):Observable<any>{
+    return this.http.delete<any>(`${this.apiUrl}delschedule/${id}`)
+  }
+  updateSchedule(id:String, data:any):Observable<any>{
+    return this.http.put<any>(`${this.apiUrl}updateschedule/${id}`, data)
+  }
 }
