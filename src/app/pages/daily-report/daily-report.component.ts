@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { PatientService } from '../../core/service/patient/patient.service';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 interface AdmittedPatient {
   _id: string;
   firstName: string;
@@ -29,13 +30,17 @@ export class DailyReportComponent implements OnInit {
   admitPatient: AdmittedPatient[] = [];
   // admitPatient: [] = [];
   selectedPatient: any;
-
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  today: string | undefined; // Add this variable
+  constructor(private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router) { }
 
   ngOnInit() {
+    const today = new Date().toISOString().split('T')[0]; // Format today's date as YYYY-MM-DD
+
     this.reportForm = this.fb.group({
       patient: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [today, Validators.required], // Set the default value to today's date
       symptoms: ['', Validators.required],
       diagnosis: ['', Validators.required],
       treatment: ['', Validators.required]
@@ -56,8 +61,17 @@ export class DailyReportComponent implements OnInit {
   }
   onSubmit() {
     if (this.reportForm.valid) {
-      console.log(this.reportForm.value);
-      // Handle form submission logic here
+      const apiUrl = 'http://localhost:3000/dailyReport';
+      this.http.post(apiUrl, this.reportForm.value).subscribe(
+        (response) => {
+          console.log('Report submitted successfully:', response);
+          // Navigate to another page or show success message
+          this.router.navigate(['/reports']); // Example: Redirect to a report listing page
+        },
+        (error) => {
+          console.error('Error submitting report:', error);
+        }
+      );
     }
   }
 }
