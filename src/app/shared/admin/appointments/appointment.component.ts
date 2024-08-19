@@ -27,7 +27,7 @@ export class AppointmentComponent implements OnInit {
   doctorName: any[] = [];
   filteredDoctors: any[] = [];
   appointmentAdmin:any[]=[];
-
+  page: number = 1;
   tomorrow: string;
   userRole: string | null | undefined;
   isModalOpen = false;
@@ -186,8 +186,13 @@ export class AppointmentComponent implements OnInit {
   }
   getAppointmentatAdmin(){
     this.appointmentService.getAppointmentatAdmin().subscribe((data)=>{
-      this.appointmentAdmin=data
-    })
+    //   this.appointmentAdmin=data
+    // })
+    this.appointmentAdmin = data.sort((a: { date: string | number | Date; }, b: { date: string | number | Date; }) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+  });
+
   }
   async deleteAppointment(id: string) {
     console.log('Button clicked');
