@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <div class=" card p-2" data-sortable-id="form-stuff-1">
                 <div class=" card-body">
-                    <form [formGroup]="scheduleForm" (ngSubmit)="submit()">
+                    <form [formGroup]="scheduleForm">
                         <div class="form-group row m-b-15">
                             <label class="col-form-label col-md-3 fw-bold">Doctor's Name <span
                                     class="text-danger fw-bold">*</span></label>
@@ -46,7 +46,7 @@
                                     most 4 hours difference.</small>
                             </div>
                         </div>
-                        <div class="form-group row m-b-15">
+                        <!-- <div class="form-group row m-b-15">
                             <label class="col-form-label col-md-3 fw-bold">Mobile No <span
                                     class="text-danger fw-bold">*</span></label>
                             <div class="col-md-9">
@@ -73,9 +73,9 @@
                                     <label class="form-check-label" for="other">Other</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row m-b-15 justify-content-center">
-                            <button type="submit" class="btn btn-success mr-2 col-auto">Submit</button>
+                            <button type="submit" class="btn btn-success mr-2 col-auto" (click)="submit()">{{editSchedule? 'Update Schedule':'Add'}}</button>
                             <button type="reset" class="btn btn-primary col-auto">Reset</button>
                         </div>
                     </form>
@@ -85,7 +85,7 @@
             </div>
             <div class="row mt-4">
                 <div class="col">
-                    <h2>Doctors</h2>
+                    <h2>Doctors Schedule</h2>
                     <div class="container-fulid">
                         <div class="row">
                             <div class="card">
@@ -102,9 +102,9 @@
                                                                 <th nowrap>Availabe Days</th>
                                                                 <th nowrap>Start Time</th>
                                                                 <th nowrap>End Time</th>
-                                                                <th nowrap>Sex</th>
-                                                                <th nowrap>Mobile Number</th>
-                                                                <th nowrap>Actions</th>
+                                                                <th nowrap>Action</th>
+                                                                <!-- <th nowrap>Mobile Number</th>
+                                                                <th nowrap>Actions</th> -->
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -114,17 +114,17 @@
                                                                 <td>{{item.availableDays}}</td>
                                                                 <td>{{item.startTime}}</td>
                                                                 <td>{{item.endTime}}</td>
-                                                                <td>{{item.sex}}</td>
-                                                                <td>{{item.mobileNumber}}</td>
+                                                                <!-- <td>{{item.sex}}</td>
+                                                                <td>{{item.mobileNumber}}</td> -->
                                                                 <td>
                                                                     <div class="btn-group" role="group">
                                                                         <button class="btn btn-warning btn-sm"
-                                                                            (click)="edit()">
+                                                                            (click)="edit(item)">
                                                                             <i class="fas fa-edit"></i>
                                                                         </button>
                                                                         <button
                                                                             class="btn btn-outline-danger btn-sm ml-2"
-                                                                            (click)="delete()">
+                                                                            (click)="delete(item._id)">
                                                                             <i class="fas fa-trash-alt"></i>
                                                                         </button>
                                                                     </div>

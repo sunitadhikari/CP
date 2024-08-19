@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ScheduleService } from '../../../core/service/admin/schedule.service';
 import * as alertify from 'alertifyjs';
 import { DoctorService } from '../../../core/service/admin/doctor.service';
+import { ConfirmationService } from '../../confirmation/confirmation.service';
 
 @Component({
   selector: 'app-schedule',
@@ -18,12 +19,13 @@ export class ScheduleComponent implements OnInit {
   scheduleTable: any[] = [];
   doctorName: any[] = [];
   scheduleDoctorTable: any[] = [];
-  schedulePatientTable: any[]=[]
+  schedulePatientTable: any[] = []
   userRole: string | null | undefined;
-  constructor(private fb: FormBuilder, private scheduleService: ScheduleService,private doctorService:DoctorService) {
+  editSchedule: any = null;
+  constructor(private fb: FormBuilder, private scheduleService: ScheduleService, private doctorService: DoctorService, private confirmationService: ConfirmationService) {
     this.getDoctorList();
     this.getScheduleByPatients();
-   }
+  }
 
   getSchedule() {
     this.scheduleService.getSchedule().subscribe((data) => {
@@ -31,9 +33,9 @@ export class ScheduleComponent implements OnInit {
       this.scheduleTable = data
     })
   }
-  getDoctorList(){
-    this.doctorService.getDoctor().subscribe((res)=>{
-      this.doctorName=res.doctors
+  getDoctorList() {
+    this.doctorService.getDoctor().subscribe((res) => {
+      this.doctorName = res.doctors
     })
   }
 
@@ -58,10 +60,10 @@ export class ScheduleComponent implements OnInit {
       availableDays: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
-      mobileNumber: ['', [Validators.required, Validators.pattern('^\\d{10}$')]],
-      sex: ['', Validators.required]
+      // mobileNumber: ['', [Validators.required, Validators.pattern('^\\d{10}$')]],
+      // sex: ['', Validators.required]
     }, { validators: this.timeDifferenceValidator });
-  
+
     this.getSchedule();
     this.getScheduleByDoctorFun();
     this.getScheduleByPatients()
@@ -73,7 +75,7 @@ export class ScheduleComponent implements OnInit {
     if (startTime && endTime) {
       const start = new Date(`1970-01-01T${startTime}:00`);
       const end = new Date(`1970-01-01T${endTime}:00`);
-      const diff = (end.getTime() - start.getTime()) / (1000 * 60 * 60); 
+      const diff = (end.getTime() - start.getTime()) / (1000 * 60 * 60);
 
       if (diff >= 2 && diff <= 4) {
         return null;
@@ -82,8 +84,20 @@ export class ScheduleComponent implements OnInit {
     }
     return null;
   }
-
-  submit() {
+submit(){
+  if(this.scheduleForm.valid){
+    if(this.editSchedule){
+      this.updateSchedule();
+    }
+    else{
+      this.createSchedule();
+    }
+  }
+  else{
+    alertify.error('Invalid Form')
+  }
+}
+  createSchedule() {
     if (this.scheduleForm.valid) {
       this.scheduleService.postSchedule(this.scheduleForm.value).subscribe((data) => {
         console.log(data);
@@ -96,11 +110,44 @@ export class ScheduleComponent implements OnInit {
       alertify.error('Invalid Form ')
     }
   }
-  edit() {
-    console.log('Editks item:');
+  updateSchedule(): void {
+    this.scheduleService.updateSchedule(this.editSchedule._id, this.scheduleForm.value).subscribe((res) => {
+      alertify.success('Doctor updated successfully');
+      this.editSchedule = null;
+      this.scheduleForm.reset();
+      this.getScheduleByDoctorFun();
+    },
+      (error) => {
+        alertify.error('Failed to update doctor')
+      }
+    )
+  }
+  
+  edit(schedule: any): void {
+this.editSchedule= schedule;
+this.scheduleForm.patchValue({
+  doctorName :schedule.doctorName,
+  availableDays:schedule.availableDays,
+  startTime:schedule.startTime,
+  endTime:schedule.endTime
+});
   }
 
-  delete() {
-    console.log('Delete item:');
+  async delete(id: string): Promise<void> {
+    const confirm = await this.confirmationService.showConfirmationPopup();
+    if (confirm) {
+      this.scheduleService.deleteSchedule(id).subscribe((res) => {
+        this.confirmationService.showSuccessMessage('Delete Successfully')
+        this.getScheduleByDoctorFun()
+      },
+        (error) => {
+          this.confirmationService.showErrorMessage('Sorry, cannot be deleted')
+          this.getScheduleByDoctorFun();
+        }
+      )
+    }
+    else {
+      this.confirmationService.showErrorMessage('Delete operation cancelled')
+    }
   }
 }

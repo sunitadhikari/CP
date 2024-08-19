@@ -32,7 +32,7 @@ export class DoctorComponent  implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      department: ['',Validators.required],
+      department: [''],
       picture: [''],
       dob: ['',Validators.required],
       sex: ['', Validators.required],
@@ -64,24 +64,7 @@ getDepartmentListData(){
 
     })
   }
-  // onSubmit() {
-   
-  //   if(this.doctorForm.valid){
-  //     this.userService.postRegister(this.doctorForm.value).subscribe((data)=>{
-  //    
-  //      console.log(data);
-  //      alertify.success('Doctor Added Successfully')
-  //    
-  //      this.doctorForm.reset()
-  //     })
-
-  //   }
-  //   else{
-  //     alertify.error('Invalid Form')
-  //   }
-
-    
-  // }
+ 
   onSubmit(): void {
     if (this.doctorForm.valid) {
       if (this.editingDoctor) {
@@ -93,7 +76,6 @@ getDepartmentListData(){
       alertify.error('Invalid Form');
     }
   }
-
   createDoctor(): void {
     this.userService.postRegister(this.doctorForm.value).subscribe(
       (data) => {
@@ -123,23 +105,8 @@ getDepartmentListData(){
     );
   }
 
-  // updateDoctor(): void {
-  //   this.userService.updateUser(this.editingDoctor._id, this.doctorForm.value).subscribe(
-  //     (data) => {
-  //       alertify.success('Doctor updated successfully');
-  //       this.editingDoctor = null;
-  //       this.doctorForm.reset();
-  //       this.getDoctorList();
-  //     },
-  //     (error) => {
-  //       console.error('Error updating doctor:', error);
-  //       alertify.error('Failed to update doctor');
-  //     }
-  //   );
-  // }
-
   editDoctor(doctor: any): void {
-    this.editingDoctor = doctor;
+    this.editingDoctor = doctor
     this.doctorForm.patchValue({
       firstName: doctor.firstName,
       lastName: doctor.lastName,
