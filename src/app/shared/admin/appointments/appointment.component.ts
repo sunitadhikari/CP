@@ -11,6 +11,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { PrescriptionService } from '../../../core/service/prescription-Service/prescription.service';
 import { ConfirmationService } from '../../confirmation/confirmation.service';
+import { ScheduleService } from '../../../core/service/admin/schedule.service';
 @Component({
   selector: 'app-appointment',
   standalone: true,
@@ -52,6 +53,7 @@ export class AppointmentComponent implements OnInit {
     private prescriptionService: PrescriptionService,
     private doctorService: DoctorService,
     private confirmationService: ConfirmationService,
+    private scheduleService:ScheduleService
 
   ) {
     const today = new Date();

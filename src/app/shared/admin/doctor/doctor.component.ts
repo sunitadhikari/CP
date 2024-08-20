@@ -16,14 +16,14 @@ import { ConfirmationService } from '../../confirmation/confirmation.service';
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.css'
 })
-export class DoctorComponent  implements OnInit {
+export class DoctorComponent implements OnInit {
   doctorForm!: FormGroup;
-  doctorList : any[] =[];
-  departmentList : any[] =[];
+  doctorList: any[] = [];
+  departmentList: any[] = [];
   editingDoctor: any = null;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private doctorService:DoctorService,private departmentService:DepartmentService, private userService : UserService, private confirmationService: ConfirmationService) {
-   }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private doctorService: DoctorService, private departmentService: DepartmentService, private userService: UserService, private confirmationService: ConfirmationService) {
+  }
 
   ngOnInit(): void {
     this.doctorForm = this.formBuilder.group({
@@ -34,37 +34,37 @@ export class DoctorComponent  implements OnInit {
       confirmPassword: ['', Validators.required],
       department: [''],
       picture: [''],
-      dob: ['',Validators.required],
+      dob: ['', Validators.required],
       sex: ['', Validators.required],
-      bloodGroup: ['',Validators.required],
+      bloodGroup: ['', Validators.required],
       specialist: ['', Validators.required],
       address: ['', Validators.required],
       phoneNo: [''],
       mobileNo: ['', Validators.required],
       careerTitle: ['', Validators.required],
-      biography: ['',Validators.required],
+      biography: ['', Validators.required],
       status: ['active', Validators.required],
-      role:['doctor']
+      role: ['doctor']
     });
     this.getDoctorList();
     this.getDepartmentListData()
 
   }
-getDepartmentListData(){
-  this.departmentService.getDepartment().subscribe((data)=>{
-    console.log(data);
-    this.departmentList=data
-  })
-}
-  getDoctorList(){
-    this.doctorService.getDoctor().subscribe((data)=>{
+  getDepartmentListData() {
+    this.departmentService.getDepartment().subscribe((data) => {
+      console.log(data);
+      this.departmentList = data
+    })
+  }
+  getDoctorList() {
+    this.doctorService.getDoctor().subscribe((data) => {
       // console.log(data);
-      this.doctorList=data.doctors;
+      this.doctorList = data.doctors;
       console.log(this.doctorList);
 
     })
   }
- 
+
   onSubmit(): void {
     if (this.doctorForm.valid) {
       if (this.editingDoctor) {
@@ -127,24 +127,24 @@ getDepartmentListData(){
   }
 
   async delete(id: string): Promise<void> {
-const confirm = await this.confirmationService.showConfirmationPopup(); 
-if(confirm){
-this.userService.deleteUser(id).subscribe(
-    (res) => {
-      this.confirmationService.showSuccessMessage('Delete Successfully')
-      console.log('Doctor Deleted:', res);
-      this.getDoctorList();
+    const confirm = await this.confirmationService.showConfirmationPopup();
+    if (confirm) {
+      this.userService.deleteUser(id).subscribe(
+        (res) => {
+          this.confirmationService.showSuccessMessage('Delete Successfully')
+          console.log('Doctor Deleted:', res);
+          this.getDoctorList();
 
-    },
-    (error) => {
-      console.error('Error deleting doctor:', error);
-      this.confirmationService.showErrorMessage('Sorry, cannot be deleted')
-      this.getDoctorList()
+        },
+        (error) => {
+          console.error('Error deleting doctor:', error);
+          this.confirmationService.showErrorMessage('Sorry, cannot be deleted')
+          this.getDoctorList()
+        }
+      );
     }
-  );
-}
-else{
-  this.confirmationService.showErrorMessage('Delete operation cancelled.')
-}
+    else {
+      this.confirmationService.showErrorMessage('Delete operation cancelled.')
+    }
   }
 }

@@ -267,6 +267,82 @@
       </table>
     </div>
   </div>
+
+  <div class="container mt-5" style="background-color: #c0c4c54b;
+  padding: 20px;
+  border-radius: 10px;">
+    <!-- Hospital Header -->
+    <div class="row mb-4">
+      <div class="col-2">
+        <img src="../../../../assets/logo2.png" alt="Hospital Logo" class="img-fluid circular-image ">
+      </div>
+      <div class="col-10">
+        <h1 class="display-4">ASPATAL</h1>
+        <p class="lead">Amarshing, Pokhara, Nepal</p>
+      </div>
+    </div>
+
+    <!-- Patient Details -->
+    <div class="row">
+      <h2>Doctor Discharge Report</h2>
+      <div class="col-md-12">
+        <h4>Patient Details</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th scope="row">Name:</th>
+              <td>{{patient.name}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Age:</th>
+              <td>{{patient.age}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Gender:</th>
+              <td>{{patient.gender}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Admission Date:</th>
+              <td>{{patient.admissionDate}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Discharge Date:</th>
+              <td>{{patient.dischargeDate}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Discharge Instruction:</th>
+              <td>{{patient.diagnosis}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Doctor:</th>
+              <td>{{patient.dischargeDate}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Discharge Date:</th>
+              <td>{{patient.dischargeDate}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Diagnosis:</th>
+              <td>{{patient.diagnosis}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Follow-Up Plan:</th>
+              <td>{{patient.diagnosis}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="row mt-5">
+      <div class="col-12 text-center">
+        <p class="text-muted">&copy; {{currentYear}} Hospital Name. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
 </div>
 <div class="card" *ngIf="userRole === 'labtech'">
   <div class="card-header">
@@ -398,7 +474,8 @@
               <td>{{ report.dischargeMedications }}</td>
               <td>{{ report.followUpInstructions }}</td>
               <td>
-                <button class="btn btn-primary" (click)="openModalD(report)" data-bs-toggle="modal" data-bs-target="#billModal">
+                <button class="btn btn-primary" (click)="openModalD(report)" data-bs-toggle="modal"
+                  data-bs-target="#billModal">
                   View
                 </button>
               </td>

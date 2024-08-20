@@ -11,11 +11,12 @@ import { CommonModule } from '@angular/common';
 })
 export class ProfilComponent implements OnInit {
   userProfile: any; // Adjust the type based on your profile structure
-
+  userRole: string | null | undefined;
   constructor(private profileService: UserService) {}
 
   ngOnInit(): void {
     this.fetchUserProfile();
+    this.userRole = localStorage.getItem('userRole')
   }
 
   fetchUserProfile(): void {

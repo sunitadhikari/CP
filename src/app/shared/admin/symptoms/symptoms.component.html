@@ -1,6 +1,6 @@
 <div class="container" *ngIf="userRole === 'patient'">
   <h2 class="my-4">Submit Symptoms</h2>
-  <form [formGroup]="symptomsForm" (ngSubmit)="onSubmit()" class="mb-4">
+  <form [formGroup]="symptomsForm"  class="mb-4">
     <div class="form-group">
       <label for="symptoms">Symptoms</label>
       <textarea id="symptoms" class="form-control" formControlName="symptoms" rows="4"></textarea>
@@ -8,7 +8,7 @@
         Symptoms are required with a minimum of 10 characters.
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="symptomsForm.invalid">Submit</button>
+    <button type="submit" class="btn btn-primary"  (click)="onSubmit()">{{editSymptoms ? 'Update Symptom' : ' Add Symptom'}}</button>
   </form>
 
   <div class="card">

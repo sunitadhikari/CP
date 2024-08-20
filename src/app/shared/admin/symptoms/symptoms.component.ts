@@ -10,7 +10,7 @@ import { ConfirmationService } from '../../confirmation/confirmation.service';
 @Component({
   selector: 'app-symptoms',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './symptoms.component.html',
   styleUrl: './symptoms.component.css'
 })
@@ -21,15 +21,16 @@ export class SymptomsComponent implements OnInit {
   patientByEmailTable: any[] = [];
   doctorTable: any[] = [];
   doctorList: any[] = [];
-  userRole:string|null |undefined;
+  editSymptoms: any = null;
+  userRole: string | null | undefined;
   showModal: boolean = false;
   selectedPatient: any;
   // prescription: { medicine: string, suggestion: string } = { medicine: '', suggestion: '' };
   currentPatient: any = {}; // To store the current patient data
   prescription: any = {}; // To store prescription data for the current patient
   constructor(private formBuilder: FormBuilder, private symptomsService: SymptomsService,
-    private doctorService:DoctorService,private http: HttpClient,
-    private confirmationService:ConfirmationService
+    private doctorService: DoctorService, private http: HttpClient,
+    private confirmationService: ConfirmationService
   ) {
 
 
@@ -45,7 +46,7 @@ export class SymptomsComponent implements OnInit {
     this.prescriptionForm = this.formBuilder.group({
       medicine: ['', Validators.required],
       suggestion: ['', Validators.required],
-      patientId: [''] 
+      patientId: ['']
     });
 
     this.userRole = localStorage.getItem('userRole')
@@ -55,7 +56,7 @@ export class SymptomsComponent implements OnInit {
   }
   launchModal(patient: any) {
     this.currentPatient = patient;
-    this.prescription = {}; 
+    this.prescription = {};
   }
   submitPrescription() {
     if (this.prescriptionForm.valid) {
@@ -64,12 +65,12 @@ export class SymptomsComponent implements OnInit {
       console.log('Form is invalid. Please check the fields.');
     }
   }
-getDocList(){
-  this.doctorService.getDoctor().subscribe((res)=>{
-    console.log(res);
-    this.doctorList=res
-  })
-}
+  getDocList() {
+    this.doctorService.getDoctor().subscribe((res) => {
+      console.log(res);
+      this.doctorList = res
+    })
+  }
   onSubmit() {
     console.log('form correct');
     if (this.symptomsForm.valid) {
@@ -78,6 +79,7 @@ getDocList(){
         this.getSymptomsPatient();
         alertify.success('Success')
       })
+      this.symptomsForm.reset()
     }
     else {
       alertify.error('Error to submit.')
@@ -97,9 +99,8 @@ getDocList(){
     })
   }
 
-
-  getSymptomsDoctor(){
-    this.symptomsService.getSymptomsDoctor().subscribe((data)=>{
+  getSymptomsDoctor() {
+    this.symptomsService.getSymptomsDoctor().subscribe((data) => {
       console.log(data);
       this.doctorTable = data.data
     })
@@ -121,8 +122,23 @@ getDocList(){
       this.confirmationService.showErrorMessage('Delete operation cancelled');
     }
   }
+  updateSymptoms() {
+    this.symptomsService.updateSymptoms(this.editSymptoms._id, this.symptomsForm.value).subscribe((data) => {
+      alertify.success('Symptoms updated successfully');
+      this.editSymptoms = null;
+      this.symptomsForm.reset();
+      this.getSymptomsPatientbyEmail();
+    },
+      (error) => {
+        console.error('Error updating Symptoms', error);
+        alertify.error('Failed to update symptoms');
+      });
+  }
 
-  edit(symptomId: string): void {
-    // Implement edit functionality
+  edit(symptomsId: any): void {
+    this.editSymptoms = symptomsId;
+    this.symptomsForm.patchValue({
+      symptoms: symptomsId.symptoms
+    });
   }
 }

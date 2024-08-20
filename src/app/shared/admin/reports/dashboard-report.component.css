@@ -18,4 +18,26 @@
   .alert-success {
     margin-top: 1rem;
   }
+
+  table th, table td {
+    font-size: 1.1rem;
+  }
+  table th{
+    width:35%;
+  }
+  table td{
+    width:65%;
+  }
+  h1.display-4 {
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  .circular-image {
+    width: 100px; /* Set a specific width and height */
+    height: 100px; /* It should be the same as width to make it a perfect circle */
+    border-radius: 50%; /* This makes the border circular */
+    border: 5px solid #6e6f70; /* Optional: adds a border around the image */
+    object-fit: cover; /* Ensures the image fits nicely within the circle */
+  }
   

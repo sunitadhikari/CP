@@ -37,5 +37,8 @@ export class SymptomsService {
   assignDoctor(id: string, doctor: string): Observable<any> {
     return this.http.put(`${this.assignDoctorApiUrl}/${id}`, { doctor });
   }
+  updateSymptoms(id:string, symptoms:string):Observable<any>{
+    return this.http.put(`${this.api_Url}updatesymptoms/${id}`, symptoms)
+  }
 }
 

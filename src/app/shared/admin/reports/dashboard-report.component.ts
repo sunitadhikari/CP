@@ -9,13 +9,14 @@ import * as alertify from 'alertifyjs';
 import KhaltiCheckout from "khalti-checkout-web";
 import { HttpClient } from '@angular/common/http';
 import { BillService } from '../../../core/service/bill-service/bill.service';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
 @Component({
   selector: 'app-dashboard-report',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgxPaginationModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NgxPaginationModule, MatIconModule, FormsModule],
   templateUrl: './dashboard-report.component.html',
   styleUrl: './dashboard-report.component.css'
 })
@@ -40,9 +41,20 @@ export class DashboardReportComponent implements OnInit {
   billGenerated: boolean = false;
   paidAmount: number = 0;
   dischargeReports: any[] = [];
+  doctorDischargeReport:any[]=[]
   private apiUrl = 'http://localhost:3000/gethospitalDischargeReport';
   
 
+  patient = {
+    name: 'John Doe',
+    age: 45,
+    gender: 'Male',
+    admissionDate: '2024-08-10',
+    dischargeDate:'2024-4-12',
+    diagnosis: 'Hypertension'
+  };
+
+  currentYear: number = new Date().getFullYear();
 
 
   constructor(
@@ -84,7 +96,6 @@ export class DashboardReportComponent implements OnInit {
     this.reportservice.getDischargeReportsByDoctor().subscribe((res) => {
       console.log(res);
       this.patientDataByDoctor = res
-
     })
     this.reportservice.getHospitalDischargeReports().subscribe((res) => {
       console.log(res);

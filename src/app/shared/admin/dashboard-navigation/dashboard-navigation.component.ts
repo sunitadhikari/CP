@@ -59,7 +59,7 @@ export class DashboardNavigationComponent implements OnInit{
   }
 
   constructor(private router: Router) {
-    this.currentSection = 'dashboard'
+    this.currentSection = 'symptoms'
 }
   ngOnInit(): void {
       this.userRole= localStorage.getItem('userRole')
