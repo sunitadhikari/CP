@@ -53,7 +53,8 @@ export class DoctorComponent implements OnInit {
   getDepartmentListData() {
     this.departmentService.getDepartment().subscribe((data) => {
       console.log(data);
-      this.departmentList = data
+      this.departmentList = data.departments
+      debugger
     })
   }
   getDoctorList() {

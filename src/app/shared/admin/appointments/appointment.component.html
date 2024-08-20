@@ -147,6 +147,7 @@
                           <th>Doctor Name</th>
                           <th>Date</th>
                           <th>Paid</th>
+                          <th>Schedule</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -158,6 +159,14 @@
                           <td>{{ item.doctorname }}</td>
                           <td>{{ item.date | date: 'short'}}</td>
                           <td>{{ item.isPaid ? 'Yes' : 'No' }}</td>
+                          <td>
+                            <div *ngIf="item.doctorSchedule">
+                              {{ item.doctorSchedule.startTime }} - {{ item.doctorSchedule.endTime }}
+                            </div>
+                            <div *ngIf="!item.doctorSchedule">
+                              No schedule available
+                            </div>
+                          </td>
                           <td>
                             <div class="d-flex flex-wrap button-group">
                               <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" *ngIf="!item.isPaid"

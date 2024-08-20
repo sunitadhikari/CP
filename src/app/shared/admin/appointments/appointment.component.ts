@@ -184,6 +184,7 @@ export class AppointmentComponent implements OnInit {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
       this.appointmentTable = res.appointmentByName
+      debugger
     })
   }
   getAppointmentatAdmin(){

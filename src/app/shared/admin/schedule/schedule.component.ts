@@ -97,31 +97,76 @@ submit(){
     alertify.error('Invalid Form')
   }
 }
+  // createSchedule() {
+  //   if (this.scheduleForm.valid) {
+  //     this.scheduleService.postSchedule(this.scheduleForm.value).subscribe((data) => {
+  //       console.log(data);
+  //     })
+  //     alertify.success('Form Filled Successfully')
+  //     this.scheduleForm.reset()
+  //     this.getSchedule()
+  //   }
+  //   else {
+  //     alertify.error('Invalid Form ')
+  //   }
+  // }
   createSchedule() {
     if (this.scheduleForm.valid) {
-      this.scheduleService.postSchedule(this.scheduleForm.value).subscribe((data) => {
-        console.log(data);
-      })
-      alertify.success('Form Filled Successfully')
-      this.scheduleForm.reset()
-      this.getSchedule()
-    }
-    else {
-      alertify.error('Invalid Form ')
+      this.scheduleService.postSchedule(this.scheduleForm.value).subscribe({
+        next: (data) => {
+          console.log(data);
+          alertify.success('Schedule created successfully');
+          this.scheduleForm.reset();
+          this.getSchedule();
+        },
+        error: (error) => {
+          // Handle error based on the response status
+          if (error.status === 400) {
+            alertify.error('Schedule already exists for this doctor on the specified day.');
+          } else {
+            alertify.error('An error occurred while creating the schedule.');
+          }
+        }
+      });
+    } else {
+      alertify.error('Invalid Form');
     }
   }
   updateSchedule(): void {
-    this.scheduleService.updateSchedule(this.editSchedule._id, this.scheduleForm.value).subscribe((res) => {
-      alertify.success('Doctor updated successfully');
-      this.editSchedule = null;
-      this.scheduleForm.reset();
-      this.getScheduleByDoctorFun();
-    },
-      (error) => {
-        alertify.error('Failed to update doctor')
-      }
-    )
+    if (this.editSchedule && this.scheduleForm.valid) {
+      this.scheduleService.updateSchedule(this.editSchedule._id, this.scheduleForm.value).subscribe({
+        next: (res) => {
+          alertify.success('Doctor updated successfully');
+          this.editSchedule = null;
+          this.scheduleForm.reset();
+          this.getScheduleByDoctorFun();
+        },
+        error: (error) => {
+          // Handle error based on the response status
+          if (error.status === 400) {
+            alertify.error('Schedule conflict detected. Please choose a different day.');
+          } else {
+            alertify.error('Failed to update doctor');
+          }
+        }
+      });
+    } else {
+      alertify.error('Invalid Form or no schedule to update');
+    }
   }
+  
+  // updateSchedule(): void {
+  //   this.scheduleService.updateSchedule(this.editSchedule._id, this.scheduleForm.value).subscribe((res) => {
+  //     alertify.success('Doctor updated successfully');
+  //     this.editSchedule = null;
+  //     this.scheduleForm.reset();
+  //     this.getScheduleByDoctorFun();
+  //   },
+  //     (error) => {
+  //       alertify.error('Failed to update doctor')
+  //     }
+  //   )
+  // }
   
   edit(schedule: any): void {
 this.editSchedule= schedule;
