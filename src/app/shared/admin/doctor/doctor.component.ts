@@ -123,7 +123,8 @@ export class DoctorComponent implements OnInit {
       mobileNo: doctor.mobileNo,
       careerTitle: doctor.careerTitle,
       biography: doctor.biography,
-      status: doctor.status
+      status: doctor.status,
+      role:doctor.role
     });
   }
 

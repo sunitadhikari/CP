@@ -9,6 +9,7 @@ import * as alertify from 'alertifyjs';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { WardService } from '../../core/service/ward-service/ward.service';
 import { UserService } from '../../core/service/user/user.service';
+import { ConfirmationService } from '../../shared/confirmation/confirmation.service';
 
 
 
@@ -35,7 +36,8 @@ export class AdmitPatientComponent implements OnInit {
     private patientService: PatientService,
     private departmentService: DepartmentService,
     private wardService: WardService,
-    private userService: UserService
+    private userService: UserService,
+    private confirmationService: ConfirmationService
   ) {
     this.admissionForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -63,13 +65,13 @@ export class AdmitPatientComponent implements OnInit {
 
   fetchDepartments() {
     this.departmentService.getDepartment().subscribe((data: any) => {
-      this.departmentsData = data.departments; 
+      this.departmentsData = data.departments;
     });
-    this.wardService.getAllWards().subscribe((data)=>{
-      this.wardsData=data
+    this.wardService.getAllWards().subscribe((data) => {
+      this.wardsData = data
     })
-    this.patientService.getAllPatientsAdmission().subscribe((res)=>{
-      this.patients=res.patients
+    this.patientService.getAllPatientsAdmission().subscribe((res) => {
+      this.patients = res.patients
     })
   }
 
@@ -201,8 +203,25 @@ export class AdmitPatientComponent implements OnInit {
       alertify.error('Invalid form');
     }
   }
-  editAdmit(){
+  editAdmit() {
 
   }
-  deleteAdmit(){}
+  async deleteAdmit(id: string) {
+    const confirm = await this.confirmationService.showConfirmationPopup();
+    if (confirm) {
+      this.patientService.deletePatientAdmission(id).subscribe((res) => {
+        this.confirmationService.showSuccessMessage('Delete successfully')
+        this.fetchDepartments()
+      },
+        (error) => {
+          this.confirmationService.showErrorMessage('Sorry, Cannot be deleted')
+          this.fetchDepartments()
+
+        }
+      )
+    }
+    else {
+      this.confirmationService.showErrorMessage('Delete operation cancelled.')
+    }
+  }
 }
