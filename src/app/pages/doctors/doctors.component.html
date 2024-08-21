@@ -44,7 +44,8 @@
             <div class="card mb-4">
                 <div class="row no-gutters">
                     <div class="display flex  mx-auto">
-                        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fdoctor-photo&psig=AOvVaw1PO3UCmfBAF55U9oEhBMfG&ust=1724076939545000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPjfzZ_d_ocDFQAAAAAdAAAAABAE" class="card-img-top h-20 w-100" alt="{{ item.name }}">
+                        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fdoctor-photo&psig=AOvVaw1PO3UCmfBAF55U9oEhBMfG&ust=1724076939545000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPjfzZ_d_ocDFQAAAAAdAAAAABAE"
+                            class="card-img-top h-20 w-100" alt="{{ item.name }}">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -54,12 +55,72 @@
                             <a href="" (click)="toogleBiography()">{{isExpanded ? 'See Less': 'See More' }}</a>
                             <p class="card-text fw-bold">{{ item.active }}</p>
                             <a href="dashboard" class="mx-auto justify-content-center ">
-                            <button type="submit"  class="bg-success" (submit)="submit()">Book Appointment</button>
+                                <button type="submit" class="bg-success" (submit)="submit()">Book Appointment</button>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+
+    <h4 class="m-b-15 m-t-30 text-center">Specialist of our Hospital</h4>
+    <div class="row row-space-10">
+        <div class="col-lg-3 col-md-6">
+            <!-- BEGIN item -->
+            <div class="item item-thumbnail">
+                <a href="product_detail.html" class="item-image">
+                    <img src="../assets/img/product/product-iphone.png" alt="">
+                    <div class="discount">15% OFF</div>
+                </a>
+                <div class="item-info">
+                    <h4 class="item-title">
+                        <a href="product_detail.html">iPhone 6s Plus<br>16GB</a>
+                    </h4>
+                    <p class="item-desc">3D Touch. 12MP photos. 4K video.</p>
+                    <div class="item-price">$649.00</div>
+                    <div class="item-discount-price">$739.00</div>
+                </div>
+            </div>
+            <!-- END item -->
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <!-- BEGIN item -->
+            <div class="item item-thumbnail">
+                <a href="product_detail.html" class="item-image">
+                    <img src="../assets/img/product/product-samsung-note5.png" alt="">
+                    <div class="discount">32% OFF</div>
+                </a>
+                <div class="item-info">
+                    <h4 class="item-title">
+                        <a href="product.html">Samsung Galaxy Note 5<br>Black</a>
+                    </h4>
+                    <p class="item-desc">Super. Computer. Now in two sizes.</p>
+                    <div class="item-price">$599.00</div>
+                    <div class="item-discount-price">$799.00</div>
+                </div>
+            </div>
+            <!-- END item -->
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <!-- BEGIN item -->
+            <div class="item item-thumbnail">
+                <a href="product_detail.html" class="item-image">
+                    <img src="../assets/img/product/product-iphone-se.png" alt="">
+                    <div class="discount">20% OFF</div>
+                </a>
+                <div class="item-info">
+                    <h4 class="item-title">
+                        <a href="product.html">iPhone SE<br>32/64Gb</a>
+                    </h4>
+                    <p class="item-desc">A big step for small.</p>
+                    <div class="item-price">$499.00</div>
+                    <div class="item-discount-price">$599.00</div>
+                </div>
+            </div>
+            <!-- END item -->
         </div>
     </div>
 </div>
