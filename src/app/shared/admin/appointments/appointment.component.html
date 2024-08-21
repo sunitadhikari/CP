@@ -121,7 +121,6 @@
               </div>
             </div>
           </div>
-
           <div class="form-group row m-b-15 justify-content-center">
             <button type="submit" class="btn btn-success mr-2 col-auto btn">Submit</button>
             <button type="reset" class="btn btn-primary col-auto">Reset</button>
@@ -173,10 +172,10 @@
                                 (click)="makePayment(item,item.amount)">
                                 <i class="fas fa-dollar"></i>Pay
                               </button>
-                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" (click)="edit()">
+                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" *ngIf="!item.isPaid" (click)="edit()">
                                 <i class="fas fa-edit"></i>
                               </button>
-                              <button class="btn btn-outline-danger btn-sm" (click)="deleteAppointment(item._id)">
+                              <button class="btn btn-outline-danger btn-sm" (click)="deleteAppointment(item._id)" *ngIf="!item.isPaid">
                                 <i class="fas fa-trash-alt"></i>
                               </button>
                             </div>
