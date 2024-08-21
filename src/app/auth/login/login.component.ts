@@ -25,10 +25,11 @@ ngOnInit(): void {
   }
   // this.userService.postUserLogin(this.loginForm.value).subscribe((data)=>{
   submit(){
+    console.log('button click');
     if(this.loginForm.valid){
       this.userService.postUserLogin(this.loginForm.value).subscribe((res)=>{
         if (res && res.message === 'Login Sucessfull'){
-          console.log(res);
+          console.log('res');
           console.log(this.loginForm.value)
           console.log(this.loginForm)
           localStorage.setItem('userData',JSON.stringify(this.loginForm.value));
