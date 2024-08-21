@@ -29,6 +29,9 @@ export class AdmitPatientComponent implements OnInit {
   wardsData: any[] = [];
   doctors: any[] = [];
   filteredDoctors: any[] = [];
+  filteredBeds: any[] = [];
+  selectedWardType: string = '';
+
 
   constructor(
     private fb: FormBuilder,
@@ -61,6 +64,9 @@ export class AdmitPatientComponent implements OnInit {
     this.fetchDoctors();
     this.fetchDepartments();
     this.onDepartmentChangeData();
+    this.admissionForm.get('ward')?.valueChanges.subscribe((selectedWardType: string) => {
+      this.onWardTypeChange(selectedWardType);
+    });
   }
 
   fetchDepartments() {
@@ -100,16 +106,38 @@ export class AdmitPatientComponent implements OnInit {
     );
   }
 
+  // fetchData(): void {
+  //   this.bedService.getBeds().subscribe(
+  //     (data: any[]) => {
+  //       // Filter unoccupied beds
+  //       this.beds = data.filter(bed => !bed.occupied);
+  //     },
+  //     error => {
+  //       console.error('Error fetching beds:', error);
+  //     }
+  //   );
+  // }
   fetchData(): void {
     this.bedService.getBeds().subscribe(
       (data: any[]) => {
-        // Filter unoccupied beds
+        // Filter out unoccupied beds
         this.beds = data.filter(bed => !bed.occupied);
+        // Filter beds based on the selected ward type
+        this.filterBedsByWardType();
       },
       error => {
         console.error('Error fetching beds:', error);
       }
     );
+  }
+  
+  filterBedsByWardType(): void {
+    this.filteredBeds = this.beds.filter(bed => bed.ward === this.selectedWardType);
+  }
+  
+  onWardTypeChange(selectedWardType: string): void {
+    this.selectedWardType = selectedWardType;
+    this.filterBedsByWardType();
   }
 
   getDepartments() {

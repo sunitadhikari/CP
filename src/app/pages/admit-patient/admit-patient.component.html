@@ -108,9 +108,10 @@
       <label for="bedNumber">Bed Number:</label>
       <select formControlName="bedNumber" class="form-control" required>
         <option disabled selected>Select the bed number</option>
-        <option *ngFor="let bed of beds" [value]="bed.bedNumbers">{{ bed.bedNumbers }}</option>
+        <option *ngFor="let bed of filteredBeds" [value]="bed.bedNumbers">{{ bed.bedNumbers }}</option>
       </select>
     </div>
+    
     <button type="submit" class="btn btn-primary">Admit Patient</button>
   </form>
   
@@ -132,7 +133,7 @@
           <th>Admitted At</th>
           <th>Checked By</th>
           <th>Action</th>
-          <!-- <th>Discharge</th> -->
+          <th>Discharge</th>
         </tr>
       </thead>
       <tbody>
@@ -162,9 +163,9 @@
         </div>
       </th>
       
-      <!-- <td>
+      <td>
         <button class="btn btn-danger" (click)="dischargePatient(patient._id)">Discharge</button>
-      </td> -->
+      </td>
 
         </tr>
       </tbody>
