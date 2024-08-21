@@ -72,6 +72,7 @@ export class AppointmentComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    
     this.userRole = localStorage.getItem('userRole');
     this.appointmentForm = this.fb.group({
       username: [''],
@@ -152,20 +153,37 @@ export class AppointmentComponent implements OnInit {
   //     this.filteredDoctors = []; // Show all doctors if no department is selected
   //   }
   // }
-  filterDoctors() {
-    const selectedDepartment = this.appointmentForm.get('departmentName')?.value.trim();
-
+  filterDoctors(): void {
+    const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
+  
     if (selectedDepartment) {
       this.filteredDoctors = this.doctorName.filter(doctor =>
-        doctor.department.trim() === selectedDepartment
+        doctor.department === selectedDepartment
       );
+      console.log(this.filteredDoctors)
+      debugger
     } else {
-      this.filteredDoctors = [this.doctorName];
+      this.filteredDoctors = [];
     }
-
-    console.log('Filtered Doctors:', this.filteredDoctors);
-    console.log('Type of filteredDoctors:', Array.isArray(this.filteredDoctors)); // Should log true
+    debugger
   }
+  
+  
+  
+  // filterDoctors() {
+  //   const selectedDepartment = this.appointmentForm.get('departmentName')?.value.trim();
+
+  //   if (selectedDepartment) {
+  //     this.filteredDoctors = this.doctorName.filter(doctor =>
+  //       doctor.department.trim() === selectedDepartment
+  //     );
+  //   } else {
+  //     this.filteredDoctors = [this.doctorName];
+  //   }
+
+  //   console.log('Filtered Doctors:', this.filteredDoctors);
+  //   console.log('Type of filteredDoctors:', Array.isArray(this.filteredDoctors)); // Should log true
+  // }
 
 
   submit() {

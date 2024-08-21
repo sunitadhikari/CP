@@ -37,11 +37,11 @@
             <div class="col-md-9">
               <select class="form-control m-b-5" formControlName="doctorname" required>
                 <option value="">--Please choose an option--</option>
-                <option *ngFor="let item of doctorName" [value]="item.email">
+                <option *ngFor="let item of filteredDoctors" [value]="item.email"> Name
                   {{ item.firstName }} {{ item.lastName }}
                 </option>
-
               </select>
+              
               <div *ngIf="appointmentForm.get('doctorname')?.invalid && appointmentForm.get('doctorname')?.touched"
                 class="text-danger">
                 Valid Doctor name is required.
