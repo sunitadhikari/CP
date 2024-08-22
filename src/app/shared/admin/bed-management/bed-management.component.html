@@ -22,7 +22,21 @@
         </div>
         <div class="form-group">
           <label for="charges">Charges Per Day:</label>
-          <input type="number" id="charges" class="form-control" formControlName="charges" placeholder="Enter charges" required>
+          <input 
+            type="number" 
+            id="charges" 
+            class="form-control" 
+            formControlName="charges" 
+            placeholder="Enter charges" 
+            required 
+            min="500"
+          >
+          <div *ngIf="bedForm.get('charges')?.hasError('min') && bedForm.get('charges')?.touched" class="text-danger">
+            Charges per day must be at least 500.
+          </div>
+          <div *ngIf="bedForm.get('charges')?.hasError('negativeValue') && bedForm.get('charges')?.touched" class="text-danger">
+            Charges cannot be negative.
+          </div>
         </div>
         
         <button type="submit" class="btn btn-primary">Add Beds</button>

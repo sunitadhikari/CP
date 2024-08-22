@@ -43,6 +43,8 @@ export class AppointmentComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 10;
   p: number = 1;
+  
+  editingAppointmentId: string | null = null;
 
 
   constructor(
@@ -185,19 +187,58 @@ export class AppointmentComponent implements OnInit {
   //   console.log('Type of filteredDoctors:', Array.isArray(this.filteredDoctors)); // Should log true
   // }
 
-
-  submit() {
+  submit(): void {
     if (this.appointmentForm.valid) {
-      this.appointmentService.postAppointment(this.appointmentForm.value).subscribe((data) => {
-        alertify.success('Form filled successfully');
-        this.appointmentForm.reset();
-        this.loadInitialData();
-        this.getAppointmentTable()
-      });
+      const formData = this.appointmentForm.value;
+  
+      // Check if we are editing an appointment
+      if (this.editingAppointmentId) {
+        // Update the existing appointment
+        this.appointmentService.updateAppointment(this.editingAppointmentId, formData).subscribe(
+          (res) => {
+            alertify.success('Appointment updated successfully');
+            this.editingAppointmentId = null;
+            this.appointmentForm.reset();
+            this.loadInitialData();
+            this.getAppointmentTable();
+          },
+          (error) => {
+            console.error('Error updating appointment:', error);
+            alertify.error('Error updating appointment');
+          }
+        );
+      } else {
+        // Create a new appointment
+        this.appointmentService.postAppointment(this.appointmentForm.value).subscribe(
+          (data) => {
+            alertify.success('Appointment created successfully');
+            this.appointmentForm.reset();
+            this.loadInitialData();
+            this.getAppointmentTable();
+          },
+          (error) => {
+            console.error('Error creating appointment:', error);
+            alertify.error('Error creating appointment');
+          }
+        );
+      }
     } else {
       alertify.error('Invalid form');
     }
   }
+  
+  // submit() {
+  //   if (this.appointmentForm.valid) {
+  //     this.appointmentService.postAppointment(this.appointmentForm.value).subscribe((data) => {
+  //       alertify.success('Form filled successfully');
+  //       this.appointmentForm.reset();
+  //       this.loadInitialData();
+  //       this.getAppointmentTable()
+  //     });
+  //   } else {
+  //     alertify.error('Invalid form');
+  //   }
+  // }
   getAppointmentTable() {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
@@ -345,5 +386,20 @@ export class AppointmentComponent implements OnInit {
       );
     }
   }
-  edit() { }
+  editAppointment(item: any) {
+    this.selectedAppointment = item;
+    this.editingAppointmentId = item._id;
+    
+    // Find the corresponding doctor's email or ID from the list
+    const doctorEmail = this.doctorName.find(doctor => doctor.firstName + ' ' + doctor.lastName === item.doctorname)?.email;
+  
+    this.appointmentForm.patchValue({
+      departmentName: item.departmentName,
+      doctorname: doctorEmail, // Ensure this matches the value in the <select>
+      date: item.date,
+      phone: item.phone,
+      problem: item.problem,
+    });
+  }
+  
 }

@@ -2,13 +2,23 @@
 <div class="container mt-4" >
   <div class="row p-4" style="background-color: rgb(240, 240, 240); border-radius: 6px;">
     <div class="col-lg-12">
-      <div class="card mb-4">
+      <div class="card mb-4 fit-content">
         <div class="card-body text-center">
           <img *ngIf="userProfile?.image" [src]="userProfile.image" alt="avatar" class="rounded-circle img-fluid border border-2 border-primary" style="width: 150px; height: 150px; object-fit: cover;">
-          <div class="col-2">
-            <img src="../../../../assets/logo2.png" alt="Hospital Logo" class="img-fluid circular-image ">
-            <h5 class="my-3 fw-bold">{{ userProfile?.firstName }} {{ userProfile?.lastName }}</h5>
-          </div>
+          <div class="d-flex  object-fit ">
+            <!-- Logo on the left -->
+            <div>
+                <img src="../../../../assets/logo2.png" alt="Hospital Logo" class="img-fluid circular-image">
+            </div>
+        
+            <!-- Doctor's image and name in the middle -->
+            <div class="justify-content-center align-items-center pb-2">
+                <img src="../../../assets/doctor4.png" alt="Doctor Image" class="img-fluid circular-image me-2">
+                <h5 class="fw-bold mb-0">{{ userProfile?.firstName }} {{ userProfile?.lastName }}</h5>
+            </div>
+        </div>
+        
+        
           <p class="mb-1 text-primary fw-medium">{{ userProfile?.specialist }}</p>
           <p class="text-muted mb-4 fw-medium">{{ userProfile?.department }}</p>
           <!-- <div class="d-grid gap-2">
@@ -75,6 +85,10 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
               <span class="fw-bold">Status</span>
               <span class="text-muted">{{ userProfile?.status }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span class="fw-bold">Time</span>
+              <span class="text-muted">{{ userProfile?.time }}</span>
             </li>
           </ul>
         </div>
