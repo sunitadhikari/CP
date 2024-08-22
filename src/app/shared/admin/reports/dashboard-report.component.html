@@ -201,7 +201,7 @@
 
 
 <div class="container-fluid" *ngIf="userRole === 'patient'">
-  <div class="card">
+  <!-- <div class="card">
     <div class="card-header">
       <h2 class="">Doctor's Discharge Reports</h2>
 
@@ -271,7 +271,6 @@
   <div class="container mt-5" style="background-color: #c0c4c54b;
   padding: 20px;
   border-radius: 10px;">
-    <!-- Hospital Header -->
     <div class="row mb-4">
       <div class="col-2">
         <img src="../../../../assets/logo2.png" alt="Hospital Logo" class="img-fluid circular-image ">
@@ -282,7 +281,6 @@
       </div>
     </div>
 
-    <!-- Patient Details -->
     <div class="row">
       <h2>Doctor Discharge Report</h2>
       <div class="col-md-12">
@@ -335,13 +333,44 @@
 
     </div>
 
-    <!-- Footer -->
     <div class="row mt-5">
       <div class="col-12 text-center">
         <p class="text-muted">&copy; {{currentYear}} Hospital Name. All rights reserved.</p>
       </div>
     </div>
+  </div> -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Prescriptions</h5>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>SN</th>
+                    <th>Medicine</th>
+                    <th>Suggestion</th>
+                    <th>Date</th> <!-- Adjust fields according to your schema -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let prescription of prescriptions; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ prescription.medicine }}</td>
+                    <td>{{ prescription.suggestion }}</td>
+                    <td>{{ prescription.createdAt | date: 'shortDate' }}</td> <!-- Format date if available -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  
 
 </div>
 <div class="card" *ngIf="userRole === 'labtech'">
