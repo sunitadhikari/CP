@@ -26,7 +26,7 @@ export class LabComponent implements OnInit {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
       department: [''],
-      picture: [''],
+      image: [''],
       dob: [''],
       sex: ['', Validators.required],
       bloodGroup: [''],

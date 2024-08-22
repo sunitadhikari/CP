@@ -35,6 +35,15 @@
             </div>
           </div>
         </div>
+        <label class="control-label fw-bold">Date of Birth <span class="text-danger">*</span></label>
+        <div class="row m-b-15">
+          <div class="col-md-12">
+            <input type="date" class="form-control" formControlName="dob" placeholder="Date of birth" required />
+            <div *ngIf="signupForm.get('dob')?.invalid && signupForm.get('dob')?.touched" class="text-danger">
+              Valid dob is required.
+            </div>
+          </div>
+        </div>
         <label class="control-label fw-bold">Phone <span class="text-danger">*</span></label>
         <div class="row m-b-15">
           <div class="col-md-12">

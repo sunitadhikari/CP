@@ -2396,9 +2396,9 @@ export default class Buttons {
       }).render();
     });
 &nbsp;
-    this.context.memo('button.picture', () =&gt; {
+    this.context.memo('button.image', () =&gt; {
       return this.button({
-        contents: this.ui.icon(this.options.icons.picture),
+        contents: this.ui.icon(this.options.icons.image),
         tooltip: this.lang.image.image,
         click: this.context.createInvokeHandler('imageDialog.show'),
       }).render();
