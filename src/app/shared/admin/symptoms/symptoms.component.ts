@@ -46,7 +46,7 @@ export class SymptomsComponent implements OnInit {
     this.prescriptionForm = this.formBuilder.group({
       medicine: ['', Validators.required],
       suggestion: ['', Validators.required],
-      patientId: ['']
+      patientId: ['', Validators.required]  
     });
 
     this.userRole = localStorage.getItem('userRole')
@@ -54,17 +54,91 @@ export class SymptomsComponent implements OnInit {
     this.getSymptomsDoctor()
     this.getSymptomsPatientbyEmail()
   }
+  // launchModal(patient: any) {
+  //   this.currentPatient = patient;
+  //   this.prescriptionForm.patchValue({
+  //     patientId: patient._id  
+  //   }); 
+  // debugger }
   launchModal(patient: any) {
     this.currentPatient = patient;
-    this.prescription = {};
-  }
-  submitPrescription() {
-    if (this.prescriptionForm.valid) {
-      console.log('Prescription submitted for patient:', this.currentPatient, 'Data:', this.prescription);
+    console.log('Launching Modal with Patient:', patient); // Debugging line
+  
+    // Check if patient._id is correct
+    if (patient) {
+      console.log('Patient ID:', patient); // Debugging line
+      this.prescriptionForm.patchValue({
+        patientId: patient// Patch the patient ID into the form
+      })
+      debugger
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      console.error('Patient ID is undefined!'); // Debugging line
     }
+    debugger
   }
+  
+  // submitPrescription() {
+  //   if (this.prescriptionForm.valid) {
+  //     console.log('Prescription submitted for patient:', this.currentPatient, 'Data:', this.prescription);
+  //   } else {
+  //     console.log('Form is invalid. Please check the fields.');
+  //   }
+  //   debugger
+  // }
+  // In your component
+// submitPrescription() {
+//   if (this.prescriptionForm.valid) {
+//     const prescriptionData = this.prescriptionForm.value;
+//     this.symptomsService.submitPrescription(prescriptionData).subscribe(
+//       (res) => {
+//         console.log('Prescription submitted successfully:', res);
+//         alertify.success('Prescription submitted successfully');
+//         // Optionally, reset the form or close the modal
+//         this.prescriptionForm.reset();
+//       },
+//       (error) => {
+//         console.error('Error submitting prescription:', error);
+//         alertify.error('Error submitting prescription');
+//       }
+//     );
+//   } else {
+//     console.log('Form is invalid. Please check the fields.');
+//     alertify.error('Form is invalid');
+//   }
+//   debugger
+// }
+submitPrescription() {
+  if (this.prescriptionForm.valid) {
+    const prescriptionData = this.prescriptionForm.value;
+    console.log('Prescription Data:', prescriptionData);  // Debugging line
+
+    // Check patientId specifically
+    if (!prescriptionData.patientId) {
+      console.error('Patient ID is missing in the form submission!');
+    } else {
+      console.log('Patient ID is correctly set:', prescriptionData.patientId);
+    }
+
+    this.symptomsService.submitPrescription(prescriptionData).subscribe(
+      (res) => {
+        console.log('Prescription submitted successfully:', res);
+        alertify.success('Prescription submitted successfully');
+        this.prescriptionForm.reset();
+      },
+      (error) => {
+        console.error('Error submitting prescription:', error);
+        alertify.error('Error submitting prescription');
+      }
+    );
+  } else {
+    console.log('Form is invalid. Please check the fields.');
+    alertify.error('Form is invalid');
+  }
+  debugger
+}
+
+
+
   getDocList() {
     this.doctorService.getDoctor().subscribe((res) => {
       console.log(res);

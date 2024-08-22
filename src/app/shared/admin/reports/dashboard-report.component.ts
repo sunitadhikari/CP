@@ -10,6 +10,7 @@ import KhaltiCheckout from "khalti-checkout-web";
 import { HttpClient } from '@angular/common/http';
 import { BillService } from '../../../core/service/bill-service/bill.service';
 import { MatIconModule } from '@angular/material/icon';
+import { SymptomsService } from '../../../core/service/symptoms/symptoms.service';
 
 
 
@@ -43,6 +44,8 @@ export class DashboardReportComponent implements OnInit {
   dischargeReports: any[] = [];
   doctorDischargeReport:any[]=[]
   private apiUrl = 'http://localhost:3000/gethospitalDischargeReport';
+  prescriptions: any[] = [];
+
   
 
   patient = {
@@ -63,12 +66,15 @@ export class DashboardReportComponent implements OnInit {
     private appointmetnService: AppointmentService,
     private userService: UserService, private http: HttpClient,
     private billService: BillService,
+    private symptomsService:SymptomsService
     
 
   ) { }
 
   ngOnInit(): void {
     this.userRole = localStorage.getItem('userRole')
+    this.loadPrescriptions();
+
     this.doctorDischargeReportForm = this.fb.group({
       patientName: [{ value: '', disabled: true }],
       patientAge: [{ value: '', disabled: true }],
@@ -144,6 +150,17 @@ export class DashboardReportComponent implements OnInit {
 
 
   }
+  loadPrescriptions(): void {
+    this.symptomsService.getPrescriptions().subscribe(
+      (data) => {
+        this.prescriptions = data;
+      },
+      (error) => {
+        console.error('Error fetching prescriptions:', error);
+      }
+    );
+  }
+
 
   fetchDischargeReports(): void {
     this.http.get<any>(this.apiUrl).subscribe(
