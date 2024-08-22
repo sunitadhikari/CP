@@ -79,7 +79,8 @@ export class DailyReportComponent implements OnInit {
         (response) => {
           console.log('Report submitted successfully:', response);
           // Navigate to another page or show success message
-          this.router.navigate(['/reports']); // Example: Redirect to a report listing page
+          this.router.navigate(['/reports']);
+          this.reportForm.reset();
         },
         (error) => {
           console.error('Error submitting report:', error);
