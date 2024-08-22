@@ -130,6 +130,7 @@ export class DashboardReportComponent implements OnInit {
       department :  ['', Validators.required],
       ward:  ['', Validators.required],
       bedNumber:  ['', Validators.required],
+      bed_charges:[''],
       hospitalDischargeRequest: [true]
     },);
 
