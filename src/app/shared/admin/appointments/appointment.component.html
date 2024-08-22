@@ -172,7 +172,7 @@
                                 (click)="makePayment(item,item.amount)">
                                 <i class="fas fa-dollar"></i>Pay
                               </button>
-                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" *ngIf="!item.isPaid" (click)="edit()">
+                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" *ngIf="!item.isPaid" (click)="editAppointment(item)">
                                 <i class="fas fa-edit"></i>
                               </button>
                               <button class="btn btn-outline-danger btn-sm" (click)="deleteAppointment(item._id)" *ngIf="!item.isPaid">

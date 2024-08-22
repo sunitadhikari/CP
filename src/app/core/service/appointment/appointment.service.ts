@@ -18,6 +18,7 @@ export class AppointmentService {
  private getAppointmentEmailApiUrl = this.apiUrl + 'appointmentsByEmail'
  private paidAppointmentsApiUrl = this.apiUrl + 'paidAppointments'
  private updatePaymentStatusApiUrl = this.apiUrl + 'updatePaymentStatus';
+ private updateAppointmentsApiUrl = `${this.apiUrl}updateAppointment/`; // Ensure there's a trailing slash if needed
  private getDoctorsByDepartmentApiUrl = this.apiUrl + 'getDoctorsByDepartment';
 //  private deleteDoctorApiUrl = this.apiUrl + 'delAppointment/'
 
@@ -54,4 +55,8 @@ getDoctorsByDepartment(department: string): Observable<any> {
 deleteAppointment(id:string):Observable<any>{
   return this.http.delete<any>(environment.api_url+(`delAppointment/${id}`))
 }
+updateAppointment(id: string, appointmentData: any): Observable<any> {
+  return this.http.put(`${this.updateAppointmentsApiUrl}${id}`, appointmentData);
+}
+
 }
