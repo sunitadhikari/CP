@@ -38,7 +38,7 @@ export class BedManagementComponent implements OnInit {
     this.bedForm = this.fb.group({
       ward: ['', Validators.required],
       bedNumbers: ['', [Validators.required, Validators.pattern(/^\d+(,\d+)*$/)]],
-      charges: [0, [Validators.required, Validators.min(0)]],
+      charges: ['', [Validators.required, Validators.min(500), this.negativeValueValidator]],
       occupied: [false]
 
     })
@@ -52,7 +52,9 @@ export class BedManagementComponent implements OnInit {
       status: ['all'] 
     });
   }
-
+  negativeValueValidator(control: any) {
+    return control.value < 0 ? { negativeValue: true } : null;
+  }
   ngOnInit(): void {
     this.fetchBeds();
     this.fetchDepartments();
