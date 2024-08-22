@@ -17,6 +17,7 @@ export class SymptomsService {
   private getSymptomsApiUrl = this.api_Url + 'getSymptomsbyDoctor'
   private getSymptomsPatientApiUrl = this.api_Url + 'getsymptomsbypatient'
   private getSymptomsPatientbyEmailApiUrl = this.api_Url + 'getSymptomsbyEmail'
+  private getSymptomsPrescriptionsApiUrl = this.api_Url + 'prescriptions'
   private assignDoctorApiUrl = `${this.api_Url}assignDoctor`;
 
   postSymptoms(data: any): Observable<any> {
@@ -40,5 +41,11 @@ export class SymptomsService {
   updateSymptoms(id:string, symptoms:string):Observable<any>{
     return this.http.put(`${this.api_Url}updatesymptoms/${id}`, symptoms)
   }
+  submitPrescription(prescriptionData: any): Observable<any> {
+    return this.http.post(`${this.api_Url}prescriptions`, prescriptionData);
+  }
+  getPrescriptions(): Observable<any> {
+    return this.http.get(this.getSymptomsPrescriptionsApiUrl)
+    
 }
-
+}

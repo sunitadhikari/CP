@@ -97,24 +97,24 @@
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="submitPrescription()" #prescribeForm="ngForm">
+        <form [formGroup]="prescriptionForm" (ngSubmit)="submitPrescription()">
           <div class="form-group">
             <label for="medicine">Medicine:</label>
-            <input type="text" class="form-control" id="medicine" name="medicine" [(ngModel)]="prescription.medicine" required>
+            <input type="text" class="form-control" id="medicine" formControlName="medicine" required>
           </div>
           <div class="form-group">
             <label for="suggestion">Suggestion:</label>
-            <textarea class="form-control" id="suggestion" name="suggestion" [(ngModel)]="prescription.suggestion" rows="3" required></textarea>
+            <textarea class="form-control" id="suggestion" formControlName="suggestion" rows="3" required></textarea>
           </div>
           <!-- Hidden input to store patient ID or relevant information -->
-          <input type="hidden" id="patientId" name="patientId" [value]="currentPatient.id">
+          <input type="hidden" id="patientId" formControlName="patientId" >
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
+      
     </div>
   </div>
 </div>
