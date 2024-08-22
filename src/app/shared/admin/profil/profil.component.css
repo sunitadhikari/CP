@@ -1,7 +1,24 @@
-.circular-image {
-    width: 100px; /* Set a specific width and height */
-    height: 100px; /* It should be the same as width to make it a perfect circle */
-    border-radius: 50%; /* This makes the border circular */
-    border: 5px solid #6e6f70; /* Optional: adds a border around the image */
-    object-fit: cover; /* Ensures the image fits nicely within the circle */
-  }
+
+  .circular-image {
+    width: 100px; /* Adjust size as needed */
+    height: 100px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image fits within the circle */
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.justify-content-between {
+    justify-content: space-between; /* Distributes space between the two flex containers */
+}
+
+.me-2 {
+    margin-right: 0.5rem; /* Adjust spacing between the doctor's image and the name */
+}
+
+.mb-0 {
+    margin-bottom: 0; /* Removes bottom margin from the heading */
+}

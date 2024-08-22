@@ -223,8 +223,8 @@
                       <tbody>
                         <tr *ngFor="let item of appointmentAdmin | paginate: { itemsPerPage: 10, currentPage: page }; let i = index">
                           <td>{{ i + 1 }}</td>
-                          <!-- <td>{{ item.email }}</td> -->
-                           <td>Patient name</td>
+                          <td>{{ item.email }}</td>
+                           <!-- <td>Patient name</td> -->
                           <td>{{ item.departmentName }}</td>
                           <td>{{ item.doctorname }}</td>
                           <td>{{ item.date | date: 'short'}}</td>
@@ -275,7 +275,7 @@
                         <tr *ngFor="let item of appointmentAdmin; let i = index">
                           <td>{{ i + 1 }}</td>
                           <!-- <td>{{ item.email }}</td> -->
-                           <td>Patient name</td>
+                           <td>Patient Name</td>
                           <td>{{ item.departmentName }}</td>
                           <td>{{ item.doctorname }}</td>
                           <td>{{ item.date | date: 'short'}}</td>
@@ -308,6 +308,7 @@
                 <th>SN</th>
                 <th>Username</th>
                 <th>Email</th>
+                <th>Age</th>
                 <th>Phone</th>
                 <th>Problem</th>
                 <th>Action</th>
@@ -319,6 +320,7 @@
                 <td>{{ (p - 1) * 10 + i + 1 }}</td>
                 <td>{{ appointment.username }}</td>
                 <td>{{ appointment.email }}</td>
+                <td>{{ appointment.age }}</td>
                 <td>{{ appointment.phone }}</td>
                 <td>{{ appointment.problem }}</td>
                 <td>

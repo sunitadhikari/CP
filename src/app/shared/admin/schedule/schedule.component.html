@@ -146,13 +146,13 @@
     </div>
     <div class="row">
         <div *ngIf="userRole === 'doctor'" class="col">
-            <h2>Doctor</h2>
+            
             <div class="container-fluid ">
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
                         <div class="card shadow-lg border-0">
                             <div class="card-header bg-primary text-white">
-                                <h4 class="mb-0 text-center">Doctor's Schedule</h4>
+                                <h3 class="mb-0 text-center">Doctor's Schedule</h3>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -182,10 +182,10 @@
             </div>
             
         </div>
-        <div class="row mt-4">
+        <div class="row mt-4 container">
             <div *ngIf="userRole === 'patient'" class="col">
-                <h2>Available Doctors</h2>
-                <div class="container-fulid">
+                <div class="container">
+                    <h2>Doctor's Schedule</h2>
                     <div class="row">
                         <div class="card">
                             <div class="card-body">
@@ -201,8 +201,8 @@
                                                             <th nowrap>Availabe Days</th>
                                                             <th nowrap>Start Time</th>
                                                             <th nowrap>End Time</th>
-                                                            <th nowrap>Sex</th>
-                                                            <th nowrap>Mobile Number</th>
+                                                            <!-- <th nowrap>Sex</th>
+                                                            <th nowrap>Mobile Number</th> -->
                                                             <!-- <th nowrap>Actions</th> -->
                                                         </tr>
                                                     </thead>
@@ -213,8 +213,8 @@
                                                             <td>{{item.availableDays}}</td>
                                                             <td>{{item.startTime}}</td>
                                                             <td>{{item.endTime}}</td>
-                                                            <td>{{item.sex}}</td>
-                                                            <td>{{item.mobileNumber}}</td>
+                                                            <!-- <td>{{item.sex}}</td>
+                                                            <td>{{item.mobileNumber}}</td> -->
 
                                                         </tr>
                                                     </tbody>
