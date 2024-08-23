@@ -46,6 +46,7 @@ export class AdmitPatientComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dob: ['', Validators.required],
+      email: ['', Validators.required],
       gender: ['', Validators.required],
       contactNumber: ['', Validators.required],
       address: [''],

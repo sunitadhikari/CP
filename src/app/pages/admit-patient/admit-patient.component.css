@@ -1,0 +1,17 @@
+/* Adjusts the font size and ensures text wraps within cells */
+.table-sm td, .table-sm th {
+    font-size: 0.85rem; /* Adjust this size as needed */
+    max-width: 150px; 
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}

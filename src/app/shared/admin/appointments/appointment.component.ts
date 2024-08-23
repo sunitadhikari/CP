@@ -93,12 +93,6 @@ export class AppointmentComponent implements OnInit {
     });
     this.prescriptionService.getOpdReports().subscribe((data) => {
       this.opdReports = data;
-
-      // const matchingReport = this.opdReports.find(report => report.email === this.selectedAppointment.email);
-      // if (matchingReport) {
-      //   this.selectedAppointment.departmentName = matchingReport.departmentName;
-      //   this.selectedAppointment.doctorName = matchingReport.doctorname;
-      // }
     })
     this.loadInitialData();
     this.fetchPrescriptionsForAppointments();
@@ -138,23 +132,7 @@ export class AppointmentComponent implements OnInit {
       }
     });
   }
-  // filterDoctors(): void {
-  //   const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
-  //   if (selectedDepartment) {
-  //     this.filteredDoctors = this.doctorName.filter(doctor => doctor.department === selectedDepartment);
 
-  //   } else {
-  //     this.filteredDoctors = [];
-  //   }
-  // }
-  // filterDoctors() {
-  //   const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
-  //   if (selectedDepartment) {
-  //     this.filteredDoctors = this.doctorName.filter(doctors => doctors.department === selectedDepartment);
-  //   } else {
-  //     this.filteredDoctors = []; // Show all doctors if no department is selected
-  //   }
-  // }
   filterDoctors(): void {
     const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
   
@@ -172,28 +150,12 @@ export class AppointmentComponent implements OnInit {
   
   
   
-  // filterDoctors() {
-  //   const selectedDepartment = this.appointmentForm.get('departmentName')?.value.trim();
-
-  //   if (selectedDepartment) {
-  //     this.filteredDoctors = this.doctorName.filter(doctor =>
-  //       doctor.department.trim() === selectedDepartment
-  //     );
-  //   } else {
-  //     this.filteredDoctors = [this.doctorName];
-  //   }
-
-  //   console.log('Filtered Doctors:', this.filteredDoctors);
-  //   console.log('Type of filteredDoctors:', Array.isArray(this.filteredDoctors)); // Should log true
-  // }
-
+  
   submit(): void {
     if (this.appointmentForm.valid) {
       const formData = this.appointmentForm.value;
   
-      // Check if we are editing an appointment
       if (this.editingAppointmentId) {
-        // Update the existing appointment
         this.appointmentService.updateAppointment(this.editingAppointmentId, formData).subscribe(
           (res) => {
             alertify.success('Appointment updated successfully');
@@ -208,13 +170,12 @@ export class AppointmentComponent implements OnInit {
           }
         );
       } else {
-        // Create a new appointment
         this.appointmentService.postAppointment(this.appointmentForm.value).subscribe(
           (data) => {
-            alertify.success('Appointment created successfully');
-            this.appointmentForm.reset();
             this.loadInitialData();
             this.getAppointmentTable();
+            alertify.success('Appointment created successfully');
+            this.appointmentForm.reset();
           },
           (error) => {
             console.error('Error creating appointment:', error);
@@ -227,18 +188,7 @@ export class AppointmentComponent implements OnInit {
     }
   }
   
-  // submit() {
-  //   if (this.appointmentForm.valid) {
-  //     this.appointmentService.postAppointment(this.appointmentForm.value).subscribe((data) => {
-  //       alertify.success('Form filled successfully');
-  //       this.appointmentForm.reset();
-  //       this.loadInitialData();
-  //       this.getAppointmentTable()
-  //     });
-  //   } else {
-  //     alertify.error('Invalid form');
-  //   }
-  // }
+
   getAppointmentTable() {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
@@ -248,8 +198,6 @@ export class AppointmentComponent implements OnInit {
   }
   getAppointmentatAdmin(){
     this.appointmentService.getAppointmentatAdmin().subscribe((data)=>{
-    //   this.appointmentAdmin=data
-    // })
     this.appointmentAdmin = data.sort((a: { date: string | number | Date; }, b: { date: string | number | Date; }) => {
       return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
@@ -318,39 +266,7 @@ export class AppointmentComponent implements OnInit {
       }
     );
   }
-  // makePayment(item: any): void {
-  //   const config = {
-  //     publicKey: 'test_public_key_0275cc5e2bae42fb890536aae01e9e73',
-  //     productIdentity: item._id,
-  //     productName: 'Appointment Payment',
-  //     productUrl: 'http://example.com/appointment',
-  //     eventHandler: {
-  //       onSuccess: (payload: any) => {
-  //         this.updatePaymentStatus(item._id, payload);
-  //       },
-  //       onError: (error: any) => {
-  //         alertify.error('Payment failed');
-  //       },
-  //       onClose: () => { }
-  //     },
-  //     paymentPreference: ['KHALTI', 'EBANKING', 'MOBILE_BANKING', 'CONNECT_IPS', 'SCT']
-  //   };
-
-  //   const checkout = new KhaltiCheckout(config);
-  //   checkout.show({ amount: 1000 });
-  // }
-
-  // updatePaymentStatus(id: string, payload: any): void {
-  //   this.appointmentService.updatePaymentStatus(id, payload).subscribe(
-  //     (response: any) => {
-  //       alertify.success('Payment successful');
-  //       this.loadInitialData();
-  //     },
-  //     (error: any) => {
-  //       alertify.error('Payment status update failed');
-  //     }
-  //   );
-  // }
+  
   openModal(appointment: any, mode: 'view' | 'prescribe'): void {
     this.selectedAppointment = appointment;
     this.modalMode = mode;
@@ -390,12 +306,11 @@ export class AppointmentComponent implements OnInit {
     this.selectedAppointment = item;
     this.editingAppointmentId = item._id;
     
-    // Find the corresponding doctor's email or ID from the list
     const doctorEmail = this.doctorName.find(doctor => doctor.firstName + ' ' + doctor.lastName === item.doctorname)?.email;
   
     this.appointmentForm.patchValue({
       departmentName: item.departmentName,
-      doctorname: doctorEmail, // Ensure this matches the value in the <select>
+      doctorname: doctorEmail, 
       date: item.date,
       phone: item.phone,
       problem: item.problem,
