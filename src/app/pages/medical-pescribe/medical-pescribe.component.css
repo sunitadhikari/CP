@@ -1,0 +1,18 @@
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
+  }
+  
+  .table th, .table td {
+    vertical-align: middle;
+  }
+  
+  ul.list-unstyled li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  ul.list-unstyled li:last-child {
+    border-bottom: none;
+  }
+  

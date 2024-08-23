@@ -1,0 +1,48 @@
+/* Dark header background */
+.thead-dark th {
+    background-color: #343a40; /* Dark color */
+    color: #ffffff; /* White text */
+    text-align: center;
+}
+
+/* Hover effect for table rows */
+.table-row:hover {
+    background-color: #f1f1f1; /* Light grey background on hover */
+}
+
+/* Button group styling */
+.btn-group .btn {
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-group .btn i {
+    margin-right: 8px;
+}
+
+.btn-group .btn:hover {
+    opacity: 0.9;
+}
+
+.btn-group .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-group .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Responsive text: hide text on small screens and show on larger screens */
+.d-none.d-sm-inline {
+    display: none;
+}
+
+@media (min-width: 576px) {
+    .d-none.d-sm-inline {
+        display: inline;
+    }
+}

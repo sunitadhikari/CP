@@ -1,22 +1,26 @@
 <div class="container" *ngIf="userRole === 'patient'">
-  <h2 class="my-4">Submit Symptoms</h2>
-  <form [formGroup]="symptomsForm"  class="mb-4">
+  <h2 class="my-4 text-primary">Submit Symptoms</h2>
+  <form [formGroup]="symptomsForm" class="mb-4 p-4 border rounded shadow-sm bg-light">
     <div class="form-group">
-      <label for="symptoms">Symptoms</label>
-      <textarea id="symptoms" class="form-control" formControlName="symptoms" rows="4"></textarea>
+      <label for="symptoms" class="font-weight-bold">Symptoms</label>
+      <textarea id="symptoms" class="form-control" formControlName="symptoms" rows="4" placeholder="Describe your symptoms..."></textarea>
       <div *ngIf="symptomsForm.get('symptoms')?.invalid && symptomsForm.get('symptoms')?.touched" class="text-danger mt-2">
         Symptoms are required with a minimum of 10 characters.
       </div>
     </div>
-    <button type="submit" class="btn btn-primary"  (click)="onSubmit()">{{editSymptoms ? 'Update Symptom' : ' Add Symptom'}}</button>
+    <button type="submit" class="btn btn-primary  mt-3" (click)="onSubmit()" 
+  style="background-color: #007bff; border-color: #007bff; transition: background-color 0.3s ease, transform 0.3s ease;">
+  {{editSymptoms ? 'Update Symptom' : ' Add Symptom'}}
+</button>
+
   </form>
 
-  <div class="card">
+  <div class="card shadow-sm">
     <div class="card-body">
-      <h5 class="card-title">Symptoms History</h5>
+      <h5 class="card-title text-secondary">Symptoms History</h5>
       <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
+        <table class="table table-striped table-hover table-bordered">
+          <thead class="thead-dark">
             <tr>
               <th>SN</th>
               <th>Symptoms</th>
@@ -24,15 +28,14 @@
             </tr>
           </thead>
           <tbody>
-            <!-- <tr *ngFor="let item of patientTable; let i = index"> -->
-              <tr *ngFor="let item of patientTable; let i = index">
+            <tr *ngFor="let item of patientTable; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ item.symptoms }}</td>
               <td>
                 <div class="btn-group">
-                  <!-- <button class="btn btn-warning btn-sm" (click)="edit(item._id)">Edit</button> -->
-                  <button class="btn btn-outline-danger btn-sm ml-2" (click)="delete(item._id)">Delete</button>
-                
+                  <button class="btn btn-outline-danger btn-sm ml-2" (click)="delete(item._id)">
+                    <i class="fas fa-trash-alt"></i> Delete
+                  </button>
                 </div>
               </td>
             </tr>
@@ -42,6 +45,7 @@
     </div>
   </div>
 </div>
+
 <!-- *ngIf="userRole === 'doctor'" -->
 
 <div class="container-fluid" *ngIf="userRole === 'doctor'" >

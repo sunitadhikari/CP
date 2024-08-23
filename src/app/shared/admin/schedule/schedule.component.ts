@@ -58,6 +58,7 @@ export class ScheduleComponent implements OnInit {
     this.scheduleForm = this.fb.group({
       doctorName: ['', Validators.required],
       availableDays: ['', Validators.required],
+      date: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
       // mobileNumber: ['', [Validators.required, Validators.pattern('^\\d{10}$')]],
@@ -84,34 +85,25 @@ export class ScheduleComponent implements OnInit {
     }
     return null;
   }
-submit(){
-  if(this.scheduleForm.valid){
-    if(this.editSchedule){
-      this.updateSchedule();
+  submit() {
+    if (this.scheduleForm.valid) {
+      if (this.editSchedule) {
+        this.updateSchedule();
+      }
+      else {
+        this.createSchedule();
+      }
     }
-    else{
-      this.createSchedule();
+    else {
+      alertify.error('Invalid Form')
     }
   }
-  else{
-    alertify.error('Invalid Form')
-  }
-}
-  // createSchedule() {
-  //   if (this.scheduleForm.valid) {
-  //     this.scheduleService.postSchedule(this.scheduleForm.value).subscribe((data) => {
-  //       console.log(data);
-  //     })
-  //     alertify.success('Form Filled Successfully')
-  //     this.scheduleForm.reset()
-  //     this.getSchedule()
-  //   }
-  //   else {
-  //     alertify.error('Invalid Form ')
-  //   }
-  // }
+
   createSchedule() {
     if (this.scheduleForm.valid) {
+    //   const formData = { ...this.scheduleForm.value };
+    // formData.date = this.formatDate(formData.date);
+
       this.scheduleService.postSchedule(this.scheduleForm.value).subscribe({
         next: (data) => {
           console.log(data);
@@ -134,6 +126,10 @@ submit(){
   }
   updateSchedule(): void {
     if (this.editSchedule && this.scheduleForm.valid) {
+
+      // const formData = { ...this.scheduleForm.value };
+      // formData.date = this.formatDate(formData.date);
+
       this.scheduleService.updateSchedule(this.editSchedule._id, this.scheduleForm.value).subscribe({
         next: (res) => {
           alertify.success('Doctor updated successfully');
@@ -154,7 +150,7 @@ submit(){
       alertify.error('Invalid Form or no schedule to update');
     }
   }
-  
+
   // updateSchedule(): void {
   //   this.scheduleService.updateSchedule(this.editSchedule._id, this.scheduleForm.value).subscribe((res) => {
   //     alertify.success('Doctor updated successfully');
@@ -167,17 +163,20 @@ submit(){
   //     }
   //   )
   // }
-  
-  edit(schedule: any): void {
-this.editSchedule= schedule;
-this.scheduleForm.patchValue({
-  doctorName :schedule.doctorName,
-  availableDays:schedule.availableDays,
-  startTime:schedule.startTime,
-  endTime:schedule.endTime
-});
-  }
 
+  edit(schedule: any): void {
+    this.editSchedule = schedule;
+    this.scheduleForm.patchValue({
+      doctorName: schedule.doctorName,
+      availableDays: schedule.availableDays,
+      date: schedule.date,
+      startTime: schedule.startTime,
+      endTime: schedule.endTime
+    });
+  }
+  // formatDate(date: string): string {
+  //   return new Date(date).toDateString(); // Format date as "Sun Sep 01 2024"
+  // }
   async delete(id: string): Promise<void> {
     const confirm = await this.confirmationService.showConfirmationPopup();
     if (confirm) {
