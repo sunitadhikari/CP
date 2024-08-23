@@ -241,7 +241,7 @@ export class DashboardReportComponent implements OnInit {
     if (this.billForm.valid) {
       const billData = this.billForm.value;
       console.log('Bill Data:', billData); // Check the complete bill data
-      debugger; // Use this to step through and inspect billData
+      ; // Use this to step through and inspect billData
       // Handle bill data, e.g., send it to the backend
       this.billService.saveBill(billData).subscribe(
         response => {
@@ -290,7 +290,7 @@ export class DashboardReportComponent implements OnInit {
   //     paymentType,
   //     paymentData
   //   };
-  //   debugger
+  //   
   //   this.billService.saveBill(billData).subscribe(
   //     response => {
   //       console.log('Bill saved:', response);
@@ -391,7 +391,7 @@ export class DashboardReportComponent implements OnInit {
     this.doctorDischargeReportForm.enable();  // Enable all controls temporarily
 
     if (this.doctorDischargeReportForm.valid) {
-      debugger
+      
       this.reportservice.postDoctorReport(this.doctorDischargeReportForm.value)
         .subscribe(
           (response) => {
@@ -400,7 +400,7 @@ export class DashboardReportComponent implements OnInit {
             this.doctorDischargeReportForm.disable();  // Disable controls again
           },
           (error) => {
-            debugger
+            
 
             console.error('Error submitting doctors discharge report:', error);
             this.doctorDischargeReportForm.disable();  // Disable controls if there's an error
@@ -414,9 +414,9 @@ export class DashboardReportComponent implements OnInit {
   submitHospitalReport(): void {
     alert('button is clicked')
     const value = this.hospitalDischargeReportForm.valid
-    debugger
+    
     if (this.hospitalDischargeReportForm.valid) {
-      debugger
+      
 
       this.reportservice.postHospitalReport(this.hospitalDischargeReportForm.value).subscribe(
         (response) => {
@@ -424,7 +424,7 @@ export class DashboardReportComponent implements OnInit {
           this.hospitalDischargeReportForm.reset();
         },
         (error) => {
-          debugger
+          
 
           console.error('Error submitting hospital discharge report:', error);
         }

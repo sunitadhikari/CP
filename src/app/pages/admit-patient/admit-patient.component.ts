@@ -55,7 +55,8 @@ export class AdmitPatientComponent implements OnInit {
       ward: ['', Validators.required],
       bedNumber: ['', Validators.required],
       checkedBy: ['', Validators.required],
-      admittedAt: [new Date()]
+      admittedAt: [new Date()],
+  
     });
   }
 
@@ -100,6 +101,8 @@ export class AdmitPatientComponent implements OnInit {
     this.patientService.dischargePatient(patientId, dischargeDate).subscribe(
       (response) => {
         console.log('Patient discharged:', response);
+        alertify.success('Discharged successfully')
+
       },
       (error) => {
         console.error('Error discharging patient:', error);

@@ -176,14 +176,9 @@ export class AppointmentComponent implements OnInit {
           } else {
             alertify.error('Error updating appointment');
           }
-<<<<<<< HEAD
-        );
-      } else {
-=======
         }
       );} else {
         // Create a new appointment
->>>>>>> b74f493d6798299be6ec564d3adbd61a43649628
         this.appointmentService.postAppointment(this.appointmentForm.value).subscribe(
           (data) => {
             this.loadInitialData();
@@ -218,7 +213,7 @@ export class AppointmentComponent implements OnInit {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
       this.appointmentTable = res.appointmentByName
-      debugger
+      
     })
   }
   getAppointmentatAdmin(){

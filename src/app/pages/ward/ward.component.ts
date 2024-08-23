@@ -180,19 +180,19 @@ async deleteWard(id: string) {
     this.wardService.deleteWard(id).subscribe(
 
       (res) => {
-        debugger
+        
         this.confirmationService.showSuccessMessage('Delete Successfully');
         this.loadWards();
       },
       (error) => {
-        debugger
+        
         this.confirmationService.showErrorMessage('Sorry, cannot be deleted');
         this.loadWards();
       }
     );
-    debugger
+    
   } else {
-    debugger
+    
     this.confirmationService.showErrorMessage('Delete operation cancelled');
   }
 }

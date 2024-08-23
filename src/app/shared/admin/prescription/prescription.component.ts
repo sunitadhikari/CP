@@ -17,8 +17,7 @@ export class PrescriptionComponent {
   ];
 
   prescriptions = [
-    { id: 1, patient: 'John Doe', date: '2024-06-01', prescription: 'Take 1 tablet daily' },
-    { id: 2, patient: 'Jane Smith', date: '2024-06-02', prescription: 'Apply ointment twice a day' }
+   
   ];
 
   actions = [
