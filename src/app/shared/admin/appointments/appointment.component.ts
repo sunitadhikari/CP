@@ -202,12 +202,20 @@ export class AppointmentComponent implements OnInit {
             this.loadInitialData();
             this.getAppointmentTable();
           },
-          (error) => {
-            console.error('Error updating appointment:', error);
+        //   (error) => {
+        //     console.error('Error updating appointment:', error);
+        //     alertify.error('Error updating appointment');
+        //   }
+        // );
+        (error) => {
+          console.error('Error updating appointment:', error);
+          if (error.error?.message) {
+            alertify.error(error.error.message);
+          } else {
             alertify.error('Error updating appointment');
           }
-        );
-      } else {
+        }
+      );} else {
         // Create a new appointment
         this.appointmentService.postAppointment(this.appointmentForm.value).subscribe(
           (data) => {
@@ -216,12 +224,23 @@ export class AppointmentComponent implements OnInit {
             this.loadInitialData();
             this.getAppointmentTable();
           },
-          (error) => {
-            console.error('Error creating appointment:', error);
-            alertify.error('Error creating appointment');
-          }
-        );
+      //     (error) => {
+      //       console.error('Error:', error.message || error);
+      //       alertify.error('Error: ' + (error.message || 'An unexpected error occurred'));
+      //     }
+          
+      //   );
+      // }  
+      (error) => {
+        console.error('Error creating appointment:', error);
+        if (error.error?.message) {
+          alertify.error(error.error.message);
+        } else {
+          alertify.error('Error creating appointment');
+        }
       }
+    );
+  }
     } else {
       alertify.error('Invalid form');
     }

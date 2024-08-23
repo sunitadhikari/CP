@@ -10,7 +10,7 @@
         <form [formGroup]="appointmentForm" (ngSubmit)="submit()">
 
           <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Department Name <span
+            <label class="col-form-label col-md-3 fw-bold">Department Name<span
                 class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
               <!-- <select class="form-control" formControlName="departmentName" placeholder="Choose one option"> -->
@@ -135,13 +135,15 @@
           <div class="card-body">
             <div class="col-lg-12">
               <div class="panel panel-inverse" data-sortable-id="table-basic-4">
-                <div class="panel-body">
+                <div class="panel-heading bg-dark text-white">
+                  <h4 class="panel-title">Appointment Table</h4>
+                </div>
+                <div class="panel-body p-0">
                   <div class="table-responsive">
-                    <table class="table">
-                      <thead>
+                    <table class="table table-hover table-striped table-bordered">
+                      <thead class="thead-dark">
                         <tr>
                           <th>SN</th>
-                          <!-- <th>Email</th> -->
                           <th>Department Name</th>
                           <th>Doctor Name</th>
                           <th>Date</th>
@@ -153,41 +155,45 @@
                       <tbody>
                         <tr *ngFor="let item of appointmentTable; let i = index">
                           <td>{{ i + 1 }}</td>
-                          <!-- <td>{{ item.email }}</td> -->
                           <td>{{ item.departmentName }}</td>
                           <td>{{ item.doctorname }}</td>
-                          <td>{{ item.date | date: 'short'}}</td>
-                          <td>{{ item.isPaid ? 'Yes' : 'No' }}</td>
+                          <td>{{ item.date | date: 'short' }}</td>
+                          <td>
+                            <span class="badge badge-pill" 
+                                  [ngClass]="item.isPaid ? 'badge-success' : 'badge-danger'">
+                              {{ item.isPaid ? 'Yes' : 'No' }}
+                            </span>
+                          </td>
                           <td>
                             <div *ngIf="item.doctorSchedule">
-                              {{ item.doctorSchedule.startTime }} - {{ item.doctorSchedule.endTime }}
+                              <span class="badge badge-info">
+                                {{ item.doctorSchedule.startTime }} - {{ item.doctorSchedule.endTime }}
+                              </span>
                             </div>
                             <div *ngIf="!item.doctorSchedule">
-                              No schedule available
+                              <span class="text-muted">No schedule available</span>
                             </div>
                           </td>
                           <td>
-                            <div class="d-flex flex-wrap button-group">
-                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" *ngIf="!item.isPaid"
-                                (click)="makePayment(item,item.amount)">
-                                <i class="fas fa-dollar"></i>Pay
+                            <div class="btn-group btn-group-sm">
+                              <button class="btn btn-success" *ngIf="!item.isPaid" (click)="makePayment(item,item.amount)">
+                                <i class="fas fa-dollar-sign"></i> Pay
                               </button>
-                              <button class="btn btn-warning btn-sm mb-2 mb-md-0 mr-md-2" *ngIf="!item.isPaid" (click)="editAppointment(item)">
-                                <i class="fas fa-edit"></i>
+                              <button class="btn btn-primary" *ngIf="!item.isPaid" (click)="editAppointment(item)">
+                                <i class="fas fa-edit"></i> Edit
                               </button>
-                              <button class="btn btn-outline-danger btn-sm" (click)="deleteAppointment(item._id)" *ngIf="!item.isPaid">
-                                <i class="fas fa-trash-alt"></i>
+                              <button class="btn btn-danger" (click)="deleteAppointment(item._id)" *ngIf="!item.isPaid">
+                                <i class="fas fa-trash-alt"></i> Delete
                               </button>
                             </div>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-
                   </div>
-                  <!-- end table-responsive -->
                 </div>
               </div>
+              
             </div>
           </div>
         </div>
@@ -303,42 +309,45 @@
         <h2>Appointments</h2>
         <div class="table-responsive">
           <table class="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th>SN</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Age</th>
-                <th>Phone</th>
-                <th>Problem</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                *ngFor="let appointment of getAppointmentByEmailList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-                <td>{{ (p - 1) * 10 + i + 1 }}</td>
-                <td>{{ appointment.username }}</td>
-                <td>{{ appointment.email }}</td>
-                <td>{{ appointment.age }}</td>
-                <td>{{ appointment.phone }}</td>
-                <td>{{ appointment.problem }}</td>
-                <td>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary" (click)="openModal(appointment, 'prescribe')">
-                      <i class="fas fa-prescription-bottle-alt"></i> {{ appointment.prescription ? 'View Prescription' :
-                      'Prescribe' }}
-                    </button>
-                    <button type="button" class="btn btn-secondary mx-2" (click)="openModal(appointment, 'view')">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
+              <thead class="thead-dark">
+                  <tr>
+                      <th>SN</th>
+                      <th>Username</th>
+                      <th>Email</th>
+                      <th>Age</th>
+                      <th>Phone</th>
+                      <th>Problem</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let appointment of getAppointmentByEmailList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
+                      class="table-row">
+                      <td>{{ (p - 1) * 10 + i + 1 }}</td>
+                      <td>{{ appointment.username }}</td>
+                      <td>{{ appointment.email }}</td>
+                      <td>{{ appointment.age }}</td>
+                      <td>{{ appointment.phone }}</td>
+                      <td>{{ appointment.problem }}</td>
+                      <td>
+                          <div class="btn-group" role="group" aria-label="Actions">
+                              <button type="button" class="btn btn-primary" (click)="openModal(appointment, 'prescribe')" title="Prescribe">
+                                  <i class="fas fa-prescription-bottle-alt"></i>
+                                  <span class="d-none d-sm-inline">{{ appointment.prescription ? 'View Prescription' : 'Prescribe' }}</span>
+                              </button>
+                              <button type="button" class="btn btn-secondary mx-2" (click)="openModal(appointment, 'view')" title="View Details">
+                                  <i class="fas fa-eye"></i>
+                                  <span class="d-none d-sm-inline">View</span>
+                              </button>
+                          </div>
+                      </td>
+                  </tr>
+              </tbody>
           </table>
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
-        </div>
+      </div>
+      
+      
       </div>
     </div>
   </div>

@@ -33,6 +33,13 @@
                             </div>
                         </div>
                         <div class="form-group row m-b-15">
+                            <label class="col-form-label col-md-3 fw-bold">Date <span class="text-danger fw-bold">*</span></label>
+                            <div class="col-md-9">
+                              <input type="date" class="form-control m-b-5" formControlName="date" required />
+                            </div>
+                          </div>
+                          
+                        <div class="form-group row m-b-15">
                             <label class="col-form-label col-md-3 fw-bold">Start and End Time <span
                                     class="text-danger fw-bold">*</span></label>
                             <div class="col d-flex justify-content-between">
@@ -75,7 +82,8 @@
                             </div>
                         </div> -->
                         <div class="form-group row m-b-15 justify-content-center">
-                            <button type="submit" class="btn btn-success mr-2 col-auto" (click)="submit()">{{editSchedule? 'Update Schedule':'Add'}}</button>
+                            <button type="submit" class="btn btn-success mr-2 col-auto"
+                                (click)="submit()">{{editSchedule? 'Update Schedule':'Add'}}</button>
                             <button type="reset" class="btn btn-primary col-auto">Reset</button>
                         </div>
                     </form>
@@ -99,23 +107,21 @@
                                                             <tr>
                                                                 <th>Id</th>
                                                                 <th nowrap>Doctor Name</th>
+                                                                <th nowrap>Date</th>
                                                                 <th nowrap>Availabe Days</th>
                                                                 <th nowrap>Start Time</th>
                                                                 <th nowrap>End Time</th>
                                                                 <th nowrap>Action</th>
-                                                                <!-- <th nowrap>Mobile Number</th>
-                                                                <th nowrap>Actions</th> -->
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr *ngFor="let item of scheduleTable; let i = index">
                                                                 <td>{{i+1}}</td>
                                                                 <td>{{item.doctorName}}</td>
+                                                                <td>{{item.date}}</td>
                                                                 <td>{{item.availableDays}}</td>
                                                                 <td>{{item.startTime}}</td>
                                                                 <td>{{item.endTime}}</td>
-                                                                <!-- <td>{{item.sex}}</td>
-                                                                <td>{{item.mobileNumber}}</td> -->
                                                                 <td>
                                                                     <div class="btn-group" role="group">
                                                                         <button class="btn btn-warning btn-sm"
@@ -146,12 +152,12 @@
     </div>
     <div class="row">
         <div *ngIf="userRole === 'doctor'" class="col">
-            
+
             <div class="container-fluid ">
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
                         <div class="card shadow-lg border-0">
-                            <div class="card-header bg-primary text-white">
+                            <div class="card-header bg-info text-dark">
                                 <h3 class="mb-0 text-center">Doctor's Schedule</h3>
                             </div>
                             <div class="card-body">
@@ -160,15 +166,53 @@
                                         <thead class="thead-dark text-center">
                                             <tr>
                                                 <th>SN</th>
-                                                <th>Available Days</th>
+                                                <th>Date</th>
                                                 <th>Start Time</th>
                                                 <th>End Time</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let item of scheduleDoctorTable; let i = index" class="text-center">
+                                            <tr *ngFor="let item of scheduleDoctorTable; let i = index" class="text-center" 
+                                            [ngClass]="{'table-info text-white': i % 2 === 0, 'table-warning text-dark': i % 2 !== 0}">
                                                 <td>{{i+1}}</td>
-                                                <td>{{item.availableDays}}</td>
+                                                <td>{{item.date | date: 'fullDate'}}</td>
+                                                <td>{{item.startTime}}</td>
+                                                <td>{{item.endTime}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-4 container">
+            <div *ngIf="userRole === 'patient'" class="col">
+                <div class="container my-4">
+                    <h2 class="text-center text-primary mb-4">Doctor's Schedule</h2>
+                    <div class="row justify-content-center">
+                        <div class="card shadow-lg border-0">
+                            <div class="card-body p-4">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered">
+                                        <thead class="thead-dark text-white text-center">
+                                            <tr>
+                                                <th scope="col">SN</th>
+                                                <th scope="col">Doctor Name</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Start Time</th>
+                                                <th scope="col">End Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of schedulePatientTable; let i = index">
+                                                <th scope="row">{{i+1}}</th>
+                                                <td>{{item.doctorName}}</td>
+                                                <td>{{item.date | date: 'fullDate'}}</td>
                                                 <td>{{item.startTime}}</td>
                                                 <td>{{item.endTime}}</td>
                                             </tr>
@@ -181,53 +225,6 @@
                 </div>
             </div>
             
-        </div>
-        <div class="row mt-4 container">
-            <div *ngIf="userRole === 'patient'" class="col">
-                <div class="container">
-                    <h2>Doctor's Schedule</h2>
-                    <div class="row">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="col-lg-12">
-                                    <div class="panel panel-inverse" data-sortable-id="table-basic-4">
-                                        <div class="panel-body">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>SN</th>
-                                                            <th>Doctor Name</th>
-                                                            <th nowrap>Availabe Days</th>
-                                                            <th nowrap>Start Time</th>
-                                                            <th nowrap>End Time</th>
-                                                            <!-- <th nowrap>Sex</th>
-                                                            <th nowrap>Mobile Number</th> -->
-                                                            <!-- <th nowrap>Actions</th> -->
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr *ngFor="let item of schedulePatientTable; let i = index">
-                                                            <td>{{i+1}}</td>
-                                                            <td>{{item.doctorName}}</td>
-                                                            <td>{{item.availableDays}}</td>
-                                                            <td>{{item.startTime}}</td>
-                                                            <td>{{item.endTime}}</td>
-                                                            <!-- <td>{{item.sex}}</td>
-                                                            <td>{{item.mobileNumber}}</td> -->
-
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
