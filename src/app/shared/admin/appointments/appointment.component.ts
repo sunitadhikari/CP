@@ -23,10 +23,11 @@ export class AppointmentComponent implements OnInit {
   appointmentForm!: FormGroup;
   prescriptionForm!: FormGroup;
   appointmentTable: any[] = [];
-  departmentNameList: any[] = [];
   getAppointmentByEmailList: any[] = [];
   doctorName: any[] = [];
+  doctorsdata: any[] = [];
   filteredDoctors: any[] = [];
+  departmentNameList: any[] = [];
   appointmentAdmin:any[]=[];
   page: number = 1;
   tomorrow: string;
@@ -72,8 +73,10 @@ export class AppointmentComponent implements OnInit {
     this.appointmentService.getAppointmentsByDoctorEmail().subscribe((res) => {
       this.getAppointmentByEmailList = res.appointmentwithName;
     });
+  
   }
   ngOnInit(): void {
+
     
     this.userRole = localStorage.getItem('userRole');
     this.appointmentForm = this.fb.group({
@@ -93,35 +96,36 @@ export class AppointmentComponent implements OnInit {
     });
     this.prescriptionService.getOpdReports().subscribe((data) => {
       this.opdReports = data;
-
-      // const matchingReport = this.opdReports.find(report => report.email === this.selectedAppointment.email);
-      // if (matchingReport) {
-      //   this.selectedAppointment.departmentName = matchingReport.departmentName;
-      //   this.selectedAppointment.doctorName = matchingReport.doctorname;
-      // }
     })
-    this.loadInitialData();
-    this.fetchPrescriptionsForAppointments();
-    this.getAppointmentatAdmin()
-    this.getAppointmentTable();
     this.prescriptionService.getOpdReportsinDoctor().subscribe((data) => {
       this.opdReportsinDoctor = data;
 
     })
-  }
+    // this.loadInitialData();
+    this.fetchDoctors();
+    this.onDepartmentChange();
+    this.fetchPrescriptionsForAppointments();
+    this.getAppointmentatAdmin()
+    this.getAppointmentTable();
 
-  loadInitialData(): void {
-    this.departmentService.getDepartment().subscribe((res) => {
-      this.departmentNameList = res;
-    });
-    this.doctorService.getDoctor().subscribe((res) => {
-      this.doctorName = res.doctors;
 
-    });
-    this.appointmentService.getAppointmentsByDoctorEmail().subscribe((res) => {
-      this.getAppointmentByEmailList = res.appointmentwithName;
-    });
+
   }
+// Subscribe to department value changes to filter doctors
+
+
+  // loadInitialData(): void {
+  //   this.departmentService.getDepartment().subscribe((res) => {
+  //     this.departmentNameList = res;
+  //   });
+  //   this.doctorService.getDoctor().subscribe((res) => {
+  //     this.doctorName = res.doctors;
+
+  //   });
+  //   this.appointmentService.getAppointmentsByDoctorEmail().subscribe((res) => {
+  //     this.getAppointmentByEmailList = res.appointmentwithName;
+  //   });
+  // }
 
   fetchPrescriptionsForAppointments(): void {
     this.getAppointmentByEmailList.forEach((appointment) => {
@@ -138,54 +142,28 @@ export class AppointmentComponent implements OnInit {
       }
     });
   }
-  // filterDoctors(): void {
-  //   const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
-  //   if (selectedDepartment) {
-  //     this.filteredDoctors = this.doctorName.filter(doctor => doctor.department === selectedDepartment);
-
-  //   } else {
-  //     this.filteredDoctors = [];
-  //   }
-  // }
-  // filterDoctors() {
-  //   const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
-  //   if (selectedDepartment) {
-  //     this.filteredDoctors = this.doctorName.filter(doctors => doctors.department === selectedDepartment);
-  //   } else {
-  //     this.filteredDoctors = []; // Show all doctors if no department is selected
-  //   }
-  // }
-  filterDoctors(): void {
-    const selectedDepartment = this.appointmentForm.get('departmentName')?.value;
-  
-    if (selectedDepartment) {
-      this.filteredDoctors = this.doctorName.filter(doctor =>
-        doctor.department === selectedDepartment
-      );
-      console.log(this.filteredDoctors)
-      debugger
-    } else {
-      this.filteredDoctors = [];
-    }
-    debugger
+  // 
+  fetchDoctors() {
+    this.doctorService.getDoctor().subscribe((data: any) => {
+      this.doctorsdata = data.doctors;
+      // alert( this.doctorsdata);
+      // console.log(this.doctorsdata);
+      // alert(JSON.stringify(this.doctorsdata));
+      this.onDepartmentChange();
+ 
+    });
   }
+  onDepartmentChange() {
+    this.appointmentForm.get('departmentName')?.valueChanges.subscribe(selectedDepartment => {
+        if (Array.isArray(this.doctorsdata)) {
+            this.filteredDoctors = this.doctorsdata.filter(doctor => doctor.department === selectedDepartment);
+        } else {
+            console.error('Doctors array is not valid:', this.doctorsdata);
+            this.filteredDoctors = [];
+        }
+    });
+}
   
-  
-  
-  // filterDoctors() {
-  //   const selectedDepartment = this.appointmentForm.get('departmentName')?.value.trim();
-
-  //   if (selectedDepartment) {
-  //     this.filteredDoctors = this.doctorName.filter(doctor =>
-  //       doctor.department.trim() === selectedDepartment
-  //     );
-  //   } else {
-  //     this.filteredDoctors = [this.doctorName];
-  //   }
-
-  //   console.log('Filtered Doctors:', this.filteredDoctors);
-  //   console.log('Type of filteredDoctors:', Array.isArray(this.filteredDoctors)); // Should log true
-  // }
 
   submit(): void {
     if (this.appointmentForm.valid) {
@@ -199,14 +177,10 @@ export class AppointmentComponent implements OnInit {
             alertify.success('Appointment updated successfully');
             this.editingAppointmentId = null;
             this.appointmentForm.reset();
-            this.loadInitialData();
+            // this.loadInitialData();
             this.getAppointmentTable();
           },
-        //   (error) => {
-        //     console.error('Error updating appointment:', error);
-        //     alertify.error('Error updating appointment');
-        //   }
-        // );
+
         (error) => {
           console.error('Error updating appointment:', error);
           if (error.error?.message) {
@@ -216,21 +190,14 @@ export class AppointmentComponent implements OnInit {
           }
         }
       );} else {
-        // Create a new appointment
         this.appointmentService.postAppointment(this.appointmentForm.value).subscribe(
           (data) => {
             alertify.success('Appointment created successfully');
             this.appointmentForm.reset();
-            this.loadInitialData();
+            // this.loadInitialData();
             this.getAppointmentTable();
           },
-      //     (error) => {
-      //       console.error('Error:', error.message || error);
-      //       alertify.error('Error: ' + (error.message || 'An unexpected error occurred'));
-      //     }
-          
-      //   );
-      // }  
+ 
       (error) => {
         console.error('Error creating appointment:', error);
         if (error.error?.message) {
@@ -246,18 +213,7 @@ export class AppointmentComponent implements OnInit {
     }
   }
   
-  // submit() {
-  //   if (this.appointmentForm.valid) {
-  //     this.appointmentService.postAppointment(this.appointmentForm.value).subscribe((data) => {
-  //       alertify.success('Form filled successfully');
-  //       this.appointmentForm.reset();
-  //       this.loadInitialData();
-  //       this.getAppointmentTable()
-  //     });
-  //   } else {
-  //     alertify.error('Invalid form');
-  //   }
-  // }
+
   getAppointmentTable() {
     this.appointmentService.getAppointmentByEmail().subscribe((res) => {
       console.log(res);
@@ -282,7 +238,7 @@ export class AppointmentComponent implements OnInit {
       this.appointmentService.deleteAppointment(id).subscribe(
         (response) => {
           this.confirmationService.showSuccessMessage('Delete Successfully')
-          this.loadInitialData();
+          // this.loadInitialData();
           console.log('Appointment deleted', response);
           this.getAppointmentTable();
 
@@ -290,7 +246,7 @@ export class AppointmentComponent implements OnInit {
         (error) => {
           this.confirmationService.showErrorMessage('Sorry, cannot s deleted')
           console.error('Error deleting Appointment:', error);
-          this.loadInitialData();
+          // this.loadInitialData();
           this.getAppointmentTable()
         });
     }
@@ -330,7 +286,7 @@ export class AppointmentComponent implements OnInit {
     this.appointmentService.updatePaymentStatus(id, paymentData).subscribe(
       (response: any) => {
         alertify.success('Payment successful');
-        this.loadInitialData();
+        // this.loadInitialData();
       },
       (error: any) => {
         alertify.error('Payment status update failed');
@@ -396,7 +352,7 @@ export class AppointmentComponent implements OnInit {
       this.prescriptionService.savePrescription(this.selectedAppointment._id, prescriptionData).subscribe(
         (data) => {
           alertify.success('Prescription saved successfully');
-          this.loadInitialData();
+          // this.loadInitialData();
           this.closeModal();
         },
         (error) => {

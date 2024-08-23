@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { BillService } from '../../../core/service/bill-service/bill.service';
 import { MatIconModule } from '@angular/material/icon';
 import { SymptomsService } from '../../../core/service/symptoms/symptoms.service';
+import { ConfirmationService } from '../../confirmation/confirmation.service';
 
 
 
@@ -66,7 +67,8 @@ export class DashboardReportComponent implements OnInit {
     private appointmetnService: AppointmentService,
     private userService: UserService, private http: HttpClient,
     private billService: BillService,
-    private symptomsService:SymptomsService
+    private symptomsService:SymptomsService,
+    private confirmationService:ConfirmationService
     
 
   ) { }
@@ -78,6 +80,7 @@ export class DashboardReportComponent implements OnInit {
     this.doctorDischargeReportForm = this.fb.group({
       patientName: [{ value: '', disabled: true }],
       patientAge: [{ value: '', disabled: true }],
+
       gender: [{ value: '', disabled: true }],
       contactNumber: [{ value: '', disabled: true }],
       address: [{ value: '', disabled: true }],
@@ -88,6 +91,7 @@ export class DashboardReportComponent implements OnInit {
       admittedAt: [{ value: '', disabled: true }],
       dischargeDate: [{ value: '' }],
       diagnosis: [''],
+      email: [''],
       treatmentGiven: [''],
       dischargeInstructions: [''],
       followUpPlan: [''],
@@ -411,6 +415,32 @@ export class DashboardReportComponent implements OnInit {
       this.doctorDischargeReportForm.disable();  // Disable controls if form is invalid
     }
   }
+  // submitDoctorReport(): void {
+  //   if (this.doctorDischargeReportForm.valid) {
+  //     const dischargeData = this.doctorDischargeReportForm.value;
+  //     const selectedPatientId = this.doctorDischargeReportForm.get('patientSelect')?.value;
+
+  //     this.reportservice.dischargePatient(selectedPatientId, dischargeData).subscribe(
+  //       (res) => {
+  //         console.log('Patient discharged successfully:', res);
+  //         this.confirmationService.showSuccessMessage('Patient discharged successfully');
+  //         this.getAdmittedPatients(); // Refresh the list of admitted patients
+  //       },
+  //       (error) => {
+  //         console.error('Error discharging patient:', error);
+  //         this.confirmationService.showErrorMessage('Error discharging patient');
+  //       }
+  //     );
+  //   } else {
+  //     console.error('Form is invalid.');
+  //     this.confirmationService.showErrorMessage('Form is invalid');
+  //   }
+  // }
+  // private getAdmittedPatients(): void {
+  //   this.reportservice.getAdmnittedPatientReports().subscribe((patients) => {
+  //     this.Admittedpatients = patients;
+  //   });
+  // }
   submitHospitalReport(): void {
     alert('button is clicked')
     const value = this.hospitalDischargeReportForm.valid

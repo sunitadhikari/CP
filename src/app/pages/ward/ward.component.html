@@ -6,11 +6,7 @@
       <div class="card-body">
         <h5 class="card-title">Add Ward Capacity</h5>
         <form (ngSubmit)="addWard()">
-          <!-- <div class="form-group">
-            <label for="wardName">Ward Name</label>
-            <input type="text" class="form-control" id="wardName" required
-                   [(ngModel)]="newWard.wardName" name="wardName">
-          </div> -->
+   
           <div class="form-group">
             <label for="wardType">Ward Type</label>
             <input 
@@ -29,8 +25,7 @@
           </div>
      
           <button type="submit" class="btn btn-primary" [disabled]="isLoading">Add Ward</button>
-          <!-- <span *ngIf="isLoading" class="ml-3"><i class="fa fa-spinner fa-spin"></i> Loading...</span> -->
-          <!-- <span *ngIf="error" class="text-danger ml-3">{{ error }}</span> -->
+          
         </form>
       </div>
     </div>

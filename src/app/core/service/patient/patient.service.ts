@@ -40,9 +40,13 @@ export class PatientService {
   }
 
   // Update a patient
+  // updatePatientAdmission(id: string, patientData: any): Observable<any> {
+  //   return this.http.put(`${this.apiUrl}patients/${id}`, patientData);
+  // }
   updatePatientAdmission(id: string, patientData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}patients/${id}`, patientData);
   }
+  
 
   // Delete a patient
   deletePatientAdmission(id: string): Observable<any> {

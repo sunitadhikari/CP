@@ -19,7 +19,7 @@ export class WardComponent implements OnInit {
     wardType: '',
     capacity: 0
   };
-  editWard: any = null;
+  editWard: any;
   isLoading = false;
   error = '';
   page = 1;
@@ -33,21 +33,41 @@ export class WardComponent implements OnInit {
     this.loadWards();
   }
 
-  loadWards() {
-    this.isLoading = true;
+  // loadWards() {
+  //   this.isLoading = true;
+  //   this.wardService.getAllWards().subscribe(
+  //     (data) => {
+  //       console.log('Wards Data:', data); // Log the data
+  //       this.wards = data;
+  //       this.isLoading = false;
+  //     },
+  //     (error) => {
+  //       this.error = error.message;
+  //       this.isLoading = false;
+  //     }
+  //   );
+  // }
+loadWards() {
+  this.isLoading = true;
+  try {
     this.wardService.getAllWards().subscribe(
       (data) => {
+        console.log('Wards Data:', data);
         this.wards = data;
-
         this.isLoading = false;
       },
       (error) => {
+        console.error('Error loading wards:', error);
         this.error = error.message;
         this.isLoading = false;
       }
     );
+  } catch (error) {
+    console.error('Error in loadWards:', error);
+    this.error = 'An unexpected error occurred while loading wards.';
+    this.isLoading = false;
   }
-
+}
   onPageChange(page: number) {
     this.page = page;
     this.loadWards();
@@ -73,65 +93,7 @@ export class WardComponent implements OnInit {
       }
     );
   }
-  // addWard() {
-  //   this.isLoading = true;
-  //   this.wardService.createWard(this.newWard).subscribe(
-  //     (data) => {
-  //       this.wards.push(data);
-  //       this.newWard = {
-  //         wardType: '',
-  //         capacity: 0
-  //       };
-  //       alertify.success('Ward already exits')
-
-  //       this.isLoading = false;
-  //       this.loadWards();
-
-  //     },
-  //     (error) => {
-  //       this.error = error.message;
-  //       this.isLoading = false;
-  //       this.loadWards();
-
-  //     }
-  //   );
-  // }
-  // addWard() {
-  //   this.isLoading = true;
   
-  //   // Create a new ward object with lowercase wardType
-  //   const newWard = {
-  //     wardType: this.newWard.wardType.toLowerCase(),
-  //     capacity: this.newWard.capacity
-  //   };
-  
-  //   this.wardService.createWard(newWard).subscribe(
-  //     (data) => {
-  //       // Add the new ward to the wards array
-  //       this.wards.push(data);
-  
-  //       // Reset the newWard object
-  //       this.newWard = {
-  //         wardType: '',
-  //         capacity: 0
-  //       };
-  
-  //       // Set isLoading to false after successful creation
-  //       this.isLoading = false;
-  
-  //       // Display a success message
-  //       alertify.success('Ward created successfully');
-  //     },
-  //     (error) => {
-  //       // Handle error
-  //       this.error = error.message;
-  //       this.isLoading = false;
-  
-  //       // Display an error message
-  //       alertify.error('Failed to create ward');
-  //     }
-  //   );
-  // }
   editWardMode(ward: any) {
     this.editWard = { ...ward };
   }
@@ -156,23 +118,7 @@ export class WardComponent implements OnInit {
     );
   }
 
-//  async deleteWard(ward: any) {
-//     this.isLoading = true;
-//     this.wardService.deleteWard(ward._id).subscribe(
-//       () => {
-//         this.wards = this.wards.filter((w) => w._id !== ward._id);
-//         this.isLoading = false;
-//         this.loadWards();
 
-//       },
-//       (error) => {
-//         this.error = error.message;
-//         this.isLoading = false;
-//         this.loadWards();
-
-//       }
-//     );
-//   }
 async deleteWard(id: string) {
   console.log('Deleting ward with ID:', id); // Log ID
   const confirmed = await this.confirmationService.showConfirmationPopup();

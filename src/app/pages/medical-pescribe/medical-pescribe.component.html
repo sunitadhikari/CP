@@ -41,7 +41,7 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col">SN</th>
-            <th scope="col">Email</th>
+            <!-- <th scope="col">Email</th> -->
             <th scope="col">Department</th>
             <th scope="col">Doctor</th>
             <th scope="col">Date</th>
@@ -53,7 +53,7 @@
         <tbody>
           <tr *ngFor="let report of filteredPrescriptions | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ report.email }}</td>
+            <!-- <td>{{ report.email }}</td> -->
             <!-- <td>{{ report.departmentName }}</td>
             <td>{{ report.doctorname }}</td> -->
             <td>
