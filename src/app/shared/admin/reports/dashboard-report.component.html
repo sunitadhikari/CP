@@ -70,7 +70,7 @@
             placeholder="Enter admission date" readonly>
         </div>
         <div class="form-group">
-          <label for="dischargeDate">Estimated Discharge Date</label>
+          <label for="dischargeDate">Discharge Date</label>
           <input type="date" class="form-control" id="dischargeDate" formControlName="dischargeDate"
             placeholder="Enter discharge date">
         </div>
@@ -167,12 +167,10 @@
         <button type="submit" class="btn btn-primary">Submit Report</button>
       </form>
 
-      <div class="container">
-        <div class="row">
-          <div class="col">
+      <div class="table-responsive mt-4">
             <h2>Hospital Discharge Reports</h2>
-            <table class="table table-striped">
-              <thead>
+            <table class="table table-bordered">
+              <thead class="thead-dark">
                 <tr>
                   <th>SN</th>
                   <th>Patient Name</th>
@@ -204,9 +202,7 @@
       </div>
 
     </div>
-  </div>
 
-</div>
 
 
 
