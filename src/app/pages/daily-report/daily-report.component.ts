@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 interface AdmittedPatient {
+  email: any;
   _id: string;
   firstName: string;
   lastName: string;
@@ -43,6 +44,7 @@ selectedReport: any;
 
     this.reportForm = this.fb.group({
       patient: ['', Validators.required],
+      patientEmail: [{ value: '', disabled: true }, Validators.required],
       date: [today, Validators.required], // Set the default value to today's date
       symptoms: ['', Validators.required],
       diagnosis: ['', Validators.required],
@@ -93,6 +95,20 @@ viewReport(report: any): void {
       }
     );
   }
+  onPatientChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const patientId = selectElement.value;
+  
+    // Find the selected patient from the admitPatient array
+    const selectedPatient = this.admitPatient.find(patient => patient._id === patientId);
+    if (selectedPatient) {
+      // Patch the patientEmail field with the selected patient's email
+      this.reportForm.patchValue({
+        patientEmail: selectedPatient.email
+      });
+    }
+  }
+  
   onSubmit() {
     if (this.reportForm.valid) {
       const apiUrl = 'http://localhost:3000/dailyReport';
