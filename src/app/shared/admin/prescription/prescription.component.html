@@ -1,3 +1,28 @@
-<div class="container-fluid">
-    <app-shared-table [columns]="tableColumns" [data]="prescriptions" [actions]="actions"></app-shared-table>
-</div>
+<div class="container mt-4">
+    <h2 class="mb-4">Prescriptions List</h2>
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>SN</th>
+          <th>ID</th>
+          <th>Patient ID</th>
+          <th>Medicine</th>
+          <th>Suggestion</th>
+          <th>Created At</th>
+          <!-- <th>Actions</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prescription of prescriptions;let i=index">
+          <td>{{i+1 }}</td>
+          <td>{{ prescription._id }}</td>
+          <td>{{ prescription.patientId }}</td>
+          <td>{{ prescription.medicine }}</td>
+          <td>{{ prescription.suggestion }}</td>
+          <td>{{ prescription.createdAt | date: 'short' }}</td>
+         
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -14,6 +14,7 @@ export class PatientService {
 
   private postPatientApi = environment.api_url + "postPatient"
   private getPatientApi = environment.api_url + 'getPatient'
+  private getadmittedpatientbyDepartmentCountApi = environment.api_url + 'admittedpatientbyDepartment/count'
   private getBedStatusApi = environment.api_url + 'bedsStatus'
   private dischargePatientsApi = environment.api_url + 'patients'
 
@@ -22,6 +23,9 @@ export class PatientService {
   }
   getPatient(): Observable<any> {
     return this.http.get(this.getPatientApi)
+  }
+  getDashboardCounts(): Observable<any> {
+    return this.http.get(this.getadmittedpatientbyDepartmentCountApi)
   }
 
 

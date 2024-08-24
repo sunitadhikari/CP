@@ -15,6 +15,9 @@ export class WardService {
   getAllWards(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}getwards`);
   }
+  getAllWardsCount(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}getwards/count`);
+  }
 
   createWard(wardData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}postWards`, wardData);
