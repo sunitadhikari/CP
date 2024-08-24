@@ -10,82 +10,67 @@
         <form [formGroup]="appointmentForm" (ngSubmit)="submit()">
 
           <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Department Name<span
-                class="text-danger fw-bold">*</span></label>
+            <label class="col-form-label col-md-3 fw-bold">Department Name<span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <!-- <select class="form-control" formControlName="departmentName" placeholder="Choose one option"> -->
-              <select id="departmentName" class="form-control" formControlName="departmentName"
-                (change)="filterDoctors()">
-
+              <select id="departmentName" class="form-control" formControlName="departmentName" aria-label="Select Department">
                 <option value="">--Please choose an option--</option>
-                <option *ngFor="let department of departmentNameList" [value]="department.departmentName">{{
-                  department.departmentName }}</option>
-              </select>
-              <div
-                *ngIf="appointmentForm.get('departmentName')?.invalid && appointmentForm.get('departmentName')?.touched"
-                class="text-danger">
-                Selection of departmentName is required.
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">
-              Doctor name<span class="text-danger fw-bold">*</span>
-            </label>
-
-            <div class="col-md-9">
-              <select class="form-control m-b-5" formControlName="doctorname" required>
-                <option value="">--Please choose an option--</option>
-                <option *ngFor="let item of filteredDoctors" [value]="item.email">
-                  {{ item.firstName }} {{ item.lastName }}
+                <option *ngFor="let department of departmentNameList" [value]="department.departmentName">
+                  {{ department.departmentName }}
                 </option>
               </select>
-              
-              <div *ngIf="appointmentForm.get('doctorname')?.invalid && appointmentForm.get('doctorname')?.touched"
-                class="text-danger">
-                Valid Doctor name is required.
+              <div *ngIf="appointmentForm.get('departmentName')?.invalid && appointmentForm.get('departmentName')?.touched" class="text-danger">
+                Selection of department is required.
               </div>
             </div>
           </div>
-         
+        
+          <div class="form-group row m-b-15">
+            <label class="col-form-label col-md-3 fw-bold">Doctor Name<span class="text-danger fw-bold">*</span></label>
+            <div class="col-md-9">
+              <select class="form-control m-b-5" formControlName="doctorname" aria-label="Select Doctor">
+                <option value="">--Please choose an option--</option>
+                <option *ngFor="let doctor of filteredDoctors" [value]="doctor.email">
+                  {{ doctor.firstName }} {{ doctor.lastName }}
+                </option>
+              </select>
+              <div *ngIf="appointmentForm.get('doctorname')?.invalid && appointmentForm.get('doctorname')?.touched" class="text-danger">
+                Valid doctor name is required.
+              </div>
+            </div>
+          </div>
+        
           <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">Date <span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <input type="date" class="form-control m-b-5" placeholder="Appointment Date" formControlName="date"
-                required min="{{ tomorrow | date: 'yyyy-MM-dd' }}" />
-              <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched"
-                class="text-danger">
+              <input type="date" class="form-control m-b-5" placeholder="Appointment Date" formControlName="date" required min="{{ tomorrow | date: 'yyyy-MM-dd' }}" />
+              <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched" class="text-danger">
                 Date is required.
               </div>
             </div>
           </div>
+        
           <div class="form-group row m-b-15">
-            <label class="col-form-label col-md-3 fw-bold">Mobile Number<span
-                class="text-danger fw-bold">*</span></label>
+            <label class="col-form-label col-md-3 fw-bold">Mobile Number<span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <input type="text" class="form-control m-b-5" placeholder="Mobile Number" formControlName="phone"
-                required>
-              <div *ngIf="appointmentForm.get('phone')?.invalid && appointmentForm.get('phone')?.touched"
-                class="text-danger">
-                Valid mobile number is required.
+              <input type="text" class="form-control m-b-5" placeholder="Mobile Number" formControlName="phone" required pattern="^[0-9]{10}$" aria-label="Enter Mobile Number">
+              <div *ngIf="appointmentForm.get('phone')?.invalid && appointmentForm.get('phone')?.touched" class="text-danger">
+                Valid mobile number is required (10 digits).
               </div>
             </div>
           </div>
-
+        
           <div class="form-group row m-b-15">
             <label class="col-form-label col-md-3 fw-bold">Problem<span class="text-danger fw-bold">*</span></label>
             <div class="col-md-9">
-              <textarea type="text" class="form-control m-b-5" placeholder="Problem" formControlName="problem"
-                required></textarea>
-              <div *ngIf="appointmentForm.get('problem')?.invalid && appointmentForm.get('problem')?.touched"
-                class="text-danger">
-                Problem is required
+              <textarea class="form-control m-b-5" placeholder="Problem" formControlName="problem" required aria-label="Describe your problem"></textarea>
+              <div *ngIf="appointmentForm.get('problem')?.invalid && appointmentForm.get('problem')?.touched" class="text-danger">
+                Problem is required.
               </div>
             </div>
           </div>
+        
           <div class="form-group row m-b-15 justify-content-center">
-            <button type="submit" class="btn btn-success mr-2 col-auto btn">Submit</button>
+            <button type="submit" class="btn btn-success mr-2 col-auto">Submit</button>
             <button type="reset" class="btn btn-primary col-auto">Reset</button>
           </div>
         </form>

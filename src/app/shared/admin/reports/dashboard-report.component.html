@@ -169,7 +169,6 @@
                   <th>Discharge Date</th>
                   <th>Doctor</th>
                   <th>Follow Plan</th>
-                  <!-- Add more headers as per your report structure -->
                 </tr>
               </thead>
               <tbody>
@@ -180,7 +179,6 @@
                   <td>{{ report.dischargeDate | date }}</td>
                   <td>{{ report.doctorName }}</td>
                   <td>{{ report.followUpInstructions }}</td>
-                  <!-- Add more columns as per your report structure -->
                 </tr>
               </tbody>
             </table>
@@ -201,144 +199,7 @@
 
 
 <div class="container-fluid" *ngIf="userRole === 'patient'">
-  <!-- <div class="card">
-    <div class="card-header">
-      <h2 class="">Doctor's Discharge Reports</h2>
 
-    </div>
-    <div class="card-body">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Patient Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Diagnosis</th>
-            <th>Treatment Given</th>
-            <th>Discharge Instructions</th>
-            <th>Follow-up Plan</th>
-          </tr>
-        </thead>
-        <tbody id="doctorsReportTableBody">
-
-          <td>Patient Name</td>
-          <td>Age</td>
-          <td>Gender</td>
-          <td>Diagnosis</td>
-          <td>Treatment Given</td>
-          <td>Discharge Instructions</td>
-          <td>Follow-up Plan</td>
-
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header">
-      <h2 class="">Hospital Discharge Reports</h2>
-
-    </div>
-    <div class="card-body">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Patient Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Admission Date</th>
-            <th>Discharge Date</th>
-            <th>Final Diagnosis</th>
-            <th>Summary of Treatment</th>
-            <th>Discharge Medications</th>
-            <th>Follow-up Instructions</th>
-          </tr>
-        </thead>
-        <tbody id="hospitalReportTableBody">
-          <td>Patient Name</td>
-          <td>Age</td>
-          <td>Gender</td>
-          <td>Admission Date</td>
-          <td>Discharge Date</td>
-          <td>Final Diagnosis</td>
-          <td>Summary of Treatment</td>
-          <td>Discharge Medications</td>
-          <td>Follow-up Instructions</td>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="container mt-5" style="background-color: #c0c4c54b;
-  padding: 20px;
-  border-radius: 10px;">
-    <div class="row mb-4">
-      <div class="col-2">
-        <img src="../../../../assets/logo2.png" alt="Hospital Logo" class="img-fluid circular-image ">
-      </div>
-      <div class="col-10">
-        <h1 class="display-4">ASPATAL</h1>
-        <p class="lead">Amarshing, Pokhara, Nepal</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <h2>Doctor Discharge Report</h2>
-      <div class="col-md-12">
-        <h4>Patient Details</h4>
-        <table class="table table-bordered">
-          <tbody>
-            <tr>
-              <th scope="row">Name:</th>
-              <td>{{patient.name}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Age:</th>
-              <td>{{patient.age}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Gender:</th>
-              <td>{{patient.gender}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Admission Date:</th>
-              <td>{{patient.admissionDate}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Discharge Date:</th>
-              <td>{{patient.dischargeDate}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Discharge Instruction:</th>
-              <td>{{patient.diagnosis}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Doctor:</th>
-              <td>{{patient.dischargeDate}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Discharge Date:</th>
-              <td>{{patient.dischargeDate}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Diagnosis:</th>
-              <td>{{patient.diagnosis}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Follow-Up Plan:</th>
-              <td>{{patient.diagnosis}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-
-    <div class="row mt-5">
-      <div class="col-12 text-center">
-        <p class="text-muted">&copy; {{currentYear}} Hospital Name. All rights reserved.</p>
-      </div>
-    </div>
-  </div> -->
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -352,7 +213,7 @@
                     <th>SN</th>
                     <th>Medicine</th>
                     <th>Suggestion</th>
-                    <th>Date</th> <!-- Adjust fields according to your schema -->
+                    <th>Date</th> 
                   </tr>
                 </thead>
                 <tbody>
@@ -370,7 +231,7 @@
       </div>
     </div>
   </div>
-  
+
 
 </div>
 <div class="card" *ngIf="userRole === 'labtech'">
@@ -516,7 +377,6 @@
   </div>
 </div>
 
-<!-- Modal -->
 <div class="modal" id="billModal" tabindex="-1" aria-labelledby="billModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

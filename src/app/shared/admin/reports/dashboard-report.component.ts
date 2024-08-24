@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { BillService } from '../../../core/service/bill-service/bill.service';
 import { MatIconModule } from '@angular/material/icon';
 import { SymptomsService } from '../../../core/service/symptoms/symptoms.service';
+import { ConfirmationService } from '../../confirmation/confirmation.service';
 
 
 
@@ -46,7 +47,8 @@ export class DashboardReportComponent implements OnInit {
   private apiUrl = 'http://localhost:3000/gethospitalDischargeReport';
   prescriptions: any[] = [];
 
-  
+  selectedPatientId: string | null = null;
+
 
   patient = {
     name: 'John Doe',
@@ -66,7 +68,8 @@ export class DashboardReportComponent implements OnInit {
     private appointmetnService: AppointmentService,
     private userService: UserService, private http: HttpClient,
     private billService: BillService,
-    private symptomsService:SymptomsService
+    private symptomsService:SymptomsService,
+    private confirmationService:ConfirmationService
     
 
   ) { }
@@ -76,8 +79,10 @@ export class DashboardReportComponent implements OnInit {
     this.loadPrescriptions();
 
     this.doctorDischargeReportForm = this.fb.group({
+      patientId: [''],
       patientName: [{ value: '', disabled: true }],
       patientAge: [{ value: '', disabled: true }],
+
       gender: [{ value: '', disabled: true }],
       contactNumber: [{ value: '', disabled: true }],
       address: [{ value: '', disabled: true }],
@@ -88,6 +93,7 @@ export class DashboardReportComponent implements OnInit {
       admittedAt: [{ value: '', disabled: true }],
       dischargeDate: [{ value: '' }],
       diagnosis: [''],
+      email: [''],
       treatmentGiven: [''],
       dischargeInstructions: [''],
       followUpPlan: [''],
@@ -199,14 +205,47 @@ export class DashboardReportComponent implements OnInit {
       return null;
     };
   }
+  // onPatientSelect(event: Event): void {
+  //   const target = event.target as HTMLSelectElement;
+  //   const patientId = target.value;
+  //   const selectedPatient = this.Admittedpatients.find(patient => patient._id === patientId);
+  //   if (selectedPatient) {
+  //     this.patchFormWithPatientData(selectedPatient);
+  //   }
+  // }
   onPatientSelect(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const patientId = target.value;
+    this.selectedPatientId = patientId;  // Set the selected patient ID
+    this.doctorDischargeReportForm.patchValue({ patientId });
+  
     const selectedPatient = this.Admittedpatients.find(patient => patient._id === patientId);
     if (selectedPatient) {
       this.patchFormWithPatientData(selectedPatient);
     }
   }
+  
+  patchFormWithPatientData(patient: any): void {
+    // Patch the form with the selected patient's data
+    const age = this.calculateAge(patient.dob);
+    debugger
+
+    this.doctorDischargeReportForm.patchValue({
+      patientId: patient._id,  // This is where patientId is set
+      patientName: `${patient.firstName} ${patient.lastName}`,
+      patientAge: age,  // You may want to calculate age based on dob
+      gender: patient.gender,
+      contactNumber: patient.contactNumber,
+      address: patient.address,
+      medicalHistory: patient.medicalHistory,
+      department: patient.department,
+      ward: patient.ward,
+      bedNumber: patient.bedNumber,
+      admittedAt: patient.admittedAt,
+      email: patient.email
+    });
+  }
+  
 
   fetchHospitalReports(): void {
     this.loading = true;
@@ -322,25 +361,27 @@ export class DashboardReportComponent implements OnInit {
   
   fetchAdmittedPatients(): void {
     this.reportservice.getAdmnittedPatientReports().subscribe((res) => {
-      this.Admittedpatients = res.patient
+      // this.Admittedpatients = res.patient
+      this.Admittedpatients = res.patient.filter((patient: any) => patient.isActive === true);
+
     })
   }
 
-  patchFormWithPatientData(patient: any): void {
-    this.doctorDischargeReportForm.patchValue({
-      patientName: `${patient.firstName} ${patient.lastName}`,
-      patientAge: this.calculateAge(patient.dob),
-      gender: patient.gender,
-      contactNumber: patient.contactNumber,
-      address: patient.address,
-      medicalHistory: patient.medicalHistory,
-      department: patient.department,
-      ward: patient.ward,
-      bedNumber: patient.bedNumber,
-      admittedAt: new Date(patient.admittedAt).toLocaleDateString(),
-      // dischargeDate: patient.dischargeDate ? new Date(patient.dischargeDate).toLocaleDateString() : ''
-    });
-  }
+  // patchFormWithPatientData(patient: any): void {
+  //   this.doctorDischargeReportForm.patchValue({
+  //     patientName: `${patient.firstName} ${patient.lastName}`,
+  //     patientAge: this.calculateAge(patient.dob),
+  //     gender: patient.gender,
+  //     contactNumber: patient.contactNumber,
+  //     address: patient.address,
+  //     medicalHistory: patient.medicalHistory,
+  //     department: patient.department,
+  //     ward: patient.ward,
+  //     bedNumber: patient.bedNumber,
+  //     admittedAt: new Date(patient.admittedAt).toLocaleDateString(),
+  //     // dischargeDate: patient.dischargeDate ? new Date(patient.dischargeDate).toLocaleDateString() : ''
+  //   });
+  // }
 
   onPatientSelectForAdmin(event: Event): void {
     console.log('Event:', event); // Debugging
@@ -398,6 +439,7 @@ export class DashboardReportComponent implements OnInit {
             console.log('Doctors discharge report submitted successfully:', response);
             this.doctorDischargeReportForm.reset();
             this.doctorDischargeReportForm.disable();  // Disable controls again
+            debugger
           },
           (error) => {
             
@@ -406,11 +448,38 @@ export class DashboardReportComponent implements OnInit {
             this.doctorDischargeReportForm.disable();  // Disable controls if there's an error
           }
         );
+        debugger
     } else {
       console.error('Form is invalid!');
       this.doctorDischargeReportForm.disable();  // Disable controls if form is invalid
     }
   }
+  // submitDoctorReport(): void {
+  //   if (this.doctorDischargeReportForm.valid) {
+  //     const dischargeData = this.doctorDischargeReportForm.value;
+  //     const selectedPatientId = this.doctorDischargeReportForm.get('patientSelect')?.value;
+
+  //     this.reportservice.dischargePatient(selectedPatientId, dischargeData).subscribe(
+  //       (res) => {
+  //         console.log('Patient discharged successfully:', res);
+  //         this.confirmationService.showSuccessMessage('Patient discharged successfully');
+  //         this.getAdmittedPatients(); // Refresh the list of admitted patients
+  //       },
+  //       (error) => {
+  //         console.error('Error discharging patient:', error);
+  //         this.confirmationService.showErrorMessage('Error discharging patient');
+  //       }
+  //     );
+  //   } else {
+  //     console.error('Form is invalid.');
+  //     this.confirmationService.showErrorMessage('Form is invalid');
+  //   }
+  // }
+  // private getAdmittedPatients(): void {
+  //   this.reportservice.getAdmnittedPatientReports().subscribe((patients) => {
+  //     this.Admittedpatients = patients;
+  //   });
+  // }
   submitHospitalReport(): void {
     alert('button is clicked')
     const value = this.hospitalDischargeReportForm.valid

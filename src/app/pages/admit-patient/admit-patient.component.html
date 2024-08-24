@@ -1,5 +1,6 @@
 <div class="container-fluid">
   <h2>Admit New Patient</h2>
+
   <form [formGroup]="admissionForm" (ngSubmit)="submitAdmissionForm()">
     <div class="form-group">
       <label for="firstName">First Name:</label>
@@ -48,7 +49,8 @@
       <label for="checkedBy">Checked By:</label>
       <select formControlName="checkedBy" class="form-control" required>
         <option disabled selected>Select the checkedBy</option>
-        <option *ngFor="let doctor of filteredDoctors" [value]="doctor.email">{{ doctor.firstName }} {{ doctor.lastName }}</option>
+        <option *ngFor="let doctor of filteredDoctors" [value]="doctor.email">{{ doctor.firstName }} {{ doctor.lastName
+          }}</option>
       </select>
     </div>
     <div class="form-group">
@@ -65,66 +67,70 @@
         <option *ngFor="let bed of filteredBeds" [value]="bed.bedNumbers">{{ bed.bedNumbers }}</option>
       </select>
     </div>
-    
+
     <button type="submit" class="btn btn-primary">Admit Patient</button>
   </form>
-  
-  
+
+
   <div class="table-responsive mt-4">
-    <table class="table table-bordered table-sm fw-small">
+    <table class="table table-bordered">
       <thead class="thead-dark">
         <tr>
-          <th class="">SN</th>
-          <th class="">Patient Name</th>
-          <th class="">Date of Birth</th>
-          <th class="">Gender</th>
-          <th class="">Contact Number</th>
-          <th class="">Address</th>
-          <th class="">Email</th>
-          <th class="">Medical History</th>
-          <th class="">Department</th>
-          <th class="">Ward</th>
-          <th class="">Bed Number</th>
-          <th class="">Admitted At</th>
-          <th class="">Checked By</th>
-          <th class="">Action</th>
-          <th class="">Discharge</th>
+          <th>SN</th>
+          <th>Patient Name</th>
+          <th>Date of Birth</th>
+          <th>Gender</th>
+          <th>Contact Number</th>
+          <th>Address</th>
+          <th>Medical History</th>
+          <th>Department</th>
+          <th>Ward</th>
+          <th>Bed Number</th>
+          <th>Admitted At</th>
+          <th>Checked By</th>
+          <th>Action</th>
+          <!-- <th>Discharge</th> -->
         </tr>
       </thead>
       <tbody>
+        <!-- <tr *ngFor="let patient of patients | paginate: { itemsPerPage: 5, currentPage: p }"> -->
         <tr *ngFor="let patient of patients let i=index;">
           <td>{{i+1}}</td>
           <td>{{ patient.firstName }} {{ patient.lastName }}</td>
-      <td>{{ patient.dob | date }}</td>
-      <td>{{ patient.gender }}</td>
-      <td>{{ patient.contactNumber }}</td>
-      <td>{{ patient.address }}</td>
-      <td>{{patient.email}}</td>
-      <td>{{ patient.medicalHistory }}</td>
-      <td>{{ patient.department }}</td>
-      <td>{{ patient.ward }}</td>
-      <td>{{ patient.bedNumber }}</td>
-      <td>{{ patient.admittedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
-      <td>{{ patient.checkedBy }}</td>
+          <td>{{ patient.dob }}</td>
+          <td>{{ patient.gender }}</td>
+          <td>{{ patient.contactNumber }}</td>
+          <td>{{ patient.address }}</td>
+          <td>{{ patient.medicalHistory }}</td>
+          <td>{{ patient.department }}</td>
+          <td>{{ patient.ward }}</td>
+          <td>{{ patient.bedNumber }}</td>
+          <td>{{ patient.admittedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+          <td>{{ patient.checkedBy }}</td>
 
-      <th>
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-sm btn-primary" (click)="editAdmit()">
+          <th>
+            <div class="btn-group" role="group">
+              <!-- <button type="button" class="btn btn-sm btn-primary" (click)="editAdmit()">
             <i class="fas fa-edit"></i> 
-          </button>
-          <button type="button" class="btn btn-sm btn-danger mx-2" (click)="deleteAdmit(patient._id)">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </div>
-      </th>
-      <td>
-        <button class="btn btn-danger fw-small" (click)="dischargePatient(patient._id)"  >Discharge</button>
-      </td>
+          </button> -->
+              <!-- <button type="button" class="btn btn-sm btn-primary" (click)="editPatient(patient)">
+                <i class="fas fa-edit"></i> Edit
+              </button> -->
+
+              <button type="button" class="btn btn-sm btn-danger mx-2" (click)="deleteAdmit(patient._id)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </th>
+
+          <!-- <td>
+        <button class="btn btn-danger" (click)="dischargePatient(patient._id)">Discharge</button>
+      </td> -->
 
         </tr>
       </tbody>
     </table>
   </div>
-  <!-- dd -->
+
   <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
 </div>

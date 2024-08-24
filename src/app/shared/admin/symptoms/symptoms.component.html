@@ -3,15 +3,17 @@
   <form [formGroup]="symptomsForm" class="mb-4 p-4 border rounded shadow-sm bg-light">
     <div class="form-group">
       <label for="symptoms" class="font-weight-bold">Symptoms</label>
-      <textarea id="symptoms" class="form-control" formControlName="symptoms" rows="4" placeholder="Describe your symptoms..."></textarea>
-      <div *ngIf="symptomsForm.get('symptoms')?.invalid && symptomsForm.get('symptoms')?.touched" class="text-danger mt-2">
+      <textarea id="symptoms" class="form-control" formControlName="symptoms" rows="4"
+        placeholder="Describe your symptoms..."></textarea>
+      <div *ngIf="symptomsForm.get('symptoms')?.invalid && symptomsForm.get('symptoms')?.touched"
+        class="text-danger mt-2">
         Symptoms are required with a minimum of 10 characters.
       </div>
     </div>
-    <button type="submit" class="btn btn-primary  mt-3" (click)="onSubmit()" 
-  style="background-color: #007bff; border-color: #007bff; transition: background-color 0.3s ease, transform 0.3s ease;">
-  {{editSymptoms ? 'Update Symptom' : ' Add Symptom'}}
-</button>
+    <button type="submit" class="btn btn-primary  mt-3" (click)="onSubmit()"
+      style="background-color: #007bff; border-color: #007bff; transition: background-color 0.3s ease, transform 0.3s ease;">
+      {{editSymptoms ? 'Update Symptom' : ' Add Symptom'}}
+    </button>
 
   </form>
 
@@ -28,12 +30,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of patientTable; let i = index">
+            <tr *ngFor="let item of patientTable; let i = index" class="align-middle">
               <td>{{ i + 1 }}</td>
               <td>{{ item.symptoms }}</td>
               <td>
                 <div class="btn-group">
-                  <button class="btn btn-outline-danger btn-sm ml-2" (click)="delete(item._id)">
+                  <button class="btn btn-outline-danger btn-sm" (click)="delete(item._id)">
                     <i class="fas fa-trash-alt"></i> Delete
                   </button>
                 </div>
@@ -48,50 +50,46 @@
 
 <!-- *ngIf="userRole === 'doctor'" -->
 
-<div class="container-fluid" *ngIf="userRole === 'doctor'" >
+<div class="container-fluid" *ngIf="userRole === 'doctor'">
   <div class="row">
-    <div class="card">
+    <div class="card shadow-sm w-100">
       <div class="card-body">
-        <div class="col-lg-12">
-          <div class="panel panel-inverse" data-sortable-id="table-basic-4">
-            <div class="panel-body">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>SN</th>
-                      <th>Patient</th>
-                      <th>Symptoms</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of doctorTable; let i = index">
-                      <td>{{ i + 1 }}</td>
-                      <td>{{ item.patient }}</td>
-                      <td>{{ item.symptoms }}</td>
-                      <td>
-                        <div class="d-flex flex-wrap button-group">
-                          <button type="button" class="btn btn-primary"
-                            (click)="launchModal(item._id)" data-toggle="modal" data-target="#exampleModal">
-                            Prescribe
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+        <h5 class="card-title mb-4">Patient Symptoms List</h5>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th>SN</th>
+                <th>Patient</th>
+                <th>Symptoms</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of doctorTable; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.patient }}</td>
+                <td>{{ item.symptoms }}</td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="launchModal(item._id)" data-toggle="modal" data-target="#exampleModal">
+                      <i class="fas fa-prescription-bottle-alt"></i> Prescribe
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -111,14 +109,14 @@
             <textarea class="form-control" id="suggestion" formControlName="suggestion" rows="3" required></textarea>
           </div>
           <!-- Hidden input to store patient ID or relevant information -->
-          <input type="hidden" id="patientId" formControlName="patientId" >
+          <input type="hidden" id="patientId" formControlName="patientId">
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
-      
+
     </div>
   </div>
 </div>
