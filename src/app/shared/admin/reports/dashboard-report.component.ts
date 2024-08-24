@@ -530,7 +530,8 @@ export class DashboardReportComponent implements OnInit {
             
 
             console.error('Error submitting doctors discharge report:', error);
-            this.doctorDischargeReportForm.disable();  // Disable controls if there's an error
+            this.doctorDischargeReportForm.disable(); 
+            alertify.error('Error discharge patient')
           }
         );
         debugger
