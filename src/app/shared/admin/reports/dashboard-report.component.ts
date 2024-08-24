@@ -82,7 +82,7 @@ export class DashboardReportComponent implements OnInit {
       patientId: [''],
       patientName: [{ value: '', disabled: true }],
       patientAge: [{ value: '', disabled: true }],
-
+      patientEmail: [{ value: '', disabled: true }],      
       gender: [{ value: '', disabled: true }],
       contactNumber: [{ value: '', disabled: true }],
       address: [{ value: '', disabled: true }],
@@ -93,7 +93,6 @@ export class DashboardReportComponent implements OnInit {
       admittedAt: [{ value: '', disabled: true }],
       dischargeDate: [{ value: '' }],
       diagnosis: [''],
-      email: [''],
       treatmentGiven: [''],
       dischargeInstructions: [''],
       followUpPlan: [''],
@@ -133,6 +132,7 @@ export class DashboardReportComponent implements OnInit {
     this.hospitalDischargeReportForm = this.fb.group({
       patientId: [''],
       patientName: ['', Validators.required],
+      patientEmail: ['', Validators.required],
       // patientAge: [{ value: '', disabled: true }, Validators.required],
       patientAge: ['', Validators.required],
       patientGender: ['', Validators.required],
@@ -238,6 +238,7 @@ export class DashboardReportComponent implements OnInit {
       patientName: `${patient.firstName} ${patient.lastName}`,
       patientAge: age,  // You may want to calculate age based on dob
       gender: patient.gender,
+      patientEmail: patient.email,
       contactNumber: patient.contactNumber,
       address: patient.address,
       medicalHistory: patient.medicalHistory,
@@ -404,6 +405,7 @@ export class DashboardReportComponent implements OnInit {
       this.hospitalDischargeReportForm.patchValue({
         patientId: selectedPatient._id,
         patientName: selectedPatient.patientName,
+        patientEmail: selectedPatient.patientEmail,
         patientAge: selectedPatient.patientAge,
         patientGender: selectedPatient.gender,
         admissionDate: selectedPatient.admittedAt.substring(0, 10),

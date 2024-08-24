@@ -20,6 +20,12 @@
             placeholder="Enter patient name" readonly>
         </div>
         <div class="form-group">
+          <label for="patientEmail">Patient Email</label>
+          <input type="      patientEmail: [''],
+          " class="form-control" id="patientEmail" formControlName="patientEmail"
+            placeholder="Enter patient email" readonly>
+        </div>
+        <div class="form-group">
           <label for="patientAge">Patient Age</label>
           <input type="number" class="form-control" id="patientAge" formControlName="patientAge"
             placeholder="Enter patient age" readonly>
@@ -97,7 +103,7 @@
   <div class="card" *ngIf="userRole === 'admin'">
     <div class="card-header">
       <h3 class="card-title">Hospital Discharge Report</h3>
-    </div>       
+    </div>
     <div class="card-body">
       <form [formGroup]="hospitalDischargeReportForm" (ngSubmit)="submitHospitalReport()">
         <div class="form-group">
@@ -111,6 +117,11 @@
           <label for="patientAge">Patient Age</label>
           <input type="number" class="form-control" id="patientAge" formControlName="patientAge"
             placeholder="Enter patient age" required>
+        </div>
+        <div class="form-group">
+          <label for="patientEmail">patientEmail</label>
+          <input type="email" class="form-control" id="patientEmail" formControlName="patientEmail"
+            placeholder="Enter patientEmail" required>
         </div>
         <div class="form-group">
           <label for="patientGender">Patient Gender</label>
@@ -215,7 +226,7 @@
                     <th>SN</th>
                     <th>Medicine</th>
                     <th>Suggestion</th>
-                    <th>Date</th> 
+                    <th>Date</th>
                   </tr>
                 </thead>
                 <tbody>
