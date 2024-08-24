@@ -498,7 +498,6 @@ export class DashboardReportComponent implements OnInit {
         bedNumber: selectedPatient.bedNumber,
         // 
 
-
       });
     } else {
       console.error('Selected patient not found');
@@ -522,9 +521,10 @@ export class DashboardReportComponent implements OnInit {
         .subscribe(
           (response) => {
             console.log('Doctors discharge report submitted successfully:', response);
+            alertify.success('Submit successfully')
             this.doctorDischargeReportForm.reset();
             this.doctorDischargeReportForm.disable();  // Disable controls again
-            debugger
+            
           },
           (error) => {
             
