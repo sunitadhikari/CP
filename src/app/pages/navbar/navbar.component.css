@@ -44,6 +44,7 @@ body {
 
 .navbar-nav .nav-item.active .nav-link {
   color: #343a40 !important; /* Dark text for active link */
+  background-color: #fff; /* White background for active link */
   border-radius: 0.25rem; /* Rounded corners for active link */
   border-bottom: 3px solid #24f539; /* Green bottom border to highlight active item */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
