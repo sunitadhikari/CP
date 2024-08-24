@@ -13,21 +13,10 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-md-6">
-      <div class="widget widget-stats bg-success">
-        <div class="stats-icon"><i class="fas fa-hospital"></i></div>
-        <div class="stats-info">
-          <h4>Total Wards</h4>
-          <p>3,291,922</p>
-        </div>
-        <div class="stats-link">
-          <a href="javascript:;"><i class="fas fa-arrow-alt-circle-right"></i></a>
-        </div>
-      </div>
-    </div>
+
     <!-- end col-3 -->
     <!-- begin col-3 -->
-    <div class="col-xl-3 col-md-6">
+    <div class="col-xl-3 col-md-6" *ngIf="userRole === 'admin'">
       <div class="widget widget-stats bg-info">
         <div class="stats-icon"><i class="fas fa-procedures"></i></div>
         <div class="stats-info">
@@ -49,16 +38,16 @@
     </div>
     <!-- end col-3 -->
     <!-- begin col-3 -->
-    <div class="col-xl-3 col-md-6">
+    <div class="col-xl-3 col-md-6" *ngIf="userRole !== 'doctor'">
       <div class="widget widget-stats bg-warning">
         <div class="stats-icon"><i class="fas fa-bed"></i></div>
         <div class="stats-info">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="userRole !== 'patient'">
               <h4>Total Beds</h4>
               <p>{{bedCount}}</p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="userRole !== 'patient'">
               <h4>Occupied Beds</h4>
               <p>{{occupiedBeds}}</p>
             </div>
@@ -73,6 +62,43 @@
         </div>
       </div>
     </div>
+    <div class="col-xl-3 col-md-6" *ngIf="userRole === 'doctor'">
+      <div class="widget widget-stats bg-success">
+        <div class="stats-icon"><i class="fas fa-users"></i></div>
+        <div class="stats-info">
+          <h4>Total Patients</h4>
+          <p>{{ doctorPatientCount }}</p>
+        </div>
+        <div class="stats-link">
+          <a href="javascript:;"><i class="fas fa-arrow-alt-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="widget widget-stats bg-primary">
+        <div class="stats-icon"><i class="fas fa-hospital"></i></div>
+        <div class="stats-info">
+          <h4>Total Wards</h4>
+          <p>{{ wardCount }}</p>
+        </div>
+        <div class="stats-link">
+          <a href="javascript:;"><i class="fas fa-arrow-alt-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6" *ngIf="userRole === 'doctor'">
+      <div class="widget widget-stats bg-primary">
+        <div class="stats-icon"><i class="fas fa-hospital"></i></div>
+        <div class="stats-info">
+          <h4>Total Symptoms Request</h4>
+          <p>{{ symptomsCount }}</p>
+        </div>
+        <div class="stats-link">
+          <a href="javascript:;"><i class="fas fa-arrow-alt-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+
     <!-- end col-3 -->
     <!-- begin col-3 -->
     <!-- <div class="col-xl-3 col-md-6">
@@ -125,7 +151,7 @@
     </div> -->
     <!-- end col-3 -->
   </div>
-  <div class="row">
+  <div class="row"*ngIf="userRole === 'admin'">
     <!-- Admissions Chart -->
     <div class="col-xl-6 col-md-12">
       <div class="widget widget-stats">
@@ -167,6 +193,14 @@
           <div [chart]="departmentsChart"></div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="userRole === 'doctor'">
+  <div class="widget widget-stats">
+    <div class="stats-info">
+      <h4>Overall Statistics</h4>
+      <div [chart]="statsPieChart"></div>
     </div>
   </div>
 </div>
