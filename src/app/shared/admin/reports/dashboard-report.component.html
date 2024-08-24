@@ -97,7 +97,7 @@
   <div class="card" *ngIf="userRole === 'admin'">
     <div class="card-header">
       <h3 class="card-title">Hospital Discharge Report</h3>
-    </div>
+    </div>       
     <div class="card-body">
       <form [formGroup]="hospitalDischargeReportForm" (ngSubmit)="submitHospitalReport()">
         <div class="form-group">
@@ -163,6 +163,7 @@
             <table class="table table-striped">
               <thead>
                 <tr>
+                  <th>SN</th>
                   <th>Report ID</th>
                   <th>Patient Name</th>
                   <th>Admission Date</th>
@@ -172,7 +173,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let report of hospitalReports">
+                <tr *ngFor="let report of hospitalReports;let i= index;">
+                  <td>{{ i+1 }}</td>
                   <td>{{ report._id }}</td>
                   <td>{{ report.patientName }}</td>
                   <td>{{ report.admissionDate | date }}</td>

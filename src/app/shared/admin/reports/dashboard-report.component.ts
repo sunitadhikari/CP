@@ -107,7 +107,9 @@ export class DashboardReportComponent implements OnInit {
     // })
     this.reportservice.getDischargeReportsByDoctor().subscribe((res) => {
       console.log(res);
-      this.patientDataByDoctor = res
+      // this.patientDataByDoctor = res;
+      this.patientDataByDoctor = res.filter((report: any) => report.dischargeRequest === true);
+
     })
     this.reportservice.getHospitalDischargeReports().subscribe((res) => {
       console.log(res);
@@ -129,6 +131,7 @@ export class DashboardReportComponent implements OnInit {
 
     });
     this.hospitalDischargeReportForm = this.fb.group({
+      patientId: [''],
       patientName: ['', Validators.required],
       // patientAge: [{ value: '', disabled: true }, Validators.required],
       patientAge: ['', Validators.required],
@@ -399,6 +402,7 @@ export class DashboardReportComponent implements OnInit {
     if (selectedPatient) {
       console.log('Selected Patient:', selectedPatient); // Debugging
       this.hospitalDischargeReportForm.patchValue({
+        patientId: selectedPatient._id,
         patientName: selectedPatient.patientName,
         patientAge: selectedPatient.patientAge,
         patientGender: selectedPatient.gender,
@@ -493,8 +497,6 @@ export class DashboardReportComponent implements OnInit {
           this.hospitalDischargeReportForm.reset();
         },
         (error) => {
-          
-
           console.error('Error submitting hospital discharge report:', error);
         }
       );
