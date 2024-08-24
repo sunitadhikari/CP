@@ -233,7 +233,7 @@ export class DashboardReportComponent implements OnInit {
         onError: (error: any) => {
           alertify.error('Payment failed');
         },
-        onClose: () => { }
+        onClose: () => {}
       },
       paymentPreference: ['KHALTI', 'EBANKING', 'MOBILE_BANKING', 'CONNECT_IPS', 'SCT']
     };
@@ -241,32 +241,46 @@ export class DashboardReportComponent implements OnInit {
     const checkout = new KhaltiCheckout(config);
     checkout.show({ amount: amount * 100 }); // Khalti amount is in paisa, so convert from currency
   }
-  // updatePaymentStatus(id: string, payload: any, amount: number): void {
-  //   const paymentData = {
-  //     ...payload,
-  //     amount: amount
-  //   };
-  // }
+  
   updatePaymentStatus(id: string, payload: any, amount: number): void {
     const paymentData = {
       idx: payload.idx,
       token: payload.token,
-      amount: amount * 100,  // Make sure to convert to paisa if needed
+      amount: amount * 100,  // Convert amount to paisa
       mobile: payload.mobile,
       product_identity: payload.product_identity,
       product_name: payload.product_name,
-      product_url: payload.product_url,
-      widgetId: payload.widgetId,          // Ensure this field is included
-      transaction_pin: payload.transaction_pin,  // Ensure this field is included
-      source: payload.source,              // Ensure this field is included
-      public_key: payload.public_key       // Ensure this field is included
+      product_url: payload.product_url
     };
-    
+  
     this.http.post('http://localhost:3000/admit-patient-payment', paymentData).subscribe(
       response => alertify.success('Payment data saved successfully'),
       error => alertify.error('Error saving payment data')
     );
   }
+  
+  
+  // updatePaymentStatus(id: string, payload: any, amount: number): void {
+  //   const paymentData = {
+  //     idx: payload.idx,
+  //     token: payload.token,
+  //     amount: amount * 100,  // Make sure to convert to paisa if needed
+  //     mobile: payload.mobile,
+  //     product_identity: payload.product_identity,
+  //     product_name: payload.product_name,
+  //     patientId: payload.patientId,
+  //     product_url: payload.product_url,
+  //     widgetId: payload.widgetId,          // Ensure this field is included
+  //     transaction_pin: payload.transaction_pin,  // Ensure this field is included
+  //     source: payload.source,              // Ensure this field is included
+  //     public_key: payload.public_key       // Ensure this field is included
+  //   };
+    
+  //   this.http.post('http://localhost:3000/admit-patient-payment', paymentData).subscribe(
+  //     response => alertify.success('Payment data saved successfully'),
+  //     error => alertify.error('Error saving payment data')
+  //   );
+  // }
   
 
   dateGapValidator(): ValidatorFn {
