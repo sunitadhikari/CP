@@ -1,139 +1,127 @@
-/* General styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-  }
-  
-  /* Hero Section */
-  .hero-section {
-    background: url('https://careermudhra.com/wp-content/uploads/manipal-college-of-medical-sciences-pokhara.png') no-repeat center center;
-    background-size: cover;
-    padding: 150px 0;
-  }
-  .welcome{
-    padding-top: 20px;
-    padding-bottom: 20px;
-    opacity:0.8;
-    background-color: #8a8d91;
-    background-size: cover;
-  }
-.containers{
-  background-color: rgb(152, 189, 198);
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
 }
 
-  .services-section {
-    background: #c8c6c6;
-    color: #1c1a1a;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding:100px 0 100px 0;
-  }
-  
-  .services-section h1 {
-    margin-bottom: 20px;
-    font-weight: bolder;
-  }
-  
-  .services-section p {
-    color: #555; 
-    width: 40%;
-    margin: 0 auto; 
-    font-weight: bold;
-    font-size: medium;
-  }
-  .hero-section h1 {
-    font-size: 3.5rem;
-    color:rgb(11, 10, 10);
-    font-weight: bold;
-  }
-
-  .hero-section .lead {
-    font-size: 1.25rem;
-    color:black;
-    font-weight: bolder;
-   
-  }
-
-   .card {
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    height: 100%;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f1f0;
-    
-  }
-  
-  .card:hover {
-    transform: scale(1.05);
-    background-color: rgb(197, 201, 204);
-  }
-  
-  .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
-  }
-  
-  .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #04080b;
-    padding-bottom: 10px;
-  }
-  
-  .card-text {
-    color: #555;
-    font-size: 15px;
-  }
-  .feature{
-   background-color: #a7bcba;
-   padding-bottom: 60px;
-  }
-  .feature h2 {
-    font-size: 3rem;
-    color: #131313;
-    font-weight: bold;
-  }
-  
-  .fa-3x {
-    font-size: 3em;
-    color: #626162;
-  }
-.footer{
-  background-color: #2e2e36;
-  width: 100%;
-  overflow: hidden;
-  overflow-x: auto;
-}
-/* Customize footer styles */
-.footer {
-  background-color: #343a40; /* Dark background color */
-  color: #fff; /* Text color */
-  font-family: Arial, sans-serif; /* Example of using a different font */
+.hero-section {
+  background: url('https://careermudhra.com/wp-content/uploads/manipal-college-of-medical-sciences-pokhara.png') no-repeat center center;
+  background-size: cover;
+  padding: 150px 0;
+  color: #ffffff; 
 }
 
-.footer h5 {
-  color: #fff; /* Heading text color */
+.welcome {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  opacity: 0.9; 
+  background-color: rgba(138, 141, 145, 0.6); 
 }
 
-.footer .footer-text {
-  color: #ccc; /* Footer text color */
+.hero-section h1 {
+  font-size: 3.5rem; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); 
 }
 
-.footer p {
-  margin-bottom: 0; /* Remove default margin */
+.hero-section p {
+  font-size: 1.25rem; 
+  margin-bottom: 2rem;
 }
 
-.footer hr {
-  border-color: #555; /* Horizontal line color */
+.hero-section .btn {
+  background-color: #ffffff; 
+  color: #007bff; 
+  transition: background-color 0.3s, color 0.3s; 
 }
 
-.footer .small {
-  color: #999; /* Copyright text color */
+.hero-section .btn:hover {
+  background-color: #007bff; 
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.services-section {
+  background-color: #f8f9fa; 
+  border-radius: 10px; 
+  padding: 2rem;
+}
+
+.services-section h1 {
+  color: #007bff;
+  font-weight: 700;
+  font-size: 2.5rem; 
+}
+
+.services-section p {
+  font-size: 1.25rem; 
+  color: #6c757d; 
+  line-height: 1.6; 
+}
+
+.services-section img {
+  max-width: 100%; 
+  height: auto; 
+  border-radius: 15px;
+}
+
+.feature {
+  background-color: #f3f4f6; 
+}
+
+.feature-card {
+  background-color: #ffffff; 
+  border: 1px solid #e0e0e0;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; 
+  border-radius: 12px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.feature-card:hover {
+  background-color: #e1f5fe;
+  transform: translateY(-10px); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+.feature-card i {
+  color: #00bcd4; 
+  transition: color 0.3s;
+}
+
+.feature-card:hover i {
+  color: #0097a7; 
+}
+
+.feature-card .card-title {
+  color: #333; 
+}
+
+.feature-card .card-text {
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .feature-card .card-title {
+    font-size: 1.25rem; 
+  }
+
+  .feature-card .card-text {
+    font-size: 1rem; 
+  }
+}
+
+@media (max-width: 576px) {
+  .feature-card {
+    padding: 2rem; 
+  }
+
+  .feature-card i {
+    font-size: 3rem; 
+  }
+
+  .feature-card .card-title {
+    font-size: 1.5rem; 
+  }
+
+  .feature-card .card-text {
+    font-size: 0.875rem; 
+  }
 }

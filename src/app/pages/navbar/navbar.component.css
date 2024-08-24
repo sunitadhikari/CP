@@ -6,13 +6,16 @@ body {
 
 /* Navbar styles */
 .navbar {
-  background-color: #000; /* Black background */
+  background-color: #343a40; /* Dark background for navbar */
+  border-bottom: 2px solid #24f539; /* Green bottom border */
 }
 
 .navbar-brand {
-  color: #fff !important; /* White text */
+  color: #fff !important; /* White text for brand */
   font-size: 2rem;
   font-weight: bold;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-toggler {
@@ -26,20 +29,36 @@ body {
 .navbar-nav .nav-link {
   color: #fff !important; /* White text */
   margin-right: 15px;
-  padding: 0.05rem 0.5rem;
-  font-weight:bold;
+  padding: 0.5rem 1rem; /* Adjust padding for better spacing */
+  font-weight: bold;
   font-size: 1rem;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  border-radius: 0.25rem; /* Rounded corners for links */
 }
 
 .navbar-nav .nav-link:hover {
-  color: #24f539 !important; /* Black text */
-  /* background-color: #ccc5c5;  */
-  border-radius: 5px;
+  color: #24f539 !important; /* Green text on hover */
+  background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent background */
+  transform: translateY(-2px); /* Subtle lift effect */
 }
 
 .navbar-nav .nav-item.active .nav-link {
-  color: #000 !important; /* Black text */
-  background-color: #fff; /* White background */
-  border-radius: 5px;
+  color: #343a40 !important; /* Dark text for active link */
+  background-color: #fff; /* White background for active link */
+  border-radius: 0.25rem; /* Rounded corners for active link */
+  border-bottom: 3px solid #24f539; /* Green bottom border to highlight active item */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+  font-weight: bold; /* Make text bold */
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .navbar-brand {
+    font-size: 1.5rem; /* Smaller font size on smaller screens */
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.875rem; /* Smaller font size on smaller screens */
+    padding: 0.5rem 0.75rem; /* Adjust padding on smaller screens */
+  }
 }

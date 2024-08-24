@@ -1,28 +1,58 @@
+
+
+
 <app-navbar></app-navbar>
 <section class="hero-section text-center text-white">
   <div class="container welcome">
-    <h1 class="display-6">Welcome to Our Hospital</h1>
-    <p class="lead">Providing quality healthcare services to you and your family.</p>
-    <a href="contact-us" class="btn btn-primary btn-lg">Learn More</a>
+    <h1 class="display-3 font-weight-bold">Welcome to Our Hospital</h1>
+    <p class="lead mb-4">Providing quality healthcare services to you and your family.</p>
+    <a href="contact-us" class="btn btn-light btn-lg shadow">Learn More</a>
   </div>
 </section>
 
-<section class="services-section mx-auto text-center ">
-  <h1 class=" display-4 ">Aaspatal</h1>
-  <p class=" fw-bold mx-auto">Aaspatal is a web-based software that helps in facilitating the functioning of hospitals.
-    It streamlines and integrates the operations, processes and information flow in hospitals and is designed to manage
-    all the aspects of hospitals in a single platform. It combines all the information related to patients, doctors,
-    staff, hospital administration into one software.</p>
+<section class="services-section text-center py-5">
+  <div class="container">
+    <!-- <div class="row justify-content-center mb-4">
+      <div class="col-lg-12 col-md-12">
+        <h1 class="display-4 mb-4 font-weight-bold text-primary">Aaspatal</h1>
+        <p class="lead mb-4 text-muted">
+          Aaspatal is a web-based software that helps in facilitating the functioning of hospitals.
+          It streamlines and integrates the operations, processes, and information flow in hospitals and is designed to manage
+          all the aspects of hospitals in a single platform. It combines all the information related to patients, doctors,
+          staff, and hospital administration into one software.
+        </p>
+      </div>
+    </div> -->
+    <div class="row justify-content-center">
+      <h2 class="display-5 mb-4">About Aaspatal</h2>
+      <div class="col-lg-6 col-md-6 d-flex align-items-center">
+        <div>
+          <p class="lead mb-4 text-muted">
+            Aaspatal is a comprehensive web-based software designed to seamlessly integrate all hospital functions into
+            a unified platform. It excels in managing every aspect of hospital operations with precision and ease.
+            From overseeing patient records and tracking treatment histories to coordinating doctor schedules and
+            managing staff tasks, Aaspatal ensures that every component of hospital management is streamlined. The
+            software enhances the efficiency of hospital workflows by providing a centralized system for scheduling,
+            billing, patient care, and administrative tasks. </p>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <img src="https://careermudhra.com/wp-content/uploads/manipal-college-of-medical-sciences-pokhara.png"
+          class="img-fluid rounded-lg shadow-lg" alt="Aaspatal Overview">
+      </div>
+    </div>
+  </div>
 </section>
 
-<div class="container-fluid feature mx-auto">
-  <h2 class="text-center py-5 display-4 ">Our Features</h2>
-  <div class="row mx-auto">
+
+<div class="container-fluid feature py-5">
+  <h2 class="text-center display-4 mb-5">Our Features</h2>
+  <div class="row justify-content-center">
     <div class="col-lg-4 col-md-6 mb-4" *ngFor="let feature of features">
-      <div class="card h-100 text-center p-3 mx-auto">
+      <div class="card h-100 text-center p-4 feature-card">
         <div class="card-body">
-          <i [class]="feature.icon + ' fa-3x mb-3'"></i>
-          <h5 class="card-title display-6">{{ feature.title }}</h5>
+          <i [class]="feature.icon + ' fa-4x mb-3'"></i>
+          <h5 class="card-title display-5 mb-3">{{ feature.title }}</h5>
           <p class="card-text">{{ feature.description }}</p>
         </div>
       </div>
@@ -30,4 +60,7 @@
   </div>
 </div>
 
+
+
 <app-footer></app-footer>
+

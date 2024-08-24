@@ -32,6 +32,8 @@ export class DailyReportComponent implements OnInit {
   reports: any[] = []
   selectedPatient: any;
   today: string | undefined; // Add this variable
+selectedReport: any;
+
   constructor(private fb: FormBuilder,
     private http: HttpClient,
     private router: Router) { }
@@ -50,17 +52,36 @@ export class DailyReportComponent implements OnInit {
     this.fetchAdmittedPatients();
     this.fetchReports();
   }
+  // Declare a variable to hold the selected report
+
+viewReport(report: any): void {
+  this.selectedReport = report;
+}
+
+  // fetchAdmittedPatients(): void {
+  //   const apiUrl = 'http://localhost:3000/admittedpatientbyDepartment';
+  //   this.http.get<{ patient: AdmittedPatient[] }>(apiUrl).subscribe(
+  //     (response) => {
+  //       this.admitPatient = response.patient;
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching admitted patients:', error);
+  //     }
+  //   );
+  // }
   fetchAdmittedPatients(): void {
     const apiUrl = 'http://localhost:3000/admittedpatientbyDepartment';
     this.http.get<{ patient: AdmittedPatient[] }>(apiUrl).subscribe(
       (response) => {
-        this.admitPatient = response.patient;
+        // Filter the patients to only include those where isActive is true
+        this.admitPatient = response.patient.filter(patient => patient.isActive === true);
       },
       (error) => {
         console.error('Error fetching admitted patients:', error);
       }
     );
   }
+  
   fetchReports(): void {
     const apiUrl1 = 'http://localhost:3000/getDailyReport';
     this.http.get<any[]>(apiUrl1).subscribe(

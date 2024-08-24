@@ -12,6 +12,8 @@ import { BillService } from '../../../core/service/bill-service/bill.service';
 import { MatIconModule } from '@angular/material/icon';
 import { SymptomsService } from '../../../core/service/symptoms/symptoms.service';
 import { ConfirmationService } from '../../confirmation/confirmation.service';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 
 
@@ -46,6 +48,8 @@ export class DashboardReportComponent implements OnInit {
   doctorDischargeReport:any[]=[]
   private apiUrl = 'http://localhost:3000/gethospitalDischargeReport';
   prescriptions: any[] = [];
+  daysStayed: number = 0;
+  totalCharges: number = 0;
 
   selectedPatientId: string | null = null;
 
@@ -183,9 +187,63 @@ export class DashboardReportComponent implements OnInit {
     );
   }
 
+  // openModalD(report: any): void {
+  //   this.dischargeBill = report;
+  //   console.log('Selected report:', this.dischargeBill);
+  //   const admissionDate = new Date(report.admissionDate);
+  //   const dischargeDate = new Date(report.dischargeDate);
+  //   const timeDifference = dischargeDate.getTime() - admissionDate.getTime();
+  //   this.daysStayed = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert milliseconds to days
+    
+  //   // Calculate total bed charges
+  //   this.totalCharges = this.daysStayed * parseFloat(report.bed_charges);
+  // }
   openModalD(report: any): void {
     this.dischargeBill = report;
     console.log('Selected report:', this.dischargeBill);
+  
+    const admissionDate = new Date(report.admissionDate);
+    const dischargeDate = new Date(report.dischargeDate);
+  
+    // Calculate the time difference in milliseconds
+    const timeDifference = dischargeDate.getTime() - admissionDate.getTime();
+    // Calculate the number of days
+    this.daysStayed = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert milliseconds to days
+  
+    // If no difference or both dates are the same, set daysStayed to 1
+    if (this.daysStayed <= 0) {
+      this.daysStayed = 1;
+    }
+  
+    // Calculate total bed charges
+    this.totalCharges = this.daysStayed * parseFloat(report.bed_charges);
+  }
+  makePayment(item: any, amount: number): void {
+    const config = {
+      publicKey: 'test_public_key_0275cc5e2bae42fb890536aae01e9e73',
+      productIdentity: item._id,
+      productName: 'Appointment Payment',
+      productUrl: 'http://example.com/appointment',
+      eventHandler: {
+        onSuccess: (payload: any) => {
+          this.updatePaymentStatus(item._id, payload, amount);
+        },
+        onError: (error: any) => {
+          alertify.error('Payment failed');
+        },
+        onClose: () => { }
+      },
+      paymentPreference: ['KHALTI', 'EBANKING', 'MOBILE_BANKING', 'CONNECT_IPS', 'SCT']
+    };
+  
+    const checkout = new KhaltiCheckout(config);
+    checkout.show({ amount: amount * 100 }); // Khalti amount is in paisa, so convert from currency
+  }
+  updatePaymentStatus(id: string, payload: any, amount: number): void {
+    const paymentData = {
+      ...payload,
+      amount: amount
+    };
   }
 
   dateGapValidator(): ValidatorFn {
@@ -506,5 +564,33 @@ export class DashboardReportComponent implements OnInit {
   }
   closeModal(): void {
 
+  }
+  printModal(): void {
+    window.print();
+  }
+
+  // Method to export the modal content as PDF
+  exportToPDF(): void {
+    const modalContent = document.querySelector('.modal-body') as HTMLElement;
+
+    html2canvas(modalContent).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgWidth = 210;
+      const pageHeight = 295;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      let heightLeft = imgHeight;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, -heightLeft, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      pdf.save('discharge-summary.pdf');
+    });
   }
 }
