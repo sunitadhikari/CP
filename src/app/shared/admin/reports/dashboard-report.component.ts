@@ -47,7 +47,8 @@ export class DashboardReportComponent implements OnInit {
   private apiUrl = 'http://localhost:3000/gethospitalDischargeReport';
   prescriptions: any[] = [];
 
-  
+  selectedPatientId: string | null = null;
+
 
   patient = {
     name: 'John Doe',
@@ -78,6 +79,7 @@ export class DashboardReportComponent implements OnInit {
     this.loadPrescriptions();
 
     this.doctorDischargeReportForm = this.fb.group({
+      patientId: [''],
       patientName: [{ value: '', disabled: true }],
       patientAge: [{ value: '', disabled: true }],
 
@@ -203,14 +205,47 @@ export class DashboardReportComponent implements OnInit {
       return null;
     };
   }
+  // onPatientSelect(event: Event): void {
+  //   const target = event.target as HTMLSelectElement;
+  //   const patientId = target.value;
+  //   const selectedPatient = this.Admittedpatients.find(patient => patient._id === patientId);
+  //   if (selectedPatient) {
+  //     this.patchFormWithPatientData(selectedPatient);
+  //   }
+  // }
   onPatientSelect(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const patientId = target.value;
+    this.selectedPatientId = patientId;  // Set the selected patient ID
+    this.doctorDischargeReportForm.patchValue({ patientId });
+  
     const selectedPatient = this.Admittedpatients.find(patient => patient._id === patientId);
     if (selectedPatient) {
       this.patchFormWithPatientData(selectedPatient);
     }
   }
+  
+  patchFormWithPatientData(patient: any): void {
+    // Patch the form with the selected patient's data
+    const age = this.calculateAge(patient.dob);
+    debugger
+
+    this.doctorDischargeReportForm.patchValue({
+      patientId: patient._id,  // This is where patientId is set
+      patientName: `${patient.firstName} ${patient.lastName}`,
+      patientAge: age,  // You may want to calculate age based on dob
+      gender: patient.gender,
+      contactNumber: patient.contactNumber,
+      address: patient.address,
+      medicalHistory: patient.medicalHistory,
+      department: patient.department,
+      ward: patient.ward,
+      bedNumber: patient.bedNumber,
+      admittedAt: patient.admittedAt,
+      email: patient.email
+    });
+  }
+  
 
   fetchHospitalReports(): void {
     this.loading = true;
@@ -245,7 +280,7 @@ export class DashboardReportComponent implements OnInit {
     if (this.billForm.valid) {
       const billData = this.billForm.value;
       console.log('Bill Data:', billData); // Check the complete bill data
-      debugger; // Use this to step through and inspect billData
+      ; // Use this to step through and inspect billData
       // Handle bill data, e.g., send it to the backend
       this.billService.saveBill(billData).subscribe(
         response => {
@@ -294,7 +329,7 @@ export class DashboardReportComponent implements OnInit {
   //     paymentType,
   //     paymentData
   //   };
-  //   debugger
+  //   
   //   this.billService.saveBill(billData).subscribe(
   //     response => {
   //       console.log('Bill saved:', response);
@@ -326,25 +361,27 @@ export class DashboardReportComponent implements OnInit {
   
   fetchAdmittedPatients(): void {
     this.reportservice.getAdmnittedPatientReports().subscribe((res) => {
-      this.Admittedpatients = res.patient
+      // this.Admittedpatients = res.patient
+      this.Admittedpatients = res.patient.filter((patient: any) => patient.isActive === true);
+
     })
   }
 
-  patchFormWithPatientData(patient: any): void {
-    this.doctorDischargeReportForm.patchValue({
-      patientName: `${patient.firstName} ${patient.lastName}`,
-      patientAge: this.calculateAge(patient.dob),
-      gender: patient.gender,
-      contactNumber: patient.contactNumber,
-      address: patient.address,
-      medicalHistory: patient.medicalHistory,
-      department: patient.department,
-      ward: patient.ward,
-      bedNumber: patient.bedNumber,
-      admittedAt: new Date(patient.admittedAt).toLocaleDateString(),
-      // dischargeDate: patient.dischargeDate ? new Date(patient.dischargeDate).toLocaleDateString() : ''
-    });
-  }
+  // patchFormWithPatientData(patient: any): void {
+  //   this.doctorDischargeReportForm.patchValue({
+  //     patientName: `${patient.firstName} ${patient.lastName}`,
+  //     patientAge: this.calculateAge(patient.dob),
+  //     gender: patient.gender,
+  //     contactNumber: patient.contactNumber,
+  //     address: patient.address,
+  //     medicalHistory: patient.medicalHistory,
+  //     department: patient.department,
+  //     ward: patient.ward,
+  //     bedNumber: patient.bedNumber,
+  //     admittedAt: new Date(patient.admittedAt).toLocaleDateString(),
+  //     // dischargeDate: patient.dischargeDate ? new Date(patient.dischargeDate).toLocaleDateString() : ''
+  //   });
+  // }
 
   onPatientSelectForAdmin(event: Event): void {
     console.log('Event:', event); // Debugging
@@ -395,21 +432,23 @@ export class DashboardReportComponent implements OnInit {
     this.doctorDischargeReportForm.enable();  // Enable all controls temporarily
 
     if (this.doctorDischargeReportForm.valid) {
-      debugger
+      
       this.reportservice.postDoctorReport(this.doctorDischargeReportForm.value)
         .subscribe(
           (response) => {
             console.log('Doctors discharge report submitted successfully:', response);
             this.doctorDischargeReportForm.reset();
             this.doctorDischargeReportForm.disable();  // Disable controls again
+            debugger
           },
           (error) => {
-            debugger
+            
 
             console.error('Error submitting doctors discharge report:', error);
             this.doctorDischargeReportForm.disable();  // Disable controls if there's an error
           }
         );
+        debugger
     } else {
       console.error('Form is invalid!');
       this.doctorDischargeReportForm.disable();  // Disable controls if form is invalid
@@ -444,9 +483,9 @@ export class DashboardReportComponent implements OnInit {
   submitHospitalReport(): void {
     alert('button is clicked')
     const value = this.hospitalDischargeReportForm.valid
-    debugger
+    
     if (this.hospitalDischargeReportForm.valid) {
-      debugger
+      
 
       this.reportservice.postHospitalReport(this.hospitalDischargeReportForm.value).subscribe(
         (response) => {
@@ -454,7 +493,7 @@ export class DashboardReportComponent implements OnInit {
           this.hospitalDischargeReportForm.reset();
         },
         (error) => {
-          debugger
+          
 
           console.error('Error submitting hospital discharge report:', error);
         }

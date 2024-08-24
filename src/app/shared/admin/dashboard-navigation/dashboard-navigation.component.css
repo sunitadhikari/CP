@@ -1,12 +1,11 @@
 .cursor {
-    cursor: pointer;
+  cursor: pointer;
 }
 /* app.component.css */
 .list-group-item {
-    cursor: pointer;
-  }
-  .list-group-item a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
+  cursor: pointer;
+}
+.list-group-item a {
+  text-decoration: none;
+  color: inherit;
+}
