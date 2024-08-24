@@ -208,8 +208,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let item of schedulePatientTable; let i = index">
-                                                <th scope="row">{{i+1}}</th>
+                                            <tr *ngFor="let item of schedulePatientTable | paginate: { itemsPerPage:itemsPerPage, currentPage : p}; let i = index">
+                                                <th scope="row">{{ (p-1) * itemsPerPage + i+1}}</th>
                                                 <td>{{item.doctorName}}</td>
                                                 <td>{{item.date | date: 'fullDate'}}</td>
                                                 <td>{{item.startTime}}</td>
@@ -217,6 +217,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                                 </div>
                             </div>
                         </div>

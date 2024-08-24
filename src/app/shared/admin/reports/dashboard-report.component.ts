@@ -50,6 +50,7 @@ export class DashboardReportComponent implements OnInit {
   prescriptions: any[] = [];
   daysStayed: number = 0;
   totalCharges: number = 0;
+  p: number = 1; // Current page
 
   selectedPatientId: string | null = null;
 

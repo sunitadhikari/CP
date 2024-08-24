@@ -360,8 +360,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let report of dischargeReports; let i=index">
-              <td>{{ i+1 }}</td>
+            <tr *ngFor="let report of dischargeReports | paginate: { itemsPerPage:itemsPerPage, currentPage : p}; ; let i=index">
+              <td>{{(p-1) * itemsPerPage + i+1 }}</td>
               <td>{{ report.patientName }}</td>
               <td>{{ report.patientAge }}</td>
               <td>{{ report.patientGender }}</td>
@@ -380,6 +380,8 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
       </div>
     </div>
   </div>
