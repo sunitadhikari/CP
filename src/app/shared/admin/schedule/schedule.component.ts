@@ -57,7 +57,7 @@ export class ScheduleComponent implements OnInit {
     this.userRole = localStorage.getItem('userRole')
     this.scheduleForm = this.fb.group({
       doctorName: ['', Validators.required],
-      availableDays: ['', Validators.required],
+      // availableDays: ['', Validators.required],
       date: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
