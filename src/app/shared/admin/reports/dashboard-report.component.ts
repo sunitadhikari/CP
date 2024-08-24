@@ -222,7 +222,7 @@ export class DashboardReportComponent implements OnInit {
     const config = {
       publicKey: 'test_public_key_0275cc5e2bae42fb890536aae01e9e73',
       productIdentity: item._id,
-      productName: 'Appointment Payment',
+      productName: `Payment for ${item.patientName}, Age: ${item.patientAge} years`,
       productUrl: 'http://example.com/appointment',
       eventHandler: {
         onSuccess: (payload: any) => {
@@ -239,12 +239,33 @@ export class DashboardReportComponent implements OnInit {
     const checkout = new KhaltiCheckout(config);
     checkout.show({ amount: amount * 100 }); // Khalti amount is in paisa, so convert from currency
   }
+  // updatePaymentStatus(id: string, payload: any, amount: number): void {
+  //   const paymentData = {
+  //     ...payload,
+  //     amount: amount
+  //   };
+  // }
   updatePaymentStatus(id: string, payload: any, amount: number): void {
     const paymentData = {
-      ...payload,
-      amount: amount
+      idx: payload.idx,
+      token: payload.token,
+      amount: amount * 100,  // Make sure to convert to paisa if needed
+      mobile: payload.mobile,
+      product_identity: payload.product_identity,
+      product_name: payload.product_name,
+      product_url: payload.product_url,
+      widgetId: payload.widgetId,          // Ensure this field is included
+      transaction_pin: payload.transaction_pin,  // Ensure this field is included
+      source: payload.source,              // Ensure this field is included
+      public_key: payload.public_key       // Ensure this field is included
     };
+    
+    this.http.post('http://localhost:3000/admit-patient-payment', paymentData).subscribe(
+      response => alertify.success('Payment data saved successfully'),
+      error => alertify.error('Error saving payment data')
+    );
   }
+  
 
   dateGapValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
