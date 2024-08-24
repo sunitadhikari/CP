@@ -150,7 +150,8 @@ export class DashboardReportComponent implements OnInit {
       ward:  ['', Validators.required],
       bedNumber:  ['', Validators.required],
       bed_charges:[''],
-      hospitalDischargeRequest: [true]
+      hospitalDischargeRequest: [true],
+      isPaid: [false]
     },);
 
     this.hospitalDischargeReportForm.get('patientName')?.valueChanges.subscribe((patientId) => {
