@@ -4,25 +4,27 @@
       <thead class="thead-dark">
         <tr>
           <th>SN</th>
-          <th>ID</th>
-          <th>Patient ID</th>
+          <th>Symptom</th>
           <th>Medicine</th>
           <th>Suggestion</th>
           <th>Created At</th>
-          <!-- <th>Actions</th> -->
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let prescription of prescriptions;let i=index">
-          <td>{{i+1 }}</td>
-          <td>{{ prescription._id }}</td>
-          <td>{{ prescription.patientId }}</td>
+        <tr *ngFor="let prescription of prescriptions; let i = index">
+          <td>{{ i + 1 }}</td>
+          <!-- <td>{{ prescription._id }}</td> -->
+          <!-- <td>{{ prescription.patientId }}</td> -->
+          <td>{{ prescription.Symptom }}</td>
           <td>{{ prescription.medicine }}</td>
           <td>{{ prescription.suggestion }}</td>
           <td>{{ prescription.createdAt | date: 'short' }}</td>
-         
+        </tr>
+        <tr *ngIf="!prescriptions.length">
+          <td colspan="7">No prescriptions found.</td>
         </tr>
       </tbody>
     </table>
+    
   </div>
   

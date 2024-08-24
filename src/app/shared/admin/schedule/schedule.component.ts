@@ -6,11 +6,13 @@ import { ScheduleService } from '../../../core/service/admin/schedule.service';
 import * as alertify from 'alertifyjs';
 import { DoctorService } from '../../../core/service/admin/doctor.service';
 import { ConfirmationService } from '../../confirmation/confirmation.service';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @Component({
   selector: 'app-schedule',
   standalone: true,
-  imports: [SharedTableComponent, CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [SharedTableComponent, CommonModule, ReactiveFormsModule, FormsModule,NgxPaginationModule],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.css'
 })
@@ -22,6 +24,9 @@ export class ScheduleComponent implements OnInit {
   schedulePatientTable: any[] = []
   userRole: string | null | undefined;
   editSchedule: any = null;
+  p: number = 1; // Current page
+  itemsPerPage: number = 10; // Items per page
+
   constructor(private fb: FormBuilder, private scheduleService: ScheduleService, private doctorService: DoctorService, private confirmationService: ConfirmationService) {
     this.getDoctorList();
     this.getScheduleByPatients();
@@ -57,7 +62,7 @@ export class ScheduleComponent implements OnInit {
     this.userRole = localStorage.getItem('userRole')
     this.scheduleForm = this.fb.group({
       doctorName: ['', Validators.required],
-      availableDays: ['', Validators.required],
+      // availableDays: ['', Validators.required],
       date: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],

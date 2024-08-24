@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class PrescriptionComponent {
   prescriptions: any[] = [];
+  Symptom: string | undefined;
 
   constructor(
 
@@ -21,14 +22,30 @@ export class PrescriptionComponent {
     this.loadPrescriptions()
   }
 
+  // loadPrescriptions(): void {
+  //   this.http.get<any[]>('http://localhost:3000/getprescriptions')
+  //     .subscribe(
+  //       (data) => {
+  //         this.prescriptions  = data;
+  //       },
+  //       (error) => {
+  //         console.error('Error fetching payment data', error);
+  //       }
+  //     );
+  // }
   loadPrescriptions(): void {
     this.http.get<any[]>('http://localhost:3000/getprescriptions')
       .subscribe(
         (data) => {
-          this.prescriptions  = data;
+          // Flatten the prescriptions data
+          this.prescriptions = data.flatMap(item =>
+            Array.isArray(item.prescriptions)
+              ? item.prescriptions.map((prescription: any) => ({ ...prescription, Symptom: item.Symptom }))
+              : []
+          );
         },
         (error) => {
-          console.error('Error fetching payment data', error);
+          console.error('Error fetching prescriptions data', error);
         }
       );
   }
