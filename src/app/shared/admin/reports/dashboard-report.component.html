@@ -175,7 +175,6 @@
               <thead>
                 <tr>
                   <th>SN</th>
-                  <th>Report ID</th>
                   <th>Patient Name</th>
                   <th>Admission Date</th>
                   <th>Discharge Date</th>
@@ -186,7 +185,6 @@
               <tbody>
                 <tr *ngFor="let report of hospitalReports;let i= index;">
                   <td>{{ i+1 }}</td>
-                  <td>{{ report._id }}</td>
                   <td>{{ report.patientName }}</td>
                   <td>{{ report.admissionDate | date }}</td>
                   <td>{{ report.dischargeDate | date }}</td>
@@ -351,17 +349,17 @@
         <table class="table table-bordered table-striped table-hover">
           <thead class="table-dark">
             <tr>
-              <th >SN</th>
-              <th >Patient Name</th>
-              <th >Age</th>
-              <th >Gender</th>
-              <th >Admission Date</th>
-              <th >Discharge Date</th>
-              <th >Final Diagnosis</th>
-              <th >Summary of Treatment</th>
-              <th >Discharge Medications</th>
-              <th >Follow-up Instructions</th>
-              <th >Action</th>
+              <th>SN</th>
+              <th>Patient Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Admission Date</th>
+              <th>Discharge Date</th>
+              <th>Final Diagnosis</th>
+              <th>Summary of Treatment</th>
+              <th>Discharge Medications</th>
+              <th>Follow-up Instructions</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -377,7 +375,8 @@
               <td>{{ report.dischargeMedications }}</td>
               <td>{{ report.followUpInstructions }}</td>
               <td>
-                <button class="btn btn-primary btn-sm" (click)="openModalD(report)" data-bs-toggle="modal" data-bs-target="#billModal">
+                <button class="btn btn-primary btn-sm" (click)="openModalD(report)" data-bs-toggle="modal"
+                  data-bs-target="#billModal">
                   <i class="fas fa-eye"></i> View
                 </button>
               </td>
@@ -387,8 +386,8 @@
       </div>
     </div>
   </div>
-  
-  
+
+
 </div>
 <div class="modal fade" id="billModal" tabindex="-1" aria-labelledby="billModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -426,7 +425,8 @@
             <div class="col-xl-8">
               <ul class="list-unstyled">
                 <li class="text-muted">
-                  <i class="fas fa-user text-primary"></i> To: <span class="text-primary">{{ dischargeBill?.patientName }}</span>
+                  <i class="fas fa-user text-primary"></i> To: <span class="text-primary">{{ dischargeBill?.patientName
+                    }}</span>
                 </li>
                 <li class="text-muted">
                   <i class="fas fa-envelope"></i> {{ dischargeBill?.patientEmail }}
@@ -436,7 +436,7 @@
                 </li>
               </ul>
             </div>
-            
+
             <div class="col-xl-4">
               <p class="text-muted">Invoice</p>
               <ul class="list-unstyled">
@@ -508,4 +508,3 @@
     </div>
   </div>
 </div>
-

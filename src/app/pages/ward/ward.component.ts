@@ -25,6 +25,7 @@ export class WardComponent implements OnInit {
   page = 1;
   itemsPerPage = 10;
   totalItems = 0;
+  capacityInvalid = false;
 
 
   constructor(private wardService: WardService, private fb:FormBuilder, private confirmationService: ConfirmationService) { }
@@ -32,21 +33,10 @@ export class WardComponent implements OnInit {
   ngOnInit(): void {
     this.loadWards();
   }
+  onCapacityChange() {
+    this.capacityInvalid = this.newWard.capacity < 0 || this.editWard?.capacity < 0;
+  }
 
-  // loadWards() {
-  //   this.isLoading = true;
-  //   this.wardService.getAllWards().subscribe(
-  //     (data) => {
-  //       console.log('Wards Data:', data); // Log the data
-  //       this.wards = data;
-  //       this.isLoading = false;
-  //     },
-  //     (error) => {
-  //       this.error = error.message;
-  //       this.isLoading = false;
-  //     }
-  //   );
-  // }
 loadWards() {
   this.isLoading = true;
   try {

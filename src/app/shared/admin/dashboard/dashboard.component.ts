@@ -56,6 +56,9 @@ export class DashboardComponent implements OnInit {
       this.unoccupiedBeds = data.unoccupiedBeds;
       this.bedCount = data.bedCount;
       this.createBedsChart();
+      this.createDepartmentsChart();
+
+      debugger
     });
   }
 
@@ -90,9 +93,9 @@ export class DashboardComponent implements OnInit {
         type: 'pie',
         name: 'Beds',
         data: [
-          { name: 'Total Beds', y: this.bedCount },
-          { name: 'Occupied Beds', y: this.occupiedBeds },
-          { name: 'Unoccupied Beds', y: this.unoccupiedBeds }
+          // { name: 'Total Beds', y: this.bedCount },
+          { name: 'Occupied Beds', y: this.occupiedBeds,color: '#FF5733' },
+          { name: 'Unoccupied Beds', y: this.unoccupiedBeds ,    color: '#33FF57'}
         ]
       }]
     });
@@ -115,22 +118,60 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  // createDepartmentsChart(): void {
+  //   this.departmentsChart = new Chart({
+  //     chart: {
+  //       type: 'bar'
+  //     },
+  //     title: {
+  //       text: 'Departments Statistics'
+  //     },
+  //     series: [{
+  //       type: 'bar',
+  //       name: 'Departments',
+  //       data: [
+  //         { name: 'Total Departments', y: this.departmentCount },
+  //         { name: 'Total Wards', y: this.wardCount }
+  //       ]
+  //     }]
+  //   });
+  // }
   createDepartmentsChart(): void {
+    // Ensure default values if data is not available
+   
     this.departmentsChart = new Chart({
       chart: {
         type: 'bar'
       },
       title: {
-        text: 'Departments Statistics'
+        text: 'Departments and Beds Statistics'
+      },
+      xAxis: {
+        categories: ['Departments', 'Beds'],
+        title: {
+          text: 'Categories'
+        }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Count'
+        },
+        labels: {
+          overflow: 'justify'
+        }
       },
       series: [{
         type: 'bar',
-        name: 'Departments',
+        name: 'Count',
         data: [
-          { name: 'Total Departments', y: this.departmentCount },
-          { name: 'Total Wards', y: this.wardCount }
+          { name: 'Total Departments', y: this.departmentCount, color: '#1f77b4' },
+          { name: 'Total Beds', y: this.bedCount, color: '#ff7f0e' }
         ]
       }]
     });
   }
+  
+  
+  
 }
