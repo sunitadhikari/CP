@@ -3,6 +3,7 @@ import { AppointmentService } from '../../../core/service/appointment/appointmen
 import alertify from 'alertifyjs';
 import { CommonModule } from '@angular/common';
 import { BillService } from '../../../core/service/bill-service/bill.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-payment',
@@ -17,21 +18,30 @@ export class PaymentComponent implements OnInit {
   payments: any[] = [];
   selectedAppointment: any;
   userRole: string | null | undefined;
+  admitpayments: any[] = [];
+  selectedPayment: any;
+
 
 
   constructor(
     private appointmentService: AppointmentService,
-    private paymentService:BillService
+    private paymentService:BillService,
+    private http: HttpClient
 
   ) {}
 
   ngOnInit(): void {
     this.getPaidAppointments();
     this.getAllPayments();
+    this.getAdmitPayments();
     this.userRole = localStorage.getItem('userRole');
 
   }
+  openModalD(payment: any): void {
+    this.selectedPayment = payment;
+    console.log('Selected payment:', this.selectedPayment);
 
+  }
   getPaidAppointments(): void {
     this.appointmentService.paidAppointmentsHistory().subscribe(
       (data) => {
@@ -72,4 +82,16 @@ export class PaymentComponent implements OnInit {
       }
     );
   }
+  getAdmitPayments(): void {
+    this.http.get<any[]>('http://localhost:3000/admit-patient-payments')
+      .subscribe(
+        (data) => {
+          this.admitpayments = data;
+        },
+        (error) => {
+          console.error('Error fetching payment data', error);
+        }
+      );
+  }
+  
 }

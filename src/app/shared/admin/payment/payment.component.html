@@ -93,7 +93,7 @@
   </div>
 </div>
 <div class="row" *ngIf="userRole === 'reception'">
-  <div class="container mt-4" >
+  <div class="container mt-4">
     <h2>Payment List</h2>
     <table class="table table-responsive table-striped">
       <thead>
@@ -102,30 +102,81 @@
           <th>Admission Date</th>
           <th>Discharge Date</th>
           <th>Amount</th>
-          <th>Discharge Medications</th>
-          <th>Follow-Up Instructions</th>
-          <th>Final Diagnosis</th>
-          <th>Patient Age</th>
-          <th>Patient Gender</th>
-          <th>Summary of Treatment</th>
-          <th>Payment Type</th>
+          <th>Mobile</th>
+          <th>Product Identity</th>
+          <th>Product Name</th>
+          <th>Payment Token</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let payment of payments">
-          <td>{{ payment.patientName }}</td>
+        <tr *ngFor="let payment of admitpayments">
+          <td>{{ payment.product_name.split(',')[0].replace('Payment for ', '') }}</td>
           <td>{{ payment.admissionDate | date:'shortDate' }}</td>
           <td>{{ payment.dischargeDate | date:'shortDate' }}</td>
-          <td>{{ payment.amount }}</td>
-          <td>{{ payment.dischargeMedications }}</td>
-          <td>{{ payment.followUpInstructions }}</td>
-          <td>{{ payment.finalDiagnosis }}</td>
-          <td>{{ payment.patientAge }}</td>
-          <td>{{ payment.patientGender }}</td>
-          <td>{{ payment.summaryOfTreatment }}</td>
-          <td>{{ payment.paymentType }}</td>
+          <td>{{ payment.amount / 100 }}</td> <!-- Amount is in paisa, convert to currency -->
+          <td>{{ payment.mobile }}</td>
+          <td>{{ payment.product_identity }}</td>
+          <td>{{ payment.product_name }}</td>
+          <td>{{ payment.token }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="openModalD(payment)" data-bs-toggle="modal"
+            data-bs-target="#billModal"> View Details</button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+  <div class="modal fade" id="billModal" tabindex="-1" aria-labelledby="billModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="billModalLabel">Payment Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <!-- Payment Info Section -->
+            <div class="row mb-4">
+              <div class="col-md-12 text-center mb-3">
+                <i class="fab fa-hospital fa-4x" style="color:#5d9fc5;"></i>
+                <p class="pt-2">Payment Details</p>
+              </div>
+              <div class="col-md-12">
+                <ul class="list-unstyled">
+                  <li class="text-muted">
+                    <i class="fas fa-user text-primary"></i> Patient Name: <span class="text-primary">{{ selectedPayment?.product_name.split(',')[0].replace('Payment for ', '') }}</span>
+                  </li>
+                  <li class="text-muted">
+                    <i class="fas fa-calendar"></i> Admission Date: {{ selectedPayment?.admissionDate | date:'shortDate' }}
+                  </li>
+                  <li class="text-muted">
+                    <i class="fas fa-calendar-day"></i> Discharge Date: {{ selectedPayment?.dischargeDate | date:'shortDate' }}
+                  </li>
+                  <li class="text-muted">
+                    <i class="fas fa-dollar-sign"></i> Amount: NPR {{ selectedPayment?.amount / 100 }}
+                  </li>
+                  <li class="text-muted">
+                    <i class="fas fa-mobile-alt"></i> Mobile: {{ selectedPayment?.mobile }}
+                  </li>
+                  <li class="text-muted">
+                    <i class="fas fa-id-badge"></i> Product Identity: {{ selectedPayment?.product_identity }}
+                  </li>
+                  <li class="text-muted">
+                    <i class="fas fa-tag"></i> Product Name: {{ selectedPayment?.product_name }}
+                  </li>
+                  <li class="text-muted">
+                    <i class="fas fa-key"></i> Payment Token: {{ selectedPayment?.token }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
