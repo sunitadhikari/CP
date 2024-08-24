@@ -88,14 +88,14 @@
           <th>Bed Number</th>
           <th>Admitted At</th>
           <th>Checked By</th>
-          <th>Action</th>
+          <!-- <th>Action</th>? -->
           <!-- <th>Discharge</th> -->
         </tr>
       </thead>
       <tbody>
         <!-- <tr *ngFor="let patient of patients | paginate: { itemsPerPage: 5, currentPage: p }"> -->
-        <tr *ngFor="let patient of patients let i=index;">
-          <td>{{i+1}}</td>
+          <tr *ngFor="let patient of patients | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index;">
+            <td>{{ (p - 1) * itemsPerPage + i + 1 }}</td>
           <td>{{ patient.firstName }} {{ patient.lastName }}</td>
           <td>{{ patient.dob }}</td>
           <td>{{ patient.gender }}</td>
@@ -107,7 +107,7 @@
           <td>{{ patient.bedNumber }}</td>
           <td>{{ patient.admittedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
           <td>{{ patient.checkedBy }}</td>
-
+<!-- 
           <th>
             <div class="btn-group" role="group">
               <!-- <button type="button" class="btn btn-sm btn-primary" (click)="editAdmit()">
@@ -117,20 +117,19 @@
                 <i class="fas fa-edit"></i> Edit
               </button> -->
 
-              <button type="button" class="btn btn-sm btn-danger mx-2" (click)="deleteAdmit(patient._id)">
+              <!-- <button type="button" class="btn btn-sm btn-danger mx-2" (click)="deleteAdmit(patient._id)">
                 <i class="fas fa-trash-alt"></i>
-              </button>
+              </button> 
             </div>
-          </th>
+          </th> -->
 
-          <!-- <td>
-        <button class="btn btn-danger" (click)="dischargePatient(patient._id)">Discharge</button>
-      </td> -->
+ 
 
         </tr>
       </tbody>
     </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
   </div>
 
-  <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
 </div>

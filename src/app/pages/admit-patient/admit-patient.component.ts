@@ -33,7 +33,8 @@ export class AdmitPatientComponent implements OnInit {
   selectedWardType: string = '';
   editingPatientId : string | null = null;
 
-
+  p: number = 1; // Current page
+  itemsPerPage: number = 10; // Items per page
 
   constructor(
     private fb: FormBuilder,
