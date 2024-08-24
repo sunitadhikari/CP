@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 interface AdmittedPatient {
-  email: any;
   _id: string;
   firstName: string;
   lastName: string;
@@ -17,6 +16,7 @@ interface AdmittedPatient {
   department: string;
   bedNumber: string;
   admittedAt: Date;
+  email: string;
   isActive: boolean;
 }
 @Component({
@@ -44,7 +44,7 @@ selectedReport: any;
 
     this.reportForm = this.fb.group({
       patient: ['', Validators.required],
-      patientEmail: [{ value: '', disabled: true }, Validators.required],
+      patientEmail: [  '', ],
       date: [today, Validators.required], // Set the default value to today's date
       symptoms: ['', Validators.required],
       diagnosis: ['', Validators.required],
