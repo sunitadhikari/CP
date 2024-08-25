@@ -176,7 +176,9 @@
                   <th>Patient Name</th>
                   <th>Admission Date</th>
                   <th>Discharge Date</th>
-                  <th>Doctor</th>
+                  <th>Final Diagnosis</th>
+                  <th>Treatments Done</th>
+                  <th>Discharge Medications</th>
                   <th>Follow Plan</th>
                 </tr>
               </thead>
@@ -184,11 +186,13 @@
               <tbody>
                 <tr *ngFor="let report of hospitalReports;let i= index;">
                   <td>{{ i+1 }}</td>
-                  <td>{{ report.patientName }}</td>
-                  <td>{{ report.admissionDate | date }}</td>
-                  <td>{{ report.dischargeDate | date }}</td>
-                  <td>{{ report.doctorName }}</td>
-                  <td>{{ report.followUpInstructions }}</td>
+                  <td>{{ report.HospitalDischargeReport.patientName }}</td>
+                  <td>{{ report.HospitalDischargeReport.admissionDate | date }}</td>
+                  <td>{{ report.HospitalDischargeReport.dischargeDate | date }}</td>
+                  <td>{{ report.HospitalDischargeReport.finalDiagnosis }}</td>
+                  <td>{{ report.HospitalDischargeReport.summaryOfTreatment }}</td>
+                  <td>{{report.HospitalDischargeReport.dischargeMedications}}</td>
+                  <td>{{ report.HospitalDischargeReport.followUpInstructions }}</td>
                 </tr>
               </tbody>
             </table>
